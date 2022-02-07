@@ -1,12 +1,12 @@
 # Um livro sobre Fundamentos da Computação
 
 <p align="left">
-	<img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/valdigleis/Livro-FMC" />
-	<img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/valdigleis/Livro-FMC" />
-	<img alt="GitHub Issues" src="https://img.shields.io/github/issues/valdigleis/Livro-FMC" />
-	<img alt="GitHub Closed Issues" src="https://img.shields.io/github/issues-closed/valdigleis/Livro-FMC" />
-	<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/valdigleis/Livro-FMC" />
-	<img alt="GitHub Commit Activity (Week)" src="https://img.shields.io/github/commit-activity/w/valdigleis/Livro-FMC" />
+	<img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/valdigleis/Manuscrito" />
+	<img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/valdigleis/Manuscrito" />
+	<img alt="GitHub Issues" src="https://img.shields.io/github/issues/valdigleis/Manuscrito" />
+	<img alt="GitHub Closed Issues" src="https://img.shields.io/github/issues-closed/valdigleis/Manuscrito" />
+	<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/valdigleis/Manuscrito" />
+	<img alt="GitHub Commit Activity (Week)" src="https://img.shields.io/github/commit-activity/w/valdigleis/Manuscrito" />
 </p>
 
 Este repositório destina-se a ser o ambiente que abriga meu projeto LaTeX do livro sobre os fundamentos matemáticos da computação.
