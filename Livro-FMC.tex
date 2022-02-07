@@ -1,0 +1,47 @@
+\documentclass[lang=pt, citestyle=numeric-comp, bibstyle=authoryear, math=newtx, 11pt, fancy]{elegantbook}
+
+\title{Computação Formal}
+\subtitle{Um Compêndio dos Fundamentos Matemáticos da Computação}
+\author{Valdigleis S. Costa}
+\institute{Grupo ALiCIA}
+\date{\today}
+\version{1.0}
+\bioinfo{Bio}{Informações}
+
+\extrainfo{Este manuscrito não possui qualquer vínculo editorial.}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+
+\input{pacotes.tex}
+
+\begin{document}
+	% Comandos de construção básicos
+	\maketitle
+	\frontmatter
+	\tableofcontents
+	\mainmatter
+	
+	
+	% Parte do Texto Principal
+	\part{Ferramentas e Linguagem Básica}
+	\include{Texto/Part1/cap-conjunto.tex}
+	
+	\part{Lógica}
+	\part{Álgebra Universal}
+	\part{Teoria dos Números e Combinatória}
+	\part{Linguagens Formais e Autômatos}
+	\include{Texto/Part5/cap-linguagens.tex}
+	\include{Texto/Part5/cap-linguagem-reg.tex}
+	\include{Texto/Part5/cap-linguagem-LC.tex}
+	\part{Computabilidade e Decidibilidade}
+	\part{Complexidade}
+	
+	
+	% Parte dos elementos pós-textuais
+	\printbibliography
+	
+\end{document}
