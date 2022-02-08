@@ -244,3 +244,35 @@ Ambiguidade é uma característica comum encontrada nas linguagem naturais \cite
 \section{Simplificação de Gramática Livres do Contexto}\label{sec:SimplficacaoGLC}
 
 Antes de apresentar as regras de simplificação e alguns resultados sobre as mesmas é conveniente discutir alguns aspectos sobre as GLC. Antes de tudo lembre que na definição de GLC (Definição \ref{def:GLC}) não existe qualquer restrição para a forma das palavras encontradas à direita das regras de reescrita. Assim podem haver $n$ variáveis, recursão, geração de $\lambda$ e etc. Algumas desta, entretanto, podem ser removidas ou alteradas de forma que a gramática possa ser mais simples de ser utilizada, e será isto que será estudado nesta seção, ou seja, aqui será estudado diversas estratégias para transformar uma gramática qualquer $G$ em uma gramática $G'$ com alguns restrições, mas que preserva a linguagem gerada, isto é, $\mathcal{L}(G) = \mathcal{L}(G')$. 
+
+\begin{remark}
+    Assim como em \cite{benjaLivro2010} as gramáticas que serão consideradas nesta seção não são capaz de gerar a palavra vazia, ou seja, $S \not\gg \lambda$ ou ainda $\lambda \notin \mathcal{L}(G)$. Entretanto isso não irá diminuir em nada a força dos resultados que serão obtidos aqui.
+\end{remark}
+
+\begin{definition}[Regra da substituição]\label{def:RegraSubstituicao}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ uma GLC e seja $A, B \in V$ tal que $A \neq B$ de forma que em $P$ existem as produções:
+    $$A \rhd x_1Bx_2$$
+    e
+    $$B \rhd y_1 \mid y_2 \mid \cdots \mid y_n$$
+    a regra de substituição consiste em remover de $P$ a regra $A \rhd x_1A x_2$ e em seu lugar adicionar as regras:
+    $$A \rhd x_1y_1x_2 \mid x_1y_2x_2 \mid \cdots \mid x_1y_nx_2 \mid$$.
+\end{definition}
+
+Note que a regra de substituição de fato só altera a forma do conjunto $P$ gerando um novo conjunto $P'$, e pela própria regra é fácil notar que vale a seguinte desigualdade $\# P \leq \# P'$. 
+
+\begin{theorem}\label{teo:SuplificacaoGLC-Sub}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então a gramática $G'$ gerada a partir da regra de substituição é tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Suponha $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, agora seja $G' = \langle V, \Sigma, S, P'\rangle$ a GLC gerada a partir da regra de substituição aplicada a $G$. Agora assuma que $w \in \mathcal{L}(G)$, ou seja, $S \gg_G^* w$, dessa forma a dois casos a serem considerados:
+    \begin{itemize}
+        \item[(1)] Se durante a derivação $S \gg_G^* w$ não forem usadas regras da forma $A \rhd x_1Bx_2$, então obviamente essa mesma derivação pode ser replicada em todos os seu detalhes na gramática $G'$, uma vez que, todas as regras que não são da forma $A \rhd x_1Bx_2$ estão também em $P'$, assim $S \gg_{G'}^* w$, consequentemente, $w \in \mathcal{L}(G')$.
+        \item[(2)] Agora sem perda de generalidade assuma que pelo menos uma regra da forma  $A \rhd x_1Bx_2$ seguida da regra $B \rhd y_1$ aparecem na derivação $S \gg_G^* w$, portanto, tem-se que:
+        $$S \gg_G^* k_1Ak_2 \gg_{G} k_1x_1Bx_2k_2 \gg_{G} k_1x_1y_1x_2k_2 \gg^*_G w $$
+        com $k_1, k_2, x_1, x_2. y_1 \in (V \cup \Sigma)^*$. Assim pela construção de $G'$ pode-se então realizar a seguinte derivação:
+        $$S \gg^*_{G'} k_1Ak_2 \gg_{G'} k_1x_1y_1x_2k_2  \gg^*_{G'} w$$
+    \end{itemize}
+\end{proof}
+
+Como pode ser visto no Teorema \ref{teo:SuplificacaoGLC-Sub} e como discutido em \cite{benjaLivro2010} a regra de substituição pode até aumentar o número de regras de reescrita, porém, a mesma também permite que seja realizadas geração mais rápidas, isto é, que aconteçam derivações de palavras $w \in \Sigma^*$ com menos passos.
