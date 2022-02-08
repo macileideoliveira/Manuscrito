@@ -29,8 +29,8 @@ Atualmente os tópicos aos quais este manuscrito irá atacar são:
 
 ## Informações sobre o autor
 
-<p align="justify">
-O Professor Valdigleis S. Costa sob a Tutela dos professores [Benjamín Bedregal](https://docente.ufrn.br/2212166/perfil/) e [Regivan Santiago](https://docente.ufrn.br/1345816/perfil)  recebeu seus títulos de Mestre e Doutor  pelo [Programa de Pós-graduação em Sistemas e Computação](https://sigaa.ufrn.br/sigaa/public/programa/portal.jsf?id=73) vínculado ao [Departamento de Informática e Matématica Aplicada](https://www.dimap.ufrn.br) da [Universidade Federal do Rio Grande do Norte](https://www.ufrn.br/). Atualmente é professor adjunto (A2) no [Colegiado de Ciência da Computação](https://portais.univasf.edu.br/ccicomp) da [Universidade Federal do Vale do São Francisco](https://www.portais.univasf.edu.br). Tem experiência no ensino e pesquisa nas áreas de Fundamentos Matemáticos da Computação (Álgebra, Lógica, Computabilidade, Complexidade e Teoria dos Conjuntos) e Matemática aplicada (Inteligência artificial, processamento de sinais e bio-informática).
+<p style="text-align: justify;">
+O Professor Valdigleis S. Costa nasceu no estado da Paraíba e foi criado no estado vizinho do Rio Grande do Norte, sendo ele um Cientista da Computação por formação, mas um matemático por natureza (seu número de Erdös é 4). Atualmente ocupando a função de professor adjunto no <a href="https://portais.univasf.edu.br/ccicomp" target="_blank">CCICOMP</a> da <a href="https://portais.univasf.edu.br/" target="_blank">UNIVASF</a>. Obtive seus títulos de Doutor e Mestre pelo <a href="https://sigaa.ufrn.br/sigaa/public/programa/portal.jsf?id=73" target="_blank">PPgSC</a> da <a href="https://www.ufrn.br" target="_blank">UFRN</a> sob a tutela dos professores  <a href="https://lattes.cnpq.br/4601263005352005" target="_blank">Benjamin René Callejas Bedregal</a> e <a href="https://lattes.cnpq.br/7536988783793885" target="_blank">Regivan Hugo Nunes Santiago</a>.
 </p>
 
 
@@ -46,7 +46,7 @@ Quaisquer erros ou sugestões devem ser enviadas na página de [isses](https://g
 <p align="justify">
 Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License
 (the “License”). You may not use this file except in compliance with the License. You
-may obtain a copy of the License athttp://creativecommons.org/licenses/by-nc/3.0.
+may obtain a copy of the License at http://creativecommons.org/licenses/by-nc/3.0.
 Unless required by applicable law or agreed to in writing, software distributed under the
 License is distributed on an“as is” basis, without warranties or conditions of
 any kind, either express or implied. See the License for the specific language governing
