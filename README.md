@@ -37,7 +37,7 @@ O Professor Valdigleis S. Costa nasceu no estado da Paraíba e foi criado no est
 ## Contribuções
 
 <p align="justify">
-Quaisquer erros ou sugestões devem ser enviadas na página de [isses](https://github.com/valdigleis/Livro-FMC/issues) do projeto ou via o correio eletrônico: valdigleis.costa@univasf.edu.br.
+Quaisquer erros ou sugestões devem ser enviadas na página de <a href="https://github.com/valdigleis/Manuscrito/issues" target="_blank">isses</a> do projeto ou via e-mail para o professor Valdigleis clicando <a href="valdigleis.costa@univasf.edu.br">aqui</a>.
 </p>
 
 
