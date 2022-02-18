@@ -1,0 +1,46 @@
+% ===================================================
+% Arquivos para configurações e novos comandos
+% ===================================================
+
+% ===================================================
+% Informações básicas do documento para a capa
+% ===================================================
+\title{Computação Formal}
+\subtitle{Um Compêndio dos Fundamentos Matemáticos da Computação}
+\author{Valdigleis S. Costa}
+\institute{Grupo ALiCIA}
+\date{\today}
+\version{1.0}
+\bioinfo{Bio}{Informações}
+\extrainfo{Este manuscrito não possui qualquer vínculo editorial.}
+
+% ===================================================
+% Configuração dos arquivos da capa
+% ===================================================
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% ===================================================
+% Definição de cores
+% ===================================================
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+
+% ===================================================
+% Comandos e configurações para colocar epígrafes
+% nas páginas de separação das partes do texto
+% ===================================================
+\titleformat{\part}[display]
+{\filleft\fontsize{40}{40}\selectfont\scshape}
+{\fontsize{90}{90}\selectfont\thepart}
+{20pt}
+{\thispagestyle{epigraph}}
+
+\setlength\epigraphwidth{.8\textwidth}
+
+\makeatletter
+\xpatchcmd\epigraphhead
+{\let\@evenfoot}
+{\let\@oddfoot\@empty\let\@evenfoot}
+{}{}
+\makeatother

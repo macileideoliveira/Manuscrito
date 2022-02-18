@@ -1,9 +1,11 @@
 
 \chapter{Linguagens Livres do Contexto}\label{cap:LinguagemLLC}
 
-\begin{introduction}[Conteúdos]
+\begin{introduction}[Tópicos]
 	\item Gramática Livres do Contexto
 	\item Simplificação e Formas Normais de GLC
+	\item Sobre Algoritmos de Pertinência em GLC
+	\item GLC e Linguagens de Programação
 	\item Autômato de Pilha Determinístico
 	\item Autômato de Pilha Não-determinístico
 	\item Álgebra das Linguagens Livres de Contexto
@@ -102,7 +104,9 @@ Nas GLC que não são lineares, ou seja, as gramática em que as regras em $P$ p
   Resumindo dado uma uma GLC $G = \langle V, \Sigma, S, P\rangle$ uma geração é obrigatoriamente uma derivação $S \gg w$ em que $w \in \Sigma^*$, ou seja, uma derivação que gera (ou produz) uma palavra sobre o alfabeto $\Sigma$.
 \end{remark}
 
-Além da noção de geração, para visualizar o passo a passo da ``construção'' de uma palavra $w \in \Sigma^*$ em uma GLC $G$ é comum usar a ideia de árvore de derivação\footnote{Na literatura como no livro \cite{benjaLivro2010} também é comum encontrar a nomenclatura árvore ordenada.}. Uma árvore de derivação nada mais é do que uma forma visual estruturada em uma árvore que representar a construção de uma palavra, em que cada nível da árvore representa é gerada pela aplicação de uma ou mais regras de reescrita, neste sentido as folhos da árvore contém os símbolos da palavra $w$.
+Além da noção de geração, para visualizar o passo a passo da ``construção'' de uma palavra $w \in \Sigma^*$ em uma GLC $G$ é comum usar a ideia de árvore de derivação\footnote{Na literatura como no livro \cite{benjaLivro2010} também é comum encontrar a nomenclatura árvore ordenada.}. 
+
+Uma árvore de derivação nada mais é do que uma forma visual estruturada em uma árvore que representar a construção de uma palavra, em que cada nível da árvore representa é gerada pela aplicação de uma ou mais regras de reescrita, neste sentido as folhos da árvore contém os símbolos da palavra $w$.
 
 \begin{definition}[Árvore de Derivação]\label{def:ArvoreGLC}
 	Seja $G = \langle V, \Sigma, S, P\rangle$ uma GLC e dado $w \in \mathcal{L}(G)$, uma árvore de derivação para $w$ é construída seguindo as seguintes regras:
@@ -254,7 +258,7 @@ Antes de apresentar as regras de simplificação e alguns resultados sobre as me
     $$A \rhd x_1Bx_2$$
     e
     $$B \rhd y_1 \mid y_2 \mid \cdots \mid y_n$$
-    a regra de substituição consiste em remover de $P$ a regra $A \rhd x_1A x_2$ e em seu lugar adicionar as regras:
+    a regra de substituição consiste em para cada a regra $A \rhd x_1A x_2$ em $P$ adicionar as regras:
     $$A \rhd x_1y_1x_2 \mid x_1y_2x_2 \mid \cdots \mid x_1y_nx_2 \mid$$.
 \end{definition}
 
@@ -265,14 +269,371 @@ Note que a regra de substituição de fato só altera a forma do conjunto $P$ ge
 \end{theorem}
 
 \begin{proof}
-    Suponha $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, agora seja $G' = \langle V, \Sigma, S, P'\rangle$ a GLC gerada a partir da regra de substituição aplicada a $G$. Agora assuma que $w \in \mathcal{L}(G)$, ou seja, $S \gg_G^* w$, dessa forma a dois casos a serem considerados:
+    Suponha $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, agora seja $G' = \langle V, \Sigma, S, P'\rangle$ a GLC gerada a partir da regra de substituição aplicada a $G$. Agora assuma que $w \in \mathcal{L}(G)$, ou seja, $S \gg_G^* w$, dessa forma há dois casos para serem considerados:
     \begin{itemize}
         \item[(1)] Se durante a derivação $S \gg_G^* w$ não forem usadas regras da forma $A \rhd x_1Bx_2$, então obviamente essa mesma derivação pode ser replicada em todos os seu detalhes na gramática $G'$, uma vez que, todas as regras que não são da forma $A \rhd x_1Bx_2$ estão também em $P'$, assim $S \gg_{G'}^* w$, consequentemente, $w \in \mathcal{L}(G')$.
         \item[(2)] Agora sem perda de generalidade assuma que pelo menos uma regra da forma  $A \rhd x_1Bx_2$ seguida da regra $B \rhd y_1$ aparecem na derivação $S \gg_G^* w$, portanto, tem-se que:
         $$S \gg_G^* k_1Ak_2 \gg_{G} k_1x_1Bx_2k_2 \gg_{G} k_1x_1y_1x_2k_2 \gg^*_G w $$
-        com $k_1, k_2, x_1, x_2. y_1 \in (V \cup \Sigma)^*$. Assim pela construção de $G'$ pode-se então realizar a seguinte derivação:
+        com $k_1, k_2, x_1, x_2, y_1 \in (V \cup \Sigma)^*$. Assim pela construção de $G'$ pode-se então realizar a seguinte derivação:
         $$S \gg^*_{G'} k_1Ak_2 \gg_{G'} k_1x_1y_1x_2k_2  \gg^*_{G'} w$$
+        e assim tem-se que, $w \in \mathcal{L}(G')$.
     \end{itemize}
+    Logo pelos casos $(1)$ e $(2)$ acima tem-se que $\mathcal{L}(G) \subseteq \mathcal{L}(G')$. Agora mostrar que $\mathcal{L}(G') \subseteq \mathcal{L}(G)$ é trivial e não será feito aqui, e desde que $\mathcal{L}(G) \subseteq \mathcal{L}(G')$ e $\mathcal{L}(G') \subseteq \mathcal{L}(G)$ por definição tem-se que $\mathcal{L}(G) = \mathcal{L}(G')$ o que completa a prova.
 \end{proof}
 
 Como pode ser visto no Teorema \ref{teo:SuplificacaoGLC-Sub} e como discutido em \cite{benjaLivro2010} a regra de substituição pode até aumentar o número de regras de reescrita, porém, a mesma também permite que seja realizadas geração mais rápidas, isto é, que aconteçam derivações de palavras $w \in \Sigma^*$ com menos passos.
+
+\begin{example}
+    Dado a GLC $G = \langle \{S, A, B, C\}, \{0,1\}, S, P \rangle$ com $P$ definido pelas regras:
+    \begin{eqnarray*}
+        S & \rhd & A001 \mid B100\\
+        A & \rhd & 01 \mid 01B\\
+        B & \rhd & 1 \mid 0 \mid \lambda
+    \end{eqnarray*}
+    aplicando a regra de substituição em tal gramática será gerada na gramática $G' = \langle \{S, A, B, C\}, \{0,1\}, S, P' \rangle$ em que $P'$ corresponde ao conjunto formado pela seguintes regras:
+    \begin{eqnarray*}
+        S & \rhd & A001 \mid B100 \mid  01001 \mid 01B001 \mid 1100 \mid 0100 \mid 100 011001 \mid 010001 \mid 01001\\
+        A & \rhd & 01 \mid 01B \mid 011 \mid  010 \\
+        B & \rhd & 1 \mid 0 \mid \lambda
+    \end{eqnarray*}
+\end{example}
+
+Para prosseguir com o estudo das regras de simplificação antes é necessário formalizar o conceito de variável recursiva à esquerda nas GLC.
+
+\begin{definition}[Regra Recursiva à Esquerda]\label{def:VariavelRecursiva}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ uma GLC, uma variável $A$ é dita recursiva à esquerda se existe pelo menos uma regra $A \rhd Ax \in P$ com  $A \in V$ e $x \in (V \cup \Sigma)^*$.
+\end{definition}
+
+Agora é possível formalizar então a próxima regra de simplificação de GLC, sendo esta próxima regra nomeada como \textbf{Regra de Remoção da Recursividade Esquerda}.
+
+\begin{definition}[Regra de Remoção da Recursividade Esquerda]\label{def:RegraRecursiva}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ uma GLC com variáveis recursivas à esquerda. Então substitua para cada $A \in V$ as regras:
+    $$A \rhd Ax_1 \mid \cdots \mid Ax_m \mid y_1 \mid \cdots \mid y_n$$
+    pelas regras:
+    \begin{eqnarray*}
+        A & \rhd & y_1 \mid \cdots \mid y_n \mid y_1Z \mid \cdots \mid y_nZ\\
+        Z & \rhd & x_1 \mid \cdots \mid x_m \mid x_1Z \mid \cdots \mid x_mZ
+    \end{eqnarray*}
+	onde $x_1, \cdots, x_m, y_1, \cdots, y_n \in (V \cup \Sigma)^*$ e $Z$ é uma variável nova que deve ser adicionada ao conjunto $V$.
+\end{definition}
+
+Fica claro pela definição da Regra de Remoção da Recursividade Esquerda que após usa aplicação será gerada uma nova gramática com mais varáveis que a gramática original terá uma quantidade igual ou superior de regras de reescritas.
+
+\begin{theorem}\label{teo:SuplificacaoGLC-Rec}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então a gramática $G'$ gerada a partir da regra de remoção da recursividade esquerda é tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Ficará como exercício ao leitor.
+\end{proof}
+
+\begin{example}
+    Dado a GLC $G = \langle \{S, A\}, \{a,b, c\}, S, P \rangle$ com $P$ definido pelas regras:
+    \begin{eqnarray*}
+        S & \rhd & aSc \mid aAc\\
+        A & \rhd & Ab \mid b
+    \end{eqnarray*}
+    Usando a regra de remoção da recursividade esquerda é obtida a GLC $G = \langle \{S, A, B\}, \{a, b, c\}, S, P' \rangle$ onde $P'$ é definido por:
+    \begin{eqnarray*}
+        S & \rhd & aSc \mid aAc\\
+        A & \rhd & b \mid bB\\
+        B & \rhd & b \mid bB 
+    \end{eqnarray*}
+\end{example}
+
+Agora para continuar com o estudo das regras de simplificação será necessário formalizar três conceitos chaves, o primeiro conceito é a noção de relação (ou grafo) de dependências, a saber tais relações (ou grafos) são ferramentas advindas da teoria dos grafos e frequentemente usada em muitos campos do conhecimento para modela sistemas complexos \cite{benjaLivro2010}, a seguir este conceito será apresentado de forma rigorosa com respeito as GLC.
+
+\begin{definition}[Relação de dependência]\label{def:GrafoDependencia}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, a relação de dependência $DEP$ é construída como: $(A, B) \in DEP$ se, e somente se, $A \rhd xBy \in P$ com $x, y \in (V \cup \Sigma)^*$ e $A \neq B$.
+\end{definition}
+
+O leitor pode considerar a relação $DEP$ como sendo uma relação de necessidade, em que $(A, B) \in DEP$ pode ser semanticamente interpretado como, para escrever $B$ é necessário que antes existem um $A$.
+
+\begin{remark}
+    Para fins de notação, será usado o rótulo $\widehat{DEP}$ para denotar o fecho transitivo da relação $DEP$.
+\end{remark}
+
+\begin{example}\label{exe:GLCDEP}
+    Considere a GLC $G = \langle \{A, B, C, D, E\}, \{0, 1\}, A, P \rangle$ onde $P$ é o conjunto formado pelas regras:
+    
+    \begin{eqnarray*}
+        A & \rhd & 00A \mid 0B1 \mid 10AB \mid AD\\ 
+        B & \rhd & 1B01 \mid D01E\mid \lambda\\
+        C & \rhd & C01 \mid 00101 \mid 1 \mid \lambda\\
+        D & \rhd & 01E \mid 0E\\
+        E & \rhd & 1E0 \mid EE \mid D
+    \end{eqnarray*}
+    Tem-se que $\widehat{DEP}$ é o conjunto formado pelo pares $(A, B), (A, D), (B, D), (B, E), (D, E),$ e $(E, D)$.
+\end{example}
+
+O próximo conceito necessário é a noção de variável inacessível formalizado a seguir.
+
+\begin{definition}[Variável inacessível]\label{def:VariavelInacessível}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, uma variável $A \neq S$ é dita ser inacessível sempre que $(S, A) \notin \widehat{DEP}$.
+\end{definition}
+
+\begin{example}
+    Considere a GLC apresentada no Exemplo \ref{exe:GLCDEP}, em tal gramática é fácil notar que a variável $C$ é inacessível.
+\end{example}
+
+\begin{lemma}\label{lema:SemInacessivel}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então existe uma GLC sem variáveis inacessíveis $G' = \langle V', \Sigma, S, P'\rangle$ tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{lemma}
+
+\begin{proof}
+    Suponha que $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, assim pode-se construir uma nova GLC $G' = \langle V', \Sigma, S, P'\rangle$ onde: 
+    \begin{itemize}
+        \item $V' = V - \{A \in V \mid A \mbox{ é uma variável inacessível}\}$ e
+        \item $P' = \{A \rhd xBy \in P \mid A, B \in V', x, y \in (V' \cup \Sigma)^*\}$.
+    \end{itemize}
+    Agora é claro que $G'$ possui apenas variáveis acessíveis. Note agora que para toda $S \gg_G w$ tem-se que apenas regras com variáveis acessíveis são utilizadas em tal derivação, além disso, é claro pela construção de $G'$ que tais regras estarão em $P'$, consequentemente $S \gg_{G'} w$, assim $\mathcal{L}(G) \subseteq \mathcal{L}(G')$. Por outro lado, assuma por absurdo que $\mathcal{L}(G') \not\subseteq \mathcal{L}(G)$, assim existe um $w \in \mathcal{L}(G')$ tal que $w \notin \mathcal{L}(G)$, desde que $w \in \mathcal{L}(G')$ tem-se que $S \gg_{G'} w$, mas pela construção de $G'$ é obvio que toda regra usada na derivação $S \gg_{G'} w$ também estão presente em $P$ e, portanto, $S \gg_{G} w$ o que contradiz a hipótese de que $\mathcal{L}(G') \not\subseteq \mathcal{L}(G)$, consequentemente, tem-se $\mathcal{L}(G') \subseteq \mathcal{L}(G)$. Desde que, $\mathcal{L}(G) \subseteq \mathcal{L}(G')$ e $\mathcal{L}(G') \subseteq \mathcal{L}(G)$, pela definição de igualdade entre conjunto tem-se que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{proof}
+
+O terceiro e último conceito necessário para continuar com o estudo das regras de simplificação é a ideia de variável descartável em uma GLC, de forma direta uma variável descartável é aquela incapaz de derivar uma palavra sobre o alfabeto $\Sigma$, em notação formal tem-se a definição a seguir.
+
+\begin{definition}[Variável descartável]\label{def:VariavelDescartavel}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, uma variável $A$ é dita descartável sempre que para todo $w \in \Sigma^*$ tem-se que $A \not\gg^* w$.
+\end{definition}
+
+\begin{example}
+    Considere a GLC apresentada no Exemplo \ref{exe:GLCDEP}, em tal gramática as variáveis $D$ e $E$ são ambas descartáveis.
+\end{example}
+
+O leitor um pouco mais experiente em programação pode facilmente notar que uma variável descartável é aquela que é a raiz de uma árvore infinita, isto é, uma árvore que continua crescendo infinitamente, outra forma de interpretar uma variável descartável é como sendo uma variável que produz um \textit{loop} infinito no processo de derivação, ou seja, a partir de tal variável nunca é possível derivar uma palavra sobre o alfabeto base da gramática.
+
+\begin{lemma}\label{lema:SemDescartavel}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então existe uma GLC sem variáveis descartável $G' = \langle V', \Sigma, S, P'\rangle$ tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{lemma}
+
+\begin{proof}
+    Suponha que $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, assim pode-se construir uma nova GLC $G' = \langle V', \Sigma, S, P'\rangle$ onde: 
+    \begin{itemize}
+        \item $V' = V - \{A \in V \mid A \mbox{ é uma variável descartável}\}$ e
+        \item $P' = \{A \rhd xBy \in P \mid A, B \in V', x, y \in (V' \cup \Sigma)^*\}$.
+    \end{itemize}
+    Agora é claro que $G'$ não possui variáveis descartáveis. A argumentação para provar $\mathcal{L}(G) = \mathcal{L}(G')$ é similar a demonstração do Lema \ref{lema:SemInacessivel}.
+\end{proof}
+
+\begin{definition}[Regra de remoção de variáveis inúteis]\label{def:RegraInuteis}
+    Dado uma GLC $G = \langle V, \Sigma, S, P\rangle$ será gerada uma gramática $G'$ sem variáveis inúteis, após a execução dos seguintes passos.
+    \begin{enumerate}
+        \item Remova todas as variáveis Descartáveis e assim gere uma gramática $G_1$.
+        \item Remova da gramática $G_1$ todas as variáveis Inacessíveis, e assim gere a gramática $G'$.
+    \end{enumerate}
+\end{definition}
+
+O termo inútil diz respeito ao fato de uma variável $A$ não ser capaz de derivar uma palavra $w \in \Sigma^*$, ou seja, $A \not\gg_G w$.
+
+\begin{theorem}\label{teo:SemVariaveisInuteis}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então a GLC $G'$ gerada pela regra de remoção de variáveis inúteis é tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Direto dos Lemas \ref{lema:SemInacessivel} e \ref{lema:SemDescartavel}.
+\end{proof}
+
+O exemplo a seguir ilustra a aplicação da regra de remoção de variáveis inúteis.
+
+\begin{example}
+    Considere a GLC $G = \langle \{S, T, V, X, Y, Z\}, \{0, 1\}, S, P \rangle$ onde $P$ é o conjunto com as seguintes produções:
+    \begin{eqnarray*}
+        S & \rhd & 01S \mid SX0 \mid YZ \mid X0Z11\\
+        T & \rhd & \lambda\\
+        X & \rhd & X01 \mid Y0X\\
+        Y & \rhd & S01 \mid YY \mid XY \mid \lambda\\
+        Z & \rhd & S01 \mid SS
+    \end{eqnarray*}
+    Removendo as variáveis descartáveis (neste caso existe apenas variável $X$ a ser removida)  é gerado a GLC $G_1 = \langle \{S, T, V, Y, Z\}, \{0, 1\}, S, P_1 \rangle$ com $P_1$ sendo:
+    \begin{eqnarray*}
+        S & \rhd & 01S \mid YZ \\
+        T & \rhd & \lambda\\
+        Y & \rhd & S01 \mid YY \mid \lambda\\
+        Z & \rhd & S01 \mid SS
+    \end{eqnarray*}
+    Agora trabalhando considerando o conjunto $P_1$ pode-se remover as variáveis inacessíveis, ou seja, são removidas as variáveis $T, V$ e assim tem-se como resultado final da remoção de variáveis inúteis é gerada a GLC $G' = \langle \{S, Y, Z\}, \{0, 1\}, S, P' \rangle$ onde $P'$ é formado por:
+    \begin{eqnarray*}
+        S & \rhd & 01S \mid YZ \\
+        Y & \rhd & S01 \mid YY \mid \lambda\\
+        Z & \rhd & S01 \mid SS
+    \end{eqnarray*}
+\end{example}
+
+\begin{definition}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, uma regra da forma $A \rhd \lambda$ é chamada de $\lambda$-produção. 
+\end{definition}
+
+O próximo resultado estabelece que em GLC a existência de $\lambda$-produções não aumenta o poder gerativo das gramáticas.
+
+\begin{theorem}\label{teo:SemLambdaProducoes}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, então existe uma GLC $G'$ sem $\lambda$-produções tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Suponha que $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, agora defina os conjuntos 
+    \begin{eqnarray*}
+        P_1  & = &  P - \{A \rhd \lambda \mid A \in V\}\\
+        V_\lambda & = &  \{A \in V \mid A \rhd \lambda\}
+    \end{eqnarray*}
+    Pode-se agora construir um novo conjunto de regras $P_2$ da seguinte forma,  para cada uma das regras
+    $$A \rhd w_1A_1w_2A_2w_3\cdots w_{n-1}A_{n-1}w_{n}A_nw_{n+1} \in P_1$$
+    com $w_i \in (V \cup \Sigma)^*, A_j \in V_\lambda$ sendo $1 \leq i \leq n+1$ e $1 \leq j \leq n$ estarão em $P_2$ as regras:
+    \begin{eqnarray*}
+        A & \rhd & w_1w_2A_2w_3\cdots w_{n-1}A_{n-1}w_{n}A_nw_{n+1}\\
+        A & \rhd & w_1A_1w_2w_3\cdots w_{n-1}A_{n-1}w_{n}A_nw_{n+1}\\
+        \vdots & \vdots & \hspace{2.7cm} \vdots\\
+        A & \rhd & w_1A_1w_2A_2w_3\cdots w_{n-1}w_{n}A_nw_{n+1}\\
+        A & \rhd & w_1A_1w_2A_2w_3\cdots w_{n-1}A_{n-1}w_{n}w_{n+1}\\
+        A & \rhd & w_1w_2w_3\cdots w_{n-1}w_{n}w_{n+1} 
+    \end{eqnarray*}
+    Finalmente defina a GLC $G' = \langle V, \Sigma, S, P' \rangle$ em que $P' = P_1 \cup P_2$, é claro por sua construção que $P'$ não possui $\lambda$-produções. Agora assuma que $w \in \mathcal{L}(G)$, ou seja, $S \gg_G^* w$, dessa forma há dois casos para serem considerados:
+    \begin{itemize}
+        \item[(1)] Se durante a derivação $S \gg_G^* w$ não forem usadas regras da forma $A \rhd \lambda$, então obviamente essa mesma derivação pode ser replicada em todos os seu detalhes na gramática $G'$, uma vez que, todas as regras que não são da forma $A \rhd \lambda$ estão também em $P'$, assim $S \gg_{G'}^* w$, consequentemente, $w \in \mathcal{L}(G')$.
+        \item[(2)] Agora sem perda de generalidade assuma que pelo menos uma regra da forma  $A \rhd x_1Bx_2$ seguida da regra $B \rhd \lambda$ aparecem na derivação $S \gg_G^* w$, portanto, tem-se que:
+        $$S \gg_G^* k_1Ak_2 \gg_{G} k_1x_1Bx_2k_2 \gg_{G} k_1x_1x_2k_2 \gg^*_G w $$
+        com $k_1, k_2, x_1, x_2,  \in (V \cup \Sigma)^*$. Assim pela construção de $G'$ existe uma regra da forma $A \rhd x_1x_2$ e, portanto, em $G'$ é possível realizar a seguinte derivação
+        $$S \gg_G^* k_1Ak_2 \gg_{G'} k_1x_1x_2k_2 \gg^*_G w $$
+        e assim tem-se que $w \in \mathcal{L}(G')$.
+    \end{itemize}
+    Assim pelos casos $(1)$ e $(2)$ mostrados acima tem-se que $\mathcal{L}(G) \subseteq \mathcal{L}(G')$. Por outro lado, mostrar que $\mathcal{L}(G') \subseteq \mathcal{L}(G)$ é trivial e ficará como exercício ao leitor. Desde que $\mathcal{L}(G) \subseteq \mathcal{L}(G')$ e $\mathcal{L}(G') \subseteq \mathcal{L}(G)$ por definição de igualdade de conjuntos tem-se que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{proof}
+
+\begin{example}
+    Dado a gramática $G = \langle \{S, X, Y, Z\}, \{a, b, c\}, S, P \rangle$ com $P$ sendo o conjunto com as seguintes regras,
+    \begin{eqnarray*}
+        S & \rhd & Xca \mid bYa \mid aZXcb \\
+        X & \rhd & bbXY \mid ZacYb \mid abYcZa \\
+        Y & \rhd & cYcaYX \mid \lambda\\
+        Z & \rhd & abc \mid \lambda
+    \end{eqnarray*}
+    utilizando a estratégia usada na prova do Teorema \ref{teo:SemLambdaProducoes}, tem-se o seguinte conjunto $P_1$ de regras, 
+    \begin{eqnarray*}
+        S & \rhd & Xca \mid bYa \mid aZXcb \\
+        X & \rhd & bbXY \mid ZacYb \mid abYcZa \\
+        Y & \rhd & cYcaYX\\
+        Z & \rhd & abc
+    \end{eqnarray*}
+    já o conjunto $P_2$ corresponde ao seguinte conjunto,
+    \begin{eqnarray*}
+        S & \rhd & Xca \mid ba \mid aXcb \\
+        X & \rhd & bbX \mid acYb \mid Zacb \mid acb \mid abYcZa \mid abcZa \mid abYca \mid abca \\
+        Y & \rhd & cYcaYX \mid ccaYX \mid cYcaX \mid ccaX \\
+        Z & \rhd & abc
+    \end{eqnarray*}
+    por fim, é construído a gramática  $G = \langle \{S, X, Y, Z\}, \{a, b, c\}, S, P' \rangle$ onde $P'$ é o conjunto com as seguintes regras,
+    \begin{eqnarray*}
+        S & \rhd & Xca \mid bYa \mid aZXcb \mid ba \mid aXcb \\
+        X & \rhd & bbXY \mid ZacYb \mid abYcZa \mid bbX \mid acYb \mid Zacb \mid acb \mid abcZa \mid abYca \mid abca  \\
+        Y & \rhd & cYcaYX \mid ccaYX \mid cYcaX \mid ccaX  \\
+        Z & \rhd & abc
+    \end{eqnarray*}
+\end{example}
+
+Entre os diferentes tipo de regras em uma gramática, existe o tipo chamado de regras unitárias definidas a seguir, tais regras tem a natureza de não gerar qualquer símbolo do alfabeto, e essa natureza muitas vezes não é desejável como dito em \cite{benjaLivro2010}, a seguir será mostrado que tais regras não aumentam o poder gerativo das GLC.
+
+\begin{definition}[Regras unitárias]\label{def:RegraUnitaria}
+    Seja $G = \langle V, \Sigma, S, P\rangle$ é uma GLC, um elemento de $P$ é chamado de regra unitária sempre que tal elemento for da forma $A \rhd B$ com $A, B \in V$.
+\end{definition}
+
+\begin{theorem}\label{teo:SemProducoesUnitarias}
+    Se $G = \langle V, \Sigma, S, P\rangle$ é uma GLC com regras unitárias, então existe uma GLC $G' = \langle V, \Sigma, S, P'\rangle$ sem regras unitárias tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Suponha que $G = \langle V, \Sigma, S, P\rangle$ é uma GLC com regras unitárias, assim construa o seguinte conjunto de regras,
+    $$P_1 = \{A \rhd xBy \in P \mid |x| + |y| \geq 1, B \in V\}$$
+    agora construa o conjunto de regras,
+    $$P_2 = \{A \rhd w \mid A \gg^*_G B, B \rhd w \in P_1\}$$
+    é fácil notar que $P_1$ e $P_2$ não possuem regras unitárias. Por fim, defina a GLC $G' = \langle V, \Sigma, S, P'\rangle$ onde $P' = P_1 \cup P_2$.  A argumentação para provar $\mathcal{L}(G) = \mathcal{L}(G')$ é similar a demonstração do Teorema \ref{teo:SemLambdaProducoes}.
+\end{proof}
+
+A seguir para melhor fixação do conhecimento o leitor encontrará no próximo exemplo o uso da construção esboçada na prova do Teorema \ref{teo:SemProducoesUnitarias}.
+
+\begin{example}
+    Dado a gramática $G = \langle \{S, X, Y, Z\}, \{0, 1\}, S, P \rangle$ com $P$ sendo o conjunto com as seguintes regras,
+    \begin{eqnarray*}
+        S & \rhd & 0X \\
+        X & \rhd & Y \mid 0X \\
+        Y & \rhd & Z \mid 1Y \mid YY\\
+        Z & \rhd & Y \mid 01
+    \end{eqnarray*}
+    agora utilizando a estratégia apresentada na prova do Teorema \ref{teo:SemProducoesUnitarias} tem-se que $P_1$ é formado pelas seguintes regras, 
+    \begin{eqnarray*}
+        S & \rhd & 0X \\
+        X & \rhd & 0X \\
+        Y & \rhd & 1Y \mid YY\\
+        Z & \rhd & 01
+    \end{eqnarray*}
+    e assim o conjunto $P_2$ é formado pelas regras
+    \begin{eqnarray*}
+        X & \rhd & 1Y \mid YY \mid 01 \\
+        Y & \rhd & 01 \\
+        Z & \rhd & 1Y \mid YY
+    \end{eqnarray*}
+    por fim, é construído a gramática  $G = \langle \{S, X, Y, Z\}, \{a, b, c\}, S, P' \rangle$ onde $P'$ é o conjunto com as seguintes regras,
+    \begin{eqnarray*}
+        S & \rhd & 0X \\
+        X & \rhd & 0X \mid 1Y \mid YY \mid 01 \\
+        Y & \rhd & 1Y \mid YY \mid 01\\
+        Z & \rhd & 01 \mid 1Y \mid YY
+    \end{eqnarray*}
+\end{example}
+
+Agora que foram apresentadas as estratégia de simplificação de gramática este manuscrito pode prosseguir para a apresentação do conceito de normalização de gramática. Como explicado em \cite{menezes1998LFA}, uma normalização consiste de estabelecer um ou mais  padrões (ou restrições) que \textbf{todas as regras} de reescrita da gramática devem obedecer. As duas principais formas normais para as GLC são como dito em  \cite{benjaLivro2010}, a forma normal de Chomsky \cite{chomsky1959} e a forma normal de Greibach \cite{greibach1965}.
+
+Vale ressaltar que nos dias atuais no estudo das linguagens formais é comum adotar uma definição reduzida\footnote{A diferença entre a forma reduzida e forma normal introduzida por Chomsky em \cite{chomsky1959}, é que a versão original do paper permitia a existência da regra $S \rhd \lambda$.} da forma normal de Chomsky como podem ser visto em \cite{benjaLivro2010, hopcroft2008, menezes1998LFA}, assim seguindo o padrão atual do estudo das linguagens formais e autômatos esse manuscrito também irá adotar a versão reduzida.
+
+\begin{definition}[Forma normal de Chomsky]\label{def:NormalChomsky}
+    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal Chomsky se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = AB$ ou $\beta = a$ com $A, B \in V$ e $a \in \Sigma$.
+\end{definition}
+
+\begin{remark}
+    É evidente pela propria definição que GLC na forma normal de Chomsky não possuem $\lambda$-produções e nem regras unitárias.
+\end{remark}
+
+Antes de apresentar o algoritmo capaz de converter qualquer GLC em sua equivalente na forma normal de Chomsky é conveniente apresentar a definição e os resultados a seguir.
+
+\begin{definition}[Forma normal de pré-Chomsky]\label{def:NormalPreChomsky}
+    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal pré-Chomsky se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = A_1\cdots A_m$ ou $\beta = a_1\cdots a_n$ com $A_i \in V, a_j \in \Sigma$ sendo $1 \leq i \leq m$ e $1 \leq j \leq n$.
+\end{definition}
+
+\begin{lemma}\label{lema:PreChomsky}
+    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal pré-Chomsky tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{lemma}
+
+\begin{proof}
+    Assuma sem perda de generalidade que $G = \langle V, \Sigma, S, P \rangle$ é uma GLC sem $\lambda$-produções, assim toda regra $\alpha \rhd \beta \in P$ é tal que $\beta = w_1A_1 \cdots w_{n}A_{n}w_{n+1}$ com $w_i \in \Sigma^*$ e $A_j \in V \cup \{\lambda\}$ e $|w_1A_1 \cdots w_{n}A_{n}w_{n+1}| \geq 1$ sendo que $1 \leq i \leq n+1$ e $1 \leq j \leq n$. Agora construa um novo conjunto de variáveis da forma $V_\Sigma = \{A_a \mid a \in \Sigma\}$, assim é claro a existência de isomorfismo $h: \Sigma^* \rightarrow V_\Sigma^*$ definido recursivamente para todo $w \in \Sigma^*$ e $a \in \Sigma$ como sendo:
+    \begin{eqnarray*}
+        h(\lambda) & = & \lambda\\
+        h(wa) & = & h(w)A_a
+    \end{eqnarray*}
+    agora defina uma nova gramática $G' = \langle V', \Sigma, S, P' \rangle$ onde $V' = V \cup V_\Sigma$ e $P' = P_h \cup P_\Sigma$ onde, 
+    $$P_h = \{\alpha \rhd h(w_1)A_1 \cdots h(w_{n})A_{n}h(w_{n+1}) \mid \alpha \rhd w_1A_1 \cdots w_nA_{n}w_{n+1} \in P\}$$
+    e
+    $$P_\Sigma = \{A_a \rhd a \mid A_a \in V_\Sigma\}$$
+    consequentemente, todo $\alpha' \rhd \beta' \in P'$ é tal que $\beta' = X_1\cdots X_n$ ou $\beta' = a$ com $X_k \in V'$ e $a \in \Sigma \cup \{\lambda\}$ com $1 \leq k \leq n$ e $|X_1\cdots X_n| \geq 1$, assim por definição tem-se que $G'$ está na forma normal pré-Chomsky. Agora para mostrar que $\mathcal{L}(G) = \mathcal{L}(G')$  basta usar um argumento similar aos utilizados nas demonstrações dos Lemas \ref{lema:SemInacessivel} e \ref{lema:SemDescartavel} e dos Teoremas \ref{teo:SuplificacaoGLC-Sub},  \ref{teo:SemLambdaProducoes} e \ref{teo:SemProducoesUnitarias}.
+\end{proof}
+
+\begin{theorem}
+    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal de Chomsky tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+    Assuma sem perda de generalidade que $G = \langle V, \Sigma, S, P \rangle$ é uma GLC assim pelo Lema \ref{lema:PreChomsky} existe uma GLC na forma normal pré-Chomsky $\widehat{G} = \langle \widehat{V}, \Sigma, S, \widehat{P} \rangle$ tal que $\mathcal{L}(G) = \mathcal{L}(\widehat{G})$, e como pode ser notado na demonstração do  Lema \ref{lema:PreChomsky} todas as regras em $\widehat{P}$ serão das forma:
+    \begin{itemize}
+        \item $A \rhd A_1 \cdots A_n$ ou 
+        \item $A \rhd a$
+    \end{itemize}
+    com $A, A_i \in \widehat{V}$ e $a \in \Sigma$ para cada $1 \leq i \leq n$. Agora defina os seguintes conjuntos disjuntos:
+    \begin{itemize}
+        \item $P_{1} = \{A \rhd w \in P \mid |w| \leq 2\}$
+        \item $P_{2} = P - P_{1}$
+    \end{itemize}
+    agora considere um conjunto de variáveis $V_1$ inicialmente vazio, além disso,  construa um conjunto $P_3$ da seguinte forma, para cada $A \rhd A_1A_2\cdots a_m \in P_2$ as regras:
+    \begin{eqnarray*}
+        A & \rhd & A_1X_1\\
+        X_1 & \rhd & A_2X_2\\
+        \vdots & \vdots & \vdots\\
+        X_{m-2} & \rhd & A_{m-1}A_{m}
+    \end{eqnarray*}
+    são elementos de $P_3$ e $X_i$ é uma nova variável adicionada ao conjunto $V_1$ com $i \leq m-2$. Agora construa uma gramática $G' = \langle V', \Sigma, S, P' \rangle$ onde $V' = V_1 \cup V$ e $P' = P_1 \cup P_3$, é fácil ver que todas as regras em $P'$ satisfazem as condições da forma normal de Chomsky, assim $G'$ está na forma normal de Chomsky. Agora por indução sobre as derivações não é difícil verificar que para toda palavra $w \in \Sigma$ tem-se que $S \gg^*_{\widehat{G}} w$ se, e somente se, $S \gg^*_{G'} w$,  consequentemente,  $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{proof}

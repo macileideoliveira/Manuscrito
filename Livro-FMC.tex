@@ -1,22 +1,7 @@
 \documentclass[lang=pt, citestyle=numeric-comp, bibstyle=authoryear, math=newtx, 11pt, fancy]{elegantbook}
 
-\title{Computação Formal}
-\subtitle{Um Compêndio dos Fundamentos Matemáticos da Computação}
-\author{Valdigleis S. Costa}
-\institute{Grupo ALiCIA}
-\date{\today}
-\version{1.0}
-\bioinfo{Bio}{Informações}
-
-\extrainfo{Este manuscrito não possui qualquer vínculo editorial.}
-
-\logo{logo-blue.png}
-\cover{cover.jpg}
-
-\definecolor{customcolor}{RGB}{32,178,170}
-\colorlet{coverlinecolor}{customcolor}
-
 \input{pacotes.tex}
+\input{configuracoes}
 
 \begin{document}
 	% Comandos de construção básicos
@@ -26,18 +11,44 @@
 	\mainmatter
 	
 	
-	% Parte do Texto Principal
+	% ====================================================
+	% Parte das Ferramentas e Linguagem Básica
+	% ====================================================
+	\epigraphhead[550]{Alice perguntou, ``-Gato Cheshire... pode me dizer qual o caminho que eu devo tomar?''\\ ``-Isso depende muito do lugar para onde você quer ir'', disse o Gato.\\ ``-Eu não sei para onde ir!'', respondeu Alice.\\ ``-Se você não sabe para onde ir, qualquer caminho serve''. Falou o gato.\par\rule[0.7ex]{\epigraphwidth}{.4pt} \par \hfill\textsc{Lewis Carroll, Alice no País das Maravilhas.}}
 	\part{Ferramentas e Linguagem Básica}
 	\include{Texto/Part1/cap-conjunto.tex}
 	
+	% ====================================================
+	% Parte de Lógica
+	% ====================================================
 	\part{Lógica}
+	
+	% ====================================================
+	% Parte da Álgebra Universal
+	% ====================================================
 	\part{Álgebra Universal}
+	
+	% ====================================================
+	% Parte da Teoria dos Números e da Combinatória
+	% ====================================================
 	\part{Teoria dos Números e Combinatória}
-	\part{Linguagens Formais e Autômatos}
+	
+	% ====================================================
+	% Parte das Linguagens Formais e Autômatos
+	% ====================================================
+	\part{Linguagens Formais, Autômatos e Computabilidade}
 	\include{Texto/Part5/cap-linguagens.tex}
 	\include{Texto/Part5/cap-linguagem-reg.tex}
 	\include{Texto/Part5/cap-linguagem-LC.tex}
-	\part{Computabilidade e Decidibilidade}
+	
+	% ====================================================
+	% Parte das Ferramentas e Linguagem Básica
+	% ====================================================
+	\part{\texorpdfstring{$\lambda$-Cálculo}{Lambda Cálculo}}
+	
+	% ====================================================
+	% Parte das Ferramentas e Linguagem Básica
+	% ====================================================
 	\part{Complexidade}
 	
 	

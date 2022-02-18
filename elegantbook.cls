@@ -101,7 +101,8 @@
 		bookmarksnumbered=true,
 		bookmarksopen=true,
 	  	pdfkeywords={Fundamentos, Matemática, Computação},
-		pdfauthor={Valdigleis S Costa},     % author
+		pdfauthor={Valdigleis S Costa},
+		pdfencoding=auto, % Aqui pode apagar qualquer coisa
 		colorlinks=true,
 		linkcolor=blue,
 		citecolor=green,
@@ -111,6 +112,8 @@
 		pdfborder={0 0 0},
 		linktocpage
 }
+
+\usepackage{bookmark} % Aqui pode apagar qualquer coisa
 
 %% device settings
 \RequirePackage{geometry}
@@ -710,7 +713,7 @@
   \newcommand{\assumptionname}{Assunto}
   \newcommand{\conclusionname}{Conclusão}
   \newcommand{\solutionname}{Soluções}
-  \newcommand{\propertyname}{Propiedade}
+  \newcommand{\propertyname}{Propriedade}
   \newcommand{\introductionname}{Introdução}
   \newcommand{\problemsetname}{Exercício}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}

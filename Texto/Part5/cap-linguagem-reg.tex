@@ -1,6 +1,6 @@
 \chapter{Linguagens Regulares}\label{cap:LinguagemRegulares}
 
-\begin{introduction}[Conteúdos]
+\begin{introduction}[Tópicos]
 	\item Autômatos Finitos Determinísticos
 	\item Autômatos Finitos Não-determinísticos
 	\item $\lambda$-Autômatos Finitos Não-determinísticos
@@ -702,7 +702,7 @@ A seguir o leitor será apresentado a uma melhoria no algoritmo de construção 
 	\end{eqnarray*}
 \end{example}
 
-\section{$\lambda$-Autômatos Finitos Não-determinísticos}\label{sec:LAFN}
+\section{Autômatos Finitos Não-determinísticos com Movimentos Vazios}\label{sec:LAFN}
 
 Os $\lambda$-Autômatos Finitos Não-determinísticos, ou simplesmente, $\lambda$-AFN são como dito em \cite{menezes1998LFA}, uma generalização do modelo de AFN que foi introduzido na seção anterior e que são permitidas transições entre estados diferentes usando (ou consumindo) a palavra vazia, tais transições recebem o nome de $\lambda$-transições, a seguir tais autômatos serão apresentados formalmente.
 
@@ -1416,9 +1416,9 @@ Desde que $\delta^*([q], a) = [\delta(q, a)]$ é um caso particular do resultado
 	A demonstração fica como exercício ao leitor.
 \end{proof}
 
-\subsection{Máquinas de Mealy e Moore}
+\section{Máquinas de Mealy e Moore}\label{sec:MealyMoore}
 
-Os trabalhos iniciais de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, também são os trabalhos responsáveis por formalizar o conceito de tradutores finitos ou autômato finito com saída. Diferente dos autômatos sem saída vistos nas seções \ref{subsec:AFD}, \ref{subsec:AFN} e \ref{subsec:LAFN} as máquinas de Mealy e Moore são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN. As máquinas de Mealy, por exemplo,  são um modelo matemático simples para definir máquinas de cifras (criptografia), ou seja, máquinas que a partir de um texto de entrada geram um texto cifrado (criptografado) como saída \cite{menezes1998LFA}.
+Os trabalhos iniciais de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, também são os trabalhos responsáveis por formalizar o conceito de tradutores finitos ou autômato finito com saída. Diferente dos autômatos sem saída vistos nas seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN} as máquinas de Mealy e Moore são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN. As máquinas de Mealy, por exemplo,  são um modelo matemático simples para definir máquinas de cifras (criptografia), ou seja, máquinas que a partir de um texto de entrada geram um texto cifrado (criptografado) como saída \cite{menezes1998LFA}.
 
 Em termos informais uma autômato com saída pode ser descrito como um máquina que possui duas memórias (somente de leitura), a primeira memória guarda a palavra de entrada usada no funcionamento da máquina, já segunda memória (apenas de escrita) é responsável por armazenar a palavra de saída, sendo essa gerada durante o funcionamento do autômato.
 
