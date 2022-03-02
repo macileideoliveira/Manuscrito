@@ -101,12 +101,12 @@ Nas GLC que não são lineares, ou seja, as gramática em que as regras em $P$ p
 \end{example}
 
 \begin{remark}
-  Resumindo dado uma uma GLC $G = \langle V, \Sigma, S, P\rangle$ uma geração é obrigatoriamente uma derivação $S \gg w$ em que $w \in \Sigma^*$, ou seja, uma derivação que gera (ou produz) uma palavra sobre o alfabeto $\Sigma$.
+  Resumindo dado uma GLC $G = \langle V, \Sigma, S, P\rangle$ uma geração é obrigatoriamente uma derivação $S \gg w$ em que $w \in \Sigma^*$, ou seja, uma derivação que gera (ou produz) uma palavra sobre o alfabeto $\Sigma$.
 \end{remark}
 
 Além da noção de geração, para visualizar o passo a passo da ``construção'' de uma palavra $w \in \Sigma^*$ em uma GLC $G$ é comum usar a ideia de árvore de derivação\footnote{Na literatura como no livro \cite{benjaLivro2010} também é comum encontrar a nomenclatura árvore ordenada.}. 
 
-Uma árvore de derivação nada mais é do que uma forma visual estruturada em uma árvore que representar a construção de uma palavra, em que cada nível da árvore representa é gerada pela aplicação de uma ou mais regras de reescrita, neste sentido as folhos da árvore contém os símbolos da palavra $w$.
+Uma árvore de derivação nada mais é do que uma forma visual estruturada em uma árvore\footnote{As árvores de derivação são representações cuja a forma similar a construção das árvores $n$-árias da área de estrutura de dados \cite{jaime1994}.} que representar a construção de uma palavra, em que cada nível da árvore representa é gerada pela aplicação de uma ou mais regras de reescrita, neste sentido as folhos da árvore contém os símbolos da palavra $w$.
 
 \begin{definition}[Árvore de Derivação]\label{def:ArvoreGLC}
 	Seja $G = \langle V, \Sigma, S, P\rangle$ uma GLC e dado $w \in \mathcal{L}(G)$, uma árvore de derivação para $w$ é construída seguindo as seguintes regras:
@@ -183,13 +183,13 @@ Uma árvore de derivação nada mais é do que uma forma visual estruturada em u
 \end{note}
 
 \begin{definition}[Ambiguidade]\label{def:AmbiguidadePalavra}
-	Dado uma GLC $G = \langle V, \Sigma, S, P\rangle$ uma palavra $w \in \mathcal{L}(G)$ é dita ser ambígua sempre que existe duas árvores de derivação diferentes para $w$.
+	Dado uma GLC $G = \langle V, \Sigma, S, P\rangle$ uma palavra $w \in \mathcal{L}(G)$ é dita ser ambígua sempre que existe duas gerações diferentes para $w$.
 \end{definition}
 
 A Definição \ref{def:AmbiguidadePalavra} pode ser reinterpretada da seguinte forma: uma palavra $w$ é ambígua com relação a uma GLC $G$ se existem duas gerações mais à esquerda (à direta) para tal palavra.
 
 \begin{definition}[Linguagem Ambígua]\label{def:LinguagemAmbiguidade}
-	Dado uma GLC $G = \langle V, \Sigma, S, P\rangle$ a linguagem $\mathcal{L}(G)$ é dita ser ambígua se existe pelo menos uma palavra $w \in \mathcal{L}(G)$ tal que $w$ seja uma palavra ambígua.
+	Uma linguagem $L$ é dita ser ambígua se existe uma GLC $G$ e uma palavra $w$ tal que $L = \mathcal{L}(G)$ e $w$ seja uma palavra ambígua em $G$. L será dita inerentemente ambígua se existe $w$ para todo GLC $G$ tal que  $w$ seja uma palavra ambígua em $G$ e $L = \mathcal{L}(G)$.
 \end{definition}
 
 \begin{example}
@@ -250,7 +250,7 @@ Ambiguidade é uma característica comum encontrada nas linguagem naturais \cite
 Antes de apresentar as regras de simplificação e alguns resultados sobre as mesmas é conveniente discutir alguns aspectos sobre as GLC. Antes de tudo lembre que na definição de GLC (Definição \ref{def:GLC}) não existe qualquer restrição para a forma das palavras encontradas à direita das regras de reescrita. Assim podem haver $n$ variáveis, recursão, geração de $\lambda$ e etc. Algumas desta, entretanto, podem ser removidas ou alteradas de forma que a gramática possa ser mais simples de ser utilizada, e será isto que será estudado nesta seção, ou seja, aqui será estudado diversas estratégias para transformar uma gramática qualquer $G$ em uma gramática $G'$ com alguns restrições, mas que preserva a linguagem gerada, isto é, $\mathcal{L}(G) = \mathcal{L}(G')$. 
 
 \begin{remark}
-    Assim como em \cite{benjaLivro2010} as gramáticas que serão consideradas nesta seção não são capaz de gerar a palavra vazia, ou seja, $S \not\gg \lambda$ ou ainda $\lambda \notin \mathcal{L}(G)$. Entretanto isso não irá diminuir em nada a força dos resultados que serão obtidos aqui.
+    Assim como em \cite{benjaLivro2010} as gramáticas que serão consideradas nesta seção não são capazes de gerar a palavra vazia, ou seja, $S \not\gg \lambda$ ou ainda $\lambda \notin \mathcal{L}(G)$. Entretanto isso não irá diminuir em nada a força dos resultados que serão obtidos aqui.
 \end{remark}
 
 \begin{definition}[Regra da substituição]\label{def:RegraSubstituicao}
@@ -587,13 +587,13 @@ Vale ressaltar que nos dias atuais no estudo das linguagens formais é comum ado
 \end{definition}
 
 \begin{remark}
-    É evidente pela propria definição que GLC na forma normal de Chomsky não possuem $\lambda$-produções e nem regras unitárias.
+    É evidente pela própria definição que GLC na forma normal de Chomsky não possuem $\lambda$-produções e nem regras unitárias.
 \end{remark}
 
 Antes de apresentar o algoritmo capaz de converter qualquer GLC em sua equivalente na forma normal de Chomsky é conveniente apresentar a definição e os resultados a seguir.
 
 \begin{definition}[Forma normal de pré-Chomsky]\label{def:NormalPreChomsky}
-    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal pré-Chomsky se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = A_1\cdots A_m$ ou $\beta = a_1\cdots a_n$ com $A_i \in V, a_j \in \Sigma$ sendo $1 \leq i \leq m$ e $1 \leq j \leq n$.
+    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal pré-Chomsky se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = A_1\cdots A_m$ ou $\beta = a$ com $A_i \in V, a \in \Sigma$ sendo $1 \leq i \leq m$.
 \end{definition}
 
 \begin{lemma}\label{lema:PreChomsky}
@@ -607,13 +607,13 @@ Antes de apresentar o algoritmo capaz de converter qualquer GLC em sua equivalen
         h(wa) & = & h(w)A_a
     \end{eqnarray*}
     agora defina uma nova gramática $G' = \langle V', \Sigma, S, P' \rangle$ onde $V' = V \cup V_\Sigma$ e $P' = P_h \cup P_\Sigma$ onde, 
-    $$P_h = \{\alpha \rhd h(w_1)A_1 \cdots h(w_{n})A_{n}h(w_{n+1}) \mid \alpha \rhd w_1A_1 \cdots w_nA_{n}w_{n+1} \in P\}$$
+    $$P_h = \{\alpha \rhd h(w_1)A_1 \cdots h(w_{n})A_{n}h(w_{n+1}) \mid \alpha \rhd w_1A_1 \cdots w_nA_{n}w_{n+1} \in P, |n+1| \geq 2\}$$
     e
     $$P_\Sigma = \{A_a \rhd a \mid A_a \in V_\Sigma\}$$
     consequentemente, todo $\alpha' \rhd \beta' \in P'$ é tal que $\beta' = X_1\cdots X_n$ ou $\beta' = a$ com $X_k \in V'$ e $a \in \Sigma \cup \{\lambda\}$ com $1 \leq k \leq n$ e $|X_1\cdots X_n| \geq 1$, assim por definição tem-se que $G'$ está na forma normal pré-Chomsky. Agora para mostrar que $\mathcal{L}(G) = \mathcal{L}(G')$  basta usar um argumento similar aos utilizados nas demonstrações dos Lemas \ref{lema:SemInacessivel} e \ref{lema:SemDescartavel} e dos Teoremas \ref{teo:SuplificacaoGLC-Sub},  \ref{teo:SemLambdaProducoes} e \ref{teo:SemProducoesUnitarias}.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{teo:NormalChomsky}
     Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal de Chomsky tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
 \end{theorem}
 
@@ -635,5 +635,173 @@ Antes de apresentar o algoritmo capaz de converter qualquer GLC em sua equivalen
         \vdots & \vdots & \vdots\\
         X_{m-2} & \rhd & A_{m-1}A_{m}
     \end{eqnarray*}
-    são elementos de $P_3$ e $X_i$ é uma nova variável adicionada ao conjunto $V_1$ com $i \leq m-2$. Agora construa uma gramática $G' = \langle V', \Sigma, S, P' \rangle$ onde $V' = V_1 \cup V$ e $P' = P_1 \cup P_3$, é fácil ver que todas as regras em $P'$ satisfazem as condições da forma normal de Chomsky, assim $G'$ está na forma normal de Chomsky. Agora por indução sobre as derivações não é difícil verificar que para toda palavra $w \in \Sigma$ tem-se que $S \gg^*_{\widehat{G}} w$ se, e somente se, $S \gg^*_{G'} w$,  consequentemente,  $\mathcal{L}(G) = \mathcal{L}(G')$.
+    são elementos de $P_3$ e $X_i$ é uma nova variável adicionada ao conjunto $V_1$ com $i \leq m-2$. Agora construa uma gramática $G' = \langle V', \Sigma, S, P' \rangle$ onde $V' = V_1 \cup V$ e $P' = P_1 \cup P_3$, é fácil ver que todas as regras em $P'$ satisfazem as condições da forma normal de Chomsky, assim $G'$ está na forma normal de Chomsky. Por fim, não é difícil verificar que para toda palavra $w \in \Sigma$ tem-se que $S \gg^*_{\widehat{G}} w$ se, e somente se, $S \gg^*_{G'} w$,  consequentemente,  $\mathcal{L}(G) = \mathcal{L}(G')$.
 \end{proof}
+
+Para que leitores com menos facilidade com a linguagem matemática possam entender os procedimentos para encontrar a forma normal de Chomsky de uma GLC dada, agora serão convertidos os procedimentos usados nas demonstrações do Lema \ref{lema:PreChomsky} e do Teorema \ref{teo:NormalChomsky} em dois algoritmos.
+
+\begin{algorithm}[h]
+	\Entrada{Uma GLC $G = \langle V, \Sigma, S, P \rangle$}
+	\Saida{Uma GLC $G' = \langle V', \Sigma, S, P' \rangle$ na forma normal pré-Chomsky}
+	\Inicio{
+	    Se existirem remova as $\lambda$-produções\\
+		Se existirem remova as regras unitárias\\
+		Inicialize o conjunto $V'$ sendo igual a $V$\\
+		Inicialize o conjunto $P'$ como sendo vazio\\
+		\ParaCada{$a \in \Sigma$}{
+		    Adicione em $V'$ a variável $A_a$\\
+		    Adicione em $P'$ a regra $A_a \rhd a$\\
+		    \Se{$A \rhd a \in P$ com $A \in V$}{
+		        Adicione em $P'$ a regra $A\rhd a$\\
+		    }
+		}
+		\ParaCada{$\alpha \rhd \beta \in P$ com $|\beta| \geq 2$}{
+		    \eSe{$\exists a \in \Sigma$ em $\beta$}{
+		        Gere $\beta'$ trocando cada $a \in \Sigma$ de $\beta$ por $A_a$\\
+		        Adicione em $P'$ a regra $\alpha \rhd \beta'$\\
+		    }{
+		        Adicione em $P'$ a regra $\alpha \rhd \beta$\\
+		    }
+	    }
+	    \Retorna{$G' = \langle V', \Sigma, S, P' \rangle$}
+	}
+	\caption{Algoritmo para construir uma GLC na forma normal pré-Chomsky.}
+	\label{alg:GLC-FNpreChomsky}
+\end{algorithm}
+
+\begin{remark}
+    O leitor atento pode notar que a implementação do isomorfismo $h$ descrito na demonstração do Lema \ref{lema:PreChomsky} corresponde exatamente ao trecho de código entre as linhas 14 e 19 do Algoritmo \ref{alg:GLC-FNpreChomsky}.
+\end{remark}
+\newpage
+
+\begin{algorithm}[h]
+	\Entrada{Uma GLC $G = \langle V, \Sigma, S, P \rangle$}
+	\Saida{Uma GLC $G' = \langle V', \Sigma, S, P' \rangle$ na forma normal de Chomsky}
+	\Inicio{
+		Use $G$ como entrada do Algoritmo \ref{alg:GLC-FNpreChomsky} e obtenha $\widehat{G} = \langle \widehat{V}, \Sigma, S, \widehat{P} \rangle$\\
+		Inicialize o conjunto $V'$ sendo igual a $\widehat{V}$\\
+		Inicialize o conjunto $P'$ como sendo vazio\\
+		\ParaCada{$\alpha \rhd \beta \in \widehat{P}$ com $|\beta| \leq 2$}{
+		    Adicione a regra $\alpha \rhd \beta$ no conjunto $P'$\\
+		}
+		\ParaCada{$\alpha \rhd A_1A_2A_3\cdots A_n \in \widehat{P}$ com $n \geq 3$}{
+		    Adicione variáveis novas $X_1, \cdots, X_{n-1}$ em $V'$\\
+		    Adicione em $P'$ as regras $\alpha \rhd A_1X_1, X_1 \rhd A_2X_2, \cdots, X_{n-2} \rhd A_{n-1}A_n$\\
+		}
+		\Retorna{$G' = \langle V', \Sigma, S, P' \rangle$}
+	}
+	\caption{Algoritmo para construir uma GLC na forma normal de Chomsky.}
+	\label{alg:GLC-FNChomsky}
+\end{algorithm}
+
+\begin{example}
+    A GLC na forma normal de Chomskya obtida a partir da GLC $G = \langle \{S, A, B, C, D\}, \{0,1\}, S, P \rangle$ com $P$ sendo formado pelas seguintes regras:
+    \begin{eqnarray*}
+        S & \rhd & 0AB \mid C1D \mid 011 \mid 100\\
+        A & \rhd & 1A00 \mid 11B \mid CA0\\
+        B & \rhd & 0S \mid C1S \mid \lambda\\
+        C & \rhd & 11C \mid B01 \mid \lambda\\
+        D & \rhd & 101 \mid \lambda
+    \end{eqnarray*}
+    è construída aplicando primeiro o Algoritmo \ref{alg:GLC-FNpreChomsky} sobre a gramática $G$, assim inicialmente o algoritmo remove as $\lambda$-produções gerado um conjunto de regras temporário da forma,
+    \begin{eqnarray*}
+        S & \rhd & 0AB \mid C1D \mid 011 \mid 100 \mid 0A \mid C1 \mid 1D \mid 1\\
+        A & \rhd & 1A00 \mid B11 \mid 0CA \mid 11 \mid 0A\\
+        B & \rhd & 0S \mid C1S \mid 1S\\
+        C & \rhd & 11C \mid B01 \mid 11 \mid 01\\
+        D & \rhd & 101
+    \end{eqnarray*}
+    como não produções unitárias no conjunto de regras acima o Algoritmo \ref{alg:GLC-FNpreChomsky} inicializa o conjunto $V' = \{S, A, B, C, D\}$ e cria e insere em $V'$ as varáveis $A_0$ e $A_1$, ou seja, tem-se agora que $V' = \{S, A, B, C, D, A_0, A_1\}$ e são adicionados as regras  $A_0 \rhd 0$ e $A_1 \rhd 1$ no conjunto de regras temporário, ou seja, tal conjunto fica da forma,
+    \begin{eqnarray*}
+        S & \rhd & 0AB \mid C1D \mid 011 \mid 100 \mid 0A \mid C1 \mid 1D \mid 1\\
+        A & \rhd & 1A00 \mid B11 \mid 0CA \mid 11 \mid 0A\\
+        B & \rhd & 0S \mid C1S \mid 1S\\
+        C & \rhd & 11C \mid B01 \mid 11 \mid 01\\
+        D & \rhd & 101\\
+        A_0 & \rhd & 0 \\
+        A_1 & \rhd & 1
+    \end{eqnarray*}
+    agora para cada regra $\alpha \rhd \beta$ em que $|\beta| \geq 2$ são trocados os símbolos $a \in \{0,1\}$ de $\beta$ pelas variáveis correspondentes $A_a$, ou seja, o conjunto de regras passa a ter a forma, 
+    \begin{eqnarray*}
+        S & \rhd & 0AB \mid CA_1D \mid A_0A_1A_1 \mid A_1A_0A_0 \mid A_0A \mid CA_1 \mid A_1D \mid 1\\
+        A & \rhd & A_1AA_0A_0 \mid BA_1A_1 \mid A_0CA \mid A_1A_1 \mid A_0A\\
+        B & \rhd & A_0S \mid CA_1S \mid A_1S\\
+        C & \rhd & A_1A_1C \mid BA_0A_1 \mid A_1A_1 \mid A_0A_1\\
+        D & \rhd & A_1A_0A_1\\
+        A_0 & \rhd & 0 \\
+        A_1 & \rhd & 1
+    \end{eqnarray*}
+    neste ponto o conjunto temporário de regras já está na forma pré-Chomsky, pode-se então usar o Algoritmo \ref{alg:GLC-FNChomsky}, que irá conservar as regras da forma $\alpha \rightarrow w$ com $|w| \leq 2$, e  para cada regra $\alpha \rhd A_1A_2A_3\cdots A_n$ com $n \geq 3$ irá criar e adicionar a $V'$ novas variáveis $X_1, X_{n-1}$ e no conjunto de regras serão inseridas as regras $\alpha \rhd A_1X_1, X_1 \rhd A_2X_2, \cdots, X_{n-2} \rhd A_{n-1}A_n$, assim o conjunto de regras passa a ser da forma,
+    
+    \begin{eqnarray*}
+        S & \rhd & 0X_1 \mid CX_2 \mid A_0X_3 \mid A_1X_4 \mid A_0A \mid CA_1 \mid A_1D \mid 1\\
+        X_1 & \rhd & AB \\
+        X_2 & \rhd & A_1D\\
+        X_3 & \rhd & A_1A_1\\
+        X_4 & \rhd & A_0A_0\\
+        A & \rhd & A_1X_5 \mid BX_3 \mid A_0X_6 \mid A_1A_1 \mid A_0A\\
+        X_5 & \rhd & AX_4\\
+        X_6 & \rhd & CA\\
+        B & \rhd & A_0S \mid CY_1 \mid A_1S\\
+        Y_1 & \rhd & A_1S\\
+        C & \rhd & A_1Y_2 \mid BY_3 \mid A_1A_1 \mid A_0A_1\\
+        Y_2 & \rhd & A_1C\\
+        Y_3 & \rhd & A_0A_1\\
+        D & \rhd & A_1Y_3\\
+        A_0 & \rhd & 0 \\
+        A_1 & \rhd & 1
+    \end{eqnarray*}
+    
+    agora tem-se claramente que a gramática com tal conjunto de regras será uma GLC que está na forma normal de Chomsky. 
+\end{example}
+
+\begin{definition}[Forma Normal de Greibach]
+    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal de Greibach se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = aA_1\cdots A_n$ com $a \in \Sigma, A_i \in V \cup \{\lambda\}$ com $1 \leq i \leq n$.
+\end{definition}
+
+O leitor atendo pode notar que as gramáticas na forma normal de Greibach possuem duas características básicas, (1) não possuem recursão à esquerda e (2) não são capazes de gerar a palavra vazia.
+
+\begin{theorem}\label{teo:FNGreibach}
+    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal compacta de Greibach tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+A demonstração do Teorema \ref{teo:FNGreibach} acima não será exibida neste manuscrito, o leitor interessando pode consultada tal demonstração em detalhes nos livros \cite{benjaLivro2010, hopcroft2008} e também no artigo \cite{greibach1965}, além de uma versão mais ``fácil'' apresentada no trabalho \cite{andrzej1984}. A seguir este manuscrito apresenta um algoritmo para a conversão de uma GLC normal em uma GLC na forma normal de Greibach.
+
+\begin{algorithm}[h]
+	\Entrada{Uma GLC $G = \langle V, \Sigma, S, P \rangle$}
+	\Saida{Uma GLC $G' = \langle V', \Sigma, S, P' \rangle$ na forma normal de Chomsky}
+	\Inicio{
+		Use $G$ como entrada do Algoritmo \ref{alg:GLC-FNpreChomsky} e obtenha $\widehat{G} = \langle \widehat{V}, \Sigma, S, \widehat{P} \rangle$\\
+		Defina $V' = \widehat{V}$\\
+		Defina $P' = \{A \rhd a \in \widehat{P} \mid A \in \widehat{V}, a \in \Sigma\}$\\
+		Defina $P_{tmp} = \widehat{P} - P'$\\
+		Defina uma bijeção $f: \widehat{V} \rightarrow \{1, \cdots, \# \widehat{V}\}$ tal que $f(S) = 1$.\\
+	    \Enqto{$P_{tmp} \neq \emptyset$}{
+	        Seja $(A, B)  \in \widehat{V} \times \widehat{V}$\\
+	        \eSe{$f(B) < F(A)$ e $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \in P_{tmp}$}{
+	            \Se{$B \rhd C\beta_1 \mid \cdots \mid C\beta_n \in \widehat{P}$ tal que $f(C) > f(B)$}{
+	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ de $P_{tmp}$\\
+	                Adicione $A \rhd C\beta_1\alpha_1 \mid \cdots C\beta_1\alpha_m \mid \cdots \mid  C\beta_n\alpha_1 \mid \cdots C\beta_n\alpha_m $ em $P'$ e em $P_{tmp}$\\
+	            }
+	        }{
+	            \eSe{$f(B) = F(A)$ e $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \mid \gamma_1 \mid \cdots \mid \gamma_n \in P_{tmp}$}{
+	                Defina $i = \# V'$.\\
+	                Adicione em $V'$ a nova variável $Z_i$\\
+	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \mid \gamma_1 \mid \cdots \mid \gamma_n$ de $P_{tmp}$\\
+	                Adicione as regras $A \rhd \gamma_1 \mid \cdots \mid \gamma_n \mid \gamma_1Z_i \mid \cdots \mid \gamma_nZ_i$ em $P'$\\
+	                Adicione as regras $Z_i \rhd \alpha_1 \mid \cdots \mid \alpha_m \mid \alpha_1Z_i \mid \cdots \mid \alpha_mZ_i$ em $P'$\\
+	            }{
+	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ de $P_{tmp}$\\
+	                Adicione as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ em $P'$\\
+	            }
+	        }
+	    }
+	    \ParaCada{$A \rhd B\alpha \in P'$}{
+            \Se{$A, B \in \widehat{V}$ e $f(A) < f(B)$}{
+            }	        
+	    }
+		\Retorna{$G' = \langle V', \Sigma, S, P' \rangle$}
+	}
+	\caption{Algoritmo para construir uma GLC na forma normal de Greibach.}
+	\label{alg:GLC-FNGreibach}
+\end{algorithm}
