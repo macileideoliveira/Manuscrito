@@ -1,0 +1,50 @@
+\chapter{Métodos de Demonstração}\label{cap:Demonstracoes}
+
+\begin{introduction}[Tópicos]
+	\item Introdução
+	\item Demonstrando Implicações
+\end{introduction}
+
+\section{Introdução}\label{sec:Introducao-Demonstracoes}
+
+No capítulo anterior, o leitor encontrou diversas demonstrações dentro da teoria intuitiva (ou Cantoriana) dos conjuntos. Para um leitor iniciante, talvez tenha sido um tanto quanto complicado entender a metodologia usada para construir tais demonstrações. E uma vez que, as demonstrações são figuras de interesse central no cotidiano dos matemáticos, cientistas da computação e engenheiros de software, em especial aqueles que trabalham com métodos formais, este texto irá fazer uma breve pausa no estudo da teoria dos conjuntos, para apresentar um pouco de teoria da prova ao leitor.
+
+Este capítulo começa então com o seguinte questionamento: Do ponto de vista da ciência da computação qual a importância das demonstrações? Bem a resposta a essa pergunta pode ser dada de dois pontos de vista,  um teórico (purista) e um prático (aplicado ou de engenharia).
+
+Na perspectiva de um cientista da computação puro, as demonstrações de teoremas são a principal ferramenta para investigar os limites dos diferentes modelos de computação propostos \cite{hopcroft2008, linz2006}, assim sendo é de suma importância que o estudante de graduação em ciência da computação receba em sua formação pelo menos o básico para dominar a ``arte'' de provar teoremas, sendo assim preparado para o estudo e a pesquisa pura em computação e(ou) matemática.
+
+Já na visão prática, só existe uma forma segura de garantir que um \textit{software} está livre de erros, essa ``tecnologia'' é exatamente a demonstração das propriedades do \textit{software}. É claro que, mostrar que um \textit{software} não possui erros vai exigir que o \textit{software} seja visto através de um certo nível de formalismo e rigor matemático, mas após essa modelagem através de demonstrações pode-se garantir que um \textit{software} não apresentará erros, e assim se algo errado ocorrer foi por fatores externos, tais como defeito no \textit{hardware} por exemplo, e não por falha ou erros com a implementação. Este conceito é o cerne de uma área da engenharia de \textit{software} \cite{pressman2016}, chamada métodos  (ou especificações) formais, sendo essa área o ponto crucial no desenvolvimento de \textit{softwares} para sistemas críticos \cite{sommerville2011}. Isto já mostra a grande importância de programadores e engenheiros de \textit{software} terem em sua formação as bases para o domínio das técnicas de demonstração.
+
+Nas próxima seções deste manuscrito serão descritas as principais técnicas de demonstração de interesse de matemáticos, cientistas da computação e engenheiros formais de \textit{software}. 
+
+\begin{remark}
+    Para o leitor que nunca antes teve contato com a lógica matemática recomenda-se que antes de estudar este capítulo, o leitor faça pelo menos um rápido estudo do Capítulo \ref{cap:IntroducaoLogica}.
+\end{remark}
+
+Para pode falar sobre métodos de demonstração e poder então descrever como os matemáticos, lógicos e cientistas da computação justificam enunciados usando apenas a argumentação matemática, será necessário fixar algumas nomenclaturas e listar alguns conceitos importantes.
+
+\begin{definition}[Enunciado]\label{def:Enunciado}
+	Um enunciado é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
+\end{definition}
+
+Para que uma demonstração de um enunciado possa ser aceita como correta, é comum exigir que a argumentação de tal demonstração deve conter um alto nível de rigor (formalismo) matemático, além disso, quanto maior for a riqueza\footnote{A riqueza de detalhes que uma demonstração tem pode variar, a depender para quem a prova se destina, por exemplo, uma prova escrita para um físico em geral não se preocupa com os por menores do linguajá matemático, diferentemente de uma prova escrita para matemáticos, onde os menores detalhes da linguagem matemática são considerados como informações relevantes.} de detalhes, mas fácil é de se entender as demonstrações.
+
+Os métodos de demonstração apresentadas neste manuscrito seguem as ideias e a forma apresentada em \cite{velleman2019comProvar}. Aqui as argumentações de uma dada demonstração serão realizadas em um ambiente similar ao um ``tabuleiro'' de jogo. O tabuleiro é a ferramenta utilizada para realizar e organizar as deduções que formam a demonstração de cada enunciado. 
+
+Neste manuscrito o tabuleiro será visto como uma tabela dividido em 4 colunas: a coluna 1 marcar o número do estado da prova\footnote{Usando a ideia de cada linha no tabuleiro ser vista como um estado na prova, permite enxergar uma demonstração na forma de um autômato finito determinístico \cite{hopcroft2008}, esse tipo de visão é similar ao que acontece em demonstrações usando o provador de teoremas Coq \cite{coq2013}.}, a coluna 2 contém um rascunho do texto final da demonstração, a coluna 3 guarda os dados\footnote{Os dados são sempre argumentos verdadeiros, hipótese que estão sendo assumidas como verdadeiras ou novas informações obtidas a partir de dados já existentes anteriormente no tabuleiro.} disponíveis e a coluna 4 guarda os objetivos a serem alcançados.  O ``jogo'' da demonstração acaba, isto é, a demonstração termina quando  todos os objetivos forem transformados em dados.
+
+\begin{remark}
+    Sempre que possível dentro do tabuleiro algumas sentenças serão escritas em notação matemática para tornar as informações menos verbosas.
+\end{remark}
+
+Agora o leitor pode estar a se questionar, como é construído o tabuleiro da demonstração de um determinado enunciado? Ou ainda como é produzido o texto final da demonstração a partir deste tabuleiro? As respostas para estas perguntas serão dadas a seguir. 
+
+\section{Demonstrando Implicações}\label{sec:ProvandoImplicacao}
+
+Demonstrar uma implicação consiste em construir uma prova (ou argumento) que mostre a veracidade de uma sentença com a seguinte natureza: 
+
+\begin{center}
+	Se $\alpha$, então $\beta$. 
+\end{center}
+
+Onde $\alpha$ e $\beta$ são proposições ou predicados (para detalhes ver a Seção \ref{sec:Argumento-Proposicao-Predicado}). Existe duas metodologia distintas para a demonstração de implicações sendo essas: a demonstração direta e a demonstração por contra positiva.

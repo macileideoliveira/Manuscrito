@@ -6,9 +6,9 @@
 	\item Simplificação e Formas Normais de GLC
 	\item Sobre Algoritmos de Pertinência em GLC
 	\item GLC e Linguagens de Programação
-	\item Autômato de Pilha Determinístico
-	\item Autômato de Pilha Não-determinístico
-	\item Álgebra das Linguagens Livres de Contexto
+	\item Autômato de Pilha
+	\item Álgebras das LLC
+	\item Problemas de Decisão das LLC
 	\item Questionário
 \end{introduction}
 
@@ -731,7 +731,7 @@ Para que leitores com menos facilidade com a linguagem matemática possam entend
         A_0 & \rhd & 0 \\
         A_1 & \rhd & 1
     \end{eqnarray*}
-    neste ponto o conjunto temporário de regras já está na forma pré-Chomsky, pode-se então usar o Algoritmo \ref{alg:GLC-FNChomsky}, que irá conservar as regras da forma $\alpha \rightarrow w$ com $|w| \leq 2$, e  para cada regra $\alpha \rhd A_1A_2A_3\cdots A_n$ com $n \geq 3$ irá criar e adicionar a $V'$ novas variáveis $X_1, X_{n-1}$ e no conjunto de regras serão inseridas as regras $\alpha \rhd A_1X_1, X_1 \rhd A_2X_2, \cdots, X_{n-2} \rhd A_{n-1}A_n$, assim o conjunto de regras passa a ser da forma,
+    neste ponto o conjunto temporário de regras já está na forma pré-Chomsky, pode-se então usar o Algoritmo \ref{alg:GLC-FNChomsky}, que irá conservar as regras da forma $\alpha \rhd w$ com $|w| \leq 2$, e  para cada regra $\alpha \rhd A_1A_2A_3\cdots A_n$ com $n \geq 3$ irá criar e adicionar a $V'$ novas variáveis $X_1, X_{n-1}$ e no conjunto de regras serão inseridas as regras $\alpha \rhd A_1X_1, X_1 \rhd A_2X_2, \cdots, X_{n-2} \rhd A_{n-1}A_n$, assim o conjunto de regras passa a ser da forma,
     
     \begin{eqnarray*}
         S & \rhd & 0X_1 \mid CX_2 \mid A_0X_3 \mid A_1X_4 \mid A_0A \mid CA_1 \mid A_1D \mid 1\\
@@ -755,53 +755,494 @@ Para que leitores com menos facilidade com a linguagem matemática possam entend
     agora tem-se claramente que a gramática com tal conjunto de regras será uma GLC que está na forma normal de Chomsky. 
 \end{example}
 
-\begin{definition}[Forma Normal de Greibach]
-    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal de Greibach se para todo $\alpha \rhd \beta \in P$ tem-se que $\beta = aA_1\cdots A_n$ com $a \in \Sigma, A_i \in V \cup \{\lambda\}$ com $1 \leq i \leq n$.
+%Assim como no livro \cite{benjaLivro2010} este manuscrito segue seu desenvolvimento apresentado ao leitor a definição da forma normal de Greibach.
+
+\begin{definition}[Forma Normal Reduzida de Greibach]
+    Uma GLC $G = \langle V, \Sigma, S, P \rangle$ está na forma normal reduzida de Greibach se todas as regras em $P$ tem a forma $A \rhd aB$ com $A \in V, a \in \Sigma$ e $B \in V^*$.
 \end{definition}
 
-O leitor atendo pode notar que as gramáticas na forma normal de Greibach possuem duas características básicas, (1) não possuem recursão à esquerda e (2) não são capazes de gerar a palavra vazia.
+O leitor atendo pode notar que as gramáticas na forma normal de Greibach possuem a propriedade de que a cada derivação um símbolo da palavra que se quer gerar é inserido na forma sentencial que é construída pelo passo da derivação, assim nas GLC na forma normal de Greibach existe a garantia de que sempre serão necessários \textbf{exatamente} $|w|$ passos de derivação para gerar $w$, o que contrasta com as GLC na forma normal de Chomsky é que se sabe que para gerar $w$ as derivações terão \textbf{no mínimo} $|w|$ passos, nesse sentido, pode-se dizer que as GLC na forma normal de Greibach são mais eficientes que as GLC na forma normal de Chomsky.
 
-\begin{theorem}\label{teo:FNGreibach}
-    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal compacta de Greibach tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\begin{example}\label{exe:GLC-Para_Converter}
+    A GLC $G = \langle \{S, T, U\}, \{a, b\}, S, P \rangle$ onde $P$ é definido pelas regras,
+    \begin{eqnarray*}
+        S & \rhd & TU\\
+        T & \rhd & US \mid b\\
+        U & \rhd & ST \mid a
+    \end{eqnarray*}
+    está na forma normal de Chomsky mas não está na forma normal de Greibach.
+\end{example}
+
+\begin{example}\label{exe:FazerNoExercicioGLC}
+    A GLC $G = \langle \{A, B, C\}, \{a, b\}, A, P \rangle$ onde $P$ é definido pelas regras,
+    \begin{eqnarray*}
+        A & \rhd & aC \mid a\\
+        B & \rhd & b\\
+        C & \rhd & aABB
+    \end{eqnarray*}
+    está na forma normal de Greibach.
+\end{example}
+
+\begin{theorem}
+    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC na forma normal de Greibach, então existe uma GLC $G'$ na forma normal de Chomsky tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
 \end{theorem}
 
-A demonstração do Teorema \ref{teo:FNGreibach} acima não será exibida neste manuscrito, o leitor interessando pode consultada tal demonstração em detalhes nos livros \cite{benjaLivro2010, hopcroft2008} e também no artigo \cite{greibach1965}, além de uma versão mais ``fácil'' apresentada no trabalho \cite{andrzej1984}. A seguir este manuscrito apresenta um algoritmo para a conversão de uma GLC normal em uma GLC na forma normal de Greibach.
+\begin{proof}
+    Suponha que $G = \langle V, \Sigma, S, P \rangle$ é uma GLC na forma normal de Greibach, consequentemente todas as produções são da forma $A \rhd aB$ com $A \in V, B \in V^*$ e $a \in \Sigma$, agora construa os conjuntos, 
+    \begin{itemize}
+        \item $V' = V \cup \{A_a \mid a \in \Sigma\}$
+        \item $P_1 = \{A \rhd a \in P \mid a \in \Sigma\}$
+        \item $P_2 = P - P_1$
+        \item $P_3 = \{A \rhd A_aB \mid A \rhd aB \in P_2\}$
+    \end{itemize}
+    em seguida faça $G'' = \langle V', \Sigma, S, P' \rangle$ tal que $P' = P_1 \cup P_3$, agora claramente tem-se que $G''$ está na forma normal pré-Chomsky e com o mesmo argumento usado na prova do Teorema \ref{teo:NormalChomsky} é possível construir uma GLC $G'$ na forma normal de Chomsky tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{proof}
 
-\begin{algorithm}[h]
-	\Entrada{Uma GLC $G = \langle V, \Sigma, S, P \rangle$}
+
+\begin{theorem}\label{teo:FNGreibach}
+    Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC, então existe uma GLC $G'$ na forma normal Greibach tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{theorem}
+
+O Teorema \ref{teo:FNGreibach} diz que qualquer GLC pode ser convertida para a forma normal de Greibach, neste manuscrito não será apresentado a demonstração do Teorema \ref{teo:FNGreibach}, caso o leitor tenha interesse em tal demonstração é sugerida a leitura de \cite{andrzej1984, benjaLivro2010, greibach1965, menezes1998LFA}. 
+
+\begin{corollary}
+	Se $G = \langle V, \Sigma, S, P \rangle$ é uma GLC na forma normal de Chomsky, então existe uma GLC $G'$ na forma normal Greibach tal que $\mathcal{L}(G) = \mathcal{L}(G')$.
+\end{corollary}
+
+\begin{proof}
+    Trivial.
+\end{proof}
+
+A seguir é apresentado o Algoritmo que converte as GLC para a forma normal de Greibach.
+
+\begin{algorithm}[!ht]
+	\Entrada{Uma GLC $G = \langle V, \Sigma, S, P \rangle$ na forma normal pré-Chomsy}
 	\Saida{Uma GLC $G' = \langle V', \Sigma, S, P' \rangle$ na forma normal de Chomsky}
 	\Inicio{
-		Use $G$ como entrada do Algoritmo \ref{alg:GLC-FNpreChomsky} e obtenha $\widehat{G} = \langle \widehat{V}, \Sigma, S, \widehat{P} \rangle$\\
-		Defina $V' = \widehat{V}$\\
-		Defina $P' = \{A \rhd a \in \widehat{P} \mid A \in \widehat{V}, a \in \Sigma\}$\\
-		Defina $P_{tmp} = \widehat{P} - P'$\\
-		Defina uma bijeção $f: \widehat{V} \rightarrow \{1, \cdots, \# \widehat{V}\}$ tal que $f(S) = 1$.\\
-	    \Enqto{$P_{tmp} \neq \emptyset$}{
-	        Seja $(A, B)  \in \widehat{V} \times \widehat{V}$\\
-	        \eSe{$f(B) < F(A)$ e $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \in P_{tmp}$}{
-	            \Se{$B \rhd C\beta_1 \mid \cdots \mid C\beta_n \in \widehat{P}$ tal que $f(C) > f(B)$}{
-	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ de $P_{tmp}$\\
-	                Adicione $A \rhd C\beta_1\alpha_1 \mid \cdots C\beta_1\alpha_m \mid \cdots \mid  C\beta_n\alpha_1 \mid \cdots C\beta_n\alpha_m $ em $P'$ e em $P_{tmp}$\\
+		Renomear as variáveis em $V$ para $A_1, \cdots, A_{\#V}$ de forma que $S$ seja renomeada como $S_1$\\
+		Defina os três conjuntos $P_0 = \{A_r \rhd aB \in P \mid a \in \Sigma, B \in V^*\}$, $P_1 = P - P_0$ e $V' = V$\\
+	    \Para{$i$ de $1$ até $\#V$}{
+	        Defina $j = 1$\\
+	        \Enqto{$j < i$}{
+	            \ParaCada{$A_i \rhd A_jB \in P_1$}{
+	                Remova $A_i \rhd A_jB$ de $P_1$\\   
+    	            \ParaCada{$A_j \rhd w \in P_0 \cup P_1$}{
+    	                \eSe{$w$ começa com algum $a \in \Sigma$}{
+    	                    Adicione $A_i \rhd wB$ em $P_0$\\
+    	                }{
+    	                    Adicione $A_i \rhd wB$ em $P_1$\\
+    	                }
+	                }
 	            }
-	        }{
-	            \eSe{$f(B) = F(A)$ e $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \mid \gamma_1 \mid \cdots \mid \gamma_n \in P_{tmp}$}{
-	                Defina $i = \# V'$.\\
-	                Adicione em $V'$ a nova variável $Z_i$\\
-	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m \mid \gamma_1 \mid \cdots \mid \gamma_n$ de $P_{tmp}$\\
-	                Adicione as regras $A \rhd \gamma_1 \mid \cdots \mid \gamma_n \mid \gamma_1Z_i \mid \cdots \mid \gamma_nZ_i$ em $P'$\\
-	                Adicione as regras $Z_i \rhd \alpha_1 \mid \cdots \mid \alpha_m \mid \alpha_1Z_i \mid \cdots \mid \alpha_mZ_i$ em $P'$\\
-	            }{
-	                Remova as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ de $P_{tmp}$\\
-	                Adicione as regras $A \rhd B\alpha_1 \mid \cdots \mid B\alpha_m$ em $P'$\\
-	            }
+	            Incremente o valor de $j$ em 1\\
+	        }
+	        \Se{$A_i$ possui regras recursivas a esquerda}{
+	            Adicione $Z_i$ em $V'$\\
+	            Remova a recursão à esquerda de $A_i$s, onde a variável $Z$ descrita na Definição \ref{def:RegraRecursiva} é substituída por $Z_i$ e todas as regras iniciadas com $a \in \Sigma$ são postas em $P_0$ e as demais em $P_1$
 	        }
 	    }
-	    \ParaCada{$A \rhd B\alpha \in P'$}{
-            \Se{$A, B \in \widehat{V}$ e $f(A) < f(B)$}{
-            }	        
+	    \Para{$i$ de $\#V - 1$ até 1}{
+	        Remova de $P_1$ todas as regras $A_i \rhd A_jB$ com $A_j \in V'$ e $B$ sendo uma palavra sobre $V'$\\ 
+	        \ParaCada{$A_j \rhd aC \in P_0$ onde $a \in \Sigma$ e $C$ sendo uma palavra sobre $V'$}{
+	            Adicione em $P_0$ a regra $A_i \rhd aCB$
+	        }
 	    }
-		\Retorna{$G' = \langle V', \Sigma, S, P' \rangle$}
+	    \ParaCada{$Z_i \in V'$ com $i \in \{1, \cdots, \#V\}$}{
+	        Remova de $P_1$ todas as regras $Z_i \rhd A_jB$ com $A_j \in V'$ e $B$ sendo uma palavra sobre $V'$\\ 
+	        \ParaCada{$A_j \rhd aC \in P_0$ onde $a \in \Sigma$ e $C$ sendo uma palavra sobre $V'$}{
+	            Adicione em $P_1$ a regra $Z_i \rhd aCB$
+	        }
+	    }
+	    Defina $P' = P_0 \cup P_1$\\
+		\Retorna{$G' = \langle V', \Sigma, A_1, P' \rangle$}
 	}
 	\caption{Algoritmo para construir uma GLC na forma normal de Greibach.}
 	\label{alg:GLC-FNGreibach}
 \end{algorithm}
+
+\
+
+\newpage
+\begin{example}
+    Considere a GLC do Exemplo \ref{exe:GLC-Para_Converter}, a mesma já está na forma normal de Chomsky e, portanto, está na forma normal pré-Chomsky, assim a mesma pode ser aplicada sem problemas ao Algoritmo \ref{alg:GLC-FNGreibach}, supondo que no passo dois o algoritmo renomeou as variáveis da seguinte forma, $S = A_1, T = A_2$ e $U = A_3$, o algoritmo segue construindo então os conjuntos, 
+    $$P_0 = \{A_2\rhd b, A_3 \rhd a\}$$
+    e
+    $$P_1 = \{A_1 \rhd A_2A_3, A_2 \rhd A_3A_1, A_3 \rhd A_1A_2\}$$
+    e também, 
+    $$V' = \{A_1, A_2, A_3\}$$
+    o algoritmo entra agora na execução do \textit{loop} da linha $4$, nas primeiras interações não são efetuadas mudanças nos conjuntos $P_0$ e $P_1$, porém na terceira interação, isto é, quando $i = 3$ tem-se que durante o \textit{loop} interno, iniciado na linha $6$ é encontrada a regra $A_3 \rhd A_1A_2$ em $P_0$ sendo excluída em seguida, logo depois a regra  $A_3 \rhd A_2A3A_2$ é inserida em $P_1$ que agora tem a forma, 
+    $$P_1 = \{A_1 \rhd A_2A_3, A_2 \rhd A_3A_1, A_3 \rhd A_2A_3A_2\}$$
+    o valor de $j$ aumenta para $2$ e na próxima interação do \textit{loop} (linha $6$) a regra $A_3 \rhd A_2A3A_2$ será encontra e excluída de $P_1$ em seguida será adicionado em $P_0$ a regra $A_3 \rhd bA_3A_2$ e em $P_1$ será adicionada a regra $A_3 \rhd A_3A_1A_3A_2$ e assim $P_0$ e $P_1$ passa a ser da forma, 
+    $$P_0 = \{A_2\rhd b, A_3 \rhd a \mid bA_3A_2\}$$
+    e
+    $$P_1 = \{A_1 \rhd A_2A_3, A_2 \rhd A_3A_1, A_3 \rhd A_3A_1A_3A_2\}$$
+    após isso o \textit{loop} da linha $6$ é finalizando, e o algoritmo segue uma vez que $A_3$ possuem regra recursiva à esquerda (exatamente $A_3 \rhd A_3A_1A_3A_2$) na linha $20$ o conjunto $V'$ é atualizado para a forma $V' = \{A_1, A_2, A_3, Z_3\}$, já os conjuntos $P_0$ e $P_1$ passam a ser da seguinte forma, 
+    $$P_0 = \{A_2\rhd b, A_3 \rhd a \mid aZ_3 \mid bA_3A_2 \mid bA_3A_2Z_3\}$$
+    e
+    $$P_1 = \{A_1 \rhd A_2A_3, A_2 \rhd A_3A_1, Z_3 \rhd A_1A_3A_2 \mid A_1A_3A_2Z_3\}$$
+    com a execução do \textit{loop} da linha $24$ concluída o conjunto $P_0$  passa a conter as regras,
+    \begin{eqnarray*}
+        A_1 & \rhd & bA_3A_2A_1A_3 \mid bA_3A_2Z_3A_1A_3 \mid bA_3 \mid aZ_3A_1A_3 \mid aA_1A_3\\
+        A_2 & \rhd & b \mid bA_3A_2A_1 \mid bA_3A_2Z_3A_1 \mid aZ_3A_1 \mid aA_1\\
+        A_3 & \rhd & bA_3A_2 \mid bA_3A_2Z_3 \mid aZ_3 \mid a
+    \end{eqnarray*}
+    em seguida após a execução do \textit{loop} da linha $30$ concluída o conjunto $P_1$  irá conter as regras, 
+    \begin{eqnarray*}
+        Z_3 & \rhd & bA_3A_2A_1A_3A_3A_2 \mid bA_3A_2A_1A_3A_3A_2Z_3 \mid bA_3A_2Z_3A_1A_3A_3A_2 \mid bA_3A_2Z_3A_1A_3A_3A_2Z_3 \mid\\
+        & & bA_3A_3A_2 \mid bA_3A_3A_2Z_3 \mid  aZ_3A_1A_3A_3A_2 \mid aZ_3A_1A_3A_3A_2Z_3 \mid  aA_1A_3A_3A_2 \mid aA_1A_3A_3A_2Z_3
+    \end{eqnarray*}
+    finalmente é construída a gramática $G' = \langle \{A_1, A_2, A_3, Z_3\}, \{a, b\}, A_1, P' \rangle$ onde $P' = P_0 \cup P_1$.
+    \\
+\end{example}
+
+Pode-se como explicado em \cite{benjaLivro2010, menezes1998LFA}, resumir o funcionamento do Algoritmo \ref{alg:GLC-FNGreibach} ao receber como entrada uma GLC na forma normal pré-CHomsky nas seguintes etapas:
+
+\begin{enumerate}
+    \item Renomear as variáveis.
+    \item Garantir que todas as produções seja das formas $A_i \rhd A_jB$ ou $A_j \rhd aB$ com $i \leq j$ e $A_i, A_j \in V, B \in V^*$ e $a \in \Sigma$.
+    \item Elmiar as recursões à esquerda, introduzindo com isso novas variáveis rotuladas por $Z_i$ com $i \leq \#V$.
+    \item Garantir que todas as regras sejam da forma $A \rhd aB$ com $A \in V'$ e $B V'^*$.
+\end{enumerate}
+
+Um fato importante sobre o Algoritmo \ref{alg:GLC-FNGreibach} é que diferentes ordens com que as variáveis são renomeadas geram diferentes gramáticas como resultado. O exemplo a seguir ilustra essa propriedade do Algoritmo \ref{alg:GLC-FNGreibach}.
+
+\begin{example}
+    Considere novamente a GLC do Exemplo \ref{exe:GLC-Para_Converter}, e executando as etapas do Algoritmo \ref{alg:GLC-FNGreibach}, porém renomeando as variáveis agora como, $S = A_1, U = A_2$ e $T = A_3$ será gerado a GLC na forma normal de Greibach $G = \langle \{A_1, A_2, A_3, Z_3\}, \{a, b\}, A_1, P\rangle$ com $P$ sendo o conjunto que contém as seguintes regras.
+    \begin{eqnarray*}
+        A_1 & \rhd & aA_1A_2 \mid bA_2 \mid aA_1Z_3A_2 \mid bZ_3A_2\\
+        A_2 & \rhd & aA_1A_2A_3 \mid bA_3A_2A_3 \mid aA_1Z_3A_2A_3 \mid bZ_3A_2A_3 \mid a\\
+        A_3 & \rhd & aA_1 \mid b \mid aA_1Z_3 \mid bZ_3\\
+        Z_3 & \rhd & aA_1A_2A_3A_3A_1 \mid bA_3A_2A_3A_3A_1 \mid aA_1Z_3A_2A_3A_3A_1 \mid bZ_3A_2A_3A_3A_1 \mid aA_3A_1\\
+        & & aA_1A_2A_3A_3A_1Z_3 \mid bA_3A_2A_3A_3A_1Z_3 \mid aA_1Z_3A_2A_3A_3A_1Z_3 \mid bZ_3A_2A_3A_3A_1Z_3 \mid aA_3A_1Z_3
+    \end{eqnarray*}
+\end{example}
+
+
+\section{Sobre Algoritmos de Pertinência em GLC}\label{sec:AlgoritmosPertinenciaGLC}
+
+Escrever depois...
+
+\section{Sobre GLC e Linguagens de Programação}\label{sec:GLC-Programacao}
+
+Escrever depois...
+
+\section{Autômatos de Pilha}\label{sec:AutomatoPilha}
+
+Nas Seções \ref{sec:AFD}-\ref{sec:LAFN} do Capítulo \ref{cap:LinguagemRegulares} foram apresentados uma série de três classes de máquinas (os autômatos) que era capazes de reconhecer (ou computar) linguagens regulares. Nesta seção e na próxima seção este manuscrito irá continuar com  este caminho de apresentar as máquinas de computação, ou seja, serão apresentadas modelos de máquina (autômatos) para reconhecer (ou computar) linguagens livres do contexto. 
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\tikzstyle{every path}=[very thick]
+		
+		\edef\sizetape{0.7cm}
+		\tikzstyle{tmtape}=[draw,minimum size=\sizetape]
+		
+		%% Fita
+		\begin{scope}[start chain=1 going right,node distance=-0.15mm]
+			\node [on chain=1,tmtape] (input) {$y_1$};
+			\node [on chain=1,tmtape] (raiz1) {$\ldots$};
+			\node [on chain=1,tmtape] (alvo)  {$y_i$};
+			\node [on chain=1,tmtape] (raiz2) {$\ldots$};
+			\node [on chain=1,tmtape] (output){$y_n$};
+			\node [on chain=1,xshift=0.3cm]        (descr) {\textbf{Memória}};
+		\end{scope}
+		
+		\begin{scope}[shift={(8.0cm,0.0cm)}, start chain=2 going below,node distance=-0.15mm]
+		    \node [on chain=2,tmtape] (pilha)  {$\vdots$};
+			\node [on chain=2,tmtape] (topo)  {$A_1$};
+			\node [on chain=2,tmtape] (s2) {$\vdots$};
+			\node [on chain=2,tmtape] (si) {$A_i$};
+			\node [on chain=2,tmtape] (s3) {$\vdots$};
+			\node [on chain=2,tmtape] (sn) {$A_n$};
+			\node [on chain=2,tmtape] (vazia) {$z$};
+			\node [on chain=2,xshift=0.3cm] (info) {\textbf{Pilha} \ \ \ \ \  };
+		\end{scope}
+		
+		%% Unidade de Controle
+		\begin{scope}
+			[shift={(1.5cm,-3.7cm)},start chain=circle placed {at=(-\tikzchaincount*30:1.5)}]
+			%\foreach \i in {q_0,p_1,q_2,q_3, q_4,\ddots,q_n}
+			\foreach \i in {q_0,q_1, q_2,q_3, q_4,q_5, q_6,q_7, \cdots,\ddots, q_{n-1},q_n}
+			\node [on chain] {$\i$};
+			
+			% Seta para estado corrente
+			\node (center) {};
+			\draw[->] (center) -- (circle-2);
+			
+			\node[rounded corners,draw=black,thick,fit=(circle-1) (circle-2) (circle-3) 
+			(circle-4) (circle-5) (circle-6) (circle-7) (circle-8) 
+			(circle-9) (circle-10) (circle-11) (circle-12),
+			label=right:\textbf{Unidade de Controle}] (fsbox)
+			{};
+		\end{scope}
+		
+		%% Draw TM head below (input) tape cell
+		\node [draw=white, thick, yshift=-.3cm] at (alvo.south)   (head3) {};
+		
+		
+	\end{tikzpicture}
+	\caption{Conceito informal de autômato de Pilha.}
+	\label{fig:AP-Informal}
+\end{figure}
+
+Um autômato de pilha pode ser compreendido como sendo um computador com uma estrutura formado por três partes (a) uma memória somente de leitura, (b) uma unidade de controle e (c) uma memória de escrita e leitura na forma de uma pilha. A figura \ref{fig:AP-Informal} ilustra essa visão conceitual da estrutura dos autômatos de pilha.
+
+Os dois primeiros componentes dos autômatos de pilha são similares aquele que o leitor já encontrou no Capítulo \ref{cap:LinguagemRegulares} quando esteve em contato com os AFD, AFN e $\lambda$-AFN. O terceiro componente (a pilha) é uma memória\footnote{Assim com a memória só de escrita, a pilha tem a natureza de ser dividida em cédulas, em que cada cédula pode armazenar o único símbolos por vez.} cujo acesso obedece os critérios de uma estrutura de dados d tipo pilha \cite{jaime1994}, em tal memória será sempre possível ler o topo da pilha e remover (fazer \textit{pop}) ou escrever (\textit{push}) sob o topo da pilha.
+
+Para simplificar o entendimento inicial do leitor será primeiro apresentado um modelo determinístico do Autômatos de pilha, o modelo aqui apresentado é o mesmo usado em \cite{benjaLivro2010}, vale salientar que este modelo é equivalente em poder computacional aos modelos usuais usados em \cite{harrison1978, hopcroft2008}, ou seja, ele reconhece a mesma classe de linguagens. O modelo usual encontrado na literatura será detalhado e usado mais adiante neste manuscrito.
+
+\begin{definition}[Autômato de Pilha Determinístico]\label{def:APD}
+    Um Autômato de Pilha Determinístico, ou simplesmente APD, é uma estrutura $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ onde, $Q$ é um conjunto finito e não vazio de estados, $\Sigma$ é o alfabeto de entrada, $\Gamma$ é o alfabeto da pilha, $\delta: Q \times \Sigma \times \Gamma  \rightarrow Q \times \Gamma^*$ é uma função total de transição entre os estados do autômato, $q_0 \in Q$ é o estado inicial do APD, $z \in \Gamma$ é um símbolo especial chamado de símbolo de fim da pilha\footnote{Para o leitor conhecedor dos fundamentos de estrutura de dados e programação, o símbolo da pilha vazia pode ser visto como sendo o ponteiro que aponta para \textit{null} indicado o fim da pilha.} e  $F \subseteq Q$ é um conjunto de estados finais
+\end{definition}
+
+\begin{remark}
+    Em obras como \cite{benjaLivro2010, harrison1978, hopcroft2008, menezes1998LFA} o símbolo $z$ costuma ser chamado de símbolo da pilha vazia.
+\end{remark}
+
+\begin{example}
+    A Estrutura $A = \langle \{q_0, q_1\}, \{a, b\}, \{A, z\}, \delta, q_0, z, \{q_1\} \rangle$ com $\delta$ definido a seguir é um APD.
+    \begin{eqnarray*}
+        \delta(q_0, a, z) & = & (q_0, Az)\\
+        \delta(q_0, a, A) & = & (q_0, AA)\\
+        \delta(q_0, b, z) & = & (q_0, z)\\
+        \delta(q_0, b, A) & = & (q_1, \lambda)\\
+        \delta(q_1, a, z) & = & (q_0, z)\\
+        \delta(q_1, a, A) & = & (q_0, \lambda)\\
+        \delta(q_1, b, z) & = & (q_0, z)\\
+        \delta(q_1, b, A) & = & (q_1, \lambda)
+    \end{eqnarray*}
+\end{example}
+
+Pode-se interpretar que $\delta(q_i, a, A) = (q_j, A_1A_2\cdots A_n)$ como sendo uma instrução com o seguinte significado, estando o autômato (ou a máquina) no estado $q_i$ e se o cabeçote da memória estiver sobre a cédula que contém $a$ e, além disso, estando o símbolo $A$ no top da pilha, então o autômato muda para estado $q_j$ e a palavra $A_1A_2\cdots A_n$ é empilhada\footnote{Como dito é \cite{benjaLivro2010}, quando uma palavra $A_1A_2\cdots A_n$ é empilhada no top da pilha, os símbolos da pilha sofrem \textit{push} de forma reversar, assim é $A_n$ substitui o atual topo da pilha,  depois $A_{n-1}$ é inserido na cédula sobre á cédula que guarda $A_n$, e isso se repete até que $A_1$ seja colocada na pilha, por fim o topo da pilha passa a ser $A_1$.} no top da pilha. Sobre as transições, elas podem ser categorizadas em 3 classes: 
+
+\begin{itemize}
+    \item Transições de consulta, são aquelas que o símbolo exigido no topo da pilha é o mesmo que será escrito, ou seja, a transição tem a forma $\delta(q_i, a, A) = (q_i, A)$.
+    \item Transições de inserção (ou \textit{push}), são aquelas que aumentam o tamanho da pilha, ou seja, essa transições expandem o tamanho da pilha, o leitor reconhecerá essas transições pela forma $\delta(q_i, a, A) = (q_j, A_1\cdots A_n)$ com $n \geq 2$.
+    \item  Transições de remoção (ou \textit{pop}), são aquelas que diminuem o tamanho da pilha, ou seja, essa transições reduzem o tamanho da pilha, tais transições tem a forma $\delta(q_i, a, A) = (q_j, \lambda)$.
+\end{itemize}
+
+Agora que já foram introduzidos os conceito básicos a certa dos autômatos de pilha em sua versão mais simples, isto é, na versão determinística, este manuscrito irá prosseguir apresentado a versão não-determinística.
+
+\begin{definition}[Autômato de Pilha Não-determinístico]\label{def:APN}
+    Um Autômato de Pilha Determinístico, ou simplesmente APN, é uma estrutura $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ onde, $Q, \Sigma, \Gamma, q_0, z, F$ são da mesma forma que na Definição \ref{def:APD} e $\delta$ é uma função parcial com a seguinte assinatura $\delta: Q \times (\Sigma \cup \{\lambda\}) \times \Gamma \rightarrow \wp^{fim}(Q \times \Gamma^*)$.
+\end{definition}
+
+\begin{remark}
+    Como dito em \cite{harrison1978} na notação $\wp^{fim}(Q \times \Gamma^*)$ denota uma familia finita de subconjuntos de $Q \times \Gamma^*$.
+\end{remark}
+
+\begin{example}\label{exe:APN1}
+    A Estrutura $A = \langle \{q_0, q_1, q_2\}, \{a, b\}, \{A, z\}, \delta, q_0, z, \{q_2\} \rangle$ com $\delta$ definido como sendo, 
+    \begin{eqnarray*}
+        \delta(q_0, a, z) & = & \{(q_0, AAz)\}\\
+        \delta(q_0, a, A) & = & \{(q_0, AA)\}\\
+        \delta(q_0, b, A) & = & \{(q_1, \lambda)\}\\
+        \delta(q_1, b, A) & = & \{(q_1, \lambda)\}\\
+        \delta(q_1, c, A) & = & \{(q_2, \lambda)\}\\
+        \delta(q_2, c, A) & = & \{(q_2, \lambda)\}
+    \end{eqnarray*}
+    é um APN.
+\end{example}
+
+Um ponto a se destacar neste momento é que a versão determinística dos autômatos de pilha apresentados em obras como \cite{harrison1978, hopcroft2008, sipser2010} consiste na verdade de um APN que para todo $q \in Q, a \in \Sigma \cup \{\lambda\}$ e $A \in \Sigma$ obedece as seguintes restrições:
+\begin{itemize}
+    \item[(1)] $\# \delta(q, a, A) \leq 1$ e 
+    \item[(2)] Se $\delta(q, \lambda, A) \neq \emptyset$, então $\delta(q, a, A) = \emptyset$.
+\end{itemize}
+O leitor atento pode notar que o APN no Exemplo \ref{exe:APN1} é na verdade um APD.
+
+Com respeito a representação visual, um APN (ou APD) pode ser representado usando grafos de transição, como para o caso dos autômatos do Capítulo \ref{cap:LinguagemRegulares} os estados são as arestas que são desenhada com círculos usando a seguinte regra se $q \in F$ então é desenhado círculos duplo se não é um círculo simples, já no caso de $(q_j, A_1\cdots A_n) \in \delta(q_i, a, A_0)$ então é desenhada um vértice ligando as arestas $q_i$ e $q_j$, tal que este vértice é rotulado por $a,A_0 \mid A_1\cdots A_n$, com $a \in \Sigma \cup \{\lambda\}$ e $A_i \in \Gamma^*$ para $0 \leq i \leq n-1$. 
+
+\begin{example}\label{exe:GrafoAPN1}
+	O APN do Exemplo \ref{exe:APN1} pode ser representado pelo seguinte grafo de transição
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3.0cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+			\node[state, initial]						(A)               	{$q_0$};
+			\node[state]								(B) [right of=A] 	{$q_1$};
+			\node[state, accepting]				        (C) [right of=B] 	{$q_2$};
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%[align=center]   {$(a, 11)$\\$(b, 20)$} (B)
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge [loop above]  				node [align=center] {$a,z\mid AAz$\\$a,A\mid AA$} 		 ( )
+			(A) edge 			  				node 		 {$b,A\mid \lambda$} (B)
+			(B) edge [loop above]  				node 		 {$b,A\mid \lambda$} 		 ( )
+			(B) edge 			  				node 		 {$c,A\mid \lambda$} (C)
+			(C) edge [loop above]  				node 		 {$c,A\mid \lambda$} 		 ( );
+		\end{tikzpicture}
+		\caption{Grafo de transição do APN do Exemplo \ref{exe:APN1}.}
+		\label{fig:APN1}
+	\end{figure}
+\end{example}
+
+A qualquer momento no tempo pode-se com dito em \cite{harrison1978} descrever a atual configuração de um APN (ou APD) através do conhecimento de três informações:  O estado atual do APN (ou APD), o que resta para ser processado na memória e  conteúdo da pilha.
+
+\begin{definition}[Descrição Instantânea]\label{def:DI-APD}
+    Dado um APN (APD) $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ uma descrição instantânea (d.i.) de $A$, é uma tripla $(q, w, W)$ com $q \in Q, w \in \Sigma^*$ e $W \in \Gamma^*$. O conjunto de todas as descrições instantâneas sobre $A$ é denotado por $DI_A$.
+\end{definition}
+
+\begin{remark}
+    Sempre que não causar confusão a escrita $DI_A$ pode ser modificada para $DI$.
+\end{remark}
+
+Sobre o conjunto de todas as descrições instantâneas é possível definir uma relação de movimento (ou mudança), tal relação na verdade descreve a execução de um passo de computação em um autômato de pilha, independente de ser determinístico ou não.
+
+\begin{definition}[Relação de Movimento]
+    Dado um APN (APD) $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ a relação de movimento sobre $DI$, denotada por $\twoheadrightarrow$, é dada por, 
+    \begin{equation}
+        (q_i, aw, A\beta z) \twoheadrightarrow (q_j, w, \alpha\beta z) \Longleftrightarrow (q_j, \alpha) \in \delta(q_i, a, A)
+    \end{equation}
+    Por sua vez, o fecho transitivo e reflexivo de $\twoheadrightarrow$ e denotado por $\twoheadrightarrow^*$.
+\end{definition}
+
+\begin{example}
+    Considere o APN do Exemplo \ref{exe:APN1} tem-se que,
+    $$(q_0, aaaabbcc, z) \twoheadrightarrow (q_0, aaabbcc, AAz)$$
+    pois $(q_0, AAz) \in (q_0, a, z)$. Além disso, é fácil mostrar que
+    $$(q_0, aaaabbcc, z) \twoheadrightarrow^* (q_2, \lambda, z)$$
+\end{example}
+
+Após apresentar a relação de movimento é possível seguir em frente e formalizar o conceito de palavra aceita por autômatos de pilha, como apresentado em \cite{harrison1978} existe no mínimo duas forma com que um autômato de pilha aceita uma palavra de entrada, a primeira seria o autômato simplesmente após lê toda a palavra de entrada atingir um estado final e a segunda opção que é aquela em que o autômato deve lê toda a palavra de entrada, atingir um estado final e ter a pilha vazia\footnote{Na visão (praticamente dogmática) do autor deste manuscrito, ele acredita que a segunda opção é mais compatível com a natureza dos APN e APD como sendo computadores munidos de ferramenta de controle por contagem.}.
+
+\begin{definition}[Linguagem Aceita por Estado final]
+    Dado um APN (APD) $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ a linguagem de $A$ aceita por estado final corresponde ao seguinte conjunto, 
+    \begin{equation}
+        \mathcal{L}_{F}(A) = \{w \in \Sigma^* \mid (q_0, w, z) \twoheadrightarrow^* (q_f, \lambda, u), q_f \in F, u \in \Gamma^*\}
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Linguagem Aceita por Pilha vazia]
+    Dado um APN (APD) $A = \langle Q, \Sigma, \Gamma, \delta, q_0, z, F\rangle$ a linguagem de $A$ aceita por pilha vazia corresponde ao seguinte conjunto, 
+    \begin{equation}
+        \mathcal{L}_{z}(A) = \{w \in \Sigma^* \mid (q_0, w, z) \twoheadrightarrow^* (q_f, \lambda, z), q_f \in F\}
+    \end{equation}
+\end{definition}
+
+Como mostrado em \cite{hopcroft2008} uma linguagem $L$ será aceita por um APN $A$ por pilha vazia se, e somente se, existir outro APN $A'$ que aceita $L$ por estado final.
+
+\begin{remark}
+	Para esse questionário sempre que $w \in \Sigma^*$ e $c \in \Sigma$ a notação $|w|_c$ irá representar o número de $c$'s que existem na palavra $w$.
+\end{remark}
+
+\begin{problemset}
+    \item Prove que a linguagem $\{ w \in \{0, 1\}^* \mid |w|_0 = |w|_1 \text{ e } |u|_0 \geq |u|_1, u \in PRE(w)\}$ é gera pela GLC com o seguinte conjunto de produções,
+    \begin{equation}
+        S \rhd 0S1 \mid SS \mid \lambda
+    \end{equation}
+    
+    \item Usando a GLC do exercício anterior desenhe as árvores de derivação para as palavras $abaabb, aabbaabb$ e $abababab$.
+    
+    \item Exiba uma GLC para cada linguagem a seguir.
+    \begin{enumerate}
+        \item $\{a^nb^m \mid n \neq m - 1\}$
+        \item $\{1^n0^m \mid n \neq 2m\}$
+        \item $\{0^n1^m \mid n \leq m + 4\}$
+        \item $\{a^nb^m \mid 2m \leq n + 1\}$
+        \item $\{a^nb^mc^k \mid m = n \text{ ou } m \leq k\}$
+        \item $\{a^nb^mc^k \mid k = n \text{ ou } m \neq n\}$
+        \item $\{a^{2n}b^{n}c^{n} \mid n \geq 2\}$
+        \item $\{w \in \{0, 1, 2\} \mid |w|_1 = 2k + 1, k \in \mathbb{N}\}$
+        \item $\{0^ib^ja^k \mid i, k \in \mathbb{N},  j = 2k + i\}$
+        \item $\{0^ib^ja^k \mid i, k \in \mathbb{N}, 2i = j + k\}$
+        \item $\{0^ib^ja^k \mid j, k \in \mathbb{N} i = 2k + j + 3\}$
+        \item $\{a^ib^jc^k \mid j, k \in \mathbb{N} j = 2(i + k) + 1\}$
+        \item $\{wu^nw^r \mid u \in \{0, 1\}^+, w \in \{a, b\}^*, n \in \mathbb{N}\}$
+    \end{enumerate}
+    
+    \item Considere a linguagem $L =\{0^n1^n \mid n \in \mathbb{N}\}$ prove para todo $k \in \mathbb{N}$ que a linguagem $L^k$ é livre do contexto.
+    
+    \item Prove que $00110110 \notin \mathcal{L}(G)$ onde $G$ é a GLC que tem o seguinte conjunto de regras e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & 00Y\\
+        X & \rhd & 1Y1 \mid \lambda\\
+        Y & \rhd & X0
+    \end{eqnarray*}
+    
+    \item Remova a recursão à esquerda da GLC com o seguinte conjunto de regras com $\Sigma = \{0, 1\}$ e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & 010S \mid SS \mid SS01 \mid 01
+    \end{eqnarray*}
+    
+    \item Remova a recursão à esquerda da GLC com o seguinte conjunto de regras com $\Sigma = \{0, 1\}$ e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & S1 \mid AS \mid \lambda\\
+        A & \rhd & A0 \mid 0
+    \end{eqnarray*}
+    
+    \item Remova a recursão à esquerda da GLC com o seguinte conjunto de regras com $\Sigma = \{0, 1, 2\}$ e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & 2Z \mid S10S\\
+        Z & \rhd & 2Z1 \mid \lambda
+    \end{eqnarray*}
+    
+    \item Construa uma GLC sem recursão à esquerda que gerar a linguagem $\{w \in \{0, 1\}^* \mid |w|_1 > |w|_0\}$.
+    
+    \item Elimine as regras inúteis da GLC com o conjunto de regras a seguir e sendo $\Sigma = \{a, b, c, d\}$ e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & a \mid aB \mid B \mid C\\
+        A & \rhd & aB \mid \lambda\\
+        B & \rhd & Aa \\
+        C & \rhd & cCD\\
+        D & \rhd & dd \mid ddD
+    \end{eqnarray*}
+    
+    \item Elimine as $\lambda$-produções da GLC com o conjunto de regras a seguir e sendo $\Sigma = \{0, 1\}$ e $S$ sendo o símbolo inicial.
+    \begin{eqnarray*}
+        S & \rhd & A0B \mid 0C0B\\
+        A & \rhd & 0B0 \mid \lambda \mid B\\
+        B & \rhd & 11A \mid \lambda \\
+        C & \rhd & 111C \mid AB
+    \end{eqnarray*}
+    
+    \item Considerando $\Sigma = \{0, 1\}$ e $S$  remova todas as $\lambda$-produções, regras unitárias e recursão à esquerda das GLC a seguir.
+    \begin{enumerate}
+        \item Com $S$ sendo a variável inicial e $P$ é formado por,
+        \begin{eqnarray*}
+            S & \rhd & S0 \mid 0AB\\
+            A & \rhd & B \mid aa \mid \lambda\\
+            B & \rhd & A1B \mid \lambda \mid C \\
+            C & \rhd & 0CC0 \mid ABC
+        \end{eqnarray*}
+        
+        \item Com $A$ sendo a variável inicial e $P$ é formado por,
+        \begin{eqnarray*}
+            S & \rhd & 0S0 \mid \lambda\\
+            A & \rhd & SASA \mid B\\
+            B & \rhd & 1B \mid C \mid D1 \\
+            C & \rhd & 0C1 \mid 01\\
+            D & \rhd & D0 \mid 1D
+        \end{eqnarray*}
+        
+        \item Com $C$ sendo a variável inicial e $P$ é formado por,
+        \begin{eqnarray*}
+            S & \rhd & 0A \mid 0B \mid S0A\\
+            A & \rhd & B \mid 00 \mid \lambda\\
+            B & \rhd & 1B \mid \lambda \mid C \\
+            C & \rhd & 0C0 \mid ABC
+        \end{eqnarray*}
+        
+        \item Com $B$ sendo a variável inicial e $P$ é formado por,
+        \begin{eqnarray*}
+            S & \rhd & S10A \mid A0B \mid S0A11\\
+            A & \rhd & AB \mid A00 \mid 00 \mid \lambda\\
+            B & \rhd & 1B \mid \lambda \mid BC \mid BBS \mid BB0S \\
+            C & \rhd & B \mid CBA \mid CA \mid A \mid C \mid 1 \mid \lambda
+        \end{eqnarray*}
+    \end{enumerate}
+    
+    \item Converta para a forma normal pré-Chomsky todas as GLC dos exercício de 5 até 8.
+    
+    \item Converta para a forma normal pré-Chomsky as GLC dos exercício de 10 e 11.
+    
+    \item Converta para a forma normal Chomsky as GLC dos exercício de 13 e 14.
+    
+    \item Converta para a forma normal Chomsky todas as GLC do exercício 12, 13, 14.
+    
+    \item Converta para a forma normal Greibach todas as GLC do exercício 12, 13, 14.
+    
+    \item Esboce um APN ou APD para cada linguagem do exercício 3.
+\end{problemset}
