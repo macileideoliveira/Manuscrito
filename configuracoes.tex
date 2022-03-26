@@ -26,6 +26,8 @@
 \definecolor{customcolor}{RGB}{32,178,170}
 \colorlet{coverlinecolor}{customcolor}
 
+\definecolor{cinzaClaro}{RGB}{178, 189, 193}
+
 % ===================================================
 % Comandos e configurações para colocar epígrafes
 % nas páginas de separação das partes do texto
@@ -44,3 +46,27 @@
 {\let\@oddfoot\@empty\let\@evenfoot}
 {}{}
 \makeatother
+
+
+
+% ===================================================
+% Configuração para o tabuleiro de prova
+% ===================================================
+\def\repls #1\endrepls{%
+    \begingroup
+    \replscriptwidth=0pt\relax
+    \replgivenswidth=0pt\relax
+    \replgoalswidth =0pt\relax
+    % XXX: restorerepls... here, not restorerepl...
+    \ifreplhidelineno\def\restorereplshidelineno{\global\replhidelinenotrue}%
+    \else            \def\restorereplshidelineno{\global\replhidelinenofalse}%
+    \fi
+    \let\shownum=\replhidenum
+    \let\hidenum=\replhidenum
+    \def\maxproof##1: ##2; {\IfStrContains {##1} {m} {\setreplmaxscript{$##2$}} {\setreplmaxscript{##2}}}%
+    \def\maxgiven##1: ##2; {\IfStrContains {##1} {t} {\setreplmaxgiven {##2}}   {\setreplmaxgiven {$##2$}}}%
+    \def\maxgoal ##1: ##2; {\IfStrContains {##1} {t} {\setreplmaxgoal  {##2}}   {\setreplmaxgoal  {$##2$}}}%
+    #1%
+    \restorereplshidelineno
+    \endgroup
+}

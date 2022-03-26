@@ -712,7 +712,7 @@
   \newcommand{\remarkname}{\textbf{Observação}:}
   \newcommand{\assumptionname}{Assunto}
   \newcommand{\conclusionname}{Conclusão}
-  \newcommand{\solutionname}{Soluções}
+  \newcommand{\solutionname}{Solução}
   \newcommand{\propertyname}{Propriedade}
   \newcommand{\introductionname}{Introdução}
   \newcommand{\problemsetname}{Exercício}
@@ -912,13 +912,13 @@
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
 \newenvironment{problem}[1][]{
   \refstepcounter{prob}
-  \par\noindent\textbf{\color{main}{\problemname} \theprob #1 }\rmfamily}{
+  \par\noindent\textbf{\color{main}{\textbf{\problemname}} \theprob #1 }\rmfamily}{
   \par\ignorespacesafterend}
 
 \newenvironment{note}{
   \par\noindent\makebox[-3pt][r]{
     \scriptsize\color{red!90}\textdbend\quad}
-    \textbf{\color{teal}\notename} \citshape}{\par}
+    \textbf{\color{teal}\notename:}\citshape}{\par}
 
 \newenvironment{proof}{
   \par\noindent\textbf{\color{second}\proofname\;}
@@ -926,7 +926,7 @@
   \hfill$\blacksquare$\quad
   \par}
 
-\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \citshape}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main} \solutionname} \citshape}{\par}
 \newenvironment{remark}{\noindent\textbf{\color{violet}\remarkname}}{\par}
 \newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname} \citshape}{\par}
 \newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname} \citshape}{\par}
