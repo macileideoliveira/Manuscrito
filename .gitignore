@@ -2,6 +2,7 @@
 *.swp
 *.ptc
 *.DS_Store
+*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
