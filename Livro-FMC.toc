@@ -1,0 +1,98 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {portuguese}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{I\hspace {1em}Ferramentas e Linguagem Básica}{1}{part.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Conjuntos}{2}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Conjuntos e Elementos}{2}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Operações sobre conjuntos}{6}{section.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}Operações generalizadas}{14}{section.1.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.4}Partes e partições}{15}{section.1.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Questionário}{16}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Métodos de Demonstração}{22}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Introdução}{22}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Demonstrando Implicações}{23}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{II\hspace {1em}Lógica}{26}{part.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Introdução à Lógica}{27}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}O que é Lógica?}{27}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Um Pouco de História}{28}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Argumentos, Proposições e Predicados}{30}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Conectivos, Quantificadores e Negação}{32}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Representação simbólica}{33}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Lógica e Ciência da Computação}{33}{section.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Questionário}{34}{section*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Lógica Proposicional}{37}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{III\hspace {1em}Álgebra Universal}{38}{part.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{IV\hspace {1em}Teoria dos Números e Combinatória}{39}{part.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{V\hspace {1em}Linguagens Formais, Autômatos e Computabilidade}{40}{part.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Introdução}{41}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Sobre as Linguagens Formais}{41}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Sobre Autômatos Finitos}{41}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Noções Fundamentais}{41}{section.5.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}Sobre Gramática Formais}{48}{section.5.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Questionário}{49}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Linguagens Regulares}{51}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Autômato Finito Determinístico}{51}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Autômato Finito Não-determinístico}{56}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Autômatos Finitos Não-determinísticos com Movimentos Vazios}{63}{section.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Teorema Myhill-Nerode e a Minimização de AFD}{69}{section.6.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.5}Máquinas de Mealy e Moore}{77}{section.6.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.6}A Notação Matricial}{81}{section.6.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.7}Expressões Regulares}{81}{section.6.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.8}Gramática Regulares}{89}{section.6.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Questionário}{94}{section*.51}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Linguagens Livres do Contexto}{101}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Gramática Livres do Contexto}{101}{section.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Simplificação de Gramática Livres do Contexto}{105}{section.7.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}Sobre Algoritmos de Pertinência em GLC}{120}{section.7.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}Sobre GLC e Linguagens de Programação}{120}{section.7.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.5}Autômatos de Pilha}{120}{section.7.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Questionário}{124}{section*.67}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{VI\hspace {1em}$\lambda $-Cálculo}{127}{part.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{VII\hspace {1em}Complexidade}{128}{part.7}%
