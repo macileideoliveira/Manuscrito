@@ -52,3 +52,12 @@ License is distributed on an “as is” basis, without warranties or conditions
 any kind, either express or implied. See the License for the specific language governing
 permissions and limitations under the License
 </p>
+
+## Para compilar execute os comando
+
+```
+pdflatex Livro-FMC.tex
+bibtex Livro-FMC.aux
+pdflatex Livro-FMC.tex
+pdflatex Livro-FMC.tex
+```

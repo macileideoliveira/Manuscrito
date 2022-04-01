@@ -3,6 +3,7 @@
 *.ptc
 *.DS_Store
 *.pdf
+*.sh
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
