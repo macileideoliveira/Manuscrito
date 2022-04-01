@@ -53,7 +53,7 @@ any kind, either express or implied. See the License for the specific language g
 permissions and limitations under the License
 </p>
 
-## Para compilar execute os comando
+## Para compilar execute os comandos
 
 ```
 pdflatex Livro-FMC.tex
