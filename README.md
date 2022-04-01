@@ -57,7 +57,7 @@ permissions and limitations under the License
 
 ```
 pdflatex Livro-FMC.tex
-biber Livro-FMC.aux
+biber Livro-FMC.bcf
 pdflatex Livro-FMC.tex
 pdflatex Livro-FMC.tex
 ```
