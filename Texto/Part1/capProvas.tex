@@ -18,252 +18,36 @@ Já na visão prática, só existe uma forma segura de garantir que um \textit{s
 Nas próxima seções deste manuscrito serão descritas as principais técnicas de demonstração de interesse de matemáticos, cientistas da computação e engenheiros formais de \textit{software}. 
 
 \begin{remark}
-    Para o leitor que nunca antes teve contato com a lógica matemática recomenda-se que antes de estudar este capítulo, o leitor faça pelo menos um rápido estudo do Capítulo \ref{cap:IntroducaoLogica}.
+	Para o leitor que nunca antes teve contato com a lógica matemática recomenda-se que antes de estudar este capítulo, o leitor faça pelo menos um rápido estudo do Capítulo \ref{cap:IntroducaoLogica}.
 \end{remark}
 
-Para pode falar sobre métodos de demonstração e poder então descrever como os matemáticos, lógicos e cientistas da computação justificam enunciados usando apenas a argumentação matemática, será necessário fixar algumas nomenclaturas e listar alguns conceitos importantes.
+Para pode falar sobre métodos de demonstração e poder então descrever como os matemáticos, lógicos e cientistas da computação justificam asserções usando apenas a argumentação matemática, será necessário fixar algumas nomenclaturas e falar sobre alguns conceitos importantes.
 
-\begin{definition}[Enunciado]\label{def:Enunciado}
-	Um enunciado é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
+\begin{definition}[Asserção]\label{def:Assercao}
+	Uma Asserção é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
 \end{definition}
 
 \begin{remark}
-    O leitor que conheça lógica nota facilmente que um enunciado é uma proposição ou predicado.
+	O leitor que conheça lógica nota facilmente que uma aAsserção é uma proposição ou predicado.
 \end{remark}
 
-Para que uma demonstração de um enunciado possa ser aceita como correta, é comum exigir que a argumentação de tal demonstração deve conter um alto nível de rigor (formalismo) matemático, além disso, quanto maior for a riqueza\footnote{A riqueza de detalhes que uma demonstração tem pode variar, a depender para quem a prova se destina, por exemplo, uma prova escrita para um físico em geral não se preocupa com os por menores do linguajá matemático, diferentemente de uma prova escrita para matemáticos, onde os menores detalhes da linguagem matemática são considerados como informações relevantes.} de detalhes, mas fácil é de se entender as demonstrações. As ações usada para realizar demonstrações recebem o nome de métodos (ou estratégias) de demonstrações.
+Para que uma demonstração de uma asserção possa ser aceita como correta, é comum exigir que a argumentação de tal demonstração deve conter um alto nível de rigor (formalismo) matemático, além disso, quanto maior for a riqueza\footnote{A riqueza de detalhes que uma demonstração tem pode variar, a depender para quem a prova se destina, por exemplo, uma prova escrita para um físico em geral não se preocupa com os por menores do linguajá matemático, diferentemente de uma prova escrita para matemáticos, onde os menores detalhes da linguagem matemática são considerados como informações relevantes.} de detalhes, mas fácil é de se entender as demonstrações. As ações usada para realizar demonstrações recebem o nome de métodos (ou estratégias) de demonstrações.
 
 Os métodos de demonstração apresentadas neste manuscrito seguem as ideias, a forma e ordem similares as apresentadas em \cite{velleman2019comProvar}. Para que fique mais simples do leitor iniciante entender, neste manuscrito a tarefa de realizar demonstração acontecerá em duas etapas: (1) será realizada a construção de um rascunho\footnote{O leitor deve ter em mente que menos no rascunho é conveniente escrever o máximo das informações na linguagem da lógica de primeira ordem, isso torna mais simples a conversão do rascunho de prova para o texto formal da prova.} de prova, e (2) a partir do rascunho gerado no passo anterior será elaborado um texto formal que em sintase é a prova em si.
 
-O rascunho é um ambiente na forma de uma tabela subdividida em três colunas, a primeira o marca número de passos (ou estados) da prova, a segunda coluna contém os dados disponíveis e a terceira coluna diz respeito aos objetivos (ou em inglês \textit{Goal}) que devem ser atingidos. Cada linha no rascunho por sua vez é um estado da prova\footnote{Esse tipo de visão é similar ao que acontece em provador de teoremas como Coq \cite{coq2013} e Lean.}. Uma prova está terminada (ou completa) quando todos os objetivos tiverem sido eliminados (ou satisfeitos). 
+O rascunho é um ambiente na forma de uma tabela subdividida em três colunas, a primeira o marca número de passos (ou estados) da prova, a segunda coluna contém os dados disponíveis e a terceira coluna diz respeito aos objetivos (ou em inglês \textit{Goal}) que devem ser atingidos. Cada linha no rascunho por sua vez é um estado da prova\footnote{Esse tipo de visão é similar ao que acontece em provadores de teoremas como Coq \cite{coq2013} e Lean.}. Uma prova está terminada (ou completa) quando todos os objetivos tiverem sido eliminados (ou satisfeitos). 
 
 \begin{remark}
-    Os objetivos são modificados apenas de duas formas no rascunho, quando é aplicado alguma estratégia de demonstração que altere os objetivos ou quando os mesmo são obtidos na coluna de dados por meio de inferência, neste caso o mesmo deve ser removido da coluna de objetivos.
+	Os objetivos são modificados apenas de duas formas no rascunho, quando é aplicado alguma estratégia de demonstração que altere os objetivos ou quando os mesmo são obtidos na coluna de dados por meio de inferência, neste caso o mesmo deve ser removido da coluna de objetivos.
 \end{remark}
 
-Nas seções a seguir serão apresentados as diversas estratégias para realizar demonstrações, em cada uma dela será explicado como desenvolver o rascunho de prova de cada estratégia.
+Nas seções a seguir serão apresentados as diversas estratégias para realizar demonstrações, em cada uma delas será explicado como desenvolver o rascunho de prova de cada estratégia.
 
 \section{Demonstrando Implicações}\label{sec:ProvandoImplicacao}
 
-Demonstrar uma implicação consiste em construir uma prova (ou argumento) que mostre a veracidade de um enunciado da forma: ``\textbf{Se $\alpha$, então $\beta$}'', com  $\alpha$ e $\beta$ são proposições ou predicados (para detalhes ver a Seção \ref{sec:Argumento-Proposicao-Predicado}). 
+Este texto inicia a apresentação dos métodos de demonstração pela estratégia conhecida como prova direta de implicações, ela é provavelmente o método de demonstração mais utilizado.
 
-Existe duas estratégias (ou metodologia) distintas para a realizar a demonstração de implicações: a \textbf{demonstração direta} e a \textbf{demonstração por contra positiva}. Este manuscrito irá primeiro tratar da demonstração direta cuja estratégia está descrita a seguir.
-
-\begin{definition}[Demonstração Direta]\label{Def:DemDireta}
-    Dado uma implicação:\footnote{Em lógica simbólica seria escrito como $\alpha \Rightarrow \beta$, para detalhes consulte o Capítulo \ref{cap:IntroducaoLogica}.} Se $\alpha$, então $\beta$. A estratégia de demonstração direta consiste em:
-	\begin{enumerate}
-		\item Supor que o antecedente $\alpha$ é verdadeiro.
-		\item Provar que o consequente $\beta$, usando para isso possivelmente o fato de $\alpha$ ser verdadeiro.
-	\end{enumerate}
-\end{definition}
-
-\begin{remark}
-    De forma objetiva o passo (1) estratégia de demonstração direta de implicações faz com que $\alpha$ se torne um ``dado'' que poderá ser usado no passo (2) da demonstração.
-\end{remark}
-
-No que diz respeito ao rascunho antes de aplicar a estratégia de demonstração direta, a prova estará em um estado $i$ com as informações $\gamma_1, \cdots, \gamma_n$ estando na coluna de dados e na coluna de objetivos a ser demonstrados estará exatamente uma implicação $\alpha \Rightarrow \beta$, então ao aplicar o passo (1) da estratégia direta, é criada uma nova linha $i +1$ no rascunho em que os dados agora são $\gamma_1, \cdots, \gamma_n, \alpha$ e o objetivo a ser demonstrado passa a ser $\beta$, ou seja, o estado da prova é alterado de forma que $\alpha$ passa a ser um dado e o novo objetivo a ser demonstrado se torna $\beta$. Após desenvolver o passo (2), isto é, demonstrar $\beta$ (talvez usando $n$ linhas) tem-se que $\beta$ passa a ser um dado no rascunho, ou seja, na linha $i + 1 + n$ tem-se que a coluna de dados é formada por $\gamma_1, \cdots, \gamma_n, \alpha, \beta$ e a coluna objetivos estará vazia. A seguir é ilustrado o procedimento de aplicação da demonstração direta com respeito ao rascunho de prova.
-
-\begin{table}[h]
-    \centering
-    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}@{}}
-        \hline
-        Estado & Dados & Objetivos\\
-        \hline
-        $\vdots$ & $\vdots$ & $\vdots$\\
-        $i$ & $\gamma_1, \cdots, \gamma_n$ & $\alpha \Rightarrow \beta$\\
-        $i+1$ & $\gamma_1, \cdots, \gamma_n, \alpha$ & $\beta$\\
-        $\vdots$ & $\vdots$ & $\vdots$\\
-        $i+1+n$ & $\gamma_1, \cdots, \gamma_n, \alpha, \beta$ & \\ 
-        \hline
-    \end{tabular*}
-    \caption{Rascunho genérico ilustrando a aplicação da regra de demonstração direta.}
-\end{table}
-
-Os dois enunciados apresentados nos Problemas \ref{prob:ParidadeQuadrado} e \ref{prob:MultiploDe4e2} a seguir são clássicos resultados sobre os números inteiros, eles serão usado para apresentar ao leitor na prática o uso da estratégia direta de demonstrar implicações, e também irão apresentar o uso do rascunho de prova e a transformação para texto formal de prova matemática.
-
-\begin{problem}\label{prob:ParidadeQuadrado}
-    Demonstrar que: Se $n$ é par, então seu quadrado também é par.
-\end{problem}
-
-\begin{solution}
-    Antes de qualquer coisa a implicação será reescrita usando a linguagem matemática adequada, assim tem-se o seguinte enunciado:
-    \begin{center}
-		$n = 2i \text{ com } i \in \mathbb{Z} \Rightarrow n^2 = 2j \text{ com } j \in \mathbb{Z}$
-	\end{center}
-	agora pode-se realizar a demonstração usando a estratégia direta.
-	
-	\begin{table}[h]
-        \centering
-        \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.1\linewidth}p{0.4\linewidth}p{0.4\linewidth}@{}}
-            \hline
-            Estado & Dados & Objetivos\\
-            \hline
-            1 & & $n = 2i \text{ com } i \in \mathbb{Z} \Rightarrow n^2 = 2j \text{ com } j \in \mathbb{Z}$\\
-            2 &  $n = 2i \text{ com } i \in \mathbb{Z}$ & $n^2 = 2j \text{ com } j \in \mathbb{Z}$\\
-            3 & $n = 2i \text{ com } i \in \mathbb{Z}$ e $n^2 = 2(2i^2)$ & $n^2 = 2j \text{ com } j \in \mathbb{Z}$\\
-            4 & $n = 2i \text{ com } i \in \mathbb{Z}$, fazendo $j = 2i^2$ tem-se que $n^2 =2j$ com obviamente $j \in \mathbb{Z}$ & \\
-            \hline
-        \end{tabular*}
-        \caption{Rascunho da demonstração direta do enunciado, Se $n$ é par, então seu quadrado também é par.}
-        \label{tab:Rascunho1}
-    \end{table}
-    
-    Agora pode-se então transforma o rascunho em um texto formal matemático, para isso basta usar as informações contidas na coluna de dados (sem duplicatas), em geral para provar implicações costuma-se iniciar o texto com os termos \textbf{assuma}, \textbf{suponha} ou \textbf{considere que}. Após esses termos iniciais basta seguir apresentando as informações da coluna dados utilizando entre elas texto da linguagem português que melhor se adéquem a fazer o casamento entre as informações, a seguir é esboçado um texto obtido a partir do rascunho representado na Tabela \ref{tab:Rascunho1}.
-    
-    \textbf{Texto da prova:} Suponha que $n = 2i \text{ com } i \in \mathbb{Z}$, assim elevando $n$ ao quadrado tem-se que $n^2 = 2(2i^2)$, agora desde que a multiplicação de dois números inteiros ainda é um número inteiro, tem-se que existirá um $j \in \mathbb{Z}$ tal que $j = 2i^2$ e, portanto, $n^2 = 2j$. Mas desde que $j \in \mathbb{Z}$ tem-se por definição que $n^2$ é também um número par.
-\end{solution}
-
-\begin{remark}
-    É importante ressaltar ao leitor que o texto de prova apresentado na solução do Problema \ref{prob:ParidadeQuadrado} é apenas um entre muitos textos possíveis para formalizar a escrita da prova.
-\end{remark}
-
-\begin{note}
-    O leitor deve ter notado que na solução do Problema \ref{prob:ParidadeQuadrado} o termo ``Se $n$ é par'' do enunciado foi representado na linguagem matemática por $n = 2i \text{ com } i \in \mathbb{Z}$, a razão disso não é o foco do conteúdo deste manuscrito, além de que, o autor do mesmo considera que o leitor já possui este nível de maturidade matemática. Como esta, diversas outras ``traduções'' para a linguagem matemática serão feita de forma direta, sem que exista preocupação por parte do autor em explicá-las.
-\end{note}
-
-\begin{problem}\label{prob:MultiploDe4e2}
-    Demonstrar que: Se $n$ é múltiplo de 4, então também é múltiplo de 2.
-\end{problem}
-
-\begin{solution}
-    Como antes a solução se inicia com a reescrita do enunciado usando a linguagem matemática adequada, 
-    \begin{center}
-		$n = 4i \mbox{ com } i \in \mathbb{Z} \Rightarrow n = 2j \mbox{ com } j \in \mathbb{Z}$
-	\end{center}
-	e então é desenvolvido o rascunho de prova a seguir.
-	
-	\begin{table}[h]
-        \centering
-        \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.1\linewidth}p{0.4\linewidth}p{0.4\linewidth}@{}}
-            \hline
-            Estado & Dados & Objetivos\\
-            \hline
-            1 & & $n = 4i \mbox{ com } i \in \mathbb{Z} \Rightarrow n = 2j \mbox{ com } j \in \mathbb{Z}$\\
-            2 & $n = 4i \mbox{ com } i \in \mathbb{Z}$ & $n = 2j \mbox{ com } j \in \mathbb{Z}$\\
-            3 & Mas $4 = 2\cdot 2$ assim $n = 2 \cdot 2i$ & $n = 2j \mbox{ com } j \in \mathbb{Z}$\\
-            4 & $n = 2j$ com $j = 2i$ com $i \in \mathbb{Z}$ & \\
-            \hline
-        \end{tabular*}
-        \caption{Rascunho da demonstração direta do enunciado, ``Se $n$ é múltiplo de 4, então também é múltiplo de 2''.}
-        \label{tab:Rascunho2}
-    \end{table}
-    
-    O próximo passo como antes é gera uma ``tradução'' do rascunho esboçado na Tabela \ref{tab:Rascunho2}, ou seja, expressar de forma textual formal o que foi obtido na construção do rascunho de prova é como se segue.
-    
-    \textbf{Texto da prova:} Suponha que $n = 4i \text{ com } i \in \mathbb{Z}$, desde que $4 = 2\cdot 2$ pode-se reescrever a igualdade anterior como sendo $n = 2j$ tal que $j = 2i$ e obviamente $j \in \mathbb{Z}$, agora desde que $n = 2j$ tem-se por definição que $n$ é um múltiplo de 2, o que conclui a prova.
-\end{solution}
-
-O segundo método para provar implicações é o método da contra positiva (ou contraposição), que como dito em \cite{menezes2010MD}, se baseia na equivalência lógica da expressão ``Se $\alpha$, então $\beta$'' com a expressão ``Se não $\beta$, então não $\alpha$'', ou seja, provar a segunda implicação é o mesmo que provar a primeira. O método de demonstração por contraposição (ou contra positiva) é formalizado a seguir.
-
-\begin{definition}[Demonstração por Contraposição]\label{Def:DemContra}
-    Dado uma implicação: Se $\alpha$, então $\beta$. A estratégia de demonstração por contraposição consiste em:
-	\begin{enumerate}
-	    \item Obter a implicação: ``Se não $\beta$, então não $\alpha$''.
-	    \item Demonstrar a implicação ``Se não $\beta$, então não $\alpha$'', usando o método de demonstração direta.
-	\end{enumerate}
-\end{definition}
-
-Os problemas \ref{prob:DemonstracaoImplicacao3} e \ref{prob:DemonstracaoImplicacao4} a seguir esboçam para o leitor o emprego de método de demonstração por contaposição para provar a veracidade de um teorema clássico visto em muitas turmas de matemática discreta.
-
-\begin{problem}\label{prob:DemonstracaoImplicacao3}
-	Demonstrar que: ``Se $n! > (n+1)$, então $n > 2$''.
-\end{problem}
-
-\begin{solution}
-	Primeiramente (como antes) a senteça a ser demonstrada é reescrita utilizando a linguagem da lógica matemática como:
-	\begin{center}
-		$n! > (n+1) \Rightarrow n > 2$.
-	\end{center}
-	Para demonstrar tal resultado usando a estratégia de demonstração por contraposição deve-se como descrito na Difinição \ref{Def:DemContra} contruir uma nova sentença implicativa equivalente a primeira. Isso é feito (como já descrito) negando o antecedente e o consequente e invertendo o sentido da ``seta'' implicativa. Ou seja, utilizando tal estratégia é obtido o enunciado,
-	\begin{center}
-		$n \leq  2 \Rightarrow n! \leq (n+1)$
-	\end{center}
-	Agora é construido um rascunho de prova, para provar este novo enunciado de forma direta:
-	
-	\begin{table}[h]
-		\centering
-		\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.1\linewidth}p{0.4\linewidth}p{0.4\linewidth}@{}}
-			\hline
-			Estado & Dados & Objetivos\\
-			\hline
-			1 & & $n \leq  2 \Rightarrow n! \leq (n+1)$\\
-			2 & $n \leq 2$ & $n! \leq (n+1)$\\
-			3 & $n = 0$ ou $n = 1$ ou $n=2$ & $n! \leq (n+1)$\\
-			& e portanto, tem-se: &\\
-			& $0! = 1$ assim $0! = (0+1)$ ou &\\
-			& $1! = 1$ logo $1! < (1+1)$ ou &\\
-			& $2! = 2$ e $2! < (2+1)$ & \\
-			4 & $n \leq 2$ e $n! \leq (n+1)$&\\ 
-			\hline
-		\end{tabular*}
-		\caption{Rascunho da demonstração direta do enunciado: $n \leq  2 \Rightarrow n! \leq (n+1)$.}
-		\label{tab:Rascunho3}
-	\end{table}
-
-	Convertendo o rascunho para texto, o mesmo poderia ter a forma a seguir.
-
-	\textbf{Texto da prova:} Assuma que $n \leq 2$, assim $n = 0, n = 1$ ou $n=2$ calculando os possíveis fatoriais tem-se respectivamente que: $0! = 1$, $1! = 1$ e $2! = 2$, e consequentemente tem-se que $0! \leq (0+1)$, $1! \leq (1+1)$ e $2! \leq (2+1)$, portanto, para $n \leq  2$ se verifica que $n! \leq (n+1)$, desta forma a expressão, ``se $n! > (n+1)$, então $n > 2$'', é também verdadeira.
-\end{solution}
-
-O leitor deve ter percebido que quando ao usar o método de demonstração por contraposição o autor deste manuscrito obtou por esboçar o rascunho (Tabela \ref{tab:Rascunho3}) da prova é em relação a prova direta (passo 2 da Definição \ref{Def:DemContra}), em vez de fazer uma rascunho geral da prova, isto é, também levando em consideração o passo 1 da Definição \ref{Def:DemContra}. Para fixar ainda mais a aplicação do método de demonstração por contraposição a seguir é apresentado mais um problema clássico (e básico) da teoria dos números.
-
-\begin{problem}\label{prob:DemonstracaoImplicacao4}
-	Demonstrar que: ``Se $x \neq 0$, então $x + c \neq c$''.
-\end{problem}
-
-\begin{solution}
-	Reescrevendo a contra positiva de tal enunciado de modo adequado (na lógica de primeira ordem) tem-se que,
-	$$x + c = c \Rightarrow x = 0$$
-	E assim tem-se o seguinte rascunho de prova
-	\begin{table}[h]
-		\centering
-		\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.1\linewidth}p{0.4\linewidth}p{0.4\linewidth}@{}}
-			\hline
-			Estado & Dados & Objetivos\\
-			\hline
-			1 & & $x + c = c \Rightarrow x = 0$\\
-			2 & $x + c = c$ & $x = 0$\\
-			3 & $x = 0$ &\\
-			\hline
-		\end{tabular*}
-		\caption{Rascunho da demonstração direta do enunciado: $x + c = c \Rightarrow x = 0$.}
-		\label{tab:Rascunho4}
-	\end{table}
-
-	Convertendo o rascunho em um texto de prova, o mesmo poderia ser como se segue.
-	
-	\textbf{Texto da prova:} Suponha que $x + c = c$, subtraindo $c$ em ambos os lados tem-se que, $x + c - c = c - c$, entretanto, é claro que $c - c = 0$, consequentemente tem-se que $x = 0$, e portanto, a expressão, ``Se $x \neq 0$, então $x + c \neq c$'' o enunciado ``$x + c = c \Rightarrow x = 0$'' é verdadeiro, logo o enunciado original ``Se $x \neq 0$, então $x + c \neq c$'' é também verdadeiro.
-\end{solution}
-
-Note que até agora foram utilizados exemplos em que os rascunhos de demonstrações começam sempre tendo apenas informações na coluna de objetivos e nenhum dado, isso aconteceu pois o autor deste manuscrito queria causar o mínimo de complicação inicial na cabeça do leitor iniciante em métodos de demonstração\footnote{Um leitor mais habilidoso em matemática pode notar que em todos os exemplos até aqui, poderia sem perda alguma a demonstração, acrescentar o dado inicial de que a ``entrada'' dos enunciados são em todos os problemas números inteiros.}. Entretanto, em muitas situações no momento inicial, além dos objetivos também é possível que alguns dados já sejam conhecidos de forma explicita.
-
-\begin{problem}
-	Demonstre que dado três números reais $x, y$ e $z$ com $x > y$. Se $xz \leq yz$, então $z \leq 0$.
-\end{problem}
-
-\begin{solution}
-	Reescrevendo a contra positiva do enunciado original na linguagem da lógica de primeira ordem tem-se:
-	\begin{center}
-		$x, y, z \in \mathbb{R}$ com $x > y$. $z > 0 \Rightarrow xz > yz$.
-	\end{center}
-	E assim tem-se o seguinte rascunho de prova
-	\begin{table}[h]
-		\centering
-		\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}p{0.1\linewidth}p{0.4\linewidth}p{0.4\linewidth}@{}}
-			\hline
-			Estado & Dados & Objetivos\\
-			\hline
-			1 & $x, y, z \in \mathbb{R}$ com $x > y$ & $z > 0 \Rightarrow xz > yz$\\
-			2 & $x, y, z \in \mathbb{R}$ com $x > y$ e $z > 0$ & $xz > yz$\\
-			3 & $x, y, z \in \mathbb{R}$ e $xz > yz$ &\\
-			\hline
-		\end{tabular*}
-		\caption{Rascunho da demonstração direta do enunciado: $z > 0 \Rightarrow xz > yz$.}
-		\label{tab:Rascunho5}
-	\end{table}
-
-	Note que no estado inicial (linha 1) da prova apresentada no rascunho ilustrado na Tabela \ref{tab:Rascunho5} já se tinha as informações explícitas de que as variáveis $x, y$ e  $z$ eram números reais. Agora convertendo o rascunho em um texto de prova, o mesmo poderia ser como se segue.
-	
-	\textbf{Texto da prova:} Dado $x, y, z \in \mathbb{R}$ suponha que $z > 0$ como $x > y$ pela monotonicidade da multiplicação segue que $xz > yz$, e portanto, tem-se que o enunciado expresso como $x, y, z \in \mathbb{R}$ com $x > y$. $z > 0 \Rightarrow xz > yz$ é verdadeiro, e desde que tal enunciado é a contraposição do enunciado original se $xz \leq yz$, então $z \leq 0$ tem-se que o enunciado original é também verdadeiro.
-	
-\end{solution}
+ de demonstração que veremos é provavelmente a
+que será mais utilizada. Esta permite demonstrar implicações lógicas
+e é equivalente à regra de introdução da implicação da dedução
+natural e é conhecida como prova direta.
