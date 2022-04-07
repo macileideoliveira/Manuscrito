@@ -33,15 +33,11 @@ Para pode falar sobre métodos de demonstração e poder então descrever como o
 
 Para que uma demonstração de uma asserção possa ser aceita como correta, é comum exigir que a argumentação de tal demonstração deve conter um alto nível de rigor (formalismo) matemático, além disso, quanto maior for a riqueza\footnote{A riqueza de detalhes que uma demonstração tem pode variar, a depender para quem a prova se destina, por exemplo, uma prova escrita para um físico em geral não se preocupa com os por menores do linguajá matemático, diferentemente de uma prova escrita para matemáticos, onde os menores detalhes da linguagem matemática são considerados como informações relevantes.} de detalhes, mas fácil é de se entender as demonstrações. As ações usada para realizar demonstrações recebem o nome de métodos (ou estratégias) de demonstrações.
 
-Os métodos de demonstração apresentadas neste manuscrito seguem as ideias, a forma e ordem similares as apresentadas em \cite{velleman2019comProvar}. Para que fique mais simples do leitor iniciante entender, neste manuscrito a tarefa de realizar demonstração acontecerá em duas etapas: (1) será realizada a construção de um rascunho\footnote{O leitor deve ter em mente que menos no rascunho é conveniente escrever o máximo das informações na linguagem da lógica de primeira ordem, isso torna mais simples a conversão do rascunho de prova para o texto formal da prova.} de prova, e (2) a partir do rascunho gerado no passo anterior será elaborado um texto formal que em sintase é a prova em si.
+Os métodos de demonstração apresentadas neste manuscrito seguem as ideias, a forma e ordem similares as apresentadas em \cite{velleman2019comProvar}. Assim para facilitar o entendimento do leitor novato em métodos de demonstração, este texto irá fragmentar a tarefa de construir uma prova em duas partes: (1) será feito a construção de um rascunho da prova e (2) será elaborado um texto formal, a partir deste rascunho\footnote{Vale salientar que essa abordagem não é nova, na verdade a mesma é utilizada originalmente no livro \cite{velleman2019comProvar}.}.
 
-O rascunho é um ambiente na forma de uma tabela subdividida em três colunas, a primeira o marca número de passos (ou estados) da prova, a segunda coluna contém os dados disponíveis e a terceira coluna diz respeito aos objetivos (ou em inglês \textit{Goal}) que devem ser atingidos. Cada linha no rascunho por sua vez é um estado da prova\footnote{Esse tipo de visão é similar ao que acontece em provadores de teoremas como Coq \cite{coq2013} e Lean.}. Uma prova está terminada (ou completa) quando todos os objetivos tiverem sido eliminados (ou satisfeitos). 
+O rascunho pode ser visto como sendo o ambiente que é utilizado para realizar as deduções necessárias nas demonstrações. Sua estrutura pode ser dividida em duas colunas, a primeira irá conter as dados (ou hipotéses) e a segunda que irá conter os objetivos\footnote{Alguns autores preferem usar o termo em inglês \textit{Goal}.} (ou conclusões).
 
-\begin{remark}
-	Os objetivos são modificados apenas de duas formas no rascunho, quando é aplicado alguma estratégia de demonstração que altere os objetivos ou quando os mesmo são obtidos na coluna de dados por meio de inferência, neste caso o mesmo deve ser removido da coluna de objetivos.
-\end{remark}
 
-Nas seções a seguir serão apresentados as diversas estratégias para realizar demonstrações, em cada uma delas será explicado como desenvolver o rascunho de prova de cada estratégia.
 
 \section{Demonstrando Implicações}\label{sec:ProvandoImplicacao}
 
