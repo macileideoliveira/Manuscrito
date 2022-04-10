@@ -1,8 +1,14 @@
+% !TeX spellcheck = <none>
 \chapter{Métodos de Demonstração}\label{cap:Demonstracoes}
 
 \begin{introduction}[Tópicos]
 	\item Introdução
 	\item Demonstrando Implicações
+	\item Demonstrando por Absurdo
+	\item Demonstrando por Casos
+	\item Demonstrando Universalidade
+	\item Demonstrando Existência
+	\item Demonstrando Unicidade
 \end{introduction}
 
 \section{Introdução}\label{sec:Introducao-Demonstracoes}
@@ -24,21 +30,63 @@ Nas próxima seções deste manuscrito serão descritas as principais técnicas 
 Para pode falar sobre métodos de demonstração e poder então descrever como os matemáticos, lógicos e cientistas da computação justificam asserções usando apenas a argumentação matemática, será necessário fixar algumas nomenclaturas e falar sobre alguns conceitos importantes.
 
 \begin{definition}[Asserção]\label{def:Assercao}
-	Uma Asserção é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
+	Uma \textbf{asserção} é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
 \end{definition}
 
 \begin{remark}
 	O leitor que conheça lógica nota facilmente que uma asserção é uma proposição ou predicado, para detalhes ver o Capítulo \ref{cap:IntroducaoLogica}.
 \end{remark}
 
-Para que uma demonstração de uma asserção possa ser aceita como correta, é comum exigir que a argumentação de tal demonstração deve conter um alto nível de rigor (formalismo) matemático, além disso, quanto maior for a riqueza\footnote{A riqueza de detalhes que uma demonstração tem pode variar, a depender para quem a prova se destina, por exemplo, uma prova escrita para um físico em geral não se preocupa com os por menores do linguajá matemático, diferentemente de uma prova escrita para matemáticos, onde os menores detalhes da linguagem matemática são considerados como informações relevantes.} de detalhes, mas fácil é de se entender as demonstrações. As ações usada para realizar demonstrações recebem o nome de métodos (ou estratégias) de demonstrações.
+De forma geral a demonstração de uma asserção pode ser descrita em três passos:
 
-Os métodos de demonstração apresentadas neste manuscrito seguem as ideias, a forma e ordem similares as apresentadas em \cite{velleman2019comProvar}. Assim para facilitar o entendimento do leitor novato em métodos de demonstração, este texto irá fragmentar a tarefa de construir uma prova em duas partes: (1) será feito a construção de um rascunho da prova e (2) será elaborado um texto formal, a partir deste rascunho\footnote{Vale salientar que essa abordagem não é nova, na verdade a mesma é utilizada originalmente no livro \cite{velleman2019comProvar}.}.
+\begin{enumerate}
+	\item Expressar a asserção como uma fórmula da lógica simbólica (ver Capítulo \ref{cap:IntroducaoLogica}).
+	\item Construir um rascunho que demonstra a asserção utilizando os métodos de demonstração.
+	\item Produzir um texto formal a partir do rascunho obtido no passo anterior.
+\end{enumerate}
 
-O rascunho pode ser visto como sendo o ambiente que é utilizado para realizar as deduções necessárias nas demonstrações. Sua estrutura pode ser dividida em duas colunas, a primeira irá conter as dados (ou hipotéses) e a segunda que irá conter os objetivos\footnote{Alguns autores preferem usar o termo em inglês \textit{Goal}.} (ou conclusões).
 
+Os métodos (ou estratégias) de demonstrações apresentadas neste manuscrito seguem as ideias e ordem  de apresentação similar ao que foi exposto em \cite{velleman2019comProvar}. Já o rascunho mencionando anteriormente, neste manuscrito será visto como sendo o ambiente em que será realizada as deduções necessárias para as demonstrações das asserções, isto é, o mesmo não é a prova em si, em vez disso, o mesmo é uma ferramenta para construir a prova. 
 
+Diferente de \cite{velleman2019comProvar}, em que a estrutura do rascunho é dividida é muito similar ao que acontece em demonstrações usando provadores de teoremas como Coq \cite{coq2013} e Lean \cite{lean2015}, isto é, em que existe uma separação entre dados (hipótese) e os objetivos (em inglês \textit{Goal}) que se quer demonstrar. Neste manuscrito será adotado como rascunho de prova a contrução de provas em caixa ao estilo de Fitch \cite{broda2007}. A ideia de diagrama de caixa será introduzida gradativamente a cada método.
 
 \section{Demonstrando Implicações}\label{sec:ProvandoImplicacao}
 
-Este texto iniciar a apresentação dos métodos de demonstração pela estratégia conhecida como \textbf{prova direta de implicações}, ela é provavelmente o método de demonstração mais utilizado. O leitor mais experiente em lógica pode notar que na verdade tal estratégia nada mais é que o uso da regra de introdução da implicação.
+Este texto iniciar a apresentação dos métodos de demonstração pela estratégia conhecida como \textbf{prova direta de implicações}, ela é provavelmente o método de demonstração mais utilizado, e consiste em uma prova cujo objetivo é provar uma asserção do tipo: ``Se $\alpha$, então $\beta$''. Para facilitar a escrita será usado a simbologia da lógica $\alpha \Rightarrow \beta$ para representar as implicações.
+
+\begin{method}[Prova direta de: $\alpha \Rightarrow \beta$]
+	\begin{enumerate}
+		\item Suponha que $\alpha$ é verdadeiro.
+		\item Deduza a asserção $\beta$.
+		\item Conclua a asserção: Se $\alpha$, então $\beta$.
+	\end{enumerate}
+\end{method}
+
+Com respeito a ideia do rascunho, antes da aplicação do método de prova direta o rascunho iria conter na coluna de dados um conjunto finito (que pode ser vazio) de hipóteses verdadeiras e teria na coluna de objetivo a implicação $\alpha \Rightarrow \beta$, ou seja, o rascunho estaria da forma:
+
+\begin{flushleft}
+	\begin{tabular}{ll}
+		Dados & Objetivos \\
+		$\gamma_1, \cdots, \gamma_n$ & $\alpha\Rightarrow\beta$
+	\end{tabular}
+\end{flushleft}
+\noindent após a aplicação do método de prova direta o rascunho deverá ser atualizado de forma que $\alpha$ se torne um dado e que $\beta$ passe a ser o novo objetivo a ser demonstrado, ou seja, o rascunho passa a ter a forma: 
+
+\begin{flushleft}
+	\begin{tabular}{ll}
+		Dados & Objetivos \\
+		$\gamma_1, \cdots, \gamma_n$ & $\beta$\\
+		$\alpha$
+	\end{tabular}
+\end{flushleft}
+\noindent assim fica claro que o método de prova direta tem ação imediata sobre a estrutura do rascunho de prova, no sentido de que tal método muda diretamente a forma do rascunho ao adicionar $\alpha$ com um dado e mudando o objetivo a ser demonstrado de $\alpha \Rightarrow \beta$ para $\beta$.
+
+\begin{remark}
+	O leitor mais experiente em lógica pode notar que na verdade o método de prova direta de implicações nada mais é que o uso da regra de introdução da implicação.
+\end{remark}
+
+Os exemplos a seguir esboçam ao leitor o uso da prova direta para provar resultados clássicos sobre os números inteiros.
+
+\begin{problem}
+	Demonstre a asserção: Dado $n \in \Int$. Se $n$ é impar, então $n^2 + n$ é um número par.
+\end{problem}

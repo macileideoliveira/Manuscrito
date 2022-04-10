@@ -47,26 +47,17 @@
 {}{}
 \makeatother
 
-
+% ===================================================
+% Configuração alguns comando básicos
+% ===================================================
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Rac}{\mathbb{Q}}
+\newcommand{\Irr}{\mathbb{I}}
+\newcommand{\Rea}{\mathbb{R}}
+\newcommand{\Com}{\mathbb{C}}
 
 % ===================================================
-% Configuração para o tabuleiro de prova
+% Configuração do ambiente para os métodos de prova
 % ===================================================
-\def\repls #1\endrepls{%
-    \begingroup
-    \replscriptwidth=0pt\relax
-    \replgivenswidth=0pt\relax
-    \replgoalswidth =0pt\relax
-    % XXX: restorerepls... here, not restorerepl...
-    \ifreplhidelineno\def\restorereplshidelineno{\global\replhidelinenotrue}%
-    \else            \def\restorereplshidelineno{\global\replhidelinenofalse}%
-    \fi
-    \let\shownum=\replhidenum
-    \let\hidenum=\replhidenum
-    \def\maxproof##1: ##2; {\IfStrContains {##1} {m} {\setreplmaxscript{$##2$}} {\setreplmaxscript{##2}}}%
-    \def\maxgiven##1: ##2; {\IfStrContains {##1} {t} {\setreplmaxgiven {##2}}   {\setreplmaxgiven {$##2$}}}%
-    \def\maxgoal ##1: ##2; {\IfStrContains {##1} {t} {\setreplmaxgoal  {##2}}   {\setreplmaxgoal  {$##2$}}}%
-    #1%
-    \restorereplshidelineno
-    \endgroup
-}
+%\newtheorem{method}{Método de Demonstração}[chapter]

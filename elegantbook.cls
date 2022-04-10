@@ -852,6 +852,12 @@
     IfBooleanTF={#2}{label=#3}{}}}{\relax}
 
 
+  % Declarando minha caixa
+  \DeclareTColorBox[auto counter,number within=chapter]{method}{ o t\label g }{
+  	common,thmstyle,
+  	IfValueTF={#1}{title={Método de Demonstração ~\thetcbcounter\ (#1)}}{title=Método de Demonstração ~\thetcbcounter},
+  	IfBooleanTF={#2}{label=#3}{}}{\relax}
+
 \ifdefstring{\ELEGANT@mode}{simple}{
   \let\openbox\relax
   \RequirePackage{amsthm}
