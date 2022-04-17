@@ -28,6 +28,8 @@
 
 \definecolor{cinzaClaro}{RGB}{178, 189, 193}
 
+\definecolor{blueproof}{RGB}{4, 50, 119}
+
 % ===================================================
 % Comandos e configurações para colocar epígrafes
 % nas páginas de separação das partes do texto
@@ -58,6 +60,7 @@
 \newcommand{\Com}{\mathbb{C}}
 
 % ===================================================
-% Configuração do ambiente para os métodos de prova
+% Configuração de algumas listas básicas
 % ===================================================
-%\newtheorem{method}{Método de Demonstração}[chapter]
+\newlist{exerList}{enumerate}{1}
+\setlist[exerList,1]{label={\color{blueproof}(\alph*).}}

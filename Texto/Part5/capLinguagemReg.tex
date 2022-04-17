@@ -1078,7 +1078,7 @@ Um fato importante sobre AFD que será usado a seguir e que não foi mencionado 
 O lema a seguir mostra que $\# \mathcal{H}_L$ é na verdade um limite inferior para o número de estados em um AFD. 
 
 \begin{lemma}\label{lema:LimiteInferiorEstados}
-	Se $L = \mathcal{L}(A)$ para algum AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$, então $\# \mathcal{H}_L \leq |Q|$.
+	Se $L = \mathcal{L}(A)$ para algum AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$, então $\# \mathcal{H}_L \leq \# Q$.
 \end{lemma}
 
 \begin{proof}
@@ -1091,7 +1091,7 @@ O lema a seguir mostra que $\# \mathcal{H}_L$ é na verdade um limite inferior p
 		& \stackrel{Hip.}{\Longleftrightarrow} & \widehat{\delta}(q, x) \in F\\
 		& \Longleftrightarrow & x \in \mathcal{L}(A_q)
 	\end{eqnarray*}
-	Dessa forma tem-se que $\mathcal{L}(A_q) = L_w$, e obviamente $\mathcal{L}(A_{q_0}) = L$. Desde que  $A$ é fixo, tem-se que $L_w$ depende apenas do estado obtido quando a computação $w$ começa em $q_0$, e assim o número de $L_w$ distintos, ou seja, os elementos de $\mathcal{H}_L$ não pode ser maior que o número de estados em $A$, portanto, $\#\mathcal{H}_L \leq |Q|$.
+	Dessa forma tem-se que $\mathcal{L}(A_q) = L_w$, e obviamente $\mathcal{L}(A_{q_0}) = L$. Desde que  $A$ é fixo, tem-se que $L_w$ depende apenas do estado obtido quando a computação $w$ começa em $q_0$, e assim o número de $L_w$ distintos, ou seja, os elementos de $\mathcal{H}_L$ não pode ser maior que o número de estados em $A$, portanto, $\#\mathcal{H}_L \leq \# Q$.
 \end{proof}
 
 O próximo lema estabelece que para alguma linguagem $L$ no caso $\mathcal{H}_L$ ser finito, então sua cardinalidade será o limite superior no número de estados em um AFD capaz de reconhecer $L$.
@@ -1190,7 +1190,7 @@ Apesar de extremamente elegante o resultado exposto pelo Teorema Myhill-Nerode a
 O resultado a seguir diz que se dois estados são equivalentes, então seus sucessores também o são.
 
 \begin{lemma}\label{lema:SucessoresEquivalentes}
-	Dado um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$. Se $q \equiv q'$, então $\delta(q, a) \equiv \delta(q', a)$.
+	Dado um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$. Se $q \equiv q'$, então $\delta(q, a) \equiv \delta(q', a)$ com $a \in \Sigma$.
 \end{lemma}
 
 \begin{proof}
@@ -1203,7 +1203,7 @@ O resultado a seguir diz que se dois estados são equivalentes, então seus suce
 		\item[(1)] $\widehat{\delta}(\delta(q, a), w)  \in F$ e $\widehat{\delta}(\delta(q', a), w)  \notin F$ ou
 		\item[(2)] $\widehat{\delta}(\delta(q, a), w)  \notin F$ e $\widehat{\delta}(\delta(q', a), w)  \in F$.
 	\end{itemize}
-	em particular quando $w = \lambda$, para o primeiro caso (a prova é similar para o caso (2)) tem-se pela Definição \ref{def:DeltaEstendido} que:
+	agora fazendo $w = \lambda$, para o primeiro caso (a prova é similar para o caso (2)) tem-se pela Definição \ref{def:DeltaEstendido} que:
 	\begin{eqnarray*}
 		\widehat{\delta}(\delta(q, a), w)  \in F \text{ e } \widehat{\delta}(\delta(q', a), w)  \notin F \Longleftrightarrow \delta(q, a)  \in F \text{ e }\delta(q', a)  \notin F
 	\end{eqnarray*}
@@ -1246,7 +1246,7 @@ Usando a definição anterior, a seguir será apresentado a definição de  AFD 
 \end{proof}
 
 \begin{theorem}\label{teo:FinalQuociente}
-	Seja  $A_{/\equiv} = \langle Q_{/\equiv}, \Sigma, \delta^*, [q_0],  F_{/\equiv}\rangle$ o AFD quociente obtido a partir de um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$. Então $q \in F \Longleftrightarrow [q] \in F_{/\equiv}$
+	Dado  $A_{/\equiv} = \langle Q_{/\equiv}, \Sigma, \delta^*, [q_0],  F_{/\equiv}\rangle$ o AFD quociente obtido a partir de um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ tem-se que $q \in F \Longleftrightarrow [q] \in F_{/\equiv}$
 \end{theorem}
 
 \begin{proof}
@@ -1256,7 +1256,7 @@ Usando a definição anterior, a seguir será apresentado a definição de  AFD 
 O próximo resultado mostra que o colapso de um AFD para seu AFD quociente preserva a linguagem aceita pelo autômato. 
 
 \begin{theorem}\label{teo:LinguagemQuociente}
-	Seja  $A_{/\equiv} = \langle Q_{/\equiv}, \Sigma, \delta^*, [q_0],  F_{/\equiv}\rangle$ o AFD quociente obtido a partir de um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$. Então $\mathcal{L}(A_{/\equiv}) = \mathcal{L}(A)$.
+	Dado  $A_{/\equiv} = \langle Q_{/\equiv}, \Sigma, \delta^*, [q_0],  F_{/\equiv}\rangle$ o AFD quociente obtido a partir de um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ tem-se que $\mathcal{L}(A_{/\equiv}) = \mathcal{L}(A)$.
 \end{theorem}
 
 \begin{proof}
@@ -1267,7 +1267,7 @@ O próximo resultado mostra que o colapso de um AFD para seu AFD quociente prese
 	\noindent logo $\mathcal{L}(A_{/\equiv}) = \mathcal{L}(A)$.
 \end{proof}
 
-\
+Agora é aceitável que o leitor possa se questionar sobre o que acontece quando se tenta colapsar um AFD que já é um AFD quociente. A resposta para esse fato é simples, não acontece nada, isto é, se $A_{/\equiv}$ é o AFD quociente, então o colapso dele é ele próprio, a prova disto pode ser vista em \cite{martin2003}. Outro ponto importante sobre o AFD quociente é que ele é mínimo a menos de isomorfismo \cite{martin2003}.
 
 \begin{algorithm}[!h]
 	\Entrada{Um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$}
@@ -1318,15 +1318,11 @@ O próximo resultado mostra que o colapso de um AFD para seu AFD quociente prese
 	\label{alg:AFD-Quociente}
 \end{algorithm}
 
-Agora é aceitável que o leitor possa se questionar sobre o que acontece quando se tenta colapsar um AFD que já é um AFD quociente. A resposta para esse fato é simples, não acontece nada, isto é, se $A_{/\equiv}$ é o AFD quociente, então o colapso dele é ele próprio, a prova disto pode ser vista em \cite{martin2003}.
-
-\begin{remark}
-	Um fato importante sobre o AFD quociente é que ele é mínimo a menos de isomorfismo \cite{martin2003}, isto é, a construção do quociente é equivalente ao Teorema Myhill-Nerode.
-\end{remark}
+\
 
 Agora obviamente a construção do AFD quociente pode ser visa como um algoritmo, nesse sentido o algoritmo consiste em realizar três tarefas básicas, a primeira é de encontrar os estados do autômato que são equivalentes, depois o algoritmo deve construir as classes de equivalência dos estados em reunir todas as classes no conjunto (ou espaço) quociente $Q_{/\equiv}$, depois disso o algoritmo deve definir as transições entre  os estados são agora representados pelas classes de equivalência, isto é, o algoritmo deve construir a função $\delta^*$, e por fim, definir um conjunto de estados finais, onde novamente os estados são classes de equivalência, ou seja, o último passo do algoritmo é construir o conjunto $F_{/\equiv}$.
 
-Em termos de ``implementação'' o Algoritmo \ref{alg:AFD-Quociente}  a seguir esboça o pseudo-código para a construção do AFD quociente, a ideia do mesmo é, primeiro usar os elementos em uma matriz de relação para marcar estados equivalentes, depois a partir desta matriz construir as classes de equivalência. Obviamente este texto não está preocupado com desempenho, assim possivelmente o pseudo-código a seguir pode não ser o mais eficiente, em termos da análise de algoritmo.
+Em termos de ``implementação'' o Algoritmo \ref{alg:AFD-Quociente} esboça o pseudo-código para a construção do AFD quociente, a ideia do mesmo é, primeiro usar os elementos em uma matriz de relação para marcar estados equivalentes, depois a partir desta matriz construir as classes de equivalência. Obviamente este texto não está preocupado com desempenho, assim possivelmente o pseudo-código a seguir pode não ser o mais eficiente, em termos da análise de algoritmo.
 
 \begin{remark}
 	Um ponto a ressaltar é que o Algoritmo \ref{alg:AFD-Quociente} não utilizar a matriz inteira para representar a relação de equivalência, isso acontece por que toda relação de equivalência é reflexiva e simétrica, assim basta se preocupar com as posições acima da diagonal principal da matriz, pois como explicado em \cite{benjaLivro2010}, os elementos abaixo da diagonal principal são na verdade a contraparte simétrica da relação de equivalência e os elementos na diagonal são as informações da parte reflexiva da relação.
@@ -1501,7 +1497,7 @@ Note que a máquina de Mealy traduz (ou associa) cada transição da máquina a 
 	Pode-se interpretar que as funções $\psi$ e $\widehat{\psi}$ escrevem na fita de saída da máquina, isto é, na memória adicional de escrita que tais máquinas possuem.
 \end{remark}
 
-Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máquina de Mealy não visto como uma linguagem aceita pela máquina, em vez disso, ela é vista como a linguagem traduzida pela máquina.
+Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máquina de Mealy não é visto como uma linguagem aceita pela máquina, em vez disso, ela é vista como a linguagem traduzida pela máquina.
 
 \begin{definition}[Linguagem Traduzia - Máquina de Mealy]
 	Dado uma máquina de Mealy $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0\rangle$ a linguagem traduzida de $A$, denotado por $TRAD(A)$, é o conjunto de todas as traduções das palavras $w \in \Sigma^*$ realizadas a partir do estado inicial $q_0$, ou seja, tem-se que:

@@ -194,7 +194,7 @@ Uma propriedade interessante sobre o conjunto vazio é apresentada a seguir, tal
 
 Agora que foram apresentados os conjuntos universo e vazio, é conveniente comentar sobre uma situação específica da teoria dos conjuntos como apresentada até aqui. Pelo que foi apresentado até agora já se sabe que os itens em um conjunto são chamados de elementos, entretanto, não existe qualquer restrição, além de ser bem definido, para a natureza (ou tipo) dos elementos em um conjunto. Isso possibilita que seja possível definir por exemplo um conjunto de conjuntos, isto é, um conjunto em que os elementos são também conjuntos.
 
-\begin{definition}[Família]\label{def:Familia}
+\begin{definition}[Classe]\label{def:Familia}
 	Um conjunto $A$ cujo os elementos são todos conjuntos, isto é, um conjunto da forma $A = \{x \mid x \mbox{ é um conjunto}\}$, é chamado de \textbf{família de conjuntos}.
 \end{definition}
 
@@ -745,244 +745,310 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 	É claro que uma partição de um conjunto $A$ é vazia se, e somente se, $A = \emptyset$.
 \end{remark}
 
-\begin{problemset}
-	\item Para cada um dos conjuntos a seguir, determine uma propriedade que define o conjunto e escreva os conjuntos na notação compacta.
-	\begin{enumerate}
-		\item $\{0,2,4,6,8,1,3,5,7,9\}$.
-		\item $\{-2, -4, -6, -8, 0, 6, 4, 8, 2\}$.
-		\item $\{3, 5, 7, 9, 13, 15, 17, \cdots\}$.
-		\item $\{a, c, s\}$
-		\item $\{2, 3, 5, 7, 11, 13, 17, 19, \cdots\}$.
-		\item $\{1, 4, 9, 16, 25, 36, 64, 81, 100\}$.
-		\item $\{3, 6, 9, 12, 15, 18, 21, \cdots\}$.
-		\item $\{\frac{1}{2}, \frac{2}{4}, \frac{3}{6}, \frac{4}{8}, \frac{5}{10}, \cdots\}$
-	\end{enumerate}
-	\item Escreva os seguintes conjuntos em notação compacta.
-	\begin{enumerate}
-		\item Conjunto de todos os países da América do sul.
-		\item Conjunto de planetas do sistema solar.
-		\item Conjunto dos números reais maiores que 1 e menores que 2.
-		\item Conjunto de estados brasileiros cujo nome começa com a letra ``R''.
-		\item Conjunto dos times nordestinos que já foram campões da primeira divisão do campeonato brasileiro de futebol.
-	\end{enumerate}
-	\item Escreva as sentença a seguir de forma apropriada usando a linguagem da teoria ingênua dos conjuntos.
-	\begin{enumerate}
-		\item $x$ não pertence ao conjunto $A$.
-		\item $-2$ não é um número natural.
-		\item O símbolo $\pi$ representa um número real.
-		\item O conjunto das vogais não é subconjunto do conjunto das consoantes. 
-		\item $y$ é um número inteiro, porém não é um número maior que $10$.
-		\item $D$ é o conjunto de todos os múltiplos de $-3$ que são maiores que $1$.
-	\end{enumerate}
-	\item Considere o conjunto de letras $K = \{b, t, s\}$ responda falso ou verdadeiro e justifique sua resposta:
-	\begin{enumerate}
-		\item $s \in K$?
-		\item $t \subset K$?
-		\item $K \not\subseteq K$?
-		\item $\{b\} \in K$?
-		\item $K - \{a\} = K$?
-	\end{enumerate}
-	\item Considere cada conjunto a seguir e escreva todos os seus subconjuntos.
-	\begin{enumerate}
-		\item $B = \{1, 2, 3\}$.
-		\item $F = \{a, b, c, d\}$.
-		\item $N = \{\emptyset\}$.
-		\item $R = \{\emptyset, \{\emptyset\}\}$.
-		\item $P = \{\{a, b\}, \{c, d\}, \{a, f\}, \{a, b, c\}, \emptyset\}$.
-	\end{enumerate}
-	\item Considerando o universo dos números naturais dado os subconjuntos:  $A = \{1, 2, 3, 4, 5\}$, $B = \{x \in \Nat \mid x^2 = 9\}$, $C = \{x \in \Nat \mid x^2 - 4x + 6 = 0\}$ e $D = \{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$, complemente as frase com os símbolos $\subseteq, \not\subseteq$.
-	\begin{enumerate}
-		\item $A \ \underline{ \ \ \ \ \ \ } \ B$.
-		\item $C \ \underline{ \ \ \ \ \ \ } \ B$.
-		\item $D \ \underline{ \ \ \ \ \ \ } \ C$.
-		\item $B \ \underline{ \ \ \ \ \ \ } \ A$.
-		\item $A \ \underline{ \ \ \ \ \ \ } \ D$.
-		\item $C \ \underline{ \ \ \ \ \ \ } \ A$.
-		\item $D \ \underline{ \ \ \ \ \ \ } \ B$.
-		\item $B \ \underline{ \ \ \ \ \ \ } \ \Nat$.
-		\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
-		\item $A \ \underline{ \ \ \ \ \ \ } \ \Nat$.
-		\item $A \ \underline{ \ \ \ \ \ \ } \ \Int_-$.
-		\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
-		\item $\Nat \ \underline{ \ \ \ \ \ \ } \ C$.
-		\item $C \ \underline{ \ \ \ \ \ \ } \ \Nat$.
-		\item $\{6\} \ \underline{ \ \ \ \ \ \ } \ C$
-	\end{enumerate}
-	\item Complete as sentença da teoria dos conjuntos com $\in, \subseteq$ e $\not\subseteq$.
-	\begin{enumerate}
-		\item $2 \underline{ \ \ \ \ \ \ } \{1, 2, 3\}$.
-		\item $\{2\} \underline{ \ \ \ \ \ \ } \{1, 2, 3\}$.
-		\item $\{1\} \underline{ \ \ \ \ \ \ } \{\{1\}, \{2\}, \{3\}\}$.
-		\item $\emptyset \underline{ \ \ \ \ \ \ } \{1\}$.
-		\item $\emptyset \underline{ \ \ \ \ \ \ } \{\emptyset\}$.
-		\item $\{3\} \underline{ \ \ \ \ \ \ } \emptyset$.
-		\item $\Nat \underline{ \ \ \ \ \ \ } \{2, 3, 6\}$.
-		\item $\{\{\emptyset\}, \emptyset\} \underline{ \ \ \ \ \ \ } \{\{\{\emptyset\}, \emptyset\}, \emptyset\}$.
-		\item $a \underline{ \ \ \ \ \ \ } \{\{a\}, b\} \underline{ \ \ \ \ \ \ } \{a, b, c\}$.
-		\item $0 \underline{ \ \ \ \ \ \ }  \Int_+^*$.
-		\item $\frac{1}{0} \underline{ \ \ \ \ \ \ }  \Rac$.
-		\item $\emptyset \underline{ \ \ \ \ \ \ }  \emptyset$.
-		\item $\{1, 2, 4\} \underline{ \ \ \ \ \ \ }  \{2, 4, 6\} \underline{ \ \ \ \ \ \ } \{y \mid y = 2x \mbox{ para algum } x \in \Nat\}$.
-		\item $\{1\} \underline{ \ \ \ \ \ \ }  \Rea$.
-		\item $\frac{3}{4} \underline{ \ \ \ \ \ \ }  \Nat$.
-	\end{enumerate}
-	\item Justifique as seguintes afirmações.
-	\begin{enumerate}
-		\item $\{\frac{2}{x} \mid x - 1 > 0 \mbox{ com } x \in \Nat\}$ não é subconjunto de $\Nat$. 
-		\item $\{2, 3, 4, 6, 8\}$ não é subconjunto de $\{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$.
-		\item $\{1, 2, 3\}$ é um subconjunto próprio do conjunto $\{1, 2, 3, 4, 5, 6, 7,8,9,0\}$.
-		\item $\{0, 5\}$ é subconjunto de $\Int$ mas não é subconjunto de $\Int^*$.
-		\item $\{ x \mid x + x = x\}$ é subconjunto próprio de $\Nat$.
-		\item Existem exatamente 15 subconjuntos próprios do conjunto $\{2, 3, 5, 7\}$.
-		\item Não existem subconjuntos próprios do conjunto $\emptyset$.
-		\item Sempre que $A \subset B$ e $A_0 \subset A$, tem-se que $A_0$ é também um subconjunto próprio de $B$.
-		\item O conjunto $\{2\}$ tem um único subconjunto próprio.
-		\item O conjunto $\{x \in \Nat \mid 0 < x < 3\}$ tem exatamente 3 subconjuntos próprios.
-	\end{enumerate}
-	\item Considerando o universo $\mathbb{U} = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 0\}$ e seus subconjuntos $A = \{2, 4, 6, 8\}$, $B = \{1, 3, 5, 7, 9\}$, $C = \{1, 2, 3, 4, 0\}$ e $D = \{0, 1\}$ exiba os seguintes conjuntos:
-	\begin{enumerate}
-		\item $A \cup B$.
-		\item $C \cup D$.
-		\item $D \cap A$.
-		\item $B \cap C$.
-		\item $A \cap (B \cup D)$.
-		\item $D \cap (A \cap C)$.
-		\item $(A \cap B) \cup (D \cap C)$.
-		\item $(\mathbb{U} \cap A) \cup D$.
-		\item $(D \cup A) \cap C$
-		\item $D \cap (B \cup A)$
-		\item $A \cup \overline{B}$.
-		\item $\overline{(C \cap B)} \cup D$.
-		\item $\overline{D \cap A}$.
-		\item $B \cap \overline{C}$.
-		\item $A \cap \overline{(\overline{B} \cup D)}$.
-		\item $D \cap (A \cap C)$.
-		\item $\overline{(A \cap B)} \cup (\overline{D} \cap C)$.
-		\item $\overline{(\mathbb{U} \cap \overline{A})} \cup D$.
-		\item $(D \cup A) \cap \overline{C}$
-		\item $\overline{D \cap (B \cup A)}$
-		\item $\overline{D - A}$.
-		\item $(A - B) \cap \overline{C}$.
-		\item $A \cap \overline{(\overline{B} - D)}$.
-		\item $D \cap (A - C)$.
-		\item $\overline{C} - D$.
-		\item $D - A$.
-	\end{enumerate}
-	\item Considerando o universo $\mathbb{U} = \{a, b, c, d, e, f, g, h, i, j\}$ e seus subconjuntos $A = \{b, d, f, h\}$, $B = \{a, c, e, g, i\}$, $C = \{a, b, c, d, j\}$ e $D = \{a, j\}$ exiba os seguintes conjuntos:
-	\begin{enumerate}
-		\item $\overline{B} - C$.
-		\item $A - (B \cup D)$.
-		\item $(A - (A \cap B)) - ((\overline{D} \cap C) - A)$
-		\item $\overline{(\mathbb{U} - \overline{C})} - D$
-		\item $A \ominus (B \cup D)$.
-		\item $(A \ominus (A \cap B)) \ominus ((\overline{D} \cap C) \ominus A)$
-		\item $\overline{(\mathbb{U} \ominus \overline{C})} \ominus D$
-		\item $\overline{D \ominus A}$.
-		\item $(A \ominus B) \cap \overline{C}$.
-		\item $\overline{C} \ominus D$.
-		\item $D \ominus A$.
-		\item $\overline{B} \ominus C$.
-		\item $A \cap \overline{(\overline{B} \ominus D)}$.
-		\item $D \cap (A \ominus C)$.
-	\end{enumerate}
-	\item Uma aluna do curso de Ciência da Computação realizou uma pesquisa sobre três ritmos (A, B e C) presentes no aplicativo de música \textit{Spotify} com seus colegas de classe para seu trabalho na disciplina de estatística,  e levantou os dados expostos na Tabela \ref{tab:TabelaDeDados}.
-	
-	\begin{table}[h]
-		\scriptsize
-		\centering
-		\begin{tabular}{ccccccccc}
-			\hline
-			Total de & Ouvem & Ouvem & Ouvem & Ouvem & Ouvem &  Ouvem & Ouvem &   Não ouvem \\
-			entrevistados & A & B & C & A e B & A e C & B e C & A, B e C & nenhum dos ritmos  \\
-			\hline
-			23 & 8 & 4 & 6 & 2 & 3 & 1 & 1 & 10\\
-			\hline
-		\end{tabular}
-		\caption{Tabela com dados fictício da pesquisa sobre ritmos no \textit{Spotify}.}
-		\label{tab:TabelaDeDados}
-	\end{table}
-	\begin{enumerate}
-		\item Qual é o número de entrevistados que escutam apenas o ritmo A?
-		\item Quantos entrevistados não escutam o ritmo C?
-		\item Qual é o número de entrevistados que escutam algum dos ritmos? 
-		\item Quantos entrevistados escutam o ritmo B ou C, mas não escutam o ritmo A?
-	\end{enumerate}
-	\item Dado os conjuntos $A = \{1, 2, 3\}, B = \{3,4,5\}$ e $C = \{1, 5, 6\}$ construa um conjunto $X$ com exatamente $4$ elementos tal que $A \cap X = \{3\}$, $B \cap X =\{3, 5\}$ e $C \cap X = \{5, 6\}$.
-	\item Considere o banco de dados representado na Tabela \ref{tab:TabelaBaseDeDados1}. Esboce o conjunto gerado por cada \textit{Query} detalhada abaixo  e relacione essas \textit{Queries} com as operações sobre conjuntos.
-	
-	\begin{table}[h]
-		\centering
-		\scriptsize
-		\begin{tabular}{ccccc}
-			\hline
-			id & Nome & Salário & Idade & Sexo \\
-			\hline
-			23 & Júlio & 2.300,00 & 34 & M \\
-			102 & Patrícia & 4.650,00 & 23 & F \\
-			33 & Daniel & 1.375,00 & 20 & M \\
-			43 & Renata & 6.400,00 & 24 & F \\
-			23 & Rafaela & 1.800,00 & 19 & F \\
-			57 & Tadeu & 14.450,00 & 54 & M \\
-			\hline
-		\end{tabular}
-		\caption{Uma base de dados representada como uma tabela.}
-		\label{tab:TabelaBaseDeDados1}
-	\end{table}
-	\begin{enumerate}
-		\item O conjuntos dos id's onde o sexo é igual a F e o salário não é inferior a 2.000,00.
-		\item O conjunto dos salários em que a idade não é superior a 35 ou o sexo é igual a M.
-		\item O conjunto de todos os nome em que a idade não é maior que 30 ou id é menor que 65.
-	\end{enumerate}
-	\item Exiba os seguintes conjuntos.
-	\begin{enumerate}
-		\item $\wp(\{1, 2, 3\})$.
-		\item $\wp(\wp(\{0,1\}))$.
-		\item $\wp(\{\Nat\})$.
-		\item $\wp(\{1, \{2\}, \{1, \{2\}\}\})$.
-		\item $\wp(\{1, \{1\}, \{2\}, \{3, 4\}\})$.
-		\item $\wp(\wp(\{1, 2\})) - \wp(\{0, 1\})$.
-		\item $\wp(\{a, b, c, g\} \ominus \{g, e, f, d\})$.
-		\item $\wp(\wp(\wp(\{0,1\})) \cup \wp(\{1, 2, 3\}))$.
-		\item $\wp(\wp(\emptyset) - \emptyset)$.
-		\item $\wp(\{2, 3, 4\} \cap (\{-1, 3\} \cup \{-5\}))$
-	\end{enumerate}
-	\item Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ calcule e exiba os seguintes conjuntos.
-	\begin{enumerate}
-		\item $\wp(C)$.
-		\item $\wp(A) - \wp(\overline{B})$.
-		\item $\wp((A \cup B) \ominus C)$.
-		\item $\wp((\overline{A} \cup B)) \ominus \wp(C)$.
-		\item $\wp(\overline{(C \cap B)} - (\overline{A} \cap C))$
-		\item $\wp(C) - (\wp(A) \ominus \wp(B))$.
-		\item $\wp(\overline{A}) \ominus ((\wp(C) \cap \wp(B))  -  \wp(A))$.
-		\item $\wp(\wp(A)) - \wp(\wp(B))$.
-		\item $\wp(\wp(\overline{C})) \ominus \wp(\wp(B))$.
-		\item $\wp(\mathbb{U})$.
-	\end{enumerate}
-	\item Dado o conjunto $A = \{a, b, c, d, e, f, g\}$ diga se os conjuntos a seguir são ou não partições de $A$, justifique todas as suas resposta.
-	\begin{enumerate}
-		\item $P_1 = \{\{a, c, e\}, \{b\}, \{d, g\}\}$.
-		\item $P_2 = \{\{a, g, e\}, \{c, d\}, \{b, e, f\}\}$.
-		\item $P_3 = \{\{a, b, e, g\}, \{c\}, \{d, f\}\}$.
-		\item $P_4 = \{\{a, b, c, d, e, f, g\}\}$.
-		\item $P_5 = \{\{a, b, d, e, g\}, \{f, c\}\}$.
-		\item $P_6 = \{\{a, b, c, d, e\}, \{e, f, g\}\}$.
-		\item $P_7 = \{\{b, c, d, e, f, g\}, \{a\}, \{b, a,c\}\}$.
-		\item $P_8 = \{\{a, b, c, d, e, f, g\}, \{e, d\}\}$.
-		\item $P_9 = \{\{a\}, \{b\}, \{c\}, \{d,e\}, \{f\}, \{g\}\}$.
-		\item $P_{10} = \{\{a\}, \{b\}, \{c\}, \{d\}, \{e\}, \{f\}, \{g\}\}$
-	\end{enumerate}
-	\item Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ exiba duas partições diferentes para cada um dos conjuntos a seguir. 
-	\begin{enumerate}
-		\item $C - \overline{A}$.
-		\item $A - \overline{B}$.
-		\item $(A \cup B) \ominus C$.
-		\item $(\overline{A} \cup B)) \ominus C$.
-		\item $\overline{(C \cap B)} - (\overline{A} \cap C)$
-		\item $C - (A \ominus B)$.
-		\item $\overline{A} \ominus ((C \cap B)  - A)$.
-		\item $A - B$.
-		\item $\overline{C} \ominus B$.
-		\item $\wp(\mathbb{U})$.
-	\end{enumerate}
-\end{problemset}
+\section{Questionário}\label{sec:Questionario1}
+
+\begin{problem}\label{prob:Conjuntos1}
+	Para cada um dos conjuntos a seguir, determine uma propriedade que define o conjunto e escreva os conjuntos na notação compacta.
+\end{problem}
+
+\begin{exerList}
+	\item $\{0,2,4,6,8,1,3,5,7,9\}$.
+	\item $\{-2, -4, -6, -8, 0, 6, 4, 8, 2\}$.
+	\item $\{3, 5, 7, 9, 13, 15, 17, \cdots\}$.
+	\item $\{a, c, s\}$
+	\item $\{2, 3, 5, 7, 11, 13, 17, 19, \cdots\}$.
+	\item $\{1, 4, 9, 16, 25, 36, 64, 81, 100\}$.
+	\item $\{3, 6, 9, 12, 15, 18, 21, \cdots\}$.
+	\item $\{\frac{1}{2}, \frac{2}{4}, \frac{3}{6}, \frac{4}{8}, \frac{5}{10}, \cdots\}$
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos2}
+	Escreva os seguintes conjuntos em notação compacta.
+\end{problem}
+
+\begin{exerList}
+	\item Conjunto de todos os países da América do sul.
+	\item Conjunto de planetas do sistema solar.
+	\item Conjunto dos números reais maiores que 1 e menores que 2.
+	\item Conjunto de estados brasileiros cujo nome começa com a letra ``R''.
+	\item Conjunto dos times nordestinos que já foram campões da primeira divisão do campeonato brasileiro de futebol.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos3}
+	Escreva as sentença a seguir de forma apropriada usando a linguagem da teoria dos conjuntos.
+\end{problem}
+
+\begin{exerList}
+	\item $x$ não pertence ao conjunto $A$.
+	\item $-2$ não é um número natural.
+	\item O símbolo $\pi$ representa um número real.
+	\item O conjunto das vogais não é subconjunto do conjunto das consoantes. 
+	\item $y$ é um número inteiro, porém não é um número maior que $10$.
+	\item $D$ é o conjunto de todos os múltiplos de $-3$ que são maiores que $1$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos4}
+	Considere o conjunto de letras $K = \{b, t, s\}$ responda falso ou verdadeiro e justifique sua resposta:
+\end{problem}
+
+\begin{exerList}
+	\item $s \in K$?
+	\item $t \subset K$?
+	\item $K \not\subseteq K$?
+	\item $\{b\} \in K$?
+	\item $K - \{a\} = K$?
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos5}
+	Considere cada conjunto a seguir e escreva todos os seus subconjuntos.
+\end{problem}
+
+\begin{exerList}
+	\item $B = \{1, 2, 3\}$.
+	\item $F = \{a, b, c, d\}$.
+	\item $N = \{\emptyset\}$.
+	\item $R = \{\emptyset, \{\emptyset\}\}$.
+	\item $P = \{\{a, b\}, \{c, d\}, \{a, f\}, \{a, b, c\}, \emptyset\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos6}
+	Considerando o universo dos números naturais dado os subconjuntos:  $A = \{1, 2, 3, 4, 5\}$, $B = \{x \in \Nat \mid x^2 = 9\}$, $C = \{x \in \Nat \mid x^2 - 4x + 6 = 0\}$ e $D = \{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$, complemente as frase com os símbolos $\subseteq$ e $\not\subseteq$.
+\end{problem}
+
+\begin{exerList}
+	\item $A \ \underline{ \ \ \ \ \ \ } \ B$.
+	\item $C \ \underline{ \ \ \ \ \ \ } \ B$.
+	\item $D \ \underline{ \ \ \ \ \ \ } \ C$.
+	\item $B \ \underline{ \ \ \ \ \ \ } \ A$.
+	\item $A \ \underline{ \ \ \ \ \ \ } \ D$.
+	\item $C \ \underline{ \ \ \ \ \ \ } \ A$.
+	\item $D \ \underline{ \ \ \ \ \ \ } \ B$.
+	\item $B \ \underline{ \ \ \ \ \ \ } \ \Nat$.
+	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
+	\item $A \ \underline{ \ \ \ \ \ \ } \ \Nat$.
+	\item $A \ \underline{ \ \ \ \ \ \ } \ \Int_-$.
+	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
+	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ C$.
+	\item $C \ \underline{ \ \ \ \ \ \ } \ \Nat$.
+	\item $\{6\} \ \underline{ \ \ \ \ \ \ } \ C$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos7}
+	Complete as sentença da teoria dos conjuntos com $\in, \subseteq$ e $\not\subseteq$.
+\end{problem}
+
+\begin{exerList}
+	\item $2 \underline{ \ \ \ \ \ \ } \{1, 2, 3\}$.
+	\item $\{2\} \underline{ \ \ \ \ \ \ } \{1, 2, 3\}$.
+	\item $\{1\} \underline{ \ \ \ \ \ \ } \{\{1\}, \{2\}, \{3\}\}$.
+	\item $\emptyset \underline{ \ \ \ \ \ \ } \{1\}$.
+	\item $\emptyset \underline{ \ \ \ \ \ \ } \{\emptyset\}$.
+	\item $\{3\} \underline{ \ \ \ \ \ \ } \emptyset$.
+	\item $\Nat \underline{ \ \ \ \ \ \ } \{2, 3, 6\}$.
+	\item $\{\{\emptyset\}, \emptyset\} \underline{ \ \ \ \ \ \ } \{\{\{\emptyset\}, \emptyset\}, \emptyset\}$.
+	\item $a \underline{ \ \ \ \ \ \ } \{\{a\}, b\} \underline{ \ \ \ \ \ \ } \{a, b, c\}$.
+	\item $0 \underline{ \ \ \ \ \ \ }  \Int_+^*$.
+	\item $\frac{1}{0} \underline{ \ \ \ \ \ \ }  \Rac$.
+	\item $\emptyset \underline{ \ \ \ \ \ \ }  \emptyset$.
+	\item $\{1, 2, 4\} \underline{ \ \ \ \ \ \ }  \{2, 4, 6\} \underline{ \ \ \ \ \ \ } \{y \mid y = 2x \mbox{ para algum } x \in \Nat\}$.
+	\item $\{1\} \underline{ \ \ \ \ \ \ }  \Rea$.
+	\item $\frac{3}{4} \underline{ \ \ \ \ \ \ }  \Nat$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos8}
+	Justifique as seguintes afirmações.
+\end{problem}
+
+\begin{exerList}
+	\item $\{\frac{2}{x} \mid x - 1 > 0 \mbox{ com } x \in \Nat\}$ não é subconjunto de $\Nat$. 
+	\item $\{2, 3, 4, 6, 8\}$ não é subconjunto de $\{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$.
+	\item $\{1, 2, 3\}$ é um subconjunto próprio do conjunto $\{1, 2, 3, 4, 5, 6, 7,8,9,0\}$.
+	\item $\{0, 5\}$ é subconjunto de $\Int$ mas não é subconjunto de $\Int^*$.
+	\item $\{ x \mid x + x = x\}$ é subconjunto próprio de $\Nat$.
+	\item Existem exatamente 15 subconjuntos próprios do conjunto $\{2, 3, 5, 7\}$.
+	\item Não existem subconjuntos próprios do conjunto $\emptyset$.
+	\item Sempre que $A \subset B$ e $A_0 \subset A$, tem-se que $A_0$ é também um subconjunto próprio de $B$.
+	\item O conjunto $\{2\}$ tem um único subconjunto próprio.
+	\item O conjunto $\{x \in \Nat \mid 0 < x < 3\}$ tem exatamente 3 subconjuntos próprios.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos9}
+	Considerando o universo $\mathbb{U} = \{1, 2, 3, 4, 5, 6, 7, 8, 9, 0\}$ e seus subconjuntos $A = \{2, 4, 6, 8\}$, $B = \{1, 3, 5, 7, 9\}$, $C = \{1, 2, 3, 4, 0\}$ e $D = \{0, 1\}$ exiba os conjuntos a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $A \cup B$.
+	\item $C \cup D$.
+	\item $D \cap A$.
+	\item $B \cap C$.
+	\item $A \cap (B \cup D)$.
+	\item $D \cap (A \cap C)$.
+	\item $(A \cap B) \cup (D \cap C)$.
+	\item $(\mathbb{U} \cap A) \cup D$.
+	\item $(D \cup A) \cap C$
+	\item $D \cap (B \cup A)$
+	\item $A \cup \overline{B}$.
+	\item $\overline{(C \cap B)} \cup D$.
+	\item $\overline{D \cap A}$.
+	\item $B \cap \overline{C}$.
+	\item $A \cap \overline{(\overline{B} \cup D)}$.
+	\item $D \cap (A \cap C)$.
+	\item $\overline{(A \cap B)} \cup (\overline{D} \cap C)$.
+	\item $\overline{(\mathbb{U} \cap \overline{A})} \cup D$.
+	\item $(D \cup A) \cap \overline{C}$
+	\item $\overline{D \cap (B \cup A)}$
+	\item $\overline{D - A}$.
+	\item $(A - B) \cap \overline{C}$.
+	\item $A \cap \overline{(\overline{B} - D)}$.
+	\item $D \cap (A - C)$.
+	\item $\overline{C} - D$.
+	\item $D - A$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos10}
+	Considerando o universo $\mathbb{U} = \{a, b, c, d, e, f, g, h, i, j\}$ e seus subconjuntos $A = \{b, d, f, h\}$, $B = \{a, c, e, g, i\}$, $C = \{a, b, c, d, j\}$ e $D = \{a, j\}$ exiba os seguintes conjuntos.
+\end{problem}
+
+\begin{exerList}
+	\item $\overline{B} - C$.
+	\item $A - (B \cup D)$.
+	\item $(A - (A \cap B)) - ((\overline{D} \cap C) - A)$
+	\item $\overline{(\mathbb{U} - \overline{C})} - D$
+	\item $A \ominus (B \cup D)$.
+	\item $(A \ominus (A \cap B)) \ominus ((\overline{D} \cap C) \ominus A)$
+	\item $\overline{(\mathbb{U} \ominus \overline{C})} \ominus D$
+	\item $\overline{D \ominus A}$.
+	\item $(A \ominus B) \cap \overline{C}$.
+	\item $\overline{C} \ominus D$.
+	\item $D \ominus A$.
+	\item $\overline{B} \ominus C$.
+	\item $A \cap \overline{(\overline{B} \ominus D)}$.
+	\item $D \cap (A \ominus C)$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos11}
+	Uma aluna do curso de Ciência da Computação realizou uma pesquisa sobre três ritmos (A, B e C) presentes no aplicativo de música \textit{Spotify} com seus colegas de classe para seu trabalho na disciplina de estatística,  e levantou os dados expostos na Tabela \ref{tab:TabelaDeDados}.
+\end{problem}
+
+\begin{table}[h]
+	\scriptsize
+	\centering
+	\begin{tabular}{ccccccccc}
+		\hline
+		Total de & Ouvem & Ouvem & Ouvem & Ouvem & Ouvem &  Ouvem & Ouvem &   Não ouvem \\
+		entrevistados & A & B & C & A e B & A e C & B e C & A, B e C & nenhum dos ritmos  \\
+		\hline
+		23 & 8 & 4 & 6 & 2 & 3 & 1 & 1 & 10\\
+		\hline
+	\end{tabular}
+	\caption{Tabela com dados fictício da pesquisa sobre ritmos no \textit{Spotify}.}
+	\label{tab:TabelaDeDados}
+\end{table}
+
+\begin{exerList}
+	\item Qual é o número de entrevistados que escutam apenas o ritmo A?
+	\item Quantos entrevistados não escutam o ritmo C?
+	\item Qual é o número de entrevistados que escutam algum dos ritmos? 
+	\item Quantos entrevistados escutam o ritmo B ou C, mas não escutam o ritmo A?
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos12}
+	Dado os conjuntos $A = \{1, 2, 3\}, B = \{3,4,5\}$ e $C = \{1, 5, 6\}$ construa um conjunto $X$ com exatamente $4$ elementos tal que $A \cap X = \{3\}$, $B \cap X =\{3, 5\}$ e $C \cap X = \{5, 6\}$.
+\end{problem}
+
+\begin{problem}\label{prob:Conjuntos13}
+	Considere o banco de dados representado na Tabela \ref{tab:TabelaBaseDeDados1}. Esboce o conjunto gerado por cada \textit{Query} detalhada abaixo  e relacione essas \textit{Queries} com as operações sobre conjuntos.
+\end{problem}
+
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{ccccc}
+		\hline
+		id & Nome & Salário & Idade & Sexo \\
+		\hline
+		23 & Júlio & 2.300,00 & 34 & M \\
+		102 & Patrícia & 4.650,00 & 23 & F \\
+		33 & Daniel & 1.375,00 & 20 & M \\
+		43 & Renata & 6.400,00 & 24 & F \\
+		23 & Rafaela & 1.800,00 & 19 & F \\
+		57 & Tadeu & 14.450,00 & 54 & M \\
+		\hline
+	\end{tabular}
+	\caption{Uma base de dados representada como uma tabela.}
+	\label{tab:TabelaBaseDeDados1}
+\end{table}
+
+\begin{exerList}
+	\item O conjuntos dos id's onde o sexo é igual a F e o salário não é inferior a $2.000,00$.
+	\item O conjunto dos salários em que a idade não é superior a $35$ ou o sexo é igual a M.
+	\item O conjunto de todos os nome em que a idade não é maior que $30$ ou id é menor que $65$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos14}
+	Exiba os seguintes conjuntos.
+\end{problem}
+
+\begin{exerList}
+	\item $\wp(\{1, 2, 3\})$.
+	\item $\wp(\wp(\{0,1\}))$.
+	\item $\wp(\{\Nat\})$.
+	\item $\wp(\{1, \{2\}, \{1, \{2\}\}\})$.
+	\item $\wp(\{1, \{1\}, \{2\}, \{3, 4\}\})$.
+	\item $\wp(\wp(\{1, 2\})) - \wp(\{0, 1\})$.
+	\item $\wp(\{a, b, c, g\} \ominus \{g, e, f, d\})$.
+	\item $\wp(\wp(\wp(\{0,1\})) \cup \wp(\{1, 2, 3\}))$.
+	\item $\wp(\wp(\emptyset) - \emptyset)$.
+	\item $\wp(\{2, 3, 4\} \cap (\{-1, 3\} \cup \{-5\}))$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos15}
+	Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ calcule e exiba os seguintes conjuntos.
+\end{problem}
+
+\begin{exerList}
+	\item $\wp(C)$.
+	\item $\wp(A) - \wp(\overline{B})$.
+	\item $\wp((A \cup B) \ominus C)$.
+	\item $\wp((\overline{A} \cup B)) \ominus \wp(C)$.
+	\item $\wp(\overline{(C \cap B)} - (\overline{A} \cap C))$
+	\item $\wp(C) - (\wp(A) \ominus \wp(B))$.
+	\item $\wp(\overline{A}) \ominus ((\wp(C) \cap \wp(B))  -  \wp(A))$.
+	\item $\wp(\wp(A)) - \wp(\wp(B))$.
+	\item $\wp(\wp(\overline{C})) \ominus \wp(\wp(B))$.
+	\item $\wp(\mathbb{U})$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos16}
+	Dado o conjunto $A = \{a, b, c, d, e, f, g\}$ diga se os conjuntos a seguir são ou não partições de $A$, justifique todas as suas resposta.
+\end{problem}
+
+\begin{exerList}
+	\item $P_1 = \{\{a, c, e\}, \{b\}, \{d, g\}\}$.
+	\item $P_2 = \{\{a, g, e\}, \{c, d\}, \{b, e, f\}\}$.
+	\item $P_3 = \{\{a, b, e, g\}, \{c\}, \{d, f\}\}$.
+	\item $P_4 = \{\{a, b, c, d, e, f, g\}\}$.
+	\item $P_5 = \{\{a, b, d, e, g\}, \{f, c\}\}$.
+	\item $P_6 = \{\{a, b, c, d, e\}, \{e, f, g\}\}$.
+	\item $P_7 = \{\{b, c, d, e, f, g\}, \{a\}, \{b, a,c\}\}$.
+	\item $P_8 = \{\{a, b, c, d, e, f, g\}, \{e, d\}\}$.
+	\item $P_9 = \{\{a\}, \{b\}, \{c\}, \{d,e\}, \{f\}, \{g\}\}$.
+	\item $P_{10} = \{\{a\}, \{b\}, \{c\}, \{d\}, \{e\}, \{f\}, \{g\}\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Conjuntos17}
+	Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ exiba duas partições diferentes para cada um dos conjuntos a seguir. 
+\end{problem}
+
+\begin{exerList}
+	\item $C - \overline{A}$.
+	\item $A - \overline{B}$.
+	\item $(A \cup B) \ominus C$.
+	\item $(\overline{A} \cup B)) \ominus C$.
+	\item $\overline{(C \cap B)} - (\overline{A} \cap C)$
+	\item $C - (A \ominus B)$.
+	\item $\overline{A} \ominus ((C \cap B)  - A)$.
+	\item $A - B$.
+	\item $\overline{C} \ominus B$.
+	\item $\wp(\mathbb{U})$.
+\end{exerList}
