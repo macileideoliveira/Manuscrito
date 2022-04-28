@@ -1,12 +1,6 @@
 \chapter{Conjuntos}\label{cap:Conjuntos}
 
-\begin{introduction}[Tópicos]
-	\item Conjuntos e Elementos
-	\item Operações Sobre Conjuntos
-	\item Operações Generalizadas
-	\item Partes e Partições
-	\item Questionário
-\end{introduction}
+\epigraph{``-Comece pelo começo'', disse o Rei de maneira severa,\\ ``-E continue até chegar ao fim, então pare!''}{Lewis Carroll, Alice no País das Maravilhas.}
 
 \section{Conjuntos e Elementos}\label{sec:ConjuntoElemento}
 
@@ -30,11 +24,17 @@ A definição de Cantor permite que sejam criados conjuntos com qualquer coisa q
 	A partir desse ponto será usado a nomenclatura discurso em vez de totalidade na especificação de conjuntos.
 \end{remark}
 
-Note que a Definição \ref{def:ConjuntoMinha} permite concluir que um conjunto pode ser visto como o agrupamento de entidades (os elementos) que satisfazem certas propriedades, ou ainda que, as propriedades definem os conjuntos. Para prosseguir nesse texto serão adotadas as convenções para a \textbf{linguagem da teoria dos ingênua dos conjuntos} apresentadas pelas definições que se seguem.
+Note que a Definição \ref{def:ConjuntoMinha} permite concluir que um conjunto pode ser visto como o agrupamento de entidades (os elementos) que satisfazem certas propriedades, ou ainda que, as propriedades definem os conjuntos. Prosseguindo nesse texto serão apresentadas as convenções da \textbf{teoria ingênua dos conjuntos} de forma usual, mas também serão apresentados os aspectos sintáticos e semânticos da teoria.
 
 \begin{definition}[Notações Básicas]\label{def:NotacaoConjuntos1}
-	As letras maiúsculas do alfabeto latino $A, B, \cdots, M,$ $N, \cdots, Z$ como e sem indexação serão usadas como variáveis\footnote{Formalmente o termo meta-variável é usado para designar símbolos (ou palavras) de uma linguagem responsáveis por representar um tipo dentro da Teoria dos Tipos \cite{sato2003}, aqui por outro lado, o termo é usado apenas para indicar que os símbolos representam outras entidades (conjuntos ou elementos), ou seja, tais símbolos são ``apelidos'' para certas entidades.} para representar conjuntos e as letras minúsculas $a, b, \cdots, m, n, \cdots, z$ como e sem indexação serão usadas como meta-variáveis para representar elementos.
+	As letras maiúsculas do alfabeto latino $A, B, \cdots, M,$ $N, \cdots, Z$ como e sem indexação serão usadas como variáveis para representar conjuntos e as letras minúsculas $a, b, \cdots, m, n, \cdots, z$ como e sem indexação serão usadas como meta-variáveis para representar elementos.
 \end{definition}
+
+Assim a sintaxe da teoria ingênua dos conjuntos diz que letras minúsculas sempre representam elementos e letras maiúsculas sempre representam os conjuntos.
+
+\begin{remark}
+	O termo variável é usado para designar símbolos (ou palavras) de uma linguagem responsáveis por representar de forma genérica as entidades da teoria que a linguagem descreve (para detalhes leia \cite{sato2003}), ou seja,  são ``apelidos'' ou ``rótulos'' para as entidades.
+\end{remark}
 
 Como dito anteriormente uma propriedade $\textbf{P}$ é responsável por definir um conjunto, pois todos os elementos no conjunto devem satisfazer (ou possuir) tal propriedade. Tendo isso em mente pode-se introduzir a definição a seguir.
 
@@ -45,12 +45,10 @@ Como dito anteriormente uma propriedade $\textbf{P}$ é responsável por definir
 	\end{equation}
 \end{definition}
 
-\begin{remark}
-	Na notação compacta $A = \{ x \mid \textbf{P}\}$ o símbolo $A$ é chamado de rótulo do conjunto, e a parte $\{ x \mid \textbf{P}\}$ será chamada neste manuscrito de forma estrutural do conjunto. Sendo que durante este manuscrito pode ser referenciando conjuntos apenas por seus rótulos e outras vezes usando apenas suas formas estruturais.
-\end{remark}
+Na notação compacta $A = \{ x \mid \textbf{P}\}$ o símbolo $A$ é chamado de rótulo do conjunto, e a parte $\{ x \mid \textbf{P}\}$ será chamada neste manuscrito de forma estrutural do conjunto.
 
 \begin{remark}
-	A notação compacta $A = \{ x \mid \textbf{P}\}$ pode ser lida como: ``$A$ é o conjunto de todos os $x$ tal que $\textbf{P}$ é satisfeita por $x$''.
+	A notação compacta $A = \{ x \mid \textbf{P}\}$ é na verdade uma palavra da linguagem da teoria ingênua dos conjuntos, a semântica de tal palavra pode ser interpretada como: ``$A$ é o conjunto de todos os $x$'s que satisfazem (ou possuem) a propriedade $\textbf{P}$.
 \end{remark}
 
 \begin{example}\label{exe:conjuntos}
@@ -79,8 +77,10 @@ Seguindo com o desenvolvimento da teoria dos conjuntos a definição a seguir es
 	Seja $A$ um conjunto definido sobre um discurso $M$ por uma propriedade $\textbf{P}$ e seja $x$ um elemento do discurso. Se o elemento $x$ possui (ou satisfaz) a propriedade $\textbf{P}$, então é dito que $x$ pertence a $A$, denotado por $x \in A$. Caso $x$ não possui (ou satisfaça) a propriedade $\textbf{P}$, então é dito que $x$ não pertence a $A$, denotado por $x \notin A$
 \end{definition}
 
+A Definição \ref{def:Pertinencia} está introduzindo novas entidades da linguagem da teoria dos conjuntos, sento tais objetos as palavras da forma $\underline{\ \ \ } \in \underline{\ \ \ }$ e da forma $\underline{\ \ \ } \notin \underline{\ \ \ }$. Em tais palavras o elemento do lado esquerdo dos símbolos $\in$ e $\notin$ sempre devem ser elementos do discurso ou uma variável que representa tais elementos, por outro lado, os elementos do lado direito dos símbolos $\in$ e $\notin$ sempre devem ser o rótulo ou a forma estrutural de um conjunto.
+
 \begin{remark}
-	Quando $x \in A$, em alguns texto como em \cite{lipschutz1978-TC} é comum o uso de expressões como: ``$A$ possui $x$'' ou que ``$x$ faz parte de $A$'', durante este manuscrito possa ser que uma dessas (ou ambas) expressões sejam usadas, além da expressão padrão $x \mbox{ pertence a }  A$.
+	Quando $x \in A$, em alguns texto como em \cite{lipschutz1978-TC} é comum o uso das interpretações semânticas: ``$A$ possui $x$'' ou que ``$x$ faz parte de $A$'', durante este manuscrito possa ser que uma dessas (ou ambas) interpretações sejam usadas, além da semântica padrão: $x \mbox{ pertence a }  A$.
 \end{remark}
 
 \begin{example}
@@ -106,7 +106,9 @@ Há casos entretanto, que a notação compacta é descartada e assim os conjunto
 	Quando se optar por escrever um conjunto finito apenas listando os seus elementos entre chaves a ordem com que os elementos aparecem não importa, assim tem-se que os conjuntos $\{a, e, i, o , u\}$ e $\{e, u, i, a, o\}$ são na verdade o mesmo conjunto.
 \end{remark}
 
-Note que a relação de pertinência  apresentada anteriormente (Definição \ref{def:Pertinencia}) relaciona elementos e conjuntos, existe também uma relação extremamente fundamental dentro da teoria dos conjuntos que é definida entre dois conjuntos. Essa relação entre conjuntos recebe o nome de \textbf{relação de inclusão}, entretanto, como dito em \cite{lipschutz1978-TC}, é comum que quando um conjunto $A$ estiver relacionado com um conjunto $B$ pela relação de inclusão, se usar a expressão ``$A$ é subconjunto de $B$'', em vez de, ``$A$ está incluso em $B$''. A seguir é apresentado formalmente esta relação.
+Note que a relação de pertinência  apresentada anteriormente (Definição \ref{def:Pertinencia}) relaciona elementos e conjuntos, existe também uma relação extremamente fundamental dentro da teoria dos conjuntos que é definida entre dois conjuntos. 
+
+A relação entre conjuntos recebe o nome de \textbf{relação de inclusão}, entretanto, como dito em \cite{lipschutz1978-TC}, é comum que quando um conjunto $A$ estiver relacionado com um conjunto $B$ pela relação de inclusão, se usar a interpretação semântica ``$A$ é subconjunto de $B$'', em vez de, ``$A$ está incluso em $B$''. A seguir é apresentado formalmente esta relação.
 
 \begin{definition}[Relação de inclusão]\label{def:RelacaoInclusao}
 	Dado dois conjuntos $A$ e $B$ quaisquer, é dito que $A$ é subconjunto de $B$, denotado por $A \subseteq B$, quando todo $x \in A$ é tal que $x \in B$.
@@ -126,7 +128,11 @@ Note que a relação de pertinência  apresentada anteriormente (Definição \re
 	\end{itemize}
 \end{example}
 
-No caso de existir um $x \in A$ tal que $x \notin B$ é dito que $A$ não é subconjunto de $B$, e isto é denotado como $A \not\subseteq B$. 
+É obvio que a Definição \ref{def:RelacaoInclusao} está introduzindo novas entidades da linguagem da teoria dos conjuntos, sento tais objetos as palavras da forma $\underline{\ \ \ } \subseteq \underline{\ \ \ }$. Em tais palavras os elementos à esquerda e à direita do símbolo $\subseteq$ sempre devem ser o rótulos ou as formas estruturais de conjuntos. Em oposição a relação de inclusão existe a relação de não inclusão descrita a seguir.
+
+\begin{definition}[Relação de inclusão]\label{def:RelacaoNaoInclusao}
+	Dado dois conjuntos $A$ e $B$ quaisquer, é dito que $A$ é não subconjunto de $B$, denotado por $A \not\subseteq B$, quando existe pelo menos um $x \in A$ tal que $x \not\in B$.
+\end{definition}
 
 \begin{example}\label{exe:NaoInclusao}
 	Seja $A = \{-1, 0, 1\}$ tem-se que $A \not\subseteq \Nat$.
@@ -158,7 +164,7 @@ Usando a ideia de subconjunto pode-se como apresentado na literatura em obras co
 \end{definition}
 
 \begin{theorem}[Teorema da igualdade]
-	\cite{abe1991-TC} Sejam $A, B$ e $C$ conjuntos quaisquer. Então:
+	Sejam $A, B$ e $C$ conjuntos quaisquer. Então:
 	\begin{enumerate}
 		\item $A = A$.
 		\item Se $A = B$, então $B = A$.
@@ -189,12 +195,12 @@ Uma propriedade interessante sobre o conjunto vazio é apresentada a seguir, tal
 \end{proof}
 
 \begin{note}
-	Neste manuscrito ao final das demonstrações será sempre colocado o símbolo $\blacksquare$, tal símbolo é conhecido como túmulo de Halmos\footnote{Em inglês esse símbolo é conhecido como \textit{tombstone}, e tal símbolo foi usado para marcar o final de uma demonstração inicialmente pelo matemático Paul Halmos (1916-2006).}, este simbolo será usado para substituir a notação q.e.d. (``\textit{quod erat demonstrandum}'') usando por outras fontes bibliográficas para marcar o ponto de finalização de uma demonstração. 
+	Neste manuscrito ao final das demonstrações será sempre colocado o símbolo $\blacksquare$, tal símbolo é conhecido como túmulo de Halmos\footnote{Em inglês esse símbolo é conhecido como \textit{tombstone}, e tal símbolo foi usado para marcar o final de uma demonstração inicialmente pelo matemático Paul Halmos (1916-2006).}, este símbolo será usado para substituir a notação q.e.d. (``\textit{quod erat demonstrandum}'') usando por outras fontes bibliográficas para marcar o ponto de finalização de uma demonstração. 
 \end{note}
 
 Agora que foram apresentados os conjuntos universo e vazio, é conveniente comentar sobre uma situação específica da teoria dos conjuntos como apresentada até aqui. Pelo que foi apresentado até agora já se sabe que os itens em um conjunto são chamados de elementos, entretanto, não existe qualquer restrição, além de ser bem definido, para a natureza (ou tipo) dos elementos em um conjunto. Isso possibilita que seja possível definir por exemplo um conjunto de conjuntos, isto é, um conjunto em que os elementos são também conjuntos.
 
-\begin{definition}[Classe]\label{def:Familia}
+\begin{definition}[Família de Conjuntos]\label{def:Familia}
 	Um conjunto $A$ cujo os elementos são todos conjuntos, isto é, um conjunto da forma $A = \{x \mid x \mbox{ é um conjunto}\}$, é chamado de \textbf{família de conjuntos}.
 \end{definition}
 
@@ -250,7 +256,7 @@ Com respeito as propriedades equacionais das operações de união e interseçã
 
 \begin{table}[h]
 	\centering
-	\scriptsize
+	%\scriptsize
 	\begin{tabular}{cccc}
 		\hline
 		identificador & None & União & Interseção  \\
@@ -317,6 +323,10 @@ A partir da definição de interseção é estabelecido um conceito de extrema v
 	Direta das Definições \ref{def:UniaoConjuntos}, \ref{def:IntersecaoConjuntos} e \ref{def:ComplementoConjuntos}.
 \end{proof}
 
+\begin{remark}
+	A propriedade $(iii)$ apresentada no Teorema \ref{teo:PropriedadesComplemento} costuma ser chamada involução, como dito em \cite{lipschutz1978-TC}.
+\end{remark}
+
 Além das propriedades apresentadas no Teorema \ref{teo:PropriedadesComplemento} o complemento também apresenta propriedades ligadas diretamente a união e a interseção, tais propriedades são uma versão conjuntistas das famosas leis De Morgan (ver \cite{carmo2013, joaoPavao2014, lipschutz2013-MD}) muito conhecidas pelos estudiosos da área de lógica, a seguir são apresentadas as leis De Morgan para a linguagem teoria dos conjuntos.
 
 \begin{table*}[h]
@@ -327,7 +337,7 @@ Além das propriedades apresentadas no Teorema \ref{teo:PropriedadesComplemento}
 	\end{tabular}
 \end{table*}
 
-Outra importante operação sobre conjuntos é a diferença definida formalmente como se segue.
+Seguindo com este manuscrito, uma outra importante operação sobre conjuntos é a diferença entre conjuntos. A diferença entre conjunto apresenta duas formas, a primeira considerada por muito com a diferença natural \cite{carmo2013} e existe também a diferença simétrica, que em um certo sentido, pode ser usada para medir a  dissimetria entre conjuntos, ambas as operações são definidas formalmente a seguir.
 
 \begin{definition}[Diferença de conjuntos]\label{def:DiferencaConjuntos}
 	Dado dois conjuntos $A$ e $B$, a diferença de $A$ e $B$, denotado por $A - B$ corresponde ao seguinte conjunto:
@@ -362,7 +372,7 @@ Outra importante operação sobre conjuntos é a diferença definida formalmente
 	\end{itemize}
 \end{proof}
 
-Os dois próximos teoremas estabelecem duas séries de diversas igualdades notáveis relacionadas a operação de diferença entre conjuntos.
+A seguir são apresentadas duas séries de igualdades notáveis relacionadas a diferença entre conjuntos.
 
 \begin{theorem}\label{teo:ElementarDiferencaConjuntos1}
 	Sejam $A$ e $B$ subconjuntos de um universo $\mathbb{U}$, tem-se que:
@@ -413,6 +423,7 @@ Os dois próximos teoremas estabelecem duas séries de diversas igualdades notá
 			&\stackrel{Teo. \  \ref{teo:BasicoDiferencaConjuntos}(i)}{=}&  \overline{B} - \overline{A}
 		\end{eqnarray*}
 	\end{itemize}
+	E assim a prova está concluída.
 \end{proof}
 
 \begin{note}
@@ -641,7 +652,7 @@ Anteriormente foi mostrado que a diferença entre conjuntos não era comutativa 
 
 \section{Operações generalizadas}\label{sec:OperacaoGeneralizada}
 
-Agora após a apresentação de todas as operações básicas sobre conjuntos este manuscrito continua apresentando a forma generalizada das operações de união e interseção. 
+Agora após a apresentação de todas as operações básicas sobre conjuntos e suas principais propriedades, este manuscrito irá continuar o estudo da teoria ingênua dos conjuntos pela forma generalizada das operações de união e interseção. 
 
 \begin{definition}[União generalizada]\label{def:UniaoGeneralizadas}
 	Dado uma família $A$ então a união generalizada dos conjuntos em $A$ corresponde respectivamente a:
@@ -661,7 +672,7 @@ Agora após a apresentação de todas as operações básicas sobre conjuntos es
 
 \begin{definition}[Interseção generalizada]\label{def:IntersecaoGeneralizadas}
 	Dado uma família $A$ então a interseção generalizada dos conjuntos em $A$ corresponde respectivamente a:
-	$$A_\cap = \bigcap_{x \in A} x$$
+$$A_\cap = \bigcap_{x \in A} x$$
 \end{definition}
 
 \begin{example}
@@ -697,7 +708,7 @@ $$A_\cap = \bigcap_{i = 1}^n x_i$$
 	A prova segue da aplicação das leis De Morgan, e ficará como exercício ao leitor.
 \end{proof}
 
-\section{Partes e partições}
+\section{Partes e Partições}
 
 Como já mencionando algumas vezes anteriormente uma família é um conjunto cujo os elementos são também conjuntos. Agora dado um conjunto $A$ qualquer, em algum momento possa ser que seja necessário (por interesse prático ou teórico) trabalhar com a família dos subconjuntos deste conjunto $A$, note porém, que qualquer elemento desta família é uma parte do conjunto $A$, ou seja, a família reuni as partes de $A$, a seguir é definido formalmente o conceito de família das partes obtida a partir de um determinado conjunto.
 
@@ -709,7 +720,7 @@ Como já mencionando algumas vezes anteriormente uma família é um conjunto cuj
 Uma propriedade interessante do conjuntos das partes como dito em \cite{lipschutz1978-TC}, é que se $A$ for da forma $A = \{x_1, \cdots, x_n\}$ para algum $n \in \Nat$, então pode-se mostrar que $\wp(A)$ terá exatamente $2^n$ elementos.
 
 \begin{example}
-	Seja $A = \{a, b, c\}$ tem-se que $\wp(A) = \{\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\},\{a, c\}, \{c, b\},$ $\{a, b, c\}\}$.
+	Seja $A = \{a, b, c\}$ tem-se que o conjunto das parte de $A$ corresponde a família de conjunto $\{\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\},\{a, c\}, \{c, b\},$ $\{a, b, c\}\}$.
 \end{example}
 
 \begin{example}
@@ -745,7 +756,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 	É claro que uma partição de um conjunto $A$ é vazia se, e somente se, $A = \emptyset$.
 \end{remark}
 
-\section{Questionário}\label{sec:Questionario1}
+\section{Questionário}\label{sec:Questionario1part1}
 
 \begin{problem}\label{prob:Conjuntos1}
 	Para cada um dos conjuntos a seguir, determine uma propriedade que define o conjunto e escreva os conjuntos na notação compacta.
@@ -754,7 +765,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \begin{exerList}
 	\item $\{0,2,4,6,8,1,3,5,7,9\}$.
 	\item $\{-2, -4, -6, -8, 0, 6, 4, 8, 2\}$.
-	\item $\{3, 5, 7, 9, 13, 15, 17, \cdots\}$.
+	\item $\{3, 5, 7, 9, 11, 13, 15, 17, \cdots\}$.
 	\item $\{a, c, s\}$
 	\item $\{2, 3, 5, 7, 11, 13, 17, 19, \cdots\}$.
 	\item $\{1, 4, 9, 16, 25, 36, 64, 81, 100\}$.
@@ -931,7 +942,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \end{problem}
 
 \begin{table}[h]
-	\scriptsize
+	%\scriptsize
 	\centering
 	\begin{tabular}{ccccccccc}
 		\hline
@@ -947,6 +958,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 
 \begin{exerList}
 	\item Qual é o número de entrevistados que escutam apenas o ritmo A?
+	\item Qual é o número de entrevistados que escutam o ritmo A e não escutam o ritmo B?
 	\item Quantos entrevistados não escutam o ritmo C?
 	\item Qual é o número de entrevistados que escutam algum dos ritmos? 
 	\item Quantos entrevistados escutam o ritmo B ou C, mas não escutam o ritmo A?
@@ -962,7 +974,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 
 \begin{table}[h]
 	\centering
-	\scriptsize
+	%\scriptsize
 	\begin{tabular}{ccccc}
 		\hline
 		id & Nome & Salário & Idade & Sexo \\
@@ -1020,7 +1032,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \end{exerList}
 
 \begin{problem}\label{prob:Conjuntos16}
-	Dado o conjunto $A = \{a, b, c, d, e, f, g\}$ diga se os conjuntos a seguir são ou não partições de $A$, justifique todas as suas resposta.
+	Dado o conjunto $A = \{a, b, c, d, e, f, g\}$ diga se as famílias de conjuntos a seguir são ou não partições de $A$, justifique todas as suas resposta.
 \end{problem}
 
 \begin{exerList}

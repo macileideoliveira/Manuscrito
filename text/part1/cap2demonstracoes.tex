@@ -1,0 +1,439 @@
+\chapter{Métodos de Demonstração}\label{cap:Demonstracoes}
+
+\epigraph{Mais um colchão, mais uma demonstração}{Paul Erdös}
+
+\epigraph{Um matemático é uma máquina que transforma café em teoremas.}{Paul Erdös}
+
+\section{Introdução}\label{sec:Introducao-Demonstracoes}
+
+No capítulo anterior, o leitor encontrou diversas demonstrações dentro da teoria intuitiva (ou Cantoriana) dos conjuntos. Para um leitor iniciante talvez tenha sido um tanto quanto complicado entender a metodologia usada para construir tais demonstrações. E desde que, as demonstrações são figuras de interesse central no cotidiano dos matemáticos, cientistas da computação e engenheiros de software, em especial aqueles que trabalham com métodos formais, este texto irá fazer uma breve pausa no estudo da teoria dos conjuntos, para apresentar um pouco de teoria da prova ao leitor.
+
+Este capítulo começa então com o seguinte questionamento: Do ponto de vista da ciência da computação qual a importância das demonstrações? Bem a resposta a essa pergunta pode ser dada de dois pontos de vista,  um teórico (purista) e um prático (aplicado ou de engenharia).
+
+Na perspectiva de um cientista da computação puro, as demonstrações de teoremas, proposições, lema, corolários e propriedades são a principal ferramenta para investigar os limites dos diferentes modelos de computação propostos \cite{hopcroft2008, linz2006}, assim sendo é de suma importância que o estudante de graduação em ciência da computação receba em sua formação pelo menos o básico para dominar a ``arte'' de provar teoremas, sendo assim preparado para o estudo e a pesquisa pura em computação e(ou) matemática.
+
+Já na visão prática, só existe uma forma segura de garantir que um \textit{software} está livre de erros, essa ``tecnologia'' é exatamente a demonstração das propriedades do \textit{software}. É claro que, mostrar que um \textit{software} não possui erros vai exigir que o \textit{software} seja visto através de um certo nível de formalismo e rigor matemático, mas após essa modelagem através de demonstrações pode-se garantir que um \textit{software} não apresentará erros (quando bem especificado), e assim se algo errado ocorrer foi por fatores externos, tais como defeito no \textit{hardware} por exemplo, e não por falha ou erros com a implementação. Este conceito é o cerne de uma área da engenharia de \textit{software} \cite{pressman2016}, chamada métodos  (ou especificações) formais, sendo essa área o ponto crucial no desenvolvimento de \textit{softwares} para sistemas críticos \cite{sommerville2011}. Isto já mostra a grande importância de programadores e engenheiros de \textit{software} terem em sua formação as bases para o domínio das técnicas de demonstração.
+
+Nas próxima seções deste manuscrito serão descritas as principais técnicas de demonstração de interesse de matemáticos, cientistas da computação e engenheiros formais de \textit{software}. 
+
+\begin{remark}
+	Para o leitor que nunca antes teve contato com a lógica matemática recomenda-se que antes de estudar este capítulo, o leitor faça pelo menos um rápido estudo do Capítulo \ref{cap:IntroducaoLogica}.
+\end{remark}
+
+Para pode falar sobre métodos de demonstração e poder então descrever como os matemáticos, lógicos e cientistas da computação justificam propriedades usando apenas a argumentação matemática, será necessário fixar algumas nomenclaturas e falar sobre alguns conceitos importantes.
+
+\begin{definition}[Asserção]\label{def:Assercao}
+	Uma \textbf{asserção} é qualquer frase declarativa que possa ser expressa na linguagem da lógica simbólica.
+\end{definition}
+
+\begin{remark}
+	O leitor que conheça lógica nota facilmente que uma asserção é uma proposição ou predicado, para detalhes ver o Capítulo \ref{cap:IntroducaoLogica}.
+\end{remark}
+
+Os métodos (ou estratégias) de demonstrações apresentadas neste manuscrito seguem as ideias e a ordem  de apresentação similar ao que foi exposto em \cite{velleman2019comProvar}. Em \cite{velleman2019comProvar} antes de apresentar as provas formais, erá necessário a construção de um rascunho de prova, este rascunho possui similaridades com as demonstrações em provadores de teoremas tais como Coq \cite{coq2013} e Lean \cite{lean2015}, isto é, existe uma separação clara entre dados (hipótese) e os objetivos (em inglês \textit{Goal}) que se quer demonstrar. 
+
+Neste manuscrito por outro lado, não será utilizado a ideia de um rascunho de prova, em vez disso, será usado aqui a noção de \textbf{diagrama de blocos} \cite{broda2007}. Aqui tais diagramas serão encarados como as demonstrações em si, assim diferente de \cite{velleman2019comProvar} não haverá a necessidade de escrever um texto formal após o diagrama da prova ser completado.
+
+Sobre o diagrama de blocos é conveniente explicar sua estrutura, ele consiste de uma série de linhas numeradas de $1$ até $m$, em cada linha está uma informação, sendo esta uma hipótese assumida como verdadeira ou deduzida a partir das informações anteriores a ela ou ainda um resultado (ou definição) válido(a) conhecido(a). Um diagrama de bloco representa uma prova, porém, uma prova pode conter $n$ subprovas. Cada \textbf{prova} é delimitada no diagrama por um \textbf{bloco}, assim se existe uma subprova $p'$ em uma prova $p$, significa que o diagrama de bloco de $p'$ é interno ao diagrama de bloco de $p$. Na linha abaixo de todo bloco sempre estará a conclusão que se queria demonstrar, isto é, abaixo de cada bloco está a asserção que tal bloco demonstra.
+
+Cada linha no diagrama começa com algum termo reservado (em um sentido similar ao de palavra reservada de linguagem de programação \cite{aho2007, cooper2017}) escrito em negrito\footnote{A escrita dos termos reservados em negrito em geral será usada para que o leitor consiga identificar o que é informação último da prova e o que é apenas um artificio textual para dá melhor entendimento a demonstração.}, esses termos reservados tem três naturezas distintas: inicialização de bloco, ligação e conclusão de blocos. Tais palavras podem variar a depender do material sobre demonstrações que o leitor possa encontrar na literatura neste manuscrito serão usando os seguintes conjuntos de palavras:
+
+\begin{itemize}
+	\item Termos de inicialização de bloco: \textbf{Suponha}, \textbf{Deixe ser}, \textbf{Assuma} e \textbf{Considere};
+	\item Termos de ligação: \textbf{mas}, \textbf{tem-se que}, \textbf{então}, \textbf{assim}, \textbf{logo}, \textbf{além disso}, \textbf{desde que} e \textbf{dessa forma};
+	\item Termos de conclusão de bloco: \textbf{Portanto}, \textbf{Dessa forma}, \textbf{Consequentemente} e \textbf{Logo por contra positiva}.
+\end{itemize}  
+
+%O exemplo a seguir ilustra a construção de um diagrama de bloco para uma demonstração de uma famosa asserção.
+
+\begin{example}\label{exe:DiagramaProva1}
+	Demonstre a asserção: Dado $A = \{x \in \mid x = 2i, i \in \Int\}$ e $B = \{x \in \mid x = 2j - 2, j \in \Int\}$ tem-se que $A = B$.
+	{\scriptsize
+	\begin{logicproof}{3}
+		\begin{subproof}
+			\text{\textbf{Assuma} que } x \text{ é um elemento qualquer, }&\\ 
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \in A, &\\
+				\text{\textbf{assim }} x = 2i, i \in \Int, &\\
+				\text{\textbf{desde que} existe } k \in \Int \text{ tal que } k = j - 1 \text{ e fazendo } i = k, &\\
+				\text{\textbf{tem-se que} } x = 2i = 2k = 2(j -1) = 2j - 2.&\\
+				\text{\textbf{Então} } x \in B. &
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } x \in A, \text{ então } x \in B.&  
+		\end{subproof}
+		\text{\textbf{Consequentemente}, } \forall x.[\text{ Se } x \in A, \text{ então } x \in B].&\\
+		\begin{subproof}
+			\text{\textbf{Assuma} que } x \text{ é um elemento qualquer, }&\\ 
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \in B. &\\
+				\text{\textbf{assim }} x = 2j -2, j \in \Int, &\\
+				\text{\textbf{desde que} } j - 1 \in \Int, \text{ pode-se fazer } i = j - 1&\\
+				\text{\textbf{logo }} x = 2i. &\\
+				\text{\textbf{Então} } x \in A. &
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } x \in B, \text{ então } x \in A.&  
+		\end{subproof}
+		\text{\textbf{Consequentemente}, } \forall x.[\text{ Se } x \in B, \text{ então } x \in A].&\\
+		\text{\textbf{Portanto,} } A \subseteq B \text{ e } B \subseteq A \text{ assim por definição } A = B.&
+	\end{logicproof}
+	}
+\end{example}
+
+Neste momento o exemplo anterior serve apenas para esboçar a ideia de um diagrama de bloco para uma demonstração, note que fica evidente que a depender da situação alguns termos de ligação são melhores que outros, e o mesmo também é válido para os termos de inicialização e conclusão de bloco. 
+
+Aqui não será detalhando a aplicação dos métodos de demonstração usado na demonstração do Exemplo \ref{exe:DiagramaProva1}, mas nas próximas seções serão apresentados cada um dos métodos de demonstração, e seguida será gradativamente apresentados exemplos para esboçar ao leitor como é usado o diagrama de blocos e relação a cada método de demonstração..
+
+Como o leitor pode ter notado pelo diagrama de bloco no Exemplo \ref{exe:DiagramaProva1}, é possível enxergar o diagrama como ambiente muito similar a ideia de um programa imperativo em uma linguagem de programação estruturada (como Pascal ou C), no sentido de que, uma demonstração pode ser visto como a combinação de diversos blocos, em que os blocos respeito uma hierarquia e podem está aninhados entre si, a hierarquia dos bloco é determinar por uma indentação\footnote{Indentação é um termo utilizando em código fonte de um programa, serve para ressaltar ou definir a estrutura do algoritmo. Na maioria das linguagens de programação, a indentação é empregada com o objetivo de ressaltar a estrutura do algoritmo, aumentando assim a legibilidade do código, porém a linguagem de programação em que a indentação é parte da própria da gramática da linguagem.}. 
+
+\section{Demonstrando Implicações}\label{sec:DemonstrandoImplicacoes}
+
+Este manuscrito irá iniciar a apresentação dos métodos de demonstração a partir das estratégias usadas para demonstrar a implicação, isto é, as estratégias usadas para provar asserção da forma: ``se $\alpha$, então $\beta$''.
+
+\begin{definition}[Prova Direta (PD)]
+	Dado uma asserção da forma: ``se $\alpha$, então $\beta$''. A metodologia de prova direta para tal asserção consiste em supor $\alpha$ como sendo verdade e a partir disto deduzir $\beta$.
+\end{definition}
+
+\begin{remark}
+	Obviamente ao fazer a demonstração é necessário identificar que são os componentes $\alpha$ e $\beta$ da implicação.
+\end{remark}
+
+Esta estratégia é provavelmente a técnicas mais famosa e usada dentro todos os métodos de demonstração que existem, um conhecedor de lógica pode notar facilmente que tal estratégia nada mais é do que a regra de dedução natural chamada de introdução da implicação\cite{joaoPavao2014}. 
+
+No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco, e dentro deste bloco na primeira linha irá conter a afirmação de que $\alpha$ está sendo assumido com uma hipótese verdadeira; (2) nas próximas $n$ linhas irão acontecer as deduções necessárias até que na linha $n+2$ seja deduzido o $\beta$ e o bloco é fechado e (3) na linha $n + 3$ será adicionada a conclusão do bloco. A seguir serão apresentados exemplos do uso do método de demonstração direto para implicações e seu uso junto com o diagrama de bloco.
+
+\begin{example}\label{exe:DiagramaProva2}
+	Para demonstrar da asserção \textbf{``Se $x$ é impar, então $x^2 + x$ é par''} deve-se usar o método de demonstração \textbf{PD}, assim a prova começa abrindo um bloco e inserido na primeira linha a hipótese de que o antecedente \textbf{$x$ é um número impar} é verdadeira, ou seja, tem-se:
+	{\scriptsize
+	\begin{logicproof}{2}
+		\begin{subproof}
+			\text{\textbf{Suponha} que } x \in \Nat, &
+		\end{subproof}
+	\end{logicproof}
+	}
+	\noindent em seguida  pode-se na linha 2 deduzir a forma que $x$, mudando o diagrama para:
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \in \Nat, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \Nat,&
+			\end{subproof}
+		\end{logicproof}
+	}
+	\noindent  agora nas próximas duas linhas pode-se deduzir respectivamente as formas (ou valores) de $x^2$ e $x^2 + x$, assim o diagrama é atualizado para:
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&
+			\end{subproof}
+		\end{logicproof}
+	}
+	\noindent agora note que $x^2 + x= 2((2k^2 + 2k) + k + 1)$ pode ser reescrito (por substituição) como $x^2 + x= 2j$ com $j = (2k^2 + 2k) + k + 1$, essa dedução é inserida na linha de número $5$ atualizando o diagrama para:
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
+				\text{\textbf{logo} } x^2 + x= 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int.&
+			\end{subproof}
+		\end{logicproof}
+	}
+	\noindent agora na sexta linha do diagrama pode-se então deduzir a partir da informação na linha de número $5$ que $x^2 + x$ é um número par, assim o diagrama muda para a forma:
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
+				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int,&\\
+					\text{\textbf{então} } x^2 + x \text{ por definição é um número par}.&
+			\end{subproof}
+		\end{logicproof}
+	}
+	\noindent note porém que a informação na deduzida na linha de número $6$ é exatamente o consequente da implicação que se queria deduzir. Portanto, o objetivo interno ao bloco foi atingido, pode-se então fechar o bloco introduzindo abaixo dele a conclusão do bloco, ou seja, na linha de número $7$ é escrito que o antecedente de fato implica no consequente, assim o diagrama fica da forma:
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
+				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int,&\\
+				\text{\textbf{então} } x^2 + x \text{ por definição é um número par}.&
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } x \text{ é impar, então } x^2 + x \text{ é par.} &
+		\end{logicproof}
+	}
+	\noindent assim o objetivo a ser demonstrado foi atingido e, portanto, a prova está completa.
+\end{example}
+
+\begin{note}
+	Na demonstração apresentada no Exemplo \ref{exe:DiagramaProva2} as justificativas da evolução do diagrama fora apresentadas passo a passo e separadas do diagrama, isso foi adotado para que nesse primeiro exemplo para detalhar a evolução da demonstração ao leitor, entretanto, isso não é o padrão, o normal (que será adotado) é que a justificativa (caso necessário\footnote{Quando a justificativa for trivial, ela não será inserida na prova.}) da dedução de uma linha seja inserida a direita da informação deduzida, separada desta pelo símbolo ---. A partir deste ponto até o fim deste capítulo será usado esta forma de escrita.
+\end{note}
+
+\begin{remark}
+	Nas justificativas das provas as palavras definição, associatividade, comutatividade serão  abreviadas para DEF, ASS, COM respetivamente
+\end{remark}
+
+\begin{example}\label{exe:DiagramaProva3}
+	Demonstração da asserção: Se $n$ é múltiplo de 4, então também é múltiplo de 2.
+	
+	{\scriptsize
+		\begin{logicproof}{2}
+			\begin{subproof}
+				\text{\textbf{Suponha} que } n \text{ é múltiplo de } 4, & --- Hipótese\\
+				\text{\textbf{logo} } x = 4k, k  \in \Int,& --- DEF de múltiplo de $4$\\
+				\text{\textbf{assim} } x = (2 \cdot 2)k, k \in \Int,& --- Reescrita da linha $2$\\
+				\text{\textbf{dessa forma} } x= 2(2k), k \in \Int.& --- ASS da multiplicação\\
+				\text{\textbf{logo} } x= 2i, \text{ com } i = 2k, k \in \Int.& --- Reescrita da linha $4$\\
+				\text{\textbf{então} } x \text{ é múltiplo de } 2.& --- Def. de múltiplo de 2
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } n \text{ é múltiplo de } 4, \text{ então também é múltiplo de 2}. & --- Conclusão da PD (linhas 1-7)
+		\end{logicproof}
+	}
+\end{example}
+
+O leitor deve ter notado nos Exemplos \ref{exe:DiagramaProva2} e \ref{exe:DiagramaProva3} as demonstrações sempre iniciam das hipótese que estão sendo assumidas, isto é, os antecedentes das implicações, isso ocorrer por que nenhuma informação adicional (necessária) sendo dada como premissa, há caso entretanto, que as premissas são importantes para o desenvolvimento da prova, como será visto no próximo exemplo.
+
+\begin{example}\label{exe:DiagramaProva4}
+	Demonstração da asserção: Dado $m$ inteiro maior ou igual que 5 e $n$ um número impar positivo. Se $n$ é impar, então $m+n$ é um par maior ou igual que 6.
+	
+	{\scriptsize
+		\begin{logicproof}{2}
+			m \geq 5, m \in \Int & --- Premissa\\
+			n = 2k + 1, k \in  \Int^+ & --- Premissa\\
+			\begin{subproof}
+				\text{\textbf{Suponha} que } m \text{ é impar}, & --- Hipótese\\
+				\text{\textbf{logo} } m = 2j +1, j  \in \Int,& --- DEF  de número impar\\
+				\text{\textbf{assim} } m + n = 2(j + k + 1)&\\
+				\text{\textbf{desde que} } m \geq 5 \text{ tem-se que } j \geq 2, &\\
+				\text{\textbf{mas} como } n \in \Int_+ \text{ tem-se que } k \geq 0, &\\
+				\text{\textbf{assim }} j + k + 1 \geq 3, & --- Direto das linhas $6$ e $7$\\
+				\text{\textbf{logo} } 2(j + k + 1) \geq 6 &\\
+				\text{\textbf{então} } m + n \geq 6. & --- Reescrita da linha 9 
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } n \text{ é impar}, \text{ então } m + n \text{ é um par maior ou igual } 6. & --- Conclusão da PD (linhas 3-10)
+		\end{logicproof}
+	}
+\end{example}
+
+%\begin{remark}
+%	No Exemplo \ref{exe:DiagramaProva4} as linhas $6,7$ e $8$ da demonstração foram destacada na cor purpura por que juntas elas dizem respeito a um ferramenta da lógica que será explicado mais adiante neste capítulo.
+%\end{remark}
+%	{\color{pupChapters}
+
+
+\begin{example}\label{exe:DiagramaProva5}
+	Demonstração da asserção: Dado $m,n \in \Rea$ e $3m + 2n \leq 5$. Se $m > 1$, então $n < 1$.
+	
+	{\scriptsize
+		\begin{logicproof}{2}
+			m, n \in \Rea & --- Premissa\\
+			3m + 2n \leq 5 & --- Premissa\\
+			\begin{subproof}
+				\text{\textbf{Suponha} que } m > 1, & --- Hipótese\\
+				\text{\textbf{assim} } 3m > 3, &\\
+				\text{\textbf{desde que }} 3m \leq 5 - 2n, &\\
+				\text{\textbf{tem-se que }} 3 < 3m  \leq  5 - 2n& --- Direto das linhas $4$ e $5$\\
+				\text{\textbf{logo} } 3 < 5 - 2n,&\\
+				\text{\textbf{assim} } 3 + 2n < 5,&\\
+				\text{\textbf{então} } n < 1.&
+			\end{subproof}
+			\text{\textbf{Portanto}, Se } n > 1, \text{ então }  n < 1. & --- Conclusão da PD (linhas 3-10)
+		\end{logicproof}
+	}
+\end{example}
+
+Além do método de prova direta asserções que são implicações podem ser provadas por um segundo método, chamado método da contra positiva (ou contraposição). Como dito em \cite{menezes2010MD}, o método da contra positiva se baseia na equivalência semântica\footnote{De forma mais rigorosa o que de fato sustenta o método de demonstração por contra positiva é a corretude e a completude da lógica de primeira ordem, e não simplesmente uma questão semântica.} (ver Capítulo \ref{cap:LogicaProposicional}) da expressão ``Se $\alpha$, então $\beta$'' com a expressão ``Se não $\beta$, então não $\alpha$''. Formalmente o método de demonstração por contra positiva é como se segue.
+
+\begin{definition}[Prova por Contra Positiva (PCP)]
+	Dado uma asserção da forma: ``se $\alpha$, então $\beta$''. A metodologia de prova por contra positiva para tal asserção consiste em demonstrar usando PD a asserção ``se não $\beta$, então não $\alpha$'', em seguida concluir (ou enunciar) que a veracidade de ``se $\alpha$, então $\beta$'' segue da veracidade de ``se não $\beta$, então não $\alpha$''.
+\end{definition}
+
+\begin{remark}
+	Como pode ser visto no Capítulo \ref{cap:IntroducaoLogica} a asserção não $\alpha$ representa a negação da asserção $\alpha$.
+\end{remark}
+
+Agora em termos do diagrama de blocos o método PCP apresenta o seguinte raciocínio de construção do diagrama: (1) abrir um bloco com a primeira linha em braco; (2) realizar em um bloco (interno) a  demonstração  de que ``se não $\beta$, então não $\alpha$'' e (3) após a conclusão deste segundo bloco, o primeiro bloco é fechado, e sua conclusão consiste na informação ``se $\alpha$, então $\beta$'' e a justificativa de tal informação é simplesmente a conclusão PCP das linhas $i$-$j$, onde $i$-$j$ diz respeito ao intervalo contendo as  linhas do bloco e da conclusão da demonstração de ``se não $\beta$, então não $\alpha$''.
+
+\begin{note}
+	Vale salientar que a linha em branco no início é apenas um fator estético adotado neste manuscrito, para tornar a leitura do diagrama da demonstração mais agradável. A depender da situação do diagrama seu uso pode ser desconsiderado´.
+\end{note}
+
+\begin{example}\label{exe:DiagramaProva6}
+	Demonstração da asserção: Se $n! > (n+1)$, então $n > 2$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } n \leq 2, & --- Hipótese\\
+					\text{\textbf{assim} } n = 0, n = 1 \text{ ou } n = 2 & --- Direto da linha $2$\\
+					\text{\textbf{logo} } n! = 1 \text{ ou } n! = 2, & --- Da linha $3$ e da Def. de fatorial\\
+					\text{\textbf{então} } n! \leq (n + 1) \text{ com } n \leq 2 .& --- Direto das linhas $3$ e $4$
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } n \leq 2, \text{ então }  n! \leq (n + 1). & --- Conclusão da PD (linhas 2-5)
+			\end{subproof}
+			\text{\textbf{Logo por contra positiva}, Se }n! > (n+1), \text{ então }n > 2. & --- Conclusão da PCP (linhas 2-6)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{example}\label{exe:DiagramaProva7}
+	Demonstração da asserção: Se $n \neq 0$, então $n + c \neq c$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } n + c = c, & --- Hipótese\\
+					\text{\textbf{assim} } n + c - c = c -c  & \\
+					\text{\textbf{logo}, } n + 0 = 0, &\\
+					\text{\textbf{então} } n = 0 .&
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } n + c = c, \text{ então }  n  = 0. & --- Conclusão da PD (linhas $2$-$5$)
+			\end{subproof}
+			\text{\textbf{Logo por contra positiva}, Se }n \neq 0, \text{ então } n + c \neq c. & --- Conclusão da PCP (linhas $2$-$6$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{example}\label{exe:DiagramaProva8}
+	Demonstração da asserção: Dado três números $x, y, z \in \Rea$ com $x > y$. Se $xz \leq yz$, então $z \leq 0$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			x, y, z \in \Rea, & --- Premissa\\
+			x > y, & --- Premissa\\
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } z > 0, & --- Hipótese\\
+					\text{\textbf{então} } xz > yz,  & --- Das linhas $2$ e $4$ e da monotonicidade da multiplicação em $\Rea$
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } z > 0, \text{ então }  xz > yz. & --- Conclusão da PD (linhas $2$-$5$)
+			\end{subproof}
+			\text{\textbf{Logo por contra positiva}, Se }xz \leq yz, \text{ então } y \leq 0. & --- Conclusão da PCP (linhas $3$-$6$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{example}\label{exe:DiagramaProva9}
+	Demonstração da asserção: Se $n^2$ é par, então $n$ é par.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } n \text{ não é par}, & --- Hipótese\\
+					\text{\textbf{logo} } n = 2k + 1 \text{ com } k \in \Int,  & --- Def. de paridade\\
+					\text{\textbf{assim} } n^2 = 4k^2 + 4k + 1 \text{ com } k \in \Int,&\\
+					\text{\textbf{dessa forma }} n^2 = 2j + 1 \text{ com } j = 2k^2 + 2k,& --- Reescrita da linha $4$\\
+					\text{\textbf{então} } n^2 \text{ não é par}& --- Def. de paridade
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } n  \text{ não é par}, \text{ então } n^2  \text{ não é par}. & --- Conclusão da PD (linhas $2$-$6$)
+			\end{subproof}
+			\text{\textbf{Logo por contra positiva}, Se }n^2 \text{ é par}, \text{ então } n \text{ é par}. & --- Conclusão da PCP (linhas $2$-$6$)
+		\end{logicproof}
+	}
+\end{example}
+
+\section{Demonstração por Absurdo}\label{sec:DemonstracaoAbsurdo}
+
+O método de demonstração por redução ao absurdo\footnote{\textit{Reductio ad absurdum} em latim.} (ou por contradição) tem por objetivo provar que a asserção $\alpha$ junto com as premissas (se houverem) é verdadeira a partir da prova de que a suposição de que a asserção ``não $\alpha$'' seja verdadeira junto das mesmas premissas (mencionadas anteriormente) gera um absurdo (ou contradição). O fato deste absurdo seja gerado, permite concluir que suposição de que a asserção ``não $\alpha$'' seja verdadeira é ridícula, ou seja, ``não $\alpha$'' tem que ser falsa e, portanto, a asserção $\alpha$ tem que ser verdadeira. Esse argumento é garantido pelo princípio da não contradição mencionado na Seção \ref{sec:Tipos-Logica-Aplicacoes} do Capítulo \ref{cap:IntroducaoLogica}.
+
+%Em uma aspecto mais formal, isto é, em termos da linguagem de lógica (ver a Parte \ref{Parte:logica} desde manuscrito), a prova por redução ao absurdo de uma asserção $\alpha$ ser verdadeira é garantido pela prova de que $\Gamma\vdash \neg \alpha \Rightarrow \bot$, com $\Gamma$ sendo o conjunto de premissas.
+
+\begin{definition}[Prova por Redução ao Absurdo (RAA)]
+	A metodologia para uma demonstração por redução ao absurdo de uma asserção $\alpha$, consiste em supor que não $\alpha$ é uma hipótese verdadeira, então deduzir um absurdo (ou contradição). Em seguida concluir que dado está dedução pode-se afirma que $\alpha$ é verdadeiro.
+\end{definition} 
+
+Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) abrir um bloco  cuja primeira linha é vazia; (2) abri um bloco interno em que na primeira linha deste bloco o termo de inicialização do bloco (já listados anteriormente) é seguida da expressão ``por absurdo'' e da asserção não $\alpha$; (3) em seguida nas próximas $n$ linhas irão acontecer as deduções necessárias até que na linha $n+2$ seja deduzido o absurdo (ou uma contradição) e o bloco é fechado, inserido na linha $n +3$ a informação de que ``Se não $\alpha$, então $\bot$'' e é fechado o bloco externo e (4) na linha $n + 4$ será adicionada a conclusão do bloco externo, contendo algo como `` Portanto, $\alpha$ é verdadeiro''.
+
+\begin{remark}
+	Como explicado na Parte \ref{Parte:logica} deste manuscrito, o símbolo $\bot$ é usado para denotar o absurdo.
+\end{remark}
+
+\begin{example}\label{exe:DiagramaProva10}
+	Demonstração da asserção: $\sqrt{2} \not\in \Rac$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Assuma por absurdo} que } \sqrt{2} \in \Rac, & --- Hipótese\\
+					\text{\textbf{logo} existem } a,b \in \Int \text{ tal que }  \sqrt{2} = \frac{a}{b} \text{ sendo } b \neq 0, mdc(a, b) = 1 &\\
+					\text{\textbf{logo} } a^2 = 2b^2, \text{ ou seja, } a^2 \text{ é par},  &\\
+					\text{\textbf{dessa forma} } a = 2i \text{ com } i \in \Int,& --- Pela linha $4$ e o Exemplo \ref{exe:DiagramaProva9}\\
+					\text{\textbf{logo} } b^2 = 2i^2 \text{ com } i \in \Int,&\\
+					\text{\textbf{dessa forma} } b = 2j \text{ com } j \in \Int,& --- Pela linha $6$ e o Exemplo \ref{exe:DiagramaProva9}\\
+					\text{\textbf{assim} } mdc(a, b) \geq 2,& --- Direto das linhas $5$ e $7$\\
+					\text{\textbf{mas} } mdc(a, b) = 1  \text{ e } mdc(a, b) \geq 2 \text{ é um absurdo}.& --- Direto das linhas $3$ e $8$
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } \sqrt{2} \in \Rac, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
+			\end{subproof}
+			\text{\textbf{Consequentemente}, } \sqrt{2} \notin \Rac. & --- Conclusão da RAA (linhas $2$-$11$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{note}
+	O termo $mdc$ que aparece na demonstração no Exemplo \ref{exe:DiagramaProva10} é a abreviação para o conceito de máximo divisor comum.
+\end{note}
+
+\begin{remark}
+	Note que internamente a prova por redução ao absurdo de uma asserção $\alpha$, deve ser demonstrado a asserção: não $\alpha \Rightarrow \bot$.
+\end{remark}
+
+\begin{example}\label{exe:DiagramaProva11}
+	Demonstração da asserção: Não existe solução inteira positiva não nula para a equação diofantina\footnote{Equações diofontinas são equações polinomiais, que permite a duas ou mais variáveis assumirem apenas valores inteiros.} $x^2 - y^2 = 1$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Assuma por absurdo} que } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1 , & --- Hipótese\\
+					\text{\textbf{logo }}  x, y \in \Int_+^* \text{ tem-se que } min(x, y) = 1 \text{ e tem-se que } (x-y)(x+y) = 1,&\\
+					\text{\textbf{assim} } x - y = 1 \text{ e } x + y = 1 \text{ ou }  x - y = -1 \text{ e } x + y = -1, & --- Por $x, y \in \Int_+^*$\\
+					\text{\textbf{mas} se } x - y = 1 \text{ e } x + y = 1 \text{ pode-se assumir } x = 1 \text{ e } y = 0,&\\
+					\text{\textbf{assim} } min(x, y) \neq 1,& --- Direto da linha $5$\\
+					\text{\textbf{mas} se }  x - y = -1 \text{ e } x + y = -1 \text{ pode-se assumir } x = -1 \text{ e } y = 0, &\\
+					\text{\textbf{assim} } min(x, y) \neq 1,& --- Direto da linha $7$\\
+					\text{\textbf{mas} } min(x, y) = 1  \text{ e } min(x, y) \neq 1 \text{ é um absurdo}.&--- Direto das linhas $3, 6$ e $8$.
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
+			\end{subproof}
+			\text{\textbf{Consequentemente}, não } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1. & --- Conclusão da RAA (linhas $2$-$10$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{remark}
+	Equações diofontinas tem papel central para computação, assim vale mencionar aqui que um importante resultado sobre essas equações que possui forte impacto na lógica, computabilidade e teoria dos números  foi demonstrado pela combinação dos trabalhos de Julia Robinson (1919--1985) e Yuri Matiyasevich(1947--.) \cite{yuri1993hilbert}. Tal resultado é a prova do problema de número dez da famosa lista de Hilbert\footnote{A lista de Hilbert é um lista inicialmente composta por 10 problemas e depois expandida para 23, que foi apresentada pelo matemático alemão David Hilbert (1862-1943) como uma forma de guia a atenção dos matemáticos no século XX.}, de forma sucinta a prova do resultado diz que não existe um algoritmo (ou método) universal para determinar se uma equação diofantina tem raízes inteiras.
+\end{remark}
+
+\begin{example}\label{exe:DiagramaProva12}
+	Demonstração da asserção: Não existe um programa $P$ jogador de xadrez que sempre vença.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Assuma por absurdo} que $P$ é um programa jogador de xadrez que sempre vence}, & --- Hipótese\\
+					\text{\textbf{logo } pode-se instanciar duas execuções de }  P \text{ denotadas por } P_1 \text{ e } P_2,&\\
+					\text{\textbf{mas} se } P_1 \text{ joga contra } P_2 \text{ e vence},&\\
+					\text{\textbf{tem-se que} } P_2 \text{ não é um programa que sempre vence},& --- Direto da linha $4$\\
+					\text{\textbf{além disso} se ocorre o contrário e } P_2 \text{ joga contra } P_1 \text{ e vence},&\\
+					\text{\textbf{tem-se que} } P_1 \text{ não é um programa que sempre vence},& --- Direto da linha $6$\\
+					\text{\textbf{mas} } P_1  \text{ ou } P_2 \text{ perder é um absurdo, já que são instancias de } P.&--- Direto das linhas $3, 5$ e $7$.
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } P \text{ é um programa de jogar xadrez que sempre vence}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$8$)
+			\end{subproof}
+			\text{\textbf{Consequentemente}, Não existe um programa $P$ jogador de xadrez que sempre vença.}. & --- Conclusão da RAA (linhas $2$-$9$)
+		\end{logicproof}
+	}
+\end{example}

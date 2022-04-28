@@ -1,15 +1,5 @@
 \chapter{Introdução à Lógica}\label{cap:IntroducaoLogica}
 
-\begin{introduction}[Tópicos]
-	\item O que é Lógica?
-	\item Um Pouco de História
-	\item Argumentos, Proposições e Predicados
-	\item Conectivos, Quantificadores e Negação
-	\item Representação simbólica
-	\item Lógica e Ciência da Computação
-	\item Questionário
-\end{introduction}
-
 \section{O que é Lógica?}\label{sec:O-que-e-Logica}
 
 Antes de apresentar uma descrição histórica da lógica, este texto começa pela árdua tarefa de apresentar de forma sucinta uma resposta para a pergunta, \textbf{``o que é a lógica?}''. Como dito em \cite{BenjaV1, copi1981}, a palavra lógica e suas derivações são familiares a quase todas (se não todas) as pessoas, de fato, é comum durante o cotidiano do dia a dia as pessoas recorrerem ao uso do termo lógica ou de seu derivados, sendo que na maioria das vezes seu uso está ligada à ideia de obviedade (ou certeza), por exemplo nas frases:
@@ -58,7 +48,7 @@ Outra vertente emergente na lógica do século XIX era aquela apoiada puramente 
 
 Uma ramificação desta escola ``matemática'' ganhou força na Polônia sobre a tutela e liderança do lógico e filósofo Jan \L{}ukasiewics (1878-1956), o foco da escola polonesa era como dito em \cite{BenjaV1}, analisar os sistemas axiomáticos da lógica proposicional, lógica modal e das álgebras booleanas. Foi esta escola que primeiro considerou interpretações alternativas da linguagem (da lógica) e questões da meta-lógica tais como: consistência, corretude e completude. Por fim, foi na escola polonesa que houve pela primeira vez duas visões separadas sobre a lógica, uma em que a lógica era vista puramente como uma linguagem, e a segunda visão que via a lógica puramente como um cálculo \cite{BenjaV1}.
 
-Instigado pelo problema número dois da lista Hilbert\footnote{A lista de Hilbert é um lista inicialmente composta por 10 problemas e depois expandida para 23, que foi apresentada pelo matemático alemão David Hilbert (1862-1943) como uma forma de guia a atenção dos matemáticos no século XX.} o jovem matemático e lógico austríaco Kurt Gödel (1906-1978) fez grandes contribuições para a lógica, inicialmente ele provou o teorema da completude para a lógica de primeira ordem em sua tese de doutorado em 1929, tal resultado estabelece que uma fórmula de primeira ordem é dedutível se e somente se ela é universalmente válida \cite{BenjaV1}. Outra contribuição monumental de Gödel são seus teoremas da incompletude \cite{godel1931}, em especial o primeiro que deu uma resposta negativa ao problema número dois da lista Hilbert, de forma sucinta o resultado de Gödel estabelece que não pode haver uma sistematização completa da Aritmética  \cite{abe2002-logica}.
+Instigado pelo problema número dois da lista de Hilbert o jovem matemático e lógico austríaco Kurt Gödel (1906-1978) fez grandes contribuições para a lógica, inicialmente ele provou o teorema da completude para a lógica de primeira ordem em sua tese de doutorado em 1929, tal resultado estabelece que uma fórmula de primeira ordem é dedutível se e somente se ela é universalmente válida \cite{BenjaV1}. Outra contribuição monumental de Gödel são seus teoremas da incompletude \cite{godel1931}, em especial o primeiro que deu uma resposta negativa ao problema número dois da lista Hilbert, de forma sucinta o resultado de Gödel estabelece que não pode haver uma sistematização completa da Aritmética  \cite{abe2002-logica}.
 
 Outros contemporâneos de Gödel também contribuíram fortemente para a lógica, Alfred Tarski (1901-1983) foi o responsável pela matematização do conceito de verdade como correspondência \cite{abe2002-logica, tarski1983}, já o francês Jacques Herbrand (1908-1931) introduziu as funções recursivas e apresentou os resultados hoje chamados de teoria de Herbrand. Entre os resultados de Herbrand se encontra o teorema que relaciona um conjunto insatisfatível de fórmulas da lógica de primeira ordem com um conjunto insatisfatível de fórmulas proposicionais.
 
@@ -77,6 +67,7 @@ Como qualquer outra disciplina para entender de fato o que é a lógica deve-se 
 	\begin{itemize}
 		\item A lua é feita de queijo.
 		\item O Flamengo é um time carioca.
+		\item O uniforme principal da seleção brasileira é azul.
 	\end{itemize}
 	São ambas frases declarativas. Por outro lado, as frase:
 	\begin{itemize}
@@ -299,52 +290,58 @@ incertezas presente no raciocínio aproximado \cite{BenjaV1}, principalmente na 
 
 Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clássicas que têm aplicações ou ainda servem de fundamentação para diversas áreas ou disciplinas da computação. Porém, como esta parte do texto é apenas uma introdução não cabe neste escopo se debruçar tão profundamente assim neste assunto, em capítulos futuros as lógicas não clássicas (em especial a modal) serão estudadas mais a fundo. 
 
-\begin{problemset}
-    \item Examine cada uma das frases declarativas abaixo e diga se as mesmas são proposições ou predicados e também diga se são simples ou compostas, justifique suas respostas no caso de proposição (ou predicado) composta(o).
-    \begin{enumerate}
-    	\item Existe um gato amarelo.
-    	\item Alguns patos são marrons.
-    	\item Não é verdade que o gato de Júlio é amarelo.
-    	\item O Flamengo joga hoje.
-    	\item Todos os ratos tem olhos azuis.
-    	\item 4 é o menor número composto pelo produto de primos.
-    	\item Meu cachorro é branco, alguns outros são vermelhos.
-    	\item Alguns gatos são cinza, mas meu gato não é cinza, além disso, Tadeu tem um gato preto ou Sormany tem um rato amarelo.
-    	\item Os carros são amarelos se, e somente, se eles não são italianos.
-    	\item Se todos os jogadores da seleção jogam na Europa ou Neymar está machucado, então o Brasil não vence a Argentina.
-    	\item Basta mais um ponto na carteira de motorista para Sormany perde a aposta ou Juca terá que pagar o almoço.
-    	\item Se Lucas é irmão de Pedro, então Natalia vai casar com Gabriel se, e somente se, Francisco voltar da Espanha.
-    	\item Se $\frac{10^2}{50} = 2!$, então o $\pi - 2x = 0$ para todo $x \in \mathbb{C}$.
-    	\item Se a terra é plana e existe chip nas vacinas, então o Brasil vai conquistar o país de Juvenal. 
-    	\item A bola é preta.
-    	\item Eu tirei foto com meu avô hoje.
-    	\item $3 < 5$ segue do fato que o  voto no papel é mais rápido que voto eletrônico.
-    	\item O sorvete ser de uva segue do fato de Juliane está grávida.
-    	\item Bill escreveu o DOS em 1978 é condição necessária de Steven ter lançado o \textit{Apple} 2.
-    	\item Se o Cruzeiro é um time da primeira divisão, então todo macaco come macarrão ou não é o caso de Patricia ser professora de matemática. 
-    \end{enumerate}
+\section{Questionário}\label{sec:Questionario1part3}
 
-    \item Determine as frases simples (ou atômicas) que compõem as proposições e predicados que se seguem.
-    \begin{enumerate}
-        \item Juca não irá a festa, mas Pedro irá ou Flaviana irá.
-    	\item Fui com a minha família ontem ao parque, e me diverti muito.
-    	\item Juca vai com família ou irá sozinho, mas se Anabel aparecer no parque, então Juca e Paula não vão se diverti.
-    	\item Se Paulo chegou, então ele está na sala. Mas não é verdade que Paulo chegou.
-    	\item Valdi toca clarinete somente se, Katia tocar flauta ou Shizue sabe desenhar com carvão.
-    	\item Eu sou aluno da computação somente se, eu passei em Matemática discreta. Mas eu não passei em Introdução à programação ou reprovei todas as disciplinas do primeiro período.
-    	\item Para qualquer navio no porto, existe um marinheiro bêbado no bar ou todos os soldados estão dormindo na praia.
-    	\item Se Romero tivesse vindo vê o filme, então Katia teria ido para a sorveteria com ele. Mas Romero foi para a praia com Julinha.
-    	\item Todos os números primos são números impares ou o número $\pi$ é o pode ser escrito como produto de números primos.
-    	\item Vou a padaria se, e somente se, estiver fazendo frio ou se Juliane quiser tomar sopa.
-    	\item Não é verdade que a terra é esférica se, e somente se, não existe pessoas morando em Recife.
-    	\item Shizue e Valdi foram para o Chile, mas Luiza também foi.
-    	\item Basta que eu tire 8 em Matemática discreta para eu ter um noite de festa.
-    	\item A gripe é um condição suficiente para ser declarado morto.
-    	\item Se para todo flor existe um vaso, então os jardins de Jaçanã são cheio de cerejeiras. 
-    	\item Se ontem choveu a noite toda e hoje é meu aniversário de 14 anos, então Pedro vai a Califórnia se, e somente se, Tom e Frajola forem amigos do Manda-chuva.
-    	\item Não é verdade que Shizue sabe desenhar com carvão, mas sabe desenhar com lápis e pincel.
-    	\item O Catatau comeu o mel somente se, o Puffy saiu para passear com o Jack ou Jerry é vizinho do Mickey.
-    	\item Para todo homem existe uma mulher que é sua mãe ou Valdi toca clarinete.
-    	\item Existe um carro amarelo se, e somente se, todas bicicletas são roxas, mas as motos são azuis. 
-    \end{enumerate}
-\end{problemset}
+\begin{problem}
+    Examine cada uma das frases declarativas abaixo e diga se as mesmas são proposições ou predicados e também diga se são simples ou compostas, justifique suas respostas no caso de proposição (ou predicado) composta(o).
+\end{problem}
+
+\begin{exerList}
+	\item Existe um gato amarelo.
+	\item Alguns patos são marrons.
+	\item Não é verdade que o gato de Júlio é amarelo.
+	\item O Flamengo joga hoje.
+	\item Todos os ratos tem olhos azuis.
+	\item 4 é o menor número composto pelo produto de primos.
+	\item Meu cachorro é branco, alguns outros são vermelhos.
+	\item Alguns gatos são cinza, mas meu gato não é cinza, além disso, Tadeu tem um gato preto ou Sormany tem um rato amarelo.
+	\item Os carros são amarelos se, e somente, se eles não são italianos.
+	\item Se todos os jogadores da seleção jogam na Europa ou Neymar está machucado, então o Brasil não vence a Argentina.
+	\item Basta mais um ponto na carteira de motorista para Sormany perde a aposta ou Juca terá que pagar o almoço.
+	\item Se Lucas é irmão de Pedro, então Natalia vai casar com Gabriel se, e somente se, Francisco voltar da Espanha.
+	\item Se $\frac{10^2}{50} = 2!$, então o $\pi - 2x = 0$ para todo $x \in \mathbb{C}$.
+	\item Se a terra é plana e existe chip nas vacinas, então o Brasil vai conquistar o país de Juvenal. 
+	\item A bola é preta.
+	\item Eu tirei foto com meu avô hoje.
+	\item $3 < 5$ segue do fato que o  voto no papel é mais rápido que voto eletrônico.
+	\item O sorvete ser de uva segue do fato de Juliane está grávida.
+	\item Bill escreveu o DOS em 1978 é condição necessária de Steven ter lançado o \textit{Apple} 2.
+	\item Se o Cruzeiro é um time da primeira divisão, então todo macaco come macarrão ou não é o caso de Patricia ser professora de matemática. 
+\end{exerList}
+
+\begin{problem}
+	Determine as frases simples (ou atômicas) que compõem as proposições e predicados que se seguem.
+\end{problem}
+
+\begin{exerList}
+	\item Juca não irá a festa, mas Pedro irá ou Flaviana irá.
+	\item Fui com a minha família ontem ao parque, e me diverti muito.
+	\item Juca vai com família ou irá sozinho, mas se Anabel aparecer no parque, então Juca e Paula não vão se diverti.
+	\item Se Paulo chegou, então ele está na sala. Mas não é verdade que Paulo chegou.
+	\item Valdi toca clarinete somente se, Katia tocar flauta ou Shizue sabe desenhar com carvão.
+	\item Eu sou aluno da computação somente se, eu passei em Matemática discreta. Mas eu não passei em Introdução à programação ou reprovei todas as disciplinas do primeiro período.
+	\item Para qualquer navio no porto, existe um marinheiro bêbado no bar ou todos os soldados estão dormindo na praia.
+	\item Se Romero tivesse vindo vê o filme, então Katia teria ido para a sorveteria com ele. Mas Romero foi para a praia com Julinha.
+	\item Todos os números primos são números impares ou o número $\pi$ é o pode ser escrito como produto de números primos.
+	\item Vou a padaria se, e somente se, estiver fazendo frio ou se Juliane quiser tomar sopa.
+	\item Não é verdade que a terra é esférica se, e somente se, não existe pessoas morando em Recife.
+	\item Shizue e Valdi foram para o Chile, mas Luiza também foi.
+	\item Basta que eu tire 8 em Matemática discreta para eu ter um noite de festa.
+	\item A gripe é um condição suficiente para ser declarado morto.
+	\item Se para todo flor existe um vaso, então os jardins de Jaçanã são cheio de cerejeiras. 
+	\item Se ontem choveu a noite toda e hoje é meu aniversário de 14 anos, então Pedro vai a Califórnia se, e somente se, Tom e Frajola forem amigos do Manda-chuva.
+	\item Não é verdade que Shizue sabe desenhar com carvão, mas sabe desenhar com lápis e pincel.
+	\item O Catatau comeu o mel somente se, o Puffy saiu para passear com o Jack ou Jerry é vizinho do Mickey.
+	\item Para todo homem existe uma mulher que é sua mãe ou Valdi toca clarinete.
+	\item Existe um carro amarelo se, e somente se, todas bicicletas são roxas, mas as motos são azuis. 
+\end{exerList}

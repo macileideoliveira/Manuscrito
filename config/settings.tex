@@ -1,0 +1,449 @@
+%---------------------------------------------------------------------------------------
+%	Configuração a geometria do documento
+%---------------------------------------------------------------------------------------
+\geometry{
+	paper=a4paper,
+	top=3cm,
+	bottom=2cm,
+	left=3cm,
+	right=2cm,
+	headheight=15pt, % Header height
+	footskip=1.5cm, % Space from the bottom margin to the baseline of the footer
+	headsep=10pt,
+}
+
+%---------------------------------------------------------------------------------------
+%	Configuração as referências cruzadas e links do documento
+%---------------------------------------------------------------------------------------
+\hypersetup{
+	pdftoolbar=true,        % show Acrobat’s toolbar?
+	pdfmenubar=true,        % show Acrobat’s menu?
+	pdffitwindow=false,     % window fit to page when opened
+	pdfstartview={FitH},    % fits the width of the page to the window
+	pdftitle={Notas de Aula},           % title
+	pdfauthor={Valdigleis S Costa},     % author
+	pdfkeywords={Lógica, Computação}, % list of keywords
+	pdfnewwindow=true,      % links in new PDF window
+	colorlinks=true,        % false: boxed links; true: colored links
+	linkcolor=blue,         % color of internal links
+	citecolor=green,        % color of links to bibliography
+	filecolor=cyan,         % color of file links
+	urlcolor=red        % color of external links
+}
+
+%---------------------------------------------------------------------------------------
+%	Configuração do espaçamento
+%---------------------------------------------------------------------------------------
+\renewcommand{\baselinestretch}{1.5} 
+
+%\setlength{\parindent}{1.3cm}
+% Controle do espaçamento entre um parágrafo e outro:
+%\setlength{\parskip}{0.2cm} 
+
+%---------------------------------------------------------------------------------------
+%	Configuração das cores
+%---------------------------------------------------------------------------------------
+\definecolor{pupChapters}{RGB}{125, 50, 120}
+\definecolor{myBlue}{RGB}{86, 210, 248}
+
+% Usados no resultados teoricos
+\definecolor{titleResults}{RGB}{5, 50, 120}
+\definecolor{blueTheorem}{RGB}{10, 90, 180}
+\definecolor{blueLemma}{RGB}{25, 150, 255}
+\definecolor{blueCorollary}{RGB}{45, 200, 255}
+\definecolor{blueBackground}{RGB}{240, 250, 250}
+
+% Usado nos exemplos e exercicios
+\definecolor{greenExample}{RGB}{19, 126, 10}
+
+% Usado nas definições e observações
+\definecolor{wine}{RGB}{150,85,110} 
+\definecolor{wineBackground}{RGB}{255,230,240} 
+
+\definecolor{chesse}{RGB}{243, 234, 156}
+\definecolor{chesseBackground}{RGB}{133, 131, 116}
+
+\definecolor{lemon}{RGB}{173, 248, 2}
+\definecolor{lemonBackground}{RGB}{203, 221, 162}
+
+% Usado nas observações, explicações e perguntas
+\definecolor{snufflesColor}{RGB}{150, 185, 255}
+\definecolor{rickColor}{RGB}{221, 196, 211}
+\definecolor{mortyColor}{RGB}{145, 255, 195}
+
+%---------------------------------------------------------------------------------------
+%	Configuração do índice
+%---------------------------------------------------------------------------------------
+\contentsmargin{0cm} % Removes the default margin
+
+% Part text styling (this is mostly taken care of in the PART HEADINGS section of this file)
+\titlecontents{part}
+[0cm] % Left indentation
+{\addvspace{20pt}\bfseries} % Spacing and font options for parts
+{}
+{}
+{}
+
+% Chapter text styling
+\titlecontents{chapter}
+[1.25cm] % Left indentation
+{\addvspace{12pt}\large\sffamily\bfseries} % Spacing and font options for chapters
+{\color{myBlue!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{myBlue}} % Formatting of numbered sections of this type
+{\color{myBlue}} % Formatting of numberless sections of this type
+{\color{myBlue!60}\normalsize\;\titlerule*[.5pc]{.}\;\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+% Section text styling
+\titlecontents{section}
+[1.25cm] % Left indentation
+{\addvspace{3pt}\sffamily\bfseries} % Spacing and font options for sections
+{\color{myBlue!60}\contentslabel[\thecontentslabel]{1.25cm}\color{myBlue}} % Formatting of numbered sections of this type
+{} % Formatting of numberless sections of this type
+{\hfill\color{black}\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+% Subsection text styling
+\titlecontents{subsection}
+[1.25cm] % Left indentation
+{\addvspace{1pt}\sffamily\small} % Spacing and font options for subsections
+{\color{myBlue!60}\contentslabel[\thecontentslabel]{1.25cm}\color{myBlue}} % Formatting of numbered sections of this type
+{} % Formatting of numberless sections of this type
+{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+% Figure text styling
+\titlecontents{figure}
+[1.25cm] % Left indentation
+{\addvspace{1pt}\sffamily\small} % Spacing and font options for figures
+{\thecontentslabel\hspace*{1em}} % Formatting of numbered sections of this type
+{} % Formatting of numberless sections of this type
+{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+% Table text styling
+\titlecontents{table}
+[1.25cm] % Left indentation
+{\addvspace{1pt}\sffamily\small} % Spacing and font options for tables
+{\thecontentslabel\hspace*{1em}} % Formatting of numbered sections of this type
+{} % Formatting of numberless sections of this type
+{\ \titlerule*[.5pc]{.}\;\thecontentspage} % Formatting of the filler to the right of the heading and the page number
+
+%----------------------------------------------------------------------------------------
+%	MINI TABLE OF CONTENTS IN PART HEADS
+%----------------------------------------------------------------------------------------
+
+% Chapter text styling
+\titlecontents{lchapter}
+[0em] % Left indentation
+{\addvspace{15pt}\large\sffamily\bfseries} % Spacing and font options for chapters
+{\color{myBlue}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{myBlue}} % Chapter number
+{}  
+{\color{myBlue}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+
+% Section text styling
+\titlecontents{lsection}
+[0em] % Left indentation
+{\sffamily\small} % Spacing and font options for sections
+{\contentslabel[\thecontentslabel]{1.25cm}} % Section number
+{}
+{}
+
+% Subsection text styling (note these aren't shown by default, display them by searchings this file for tocdepth and reading the commented text)
+\titlecontents{lsubsection}
+[.5em] % Left indentation
+{\sffamily\footnotesize} % Spacing and font options for subsections
+{\contentslabel[\thecontentslabel]{1.25cm}}
+{}
+{}
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+\pagestyle{fancy} % Enable the custom headers and footers
+
+\renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.\ #1}{}} 	% Styling for the current chapter in the header
+\renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize\thesection\hspace{5pt}#1}{}} 				% Styling for the current section in the header
+
+\fancyhf{} % Clear default headers and footers
+\fancyhead[LE,RO]{\sffamily\normalsize\thepage} % Styling for the page number in the header
+\fancyhead[LO]{\rightmark} % Print the nearest section name on the left side of odd pages
+\fancyhead[RE]{\leftmark} % Print the current chapter name on the right side of even pages
+%\fancyfoot[C]{\thepage} % Uncomment to include a footer
+
+\renewcommand{\headrulewidth}{0.5pt} % Thickness of the rule under the header
+
+\fancypagestyle{plain}{% Style for when a plain pagestyle is specified
+	\fancyhead{}\renewcommand{\headrulewidth}{0pt}%
+}
+
+% Removes the header from odd empty pages at the end of chapters
+\makeatletter
+\renewcommand{\cleardoublepage}{
+	\clearpage\ifodd\c@page\else
+	\hbox{}
+	\vspace*{\fill}
+	\thispagestyle{empty}
+	\newpage
+	\fi}
+
+%---------------------------------------------------------------------------------------
+%	Configurações de teoremas, proposições, lemas, corolários, definições e métodos
+%---------------------------------------------------------------------------------------
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\renewcommand{\qedsymbol}{$\square$}
+
+
+% Estilo com caixa
+\newtheoremstyle{BoxedStyle}%
+{0pt}																									% Space above
+{0pt}																									% Space below
+{\normalfont}																							% Body font
+{}																										% Indent amount
+{\small\bf\sffamily\color{black}}																		% Theorem head font
+{\;}																									% Punctuation after theorem head
+{0.25em}																								% Space after theorem head
+{\small\sffamily\color{titleResults}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}		% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} 		% Optional theorem note
+
+% Estilo dos exemplos
+\newtheoremstyle{exampleStyle}
+{5pt}																									% Space above
+{5pt}																									% Space below
+{\normalfont}																							% Body font
+{} 																										% Indent amount
+{\small\bf\sffamily\color{greenExample}}																% Theorem head font
+{\;}																									% Punctuation after theorem head
+{0.25em}																								% Space after theorem head
+{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}						% Optional theorem note
+
+% Estilo da Definição
+\newtheoremstyle{blacknumbox} % Theorem style name
+{0pt}																							% Space above
+{0pt}																							% Space below
+{\normalfont}																					% Body font
+{}																								% Indent amount
+{\small\bf\sffamily}																			% Theorem head font
+{\;}																							% Punctuation after theorem head
+{0.25em}																						% Space after theorem head
+{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}				% Theorem text (e.g. Theorem 2.1)
+	\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}				% Optional theorem note
+
+\makeatother
+
+
+% Os contadores e comandos básicos
+\newcounter{dummy} 
+\numberwithin{dummy}{section}
+
+% Os ambientes de teoremas/lema/corolário em caixa
+\theoremstyle{BoxedStyle}
+\newtheorem{theoremeT}{Teorema}[chapter]
+\newtheorem{lemmaT}{Lema}[chapter]
+\newtheorem{corollaryT}{Corolário}[chapter]
+\newtheorem{proposition}{Proposição}[chapter]
+
+\theoremstyle{exampleStyle}
+\newtheorem{exampleT}{Exemplo}[chapter]
+\newtheorem{exerciseT}{Exercício}[chapter]
+
+\theoremstyle{blacknumbox}
+\newtheorem{definitionT}{Definição}[chapter]
+\newtheorem{remaT}{Observação}[chapter]
+\newtheorem{noteT}{{\color{blue}\scriptsize $\textdbend$ }Nota}[chapter]
+
+% Caixa Teorema
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=blueBackground,
+linecolor=blueTheorem,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{theoremBox}
+
+% Caixa Lema
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=blueBackground,
+linecolor=blueLemma,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{lemmaBox}
+
+% Caixa Corolário
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=blueBackground,
+linecolor=blueCorollary,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{corollaryBox}
+
+% Caixa da definição
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=wine,
+backgroundcolor=wineBackground,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=1pt]{dBox}
+
+% Caixa da observação
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=true,
+bottomline=true,
+linecolor=black,
+backgroundcolor=white,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=0.5pt]{oBox}
+
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=false,
+topline=false,
+bottomline=false,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=0.5pt]{iBox}
+
+% Caixa da observação - Usada
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=chesseBackground,
+backgroundcolor=chesse,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=1pt]{rBox}
+
+
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=true,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=lemon,
+backgroundcolor=lemonBackground,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=1pt]{nBox}
+
+
+% O ambiente para o teorema
+\newenvironment{theorem}{\begin{theoremBox}\begin{theoremeT}}{\end{theoremeT}\end{theoremBox}}
+\newenvironment{lemma}{\begin{lemmaBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaBox}}
+\newenvironment{corollary}{\begin{corollaryBox}\begin{corollaryT}}{\end{corollaryT}\end{corollaryBox}}
+
+% O ambiente para o example
+%\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+\newenvironment{example}{\begin{exampleT}}{\end{exampleT}}
+\newenvironment{problem}{\begin{exerciseT}}{\end{exerciseT}}
+
+
+
+% O ambiente para definição
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+\newenvironment{remark}{\begin{rBox}\begin{remaT}}{\end{remaT}\end{rBox}}
+\newenvironment{note}{\begin{nBox}\begin{noteT}}{\end{noteT}\end{nBox}}
+
+%---------------------------------------------------------------------------------------
+%	Configuração os ambientes de obserção
+%---------------------------------------------------------------------------------------
+\newtheorem*{snuffles*}{
+	\includegraphics[scale=0.05]{figures/snuffles.png}
+}
+
+\newtheorem*{rick*}{
+	\includegraphics[scale=0.07]{figures/rick.png}
+}
+
+\newtheorem*{morty*}{
+	\includegraphics[scale=0.05]{figures/morty.png}
+}
+
+
+\newtheorem*{snufflesinfo*}{
+	\includegraphics[scale=0.05]{figures/snuffles.png}
+}
+
+\newtheorem*{rickinfo*}{
+	\includegraphics[scale=0.07]{figures/rick.png}
+}
+
+\newtheorem*{mortyinfo*}{
+	\includegraphics[scale=0.05]{figures/morty.png}
+}
+
+
+\newenvironment{SnufflesInfo}{\begin{iBox}\begin{snufflesinfo*}}{\end{snufflesinfo*}\end{iBox}}
+\newenvironment{RickInfo}{\begin{iBox}\begin{rickinfo*}}{\end{rickinfo*}\end{iBox}}		
+\newenvironment{MortyInfo}{\begin{iBox}\begin{mortyinfo*}}{\end{mortyinfo*}\end{iBox}}
+
+\newenvironment{Snuffles}{\begin{oBox}\begin{snuffles*}}{\end{snuffles*}\end{oBox}}
+\newenvironment{Rick}{\begin{oBox}\begin{rick*}}{\end{rick*}\end{oBox}}		
+\newenvironment{Morty}{\begin{oBox}\begin{morty*}}{\end{morty*}\end{oBox}}	
+
+%---------------------------------------------------------------------------------------
+%	Configuração da lista para questões dos exercícios
+%---------------------------------------------------------------------------------------
+\newlist{fieldsList}{enumerate}{1}
+\setlist[fieldsList, 1]{label={\color{blue}(\roman*)}}
+
+\newlist{exerList}{enumerate}{1}
+\setlist[exerList,1]{label={\color{blue}(\alph*).}}
+

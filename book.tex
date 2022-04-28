@@ -1,0 +1,56 @@
+%---------------------------------------------------------------------------------------
+%	Meu template de livro
+%	
+%	Este pacote foi insiperado no pacote The Legrand Orange Book versão 2.1
+%
+%---------------------------------------------------------------------------------------
+\documentclass[11pt,reqno]{book}
+
+%---------------------------------------------------------------------------------------
+%	Importa os pacotes usados
+%---------------------------------------------------------------------------------------
+\input{config/packages}
+
+%---------------------------------------------------------------------------------------
+%	Importa as configurações dos pacotes
+%---------------------------------------------------------------------------------------
+\input{config/settings}
+
+%---------------------------------------------------------------------------------------
+%	Importa os comandos criados
+%---------------------------------------------------------------------------------------
+\input{config/commands}
+
+%---------------------------------------------------------------------------------------
+%	Adicionando a referência
+%---------------------------------------------------------------------------------------
+%\addbibresource{reference.bib}
+
+\begin{document}
+	%---------------------------------------------------------------------------------------
+	%	Adicionando os elementos pré-texto
+	%---------------------------------------------------------------------------------------
+	\input{pretext/cover}
+	\input{pretext/copyright}
+	\input{pretext/disclaimer}
+	\input{pretext/thanks}
+	\input{pretext/indice}
+	
+	%---------------------------------------------------------------------------------------
+	%	Adicionando os elementos do texto
+	%---------------------------------------------------------------------------------------
+	\part{Ferramentas e Linguagem Básica}\label{Parte:basica}
+	\input{text/part1/cap1conjuntos}
+	\input{text/part1/cap2demonstracoes}
+
+
+	\part{Lógica}\label{Parte:logica}
+	\input{text/part3/cap1Intrologica}
+	\input{text/part3/cap2ProLogic}
+
+	%---------------------------------------------------------------------------------------
+	%	Adicionando os elementos do pós-texto
+	%---------------------------------------------------------------------------------------
+	\bibliographystyle{abbrv}
+	\bibliography{reference}
+\end{document}

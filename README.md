@@ -56,8 +56,8 @@ permissions and limitations under the License
 ## Para compilar execute os comandos
 
 ```
-pdflatex Livro-FMC.tex
-biber Livro-FMC.bcf
-pdflatex Livro-FMC.tex
-pdflatex Livro-FMC.tex
+pdflatex book.tex
+bibtex book.aux
+pdflatex book.tex
+pdflatex book.tex
 ```
