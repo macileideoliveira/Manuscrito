@@ -536,19 +536,39 @@ Em termos do diagrama, a prova de uma generalização começa inserido na primei
 Um erro que muitos iniciantes frequentemente cometem ao tentar provar enunciados de generalização é utilizar uma (ou mais) propriedade(s) de um elemento genérico $x$  para provar $P(x)$, entretanto esta(s) propriedade(s) usada(s) não é (são) compartilhada(s) por todos os elementos de $\mathbb{U}$, isto é, apenas um subconjunto de $\mathbb{U}$ apresenta a(s) propriedade(s) usadas, para mais detalhes sobre este tipo de erro podem ser consultados em \cite{velleman2019comProvar}.
 
 \begin{example}\label{exe:DiagramaProva16}
-	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[se $n > 2$, então $x^2 > x + x$].
+	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[se $n > 2$, então $n^2 > n + n$].
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				\text{\textbf{Assuma} que } n \text{ é um número inteiro,}&  --- Hipótese\\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } n > 2, & --- Hipótese\\
+					\text{\textbf{logo} } n \cdot n > 2x,& --- Monotonicidade da multiplicação em $\mathbb{Z}$\\
+					\text{\textbf{então} } n^2 > n + n.& --- Reescrita da linha $3$
+				\end{subproof}
+				\text{\textbf{Dessa forma}, se } n > 2, \text{ então } x^2 > n + n. & --- Conclusão  das PD (linhas $2$-$4$)
+			\end{subproof}
+			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[se $n > 2$, então $x^2 > n + n$]}. & --- Conclusão da PG (linhas $1$-$5$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{example}\label{exe:DiagramaProva17}
+	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito].
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
 				\text{\textbf{Assuma} que } x \text{ é um número inteiro,}&  --- Hipótese\\
 				\begin{subproof}
-					\text{\textbf{Suponha} que } x > 2, & --- Hipótese\\
-					\text{\textbf{logo} } x \cdot x > 2x,& --- Monotonicidade da multiplicação em $\mathbb{Z}$\\
-					\text{\textbf{então} } x^2 > x + x.& --- Reescrita da linha $3$
+					\text{\textbf{Desde que} } 3(n^2 + 2n + 3) - 2n^2 = 3n^2 + 6n + 9 - 2n^2, &\\
+					\text{\textbf{mas} } 3n^2 + 6n + 9 - 2n^2 =  n^2 +6n + 9,&\\
+					\text{\textbf{assim} } 3(n^2 + 2n + 3) - 2n^2 = n^2 +6n + 9& --- Direto das linhas $2$ e $3$\\
+					\text{\textbf{mas} } n^2 +6n + 9 = (n + 3)^2,&\\
+					\text{\textbf{logo} } 3(n^2 + 2n + 3) - 2n^2 = (n + 3)^2,& 
 				\end{subproof}
-				\text{\textbf{Dessa forma}, se } n > 2, \text{ então } x^2 > x + x. & --- Conclusão  das PD (linhas $2$-$4$)
+				\text{\textbf{Dessa forma},  } 3(n^2 + 2n + 3) - 2n^2 \text{ é um quadrado perfeito.}&  --- Conclusão  das linhas $2$-$6$
 			\end{subproof}
-			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[se $n > 2$, então $x^2 > x + x$]}. & --- Conclusão da PG (linhas $1$-$5$)
+			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito]}. & --- Conclusão da PG (linhas $1$-$7$)
 		\end{logicproof}
 	}
 \end{example}
