@@ -64,11 +64,11 @@ Na notação compacta $A = \{ x \mid \textbf{P}\}$ o símbolo $A$ é chamado de 
 Para continuar o desenvolvendo da linguagem da teoria dos conjuntos, é conveniente relembrar ao leitor os símbolos usados como rótulos para representar os conjuntos numéricos mais importantes da matemática.
 
 \begin{definition}[Símbolos dos conjuntos numéricos]\label{def:SimbolosConjuntos}
-	O conjunto dos números naturais\footnote{Neste manuscrito é considerado que o conjuntos dos naturais corresponde ao conjunto $\{0, 1, 2, \cdots\}$.}, inteiros, racionais, irracionais, reais e complexos são representados respectivamente por   $\Nat$, $\Int$,  $\Rac$,  $\Irr$,  $\Rea$ e  $\Com$.
+	O conjunto dos números naturais\footnote{Neste manuscrito é considerado que o conjuntos dos naturais corresponde ao conjunto $\{0, 1, 2, \cdots\}$.}, inteiros, racionais, irracionais, reais e complexos são representados respectivamente por   $\mathbb{N}$, $\mathbb{Z}$,  $\mathbb{Q}$,  $\mathbb{I}$,  $\mathbb{R}$ e  $\mathbb{C}$.
 \end{definition}
 
 \begin{remark}
-	Neste manuscrito $\Nat_*, \Int_*, \Rac_*$ e $\Rea_*$ irão denotar receptivamente o conjunto dos naturais, inteiros, racionais e reais sem o $0$. Já $\Int^+, \Rac^+$ e $\Rea^+$ irão denotar receptivamente o conjunto dos inteiros, racionais e reais positivos. E por fim, $\Int^-, \Rac^-$ e $\Rea^-$ irão denotar receptivamente o conjunto dos inteiros, racionais e reais negativos.
+	Neste manuscrito $\mathbb{N}_*, \mathbb{Z}_*, \mathbb{Q}_*$ e $\mathbb{R}_*$ irão denotar receptivamente o conjunto dos naturais, inteiros, racionais e reais sem o $0$. Já $\mathbb{Z}^+, \mathbb{Q}^+$ e $\mathbb{R}^+$ irão denotar receptivamente o conjunto dos inteiros, racionais e reais positivos. E por fim, $\mathbb{Z}^-, \mathbb{Q}^-$ e $\mathbb{R}^-$ irão denotar receptivamente o conjunto dos inteiros, racionais e reais negativos.
 \end{remark}
 
 Seguindo com o desenvolvimento da teoria dos conjuntos a definição a seguir estabelece um relacionamento (ou relação) de pertinência entre os conjuntos e os elementos do discurso.
@@ -77,7 +77,7 @@ Seguindo com o desenvolvimento da teoria dos conjuntos a definição a seguir es
 	Seja $A$ um conjunto definido sobre um discurso $M$ por uma propriedade $\textbf{P}$ e seja $x$ um elemento do discurso. Se o elemento $x$ possui (ou satisfaz) a propriedade $\textbf{P}$, então é dito que $x$ pertence a $A$, denotado por $x \in A$. Caso $x$ não possui (ou satisfaça) a propriedade $\textbf{P}$, então é dito que $x$ não pertence a $A$, denotado por $x \notin A$
 \end{definition}
 
-A Definição \ref{def:Pertinencia} está introduzindo novas entidades da linguagem da teoria dos conjuntos, sento tais objetos as palavras da forma $\underline{\ \ \ } \in \underline{\ \ \ }$ e da forma $\underline{\ \ \ } \notin \underline{\ \ \ }$. Em tais palavras o elemento do lado esquerdo dos símbolos $\in$ e $\notin$ sempre devem ser elementos do discurso ou uma variável que representa tais elementos, por outro lado, os elementos do lado direito dos símbolos $\in$ e $\notin$ sempre devem ser o rótulo ou a forma estrutural de um conjunto.
+A Definição \ref{def:Pertinencia} está introduzindo novas entidades da linguagem da teoria dos conjuntos, sento tais objetos as palavras da forma $\underline{\ \ \ } \in \underline{\ \ \ }$ e da forma $\underline{\ \ \ } \notin \underline{\ \ \ }$. Em tais palavras o símbolo do lado esquerdo de $\in$ e $\notin$ sempre será visto como sendo um elemento do discurso ou uma variável que representa tal elemento, por outro lado, o símbolo do lado direito de $\in$ e $\notin$ sempre devem ser o rótulo ou a forma estrutural de um conjunto.
 
 \begin{remark}
 	Quando $x \in A$, em alguns texto como em \cite{lipschutz1978-TC} é comum o uso das interpretações semânticas: ``$A$ possui $x$'' ou que ``$x$ faz parte de $A$'', durante este manuscrito possa ser que uma dessas (ou ambas) interpretações sejam usadas, além da semântica padrão: $x \mbox{ pertence a }  A$.
@@ -115,7 +115,7 @@ A relação entre conjuntos recebe o nome de \textbf{relação de inclusão}, en
 \end{definition}
 
 \begin{example}\label{exe:ConjuntoHerdeiro}
-	Dado o conjunto $\Int$ tem-se que o conjunto $N = \{x \mid x \in \Int \mbox{ e } x = 2k \mbox{ para algum } k \in \Int\}$ é claramente um subconjunto de $\Int$ pois todo número par é também um número inteiro.
+	Dado o conjunto $\mathbb{Z}$ tem-se que o conjunto $N = \{x \mid x \in \mathbb{Z} \mbox{ e } x = 2k \mbox{ para algum } k \in \mathbb{Z}\}$ é claramente um subconjunto de $\mathbb{Z}$ pois todo número par é também um número inteiro.
 \end{example}
 
 \begin{example}\label{exe:Inclusao}
@@ -123,7 +123,7 @@ A relação entre conjuntos recebe o nome de \textbf{relação de inclusão}, en
 	\begin{itemize}
 		\item[(a)] $\{a, e, u\} \subseteq \{a, e, o, i , u\}$.
 		\item[(b)] $\{x \mid x \mbox{ é uma cidade do PE}\} \subseteq \{x \mid x \mbox{ é uma cidade do Brasil}\}$.
-		\item[(c)] $\{x \mid x = 2k \mbox{ para algum } k \in \Nat\} \subseteq \Nat$.
+		\item[(c)] $\{x \mid x = 2k \mbox{ para algum } k \in \mathbb{N}\} \subseteq \mathbb{N}$.
 		\item[(d)] $\{\mbox{Brasil}\} \subseteq \{x \mid x \mbox{ é um país do continente americano}\}$
 	\end{itemize}
 \end{example}
@@ -135,7 +135,7 @@ A relação entre conjuntos recebe o nome de \textbf{relação de inclusão}, en
 \end{definition}
 
 \begin{example}\label{exe:NaoInclusao}
-	Seja $A = \{-1, 0, 1\}$ tem-se que $A \not\subseteq \Nat$.
+	Seja $A = \{-1, 0, 1\}$ tem-se que $A \not\subseteq \mathbb{N}$.
 \end{example}
 
 Existe também a possibilidade de todos os elementos de $A$ serem elementos de $B$, mas que $B$ possua outros elementos que não fazem parte de $A$, nesse caso é dito que $A$ é um \textbf{subconjunto próprio} de $B$, e isto é denotado como $A \subset B$. 
@@ -143,18 +143,16 @@ Existe também a possibilidade de todos os elementos de $A$ serem elementos de $
 \begin{example}\label{exe:InclusaoPropria}
 	As seguintes relações de inclusão se verificam:
 	\begin{itemize}
-		\item[(a)] $\{1, 2\} \subset \Rea$.
+		\item[(a)] $\{1, 2\} \subset \mathbb{R}$.
 		\item[(b)] $\{x \mid x \mbox{ é uma cidade do PE}\} \subset \{x \mid x \mbox{ é uma cidade do Brasil}\}$.
-		\item[(c)] $\Int_+ \subset \Int$.
+		\item[(c)] $\mathbb{Z}_+ \subset \mathbb{Z}$.
 	\end{itemize}
 \end{example}
 
 \begin{remark}
 	Note que todo subconjunto $A$ de um conjunto $B$ pode ser visto como um conjunto construído sobre os elementos de $B$ que satisfazem uma certa propriedade $\textbf{P}$, isto é, tem-se que todo subconjunto $A$ é um conjunto da seguinte forma:
 	$$A = \{x \mid x \in B \mbox{ e } x \mbox{ satisfaz } \textbf{P}\}$$
-	também é possível encontrar a notação:
-	$$A = \{x \in B  \mid x \mbox{ satisfaz } \textbf{P}\}$$
-	sempre que possível esse manuscrito irá adotar a segunda notação.
+	também é possível encontrar a notação $A = \{x \in B  \mid x \mbox{ satisfaz } \textbf{P}\}$, sempre que possível esse manuscrito irá adotar a segunda notação.
 \end{remark}
 
 Usando a ideia de subconjunto pode-se como apresentado na literatura em obras como \cite{abe1991-TC, halmos2001, lipschutz1978-TC} introduzir a ideia de igualdade entre conjuntos, esta noção é apresentada formalmente como se segue.
@@ -206,7 +204,7 @@ Agora que foram apresentados os conjuntos universo e vazio, é conveniente comen
 
 \begin{example}\label{exe:Familia}
 	Os conjuntos: 
-	$$A_1 = \{\Int^*_+, \Int_-, \{\pi, \sqrt{-1}\}\} \mbox{ e } A_2 = \{\{a, b\}, \{\clubsuit, \spadesuit, \heartsuit, \lozenge\}, \Rea\}$$
+	$$A_1 = \{\mathbb{Z}^*_+, \mathbb{Z}_-, \{\pi, \sqrt{-1}\}\} \mbox{ e } A_2 = \{\{a, b\}, \{\clubsuit, \spadesuit, \heartsuit, \lozenge\}, \mathbb{R}\}$$
 	são ambos famílias.
 \end{example}
 
@@ -224,7 +222,7 @@ Seguindo a mesma organização de conteúdo apresentada em \cite{lipschutz2013-M
 \end{definition}
 
 \begin{example}\label{exe:UniaoDeConjuntos1}
-	Dados os dois conjuntos $A = \{x \in \Nat \mid x = 2i \mbox{ para algum } i \in \Nat\}$ e $B = \{x \in \Nat \mid x = 2j + 1 \mbox{ para algum } j \in \Nat\}$ tem-se que $A \cup B = \Nat$.
+	Dados os dois conjuntos $A = \{x \in \mathbb{N} \mid x = 2i \mbox{ para algum } i \in \mathbb{N}\}$ e $B = \{x \in \mathbb{N} \mid x = 2j + 1 \mbox{ para algum } j \in \mathbb{N}\}$ tem-se que $A \cup B = \mathbb{N}$.
 \end{example}
 
 \begin{example}\label{exe:UniaoDeConjuntos2}
@@ -239,7 +237,7 @@ Como apontado em \cite{lipschutz1978-TC} alguns livros usam a notação $A + B$ 
 \end{definition}
 
 \begin{example}\label{exe:IntersecaoDeConuuntos1}
-	Dado $A_1 = \{x \in \Nat \mid x \mbox{ é múltiplo de } 2\}$ e $A_2 = \{x \in \Nat \mid x \mbox{ é múltiplo de } 3\}$ tem-se que $A_1 \cap A_2 = \{x \in \Nat \mid x \mbox{ é múltiplo de } 6\}$.
+	Dado $A_1 = \{x \in \mathbb{N} \mid x \mbox{ é múltiplo de } 2\}$ e $A_2 = \{x \in \mathbb{N} \mid x \mbox{ é múltiplo de } 3\}$ tem-se que $A_1 \cap A_2 = \{x \in \mathbb{N} \mid x \mbox{ é múltiplo de } 6\}$.
 \end{example}
 
 \begin{example}\label{exe:IntersecaoDeConuuntos2}
@@ -303,7 +301,7 @@ A partir da definição de interseção é estabelecido um conceito de extrema v
 \end{definition}
 
 \begin{example}\label{exe:Complemento}
-	Dado $P = \{ x \in \Int \mid x = 2k \mbox{ para algum } k \in \Int\}$ tem-se então o seguinte complemento $\overline{P} = \{ x \in \Int \mid x = 2k + 1 \mbox{ para algum } k \in \Int\}$.
+	Dado $P = \{ x \in \mathbb{Z} \mid x = 2k \mbox{ para algum } k \in \mathbb{Z}\}$ tem-se então o seguinte complemento $\overline{P} = \{ x \in \mathbb{Z} \mid x = 2k + 1 \mbox{ para algum } k \in \mathbb{Z}\}$.
 \end{example}
 
 \begin{example}
@@ -349,7 +347,7 @@ Seguindo com este manuscrito, uma outra importante operação sobre conjuntos é
 \end{example}
 
 \begin{example}\label{exe:DiferencaConjuntos2}
-	Dado so conjuntos $\Int$ e $\Int_+^*$ tem-se que $\Int - \Int_+^* = \Int_-$.
+	Dado so conjuntos $\mathbb{Z}$ e $\mathbb{Z}_+^*$ tem-se que $\mathbb{Z} - \mathbb{Z}_+^* = \mathbb{Z}_-$.
 \end{example}
 
 \begin{remark}
@@ -676,7 +674,7 @@ $$A_\cap = \bigcap_{x \in A} x$$
 \end{definition}
 
 \begin{example}
-	Seja $D = \{\Int_+, \{0, -1, -2, -3\}, (\Int_- \cup \{0\})\}$, a interseção generalizada de $D$ corresponde ao conjunto $D_\cap = \{0\}$.
+	Seja $D = \{\mathbb{Z}_+, \{0, -1, -2, -3\}, (\mathbb{Z}_- \cup \{0\})\}$, a interseção generalizada de $D$ corresponde ao conjunto $D_\cap = \{0\}$.
 \end{example}
 
 \begin{example}
@@ -717,7 +715,7 @@ Como já mencionando algumas vezes anteriormente uma família é um conjunto cuj
 	$$\wp(A) = \{x \mid x \subseteq A\}$$
 \end{definition}
 
-Uma propriedade interessante do conjuntos das partes como dito em \cite{lipschutz1978-TC}, é que se $A$ for da forma $A = \{x_1, \cdots, x_n\}$ para algum $n \in \Nat$, então pode-se mostrar que $\wp(A)$ terá exatamente $2^n$ elementos.
+Uma propriedade interessante do conjuntos das partes como dito em \cite{lipschutz1978-TC}, é que se $A$ for da forma $A = \{x_1, \cdots, x_n\}$ para algum $n \in \mathbb{N}$, então pode-se mostrar que $\wp(A)$ terá exatamente $2^n$ elementos.
 
 \begin{example}
 	Seja $A = \{a, b, c\}$ tem-se que o conjunto das parte de $A$ corresponde a família de conjunto $\{\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\},\{a, c\}, \{c, b\},$ $\{a, b, c\}\}$.
@@ -823,7 +821,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \end{exerList}
 
 \begin{problem}\label{prob:Conjuntos6}
-	Considerando o universo dos números naturais dado os subconjuntos:  $A = \{1, 2, 3, 4, 5\}$, $B = \{x \in \Nat \mid x^2 = 9\}$, $C = \{x \in \Nat \mid x^2 - 4x + 6 = 0\}$ e $D = \{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$, complemente as frase com os símbolos $\subseteq$ e $\not\subseteq$.
+	Considerando o universo dos números naturais dado os subconjuntos:  $A = \{1, 2, 3, 4, 5\}$, $B = \{x \in \mathbb{N} \mid x^2 = 9\}$, $C = \{x \in \mathbb{N} \mid x^2 - 4x + 6 = 0\}$ e $D = \{x \in \mathbb{N} \mid  x = 2k \mbox{ para algum } k \in \mathbb{N}\}$, complemente as frase com os símbolos $\subseteq$ e $\not\subseteq$.
 \end{problem}
 
 \begin{exerList}
@@ -834,13 +832,13 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 	\item $A \ \underline{ \ \ \ \ \ \ } \ D$.
 	\item $C \ \underline{ \ \ \ \ \ \ } \ A$.
 	\item $D \ \underline{ \ \ \ \ \ \ } \ B$.
-	\item $B \ \underline{ \ \ \ \ \ \ } \ \Nat$.
-	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
-	\item $A \ \underline{ \ \ \ \ \ \ } \ \Nat$.
-	\item $A \ \underline{ \ \ \ \ \ \ } \ \Int_-$.
-	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ D$.
-	\item $\Nat \ \underline{ \ \ \ \ \ \ } \ C$.
-	\item $C \ \underline{ \ \ \ \ \ \ } \ \Nat$.
+	\item $B \ \underline{ \ \ \ \ \ \ } \ \mathbb{N}$.
+	\item $\mathbb{N} \ \underline{ \ \ \ \ \ \ } \ D$.
+	\item $A \ \underline{ \ \ \ \ \ \ } \ \mathbb{N}$.
+	\item $A \ \underline{ \ \ \ \ \ \ } \ \mathbb{Z}_-$.
+	\item $\mathbb{N} \ \underline{ \ \ \ \ \ \ } \ D$.
+	\item $\mathbb{N} \ \underline{ \ \ \ \ \ \ } \ C$.
+	\item $C \ \underline{ \ \ \ \ \ \ } \ \mathbb{N}$.
 	\item $\{6\} \ \underline{ \ \ \ \ \ \ } \ C$.
 \end{exerList}
 
@@ -855,15 +853,15 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 	\item $\emptyset \underline{ \ \ \ \ \ \ } \{1\}$.
 	\item $\emptyset \underline{ \ \ \ \ \ \ } \{\emptyset\}$.
 	\item $\{3\} \underline{ \ \ \ \ \ \ } \emptyset$.
-	\item $\Nat \underline{ \ \ \ \ \ \ } \{2, 3, 6\}$.
+	\item $\mathbb{N} \underline{ \ \ \ \ \ \ } \{2, 3, 6\}$.
 	\item $\{\{\emptyset\}, \emptyset\} \underline{ \ \ \ \ \ \ } \{\{\{\emptyset\}, \emptyset\}, \emptyset\}$.
 	\item $a \underline{ \ \ \ \ \ \ } \{\{a\}, b\} \underline{ \ \ \ \ \ \ } \{a, b, c\}$.
-	\item $0 \underline{ \ \ \ \ \ \ }  \Int_+^*$.
-	\item $\frac{1}{0} \underline{ \ \ \ \ \ \ }  \Rac$.
+	\item $0 \underline{ \ \ \ \ \ \ }  \mathbb{Z}_+^*$.
+	\item $\frac{1}{0} \underline{ \ \ \ \ \ \ }  \mathbb{Q}$.
 	\item $\emptyset \underline{ \ \ \ \ \ \ }  \emptyset$.
-	\item $\{1, 2, 4\} \underline{ \ \ \ \ \ \ }  \{2, 4, 6\} \underline{ \ \ \ \ \ \ } \{y \mid y = 2x \mbox{ para algum } x \in \Nat\}$.
-	\item $\{1\} \underline{ \ \ \ \ \ \ }  \Rea$.
-	\item $\frac{3}{4} \underline{ \ \ \ \ \ \ }  \Nat$.
+	\item $\{1, 2, 4\} \underline{ \ \ \ \ \ \ }  \{2, 4, 6\} \underline{ \ \ \ \ \ \ } \{y \mid y = 2x \mbox{ para algum } x \in \mathbb{N}\}$.
+	\item $\{1\} \underline{ \ \ \ \ \ \ }  \mathbb{R}$.
+	\item $\frac{3}{4} \underline{ \ \ \ \ \ \ }  \mathbb{N}$.
 \end{exerList}
 
 \begin{problem}\label{prob:Conjuntos8}
@@ -871,16 +869,16 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \end{problem}
 
 \begin{exerList}
-	\item $\{\frac{2}{x} \mid x - 1 > 0 \mbox{ com } x \in \Nat\}$ não é subconjunto de $\Nat$. 
-	\item $\{2, 3, 4, 6, 8\}$ não é subconjunto de $\{x \in \Nat \mid  x = 2k \mbox{ para algum } k \in \Nat\}$.
+	\item $\{\frac{2}{x} \mid x - 1 > 0 \mbox{ com } x \in \mathbb{N}\}$ não é subconjunto de $\mathbb{N}$. 
+	\item $\{2, 3, 4, 6, 8\}$ não é subconjunto de $\{x \in \mathbb{N} \mid  x = 2k \mbox{ para algum } k \in \mathbb{N}\}$.
 	\item $\{1, 2, 3\}$ é um subconjunto próprio do conjunto $\{1, 2, 3, 4, 5, 6, 7,8,9,0\}$.
-	\item $\{0, 5\}$ é subconjunto de $\Int$ mas não é subconjunto de $\Int^*$.
-	\item $\{ x \mid x + x = x\}$ é subconjunto próprio de $\Nat$.
+	\item $\{0, 5\}$ é subconjunto de $\mathbb{Z}$ mas não é subconjunto de $\mathbb{Z}^*$.
+	\item $\{ x \mid x + x = x\}$ é subconjunto próprio de $\mathbb{N}$.
 	\item Existem exatamente 15 subconjuntos próprios do conjunto $\{2, 3, 5, 7\}$.
 	\item Não existem subconjuntos próprios do conjunto $\emptyset$.
 	\item Sempre que $A \subset B$ e $A_0 \subset A$, tem-se que $A_0$ é também um subconjunto próprio de $B$.
 	\item O conjunto $\{2\}$ tem um único subconjunto próprio.
-	\item O conjunto $\{x \in \Nat \mid 0 < x < 3\}$ tem exatamente 3 subconjuntos próprios.
+	\item O conjunto $\{x \in \mathbb{N} \mid 0 < x < 3\}$ tem exatamente 3 subconjuntos próprios.
 \end{exerList}
 
 \begin{problem}\label{prob:Conjuntos9}
@@ -1004,7 +1002,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \begin{exerList}
 	\item $\wp(\{1, 2, 3\})$.
 	\item $\wp(\wp(\{0,1\}))$.
-	\item $\wp(\{\Nat\})$.
+	\item $\wp(\{\mathbb{N}\})$.
 	\item $\wp(\{1, \{2\}, \{1, \{2\}\}\})$.
 	\item $\wp(\{1, \{1\}, \{2\}, \{3, 4\}\})$.
 	\item $\wp(\wp(\{1, 2\})) - \wp(\{0, 1\})$.

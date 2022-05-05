@@ -47,15 +47,15 @@ Cada linha no diagrama começa com algum termo reservado (em um sentido similar 
 %O exemplo a seguir ilustra a construção de um diagrama de bloco para uma demonstração de uma famosa asserção.
 
 \begin{example}\label{exe:DiagramaProva1}
-	Demonstre a asserção: Dado $A = \{x \in \mid x = 2i, i \in \Int\}$ e $B = \{x \in \mid x = 2j - 2, j \in \Int\}$ tem-se que $A = B$.
+	Demonstre a asserção: Dado $A = \{x \in \mid x = 2i, i \in \mathbb{Z}\}$ e $B = \{x \in \mid x = 2j - 2, j \in \mathbb{Z}\}$ tem-se que $A = B$.
 	{\scriptsize
 	\begin{logicproof}{3}
 		\begin{subproof}
 			\text{\textbf{Assuma} que } x \text{ é um elemento qualquer, }&\\ 
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \in A, &\\
-				\text{\textbf{assim }} x = 2i, i \in \Int, &\\
-				\text{\textbf{desde que} existe } k \in \Int \text{ tal que } k = j - 1 \text{ e fazendo } i = k, &\\
+				\text{\textbf{assim }} x = 2i, i \in \mathbb{Z}, &\\
+				\text{\textbf{desde que} existe } k \in \mathbb{Z} \text{ tal que } k = j - 1 \text{ e fazendo } i = k, &\\
 				\text{\textbf{tem-se que} } x = 2i = 2k = 2(j -1) = 2j - 2.&\\
 				\text{\textbf{Então} } x \in B. &
 			\end{subproof}
@@ -66,8 +66,8 @@ Cada linha no diagrama começa com algum termo reservado (em um sentido similar 
 			\text{\textbf{Assuma} que } x \text{ é um elemento qualquer, }&\\ 
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \in B. &\\
-				\text{\textbf{assim }} x = 2j -2, j \in \Int, &\\
-				\text{\textbf{desde que} } j - 1 \in \Int, \text{ pode-se fazer } i = j - 1&\\
+				\text{\textbf{assim }} x = 2j -2, j \in \mathbb{Z}, &\\
+				\text{\textbf{desde que} } j - 1 \in \mathbb{Z}, \text{ pode-se fazer } i = j - 1&\\
 				\text{\textbf{logo }} x = 2i. &\\
 				\text{\textbf{Então} } x \in A. &
 			\end{subproof}
@@ -106,7 +106,7 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 	\begin{logicproof}{2}
 		\begin{subproof}
-			\text{\textbf{Suponha} que } x \in \Nat, &
+			\text{\textbf{Suponha} que } x \in \mathbb{N}, &
 		\end{subproof}
 	\end{logicproof}
 	}
@@ -114,8 +114,8 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 		\begin{logicproof}{2}
 			\begin{subproof}
-				\text{\textbf{Suponha} que } x \in \Nat, &\\
-				\text{\textbf{logo} } x = 2k + 1, k  \in \Nat,&
+				\text{\textbf{Suponha} que } x \in \mathbb{N}, &\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{N},&
 			\end{subproof}
 		\end{logicproof}
 	}
@@ -124,9 +124,9 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 		\begin{logicproof}{2}
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
-				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
-				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
-				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&
+				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&
 			\end{subproof}
 		\end{logicproof}
 	}
@@ -135,10 +135,10 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 		\begin{logicproof}{2}
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
-				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
-				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
-				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
-				\text{\textbf{logo} } x^2 + x= 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int.&
+				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
+				\text{\textbf{logo} } x^2 + x= 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \mathbb{Z}.&
 			\end{subproof}
 		\end{logicproof}
 	}
@@ -147,10 +147,10 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 		\begin{logicproof}{2}
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
-				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
-				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
-				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
-				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int,&\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
+				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \mathbb{Z},&\\
 					\text{\textbf{então} } x^2 + x \text{ por definição é um número par}.&
 			\end{subproof}
 		\end{logicproof}
@@ -160,10 +160,10 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 		\begin{logicproof}{2}
 			\begin{subproof}
 				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
-				\text{\textbf{logo} } x = 2k + 1, k  \in \Int,&\\
-				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \Int,&\\
-				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \Int.&\\
-				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \Int,&\\
+				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
+				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
+				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
+				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{então} } x^2 + x \text{ por definição é um número par}.&
 			\end{subproof}
 			\text{\textbf{Portanto}, Se } x \text{ é impar, então } x^2 + x \text{ é par.} &
@@ -173,7 +173,7 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 \end{example}
 
 \begin{note}
-	Na demonstração apresentada no Exemplo \ref{exe:DiagramaProva2} as justificativas da evolução do diagrama fora apresentadas passo a passo e separadas do diagrama, isso foi adotado para que nesse primeiro exemplo para detalhar a evolução da demonstração ao leitor, entretanto, isso não é o padrão, o normal (que será adotado) é que a justificativa (caso necessário\footnote{Quando a justificativa for trivial, ela não será inserida na prova.}) da dedução de uma linha seja inserida a direita da informação deduzida, separada desta pelo símbolo ---. A partir deste ponto até o fim deste capítulo será usado esta forma de escrita.
+	Na demonstração apresentada no Exemplo \ref{exe:DiagramaProva2} as justificativas da evolução do diagrama fora apresentadas passo a passo e separadas do diagrama, isso foi adotado nesse primeiro exemplo para detalhar a evolução da demonstração ao leitor, entretanto, isso não é o padrão, o normal (que será adotado) é que a justificativa (caso necessário\footnote{Quando a justificativa for trivial, ela não será inserida na prova.}) da dedução de uma linha seja inserida a direita da informação deduzida, separada desta pelo símbolo ---. A partir deste ponto até o fim deste capítulo será usado esta forma de escrita.
 \end{note}
 
 \begin{remark}
@@ -187,11 +187,11 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 		\begin{logicproof}{2}
 			\begin{subproof}
 				\text{\textbf{Suponha} que } n \text{ é múltiplo de } 4, & --- Hipótese\\
-				\text{\textbf{logo} } x = 4k, k  \in \Int,& --- DEF de múltiplo de $4$\\
-				\text{\textbf{assim} } x = (2 \cdot 2)k, k \in \Int,& --- Reescrita da linha $2$\\
-				\text{\textbf{dessa forma} } x= 2(2k), k \in \Int.& --- ASS da multiplicação\\
-				\text{\textbf{logo} } x= 2i, \text{ com } i = 2k, k \in \Int.& --- Reescrita da linha $4$\\
-				\text{\textbf{então} } x \text{ é múltiplo de } 2.& --- Def. de múltiplo de 2
+				\text{\textbf{logo} } x = 4k, k  \in \mathbb{Z},& --- DEF de múltiplo de $4$\\
+				\text{\textbf{assim} } x = (2 \cdot 2)k, k \in \mathbb{Z},& --- Reescrita da linha $2$\\
+				\text{\textbf{dessa forma} } x= 2(2k), k \in \mathbb{Z}.& --- ASS da multiplicação\\
+				\text{\textbf{logo} } x= 2i, \text{ com } i = 2k, k \in \mathbb{Z}.& --- Reescrita da linha $4$\\
+				\text{\textbf{então} } x \text{ é múltiplo de } 2.& --- DEF de múltiplo de 2
 			\end{subproof}
 			\text{\textbf{Portanto}, Se } n \text{ é múltiplo de } 4, \text{ então também é múltiplo de 2}. & --- Conclusão da PD (linhas 1-7)
 		\end{logicproof}
@@ -205,14 +205,14 @@ O leitor deve ter notado nos Exemplos \ref{exe:DiagramaProva2} e \ref{exe:Diagra
 	
 	{\scriptsize
 		\begin{logicproof}{2}
-			m \geq 5, m \in \Int & --- Premissa\\
-			n = 2k + 1, k \in  \Int^+ & --- Premissa\\
+			m \geq 5, m \in \mathbb{Z} & --- Premissa\\
+			n = 2k + 1, k \in  \mathbb{Z}^+ & --- Premissa\\
 			\begin{subproof}
 				\text{\textbf{Suponha} que } m \text{ é impar}, & --- Hipótese\\
-				\text{\textbf{logo} } m = 2j +1, j  \in \Int,& --- DEF  de número impar\\
+				\text{\textbf{logo} } m = 2j +1, j  \in \mathbb{Z},& --- DEF  de número impar\\
 				\text{\textbf{assim} } m + n = 2(j + k + 1)&\\
 				\text{\textbf{desde que} } m \geq 5 \text{ tem-se que } j \geq 2, &\\
-				\text{\textbf{mas} como } n \in \Int_+ \text{ tem-se que } k \geq 0, &\\
+				\text{\textbf{mas} como } n \in \mathbb{Z}_+ \text{ tem-se que } k \geq 0, &\\
 				\text{\textbf{assim }} j + k + 1 \geq 3, & --- Direto das linhas $6$ e $7$\\
 				\text{\textbf{logo} } 2(j + k + 1) \geq 6 &\\
 				\text{\textbf{então} } m + n \geq 6. & --- Reescrita da linha 9 
@@ -229,11 +229,11 @@ O leitor deve ter notado nos Exemplos \ref{exe:DiagramaProva2} e \ref{exe:Diagra
 
 
 \begin{example}\label{exe:DiagramaProva5}
-	Demonstração da asserção: Dado $m,n \in \Rea$ e $3m + 2n \leq 5$. Se $m > 1$, então $n < 1$.
+	Demonstração da asserção: Dado $m,n \in \mathbb{R}$ e $3m + 2n \leq 5$. Se $m > 1$, então $n < 1$.
 	
 	{\scriptsize
 		\begin{logicproof}{2}
-			m, n \in \Rea & --- Premissa\\
+			m, n \in \mathbb{R} & --- Premissa\\
 			3m + 2n \leq 5 & --- Premissa\\
 			\begin{subproof}
 				\text{\textbf{Suponha} que } m > 1, & --- Hipótese\\
@@ -274,7 +274,7 @@ Agora em termos do diagrama de blocos o método PCP apresenta o seguinte racioc�
 				\begin{subproof}
 					\text{\textbf{Suponha} que } n \leq 2, & --- Hipótese\\
 					\text{\textbf{assim} } n = 0, n = 1 \text{ ou } n = 2 & --- Direto da linha $2$\\
-					\text{\textbf{logo} } n! = 1 \text{ ou } n! = 2, & --- Da linha $3$ e da Def. de fatorial\\
+					\text{\textbf{logo} } n! = 1 \text{ ou } n! = 2, & --- Da linha $3$ e da DEF de fatorial\\
 					\text{\textbf{então} } n! \leq (n + 1) \text{ com } n \leq 2 .& --- Direto das linhas $3$ e $4$
 				\end{subproof}
 				\text{\textbf{Portanto}, Se } n \leq 2, \text{ então }  n! \leq (n + 1). & --- Conclusão da PD (linhas 2-5)
@@ -304,16 +304,16 @@ Agora em termos do diagrama de blocos o método PCP apresenta o seguinte racioc�
 \end{example}
 
 \begin{example}\label{exe:DiagramaProva8}
-	Demonstração da asserção: Dado três números $x, y, z \in \Rea$ com $x > y$. Se $xz \leq yz$, então $z \leq 0$.
+	Demonstração da asserção: Dado três números $x, y, z \in \mathbb{R}$ com $x > y$. Se $xz \leq yz$, então $z \leq 0$.
 	{\scriptsize
 		\begin{logicproof}{3}
-			x, y, z \in \Rea, & --- Premissa\\
+			x, y, z \in \mathbb{R}, & --- Premissa\\
 			x > y, & --- Premissa\\
 			\begin{subproof}
 				&  \\
 				\begin{subproof}
 					\text{\textbf{Suponha} que } z > 0, & --- Hipótese\\
-					\text{\textbf{então} } xz > yz,  & --- Das linhas $2$ e $4$ e da monotonicidade da multiplicação em $\Rea$
+					\text{\textbf{então} } xz > yz,  & --- Das linhas $2$ e $4$ e da monotonicidade da multiplicação em $\mathbb{R}$
 				\end{subproof}
 				\text{\textbf{Portanto}, Se } z > 0, \text{ então }  xz > yz. & --- Conclusão da PD (linhas $2$-$5$)
 			\end{subproof}
@@ -330,10 +330,10 @@ Agora em termos do diagrama de blocos o método PCP apresenta o seguinte racioc�
 				&  \\
 				\begin{subproof}
 					\text{\textbf{Suponha} que } n \text{ não é par}, & --- Hipótese\\
-					\text{\textbf{logo} } n = 2k + 1 \text{ com } k \in \Int,  & --- Def. de paridade\\
-					\text{\textbf{assim} } n^2 = 4k^2 + 4k + 1 \text{ com } k \in \Int,&\\
+					\text{\textbf{logo} } n = 2k + 1 \text{ com } k \in \mathbb{Z},  & --- DEF de paridade\\
+					\text{\textbf{assim} } n^2 = 4k^2 + 4k + 1 \text{ com } k \in \mathbb{Z},&\\
 					\text{\textbf{dessa forma }} n^2 = 2j + 1 \text{ com } j = 2k^2 + 2k,& --- Reescrita da linha $4$\\
-					\text{\textbf{então} } n^2 \text{ não é par}& --- Def. de paridade
+					\text{\textbf{então} } n^2 \text{ não é par}& --- DEF de paridade
 				\end{subproof}
 				\text{\textbf{Portanto}, Se } n  \text{ não é par}, \text{ então } n^2  \text{ não é par}. & --- Conclusão da PD (linhas $2$-$6$)
 			\end{subproof}
@@ -344,12 +344,12 @@ Agora em termos do diagrama de blocos o método PCP apresenta o seguinte racioc�
 
 \section{Demonstração por Absurdo}\label{sec:DemonstracaoAbsurdo}
 
-O método de demonstração por redução ao absurdo\footnote{\textit{Reductio ad absurdum} em latim.} (ou por contradição) tem por objetivo provar que a asserção $\alpha$ junto com as premissas (se houverem) é verdadeira a partir da prova de que a suposição de que a asserção ``não $\alpha$'' seja verdadeira junto das mesmas premissas (mencionadas anteriormente) gera um absurdo (ou contradição). O fato deste absurdo seja gerado, permite concluir que suposição de que a asserção ``não $\alpha$'' seja verdadeira é ridícula, ou seja, ``não $\alpha$'' tem que ser falsa e, portanto, a asserção $\alpha$ tem que ser verdadeira. Esse argumento é garantido pelo princípio da não contradição mencionado na Seção \ref{sec:Tipos-Logica-Aplicacoes} do Capítulo \ref{cap:IntroducaoLogica}.
+O método de demonstração por redução ao absurdo\footnote{\textit{Reductio ad absurdum} em latim.} (ou por contradição) tem por objetivo provar que a asserção $\alpha$ junto com as premissas (se houverem) é verdadeira a partir da prova de que a suposição de que a asserção ``não $\alpha$'' seja verdadeira junto das mesmas premissas (mencionadas anteriormente) gera um absurdo (ou contradição). O fato deste absurdo seja gerado, permite concluir que suposição de que a asserção ``não $\alpha$'' seja verdadeira é ridícula, ou seja, ``não $\alpha$'' tem que ser falsa e, portanto, a asserção $\alpha$ tem que ser verdadeira. Esse argumento é garantido pelos princípios da não contradição e do terceiro excluído, ambos mencionados na Seção \ref{sec:Tipos-Logica-Aplicacoes} do Capítulo \ref{cap:IntroducaoLogica}.
 
 %Em uma aspecto mais formal, isto é, em termos da linguagem de lógica (ver a Parte \ref{Parte:logica} desde manuscrito), a prova por redução ao absurdo de uma asserção $\alpha$ ser verdadeira é garantido pela prova de que $\Gamma\vdash \neg \alpha \Rightarrow \bot$, com $\Gamma$ sendo o conjunto de premissas.
 
 \begin{definition}[Prova por Redução ao Absurdo (RAA)]
-	A metodologia para uma demonstração por redução ao absurdo de uma asserção $\alpha$, consiste em supor que não $\alpha$ é uma hipótese verdadeira, então deduzir um absurdo (ou contradição). Em seguida concluir que dado está dedução pode-se afirma que $\alpha$ é verdadeiro.
+	A metodologia para uma demonstração por redução ao absurdo de uma asserção $\alpha$, consiste em supor que não $\alpha$ é uma hipótese verdadeira, então deduzir um absurdo (ou contradição). Em seguida concluir que dado que a partir de não $\alpha$ foi produzido um absurdo pode-se afirma que $\alpha$ é verdadeiro.
 \end{definition} 
 
 Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) abrir um bloco  cuja primeira linha é vazia; (2) abri um bloco interno em que na primeira linha deste bloco o termo de inicialização do bloco (já listados anteriormente) é seguida da expressão ``por absurdo'' e da asserção não $\alpha$; (3) em seguida nas próximas $n$ linhas irão acontecer as deduções necessárias até que na linha $n+2$ seja deduzido o absurdo (ou uma contradição) e o bloco é fechado, inserido na linha $n +3$ a informação de que ``Se não $\alpha$, então $\bot$'' e é fechado o bloco externo e (4) na linha $n + 4$ será adicionada a conclusão do bloco externo, contendo algo como `` Portanto, $\alpha$ é verdadeiro''.
@@ -359,24 +359,24 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 \end{remark}
 
 \begin{example}\label{exe:DiagramaProva10}
-	Demonstração da asserção: $\sqrt{2} \not\in \Rac$.
+	Demonstração da asserção: $\sqrt{2} \not\in \mathbb{Q}$.
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
 				&  \\
 				\begin{subproof}
-					\text{\textbf{Assuma por absurdo} que } \sqrt{2} \in \Rac, & --- Hipótese\\
-					\text{\textbf{logo} existem } a,b \in \Int \text{ tal que }  \sqrt{2} = \frac{a}{b} \text{ sendo } b \neq 0, mdc(a, b) = 1 &\\
+					\text{\textbf{Assuma por absurdo} que } \sqrt{2} \in \mathbb{Q}, & --- Hipótese \\
+					\text{\textbf{logo} existem } a,b \in \mathbb{Z} \text{ tal que }  \sqrt{2} = \frac{a}{b} \text{ sendo } b \neq 0, mdc(a, b) = 1 &\\
 					\text{\textbf{logo} } a^2 = 2b^2, \text{ ou seja, } a^2 \text{ é par},  &\\
-					\text{\textbf{dessa forma} } a = 2i \text{ com } i \in \Int,& --- Pela linha $4$ e o Exemplo \ref{exe:DiagramaProva9}\\
-					\text{\textbf{logo} } b^2 = 2i^2 \text{ com } i \in \Int,&\\
-					\text{\textbf{dessa forma} } b = 2j \text{ com } j \in \Int,& --- Pela linha $6$ e o Exemplo \ref{exe:DiagramaProva9}\\
+					\text{\textbf{dessa forma} } a = 2i \text{ com } i \in \mathbb{Z},& --- Pela linha $4$ e o Exemplo \ref{exe:DiagramaProva9}\\
+					\text{\textbf{logo} } b^2 = 2i^2 \text{ com } i \in \mathbb{Z},&\\
+					\text{\textbf{dessa forma} } b = 2j \text{ com } j \in \mathbb{Z},& --- Pela linha $6$ e o Exemplo \ref{exe:DiagramaProva9}\\
 					\text{\textbf{assim} } mdc(a, b) \geq 2,& --- Direto das linhas $5$ e $7$\\
 					\text{\textbf{mas} } mdc(a, b) = 1  \text{ e } mdc(a, b) \geq 2 \text{ é um absurdo}.& --- Direto das linhas $3$ e $8$
 				\end{subproof}
-				\text{\textbf{Portanto}, Se } \sqrt{2} \in \Rac, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
+				\text{\textbf{Portanto}, Se } \sqrt{2} \in \mathbb{Q}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
 			\end{subproof}
-			\text{\textbf{Consequentemente}, } \sqrt{2} \notin \Rac. & --- Conclusão da RAA (linhas $2$-$11$)
+			\text{\textbf{Consequentemente}, } \sqrt{2} \notin \mathbb{Q}. & --- Conclusão da RAA (linhas $2$-$11$)
 		\end{logicproof}
 	}
 \end{example}
@@ -396,18 +396,18 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 			\begin{subproof}
 				&  \\
 				\begin{subproof}
-					\text{\textbf{Assuma por absurdo} que } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1 , & --- Hipótese\\
-					\text{\textbf{logo }}  x, y \in \Int_+^* \text{ tem-se que } min(x, y) = 1 \text{ e tem-se que } (x-y)(x+y) = 1,&\\
-					\text{\textbf{assim} } x - y = 1 \text{ e } x + y = 1 \text{ ou }  x - y = -1 \text{ e } x + y = -1, & --- Por $x, y \in \Int_+^*$\\
+					\text{\textbf{Assuma por absurdo} que } \exists x, y \in \mathbb{Z}_+^* \text{ tal que } x^2 - y^2 = 1 , & --- Hipótese\\
+					\text{\textbf{logo }}  x, y \in \mathbb{Z}_+^* \text{ tem-se que } min(x, y) = 1 \text{ e tem-se que } (x-y)(x+y) = 1,&\\
+					\text{\textbf{assim} } x - y = 1 \text{ e } x + y = 1 \text{ ou }  x - y = -1 \text{ e } x + y = -1, & --- Por $x, y \in \mathbb{Z}_+^*$\\
 					\text{\textbf{mas} se } x - y = 1 \text{ e } x + y = 1 \text{ pode-se assumir } x = 1 \text{ e } y = 0,&\\
 					\text{\textbf{assim} } min(x, y) \neq 1,& --- Direto da linha $5$\\
 					\text{\textbf{mas} se }  x - y = -1 \text{ e } x + y = -1 \text{ pode-se assumir } x = -1 \text{ e } y = 0, &\\
 					\text{\textbf{assim} } min(x, y) \neq 1,& --- Direto da linha $7$\\
 					\text{\textbf{mas} } min(x, y) = 1  \text{ e } min(x, y) \neq 1 \text{ é um absurdo}.&--- Direto das linhas $3, 6$ e $8$.
 				\end{subproof}
-				\text{\textbf{Portanto}, Se } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
+				\text{\textbf{Portanto}, Se } \exists x, y \in \mathbb{Z}_+^* \text{ tal que } x^2 - y^2 = 1, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$10$)
 			\end{subproof}
-			\text{\textbf{Consequentemente}, não } \exists x, y \in \Int_+^* \text{ tal que } x^2 - y^2 = 1. & --- Conclusão da RAA (linhas $2$-$10$)
+			\text{\textbf{Consequentemente}, não } \exists x, y \in \mathbb{Z}_+^* \text{ tal que } x^2 - y^2 = 1. & --- Conclusão da RAA (linhas $2$-$10$)
 		\end{logicproof}
 	}
 \end{example}
@@ -426,14 +426,129 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 					\text{\textbf{Assuma por absurdo} que $P$ é um programa jogador de xadrez que sempre vence}, & --- Hipótese\\
 					\text{\textbf{logo } pode-se instanciar duas execuções de }  P \text{ denotadas por } P_1 \text{ e } P_2,&\\
 					\text{\textbf{mas} se } P_1 \text{ joga contra } P_2 \text{ e vence},&\\
-					\text{\textbf{tem-se que} } P_2 \text{ não é um programa que sempre vence},& --- Direto da linha $4$\\
+					\text{\textbf{tem-se que} } P \text{ não é um programa que sempre vence},& --- Direto da linha $4$\\
 					\text{\textbf{além disso} se ocorre o contrário e } P_2 \text{ joga contra } P_1 \text{ e vence},&\\
-					\text{\textbf{tem-se que} } P_1 \text{ não é um programa que sempre vence},& --- Direto da linha $6$\\
-					\text{\textbf{mas} } P_1  \text{ ou } P_2 \text{ perder é um absurdo, já que são instancias de } P.&--- Direto das linhas $3, 5$ e $7$.
+					\text{\textbf{tem-se que} } P \text{ não é um programa que sempre vence},& --- Direto da linha $6$\\
+					\text{\textbf{mas} } P \text{ perder é um absurdo, já que por hipótese } P \text{ é um programa que sempre vence}.&--- Direto das linhas $3, 5$ e $7$.
 				\end{subproof}
 				\text{\textbf{Portanto}, Se } P \text{ é um programa de jogar xadrez que sempre vence}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$8$)
 			\end{subproof}
 			\text{\textbf{Consequentemente}, Não existe um programa $P$ jogador de xadrez que sempre vença.}. & --- Conclusão da RAA (linhas $2$-$9$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{note}
+	O Exemplo \ref{exe:DiagramaProva12} apresenta a demonstração de uma clássica asserção diretamente ligada a computação, tal exemplo foi apresentado para mostrar ao leitor iniciante que argumentos válidos não necessariamente usam a notação matemática.
+\end{note}
+
+\begin{example}\label{exe:DiagramaProva13}
+	Demonstração da asserção: Se $3n + 2$ é impar, então $n$ é impar.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				&  \\
+				\begin{subproof}
+					\text{\textbf{Suponha por absurdo} que }3n + 2 \text{ é impar e } n \text{ é par}, & --- Hipótese\\
+					\text{\textbf{logo} } n = 2k, k \in \mathbb{Z},& --- DEF de paridade\\
+					\text{\textbf{dessa forma} } 3n + 2 = 2(3k + 1), k \in \mathbb{Z},&\\ 
+					\text{\textbf{assim} } 3n + 2 \text{ é par},& --- Da linha $4$ e da DEF de paridade\\
+					\text{\textbf{mas} } 3n + 2 \text{ ser impar e } 3n + 2 \text{ ser par, é um absurdo}.& --- Das linhas $2$ e $5$
+				\end{subproof}
+				\text{\textbf{Portanto}, se } 3n + 2 \text{ é impar e } n \text{ é par}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$7$)
+			\end{subproof}
+			\text{\textbf{Consequentemente}, se $3n + 2$ é impar, então $n$ é impar}. & --- Conclusão da RAA (linhas $2$-$8$)
+		\end{logicproof}
+	}
+\end{example}
+
+\section{Demonstração de Generalizações}\label{sec:DemonstracaoGeneralizacao}
+
+Antes de falar sobre o método usado para demonstrar generalizações deve-se primeiro reforçar ao leitor o que é são generalizações. Uma generalização é qualquer asserção que contenha em sua formação expressões das formas: 
+\begin{itemize}
+	\item[(a)] Para todo \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ }.
+	\item[(b)] Para cada \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ }.
+	\item[(c)] Para qualquer \underline{\ \ \ \ \ \ \ \ \ \ \ \ \ }.
+\end{itemize}
+
+\begin{example}
+	A seguintes asserções são generalizações.
+	\begin{itemize}
+		\item[(a)] Todos os cachorros tem quatro patas.
+		\item[(b)] Todos os números inteiros possuem um inverso aditivo.
+		\item[(c)] Todos os times de futebol pernambucanos são times brasileiros.
+	\end{itemize}
+\end{example}
+
+Nos termos da lógica uma asserção é uma generalização sempre que o quantificador universal é o quantificador mais externo a da asserção.
+
+\begin{remark}
+	Neste texto sempre que possível será usado a escrita da lógica de primeira ordem nas asserções universais. 
+\end{remark}
+
+Agora que o leitor está a par do que é uma generalização, pode-se prosseguir o texto deste manuscrito apresentando formalmente o método de demonstração para generalizações.
+
+\begin{definition}[Prova de Generalizações (PG)]
+	Para provar uma asserção da forma, ``$\forall x.[P(x)]$'', em que $P(x)$ é uma asserção acerca da variável $x$. Deve-se assumir que a variável $x$ assume como valor um objeto qualquer no universo do discurso de que trata a  generalização, em seguida, provar que a asserção $P(x)$ é verdadeira, usando as propriedades disponível de forma genérica para os objetos do universo do discurso.
+\end{definition}
+
+Em termos do diagrama, a prova de uma generalização começa inserido na primeira linha de um bloco a informação de que $x$ é um objeto genérico (ou qualquer) do discurso, em seguida é aberto um novo bloco para a subprova em que será provado que a asserção $P(x)$ é verdadeira, com o fechamento do bloco da subprova pode-se então concluir que $P(x)$ é verdadeiro para um $x$ genérico do discurso, após isso o bloco externo é fechado e  pode-se apresentar a conclusão de que todo objeto $x$ do discurso $P(x)$ é verdadeiro. Note que esse raciocínio de demonstração garante (com explicado em \cite{velleman2019comProvar}) que a asserção $P$ é universal sobre o universo do discurso, ou seja, garante a universalidade da asserção $P$.
+
+\begin{example}\label{exe:DiagramaProva14}
+	Demonstração da asserção: $\forall x \in \{4n \mid n \in \mathbb{N} \}.$[$x$ é par].
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				\text{\textbf{Assuma} que } x \text{ é um elemento qualquer de } \{4n \mid n \in \mathbb{N} \}&  --- Hipótese\\
+				\begin{subproof}
+					\text{\textbf{dessa forma} } x = 4n, n \in \mathbb{N}, & --- DEF do discurso\\
+					\text{\textbf{logo} } x = (2\cdot 2)n, n \in \mathbb{N},& --- Reescrita da linha $2$\\
+					\text{\textbf{dessa forma} } x = 2(2n), n \in \mathbb{N},& --- ASS da multiplicação \\ 
+					\text{\textbf{assim} } x = 2k, k \in \mathbb{N},& \\
+					\text{\textbf{então} } x \text{ é par}.& --- DEF de paridade
+				\end{subproof}
+				\text{\textbf{Portanto}, quando } x \in \{4n \mid n \in \mathbb{N} \}, \text{ tem-se então que }  x \text{ é par}. & --- Conclusão  das linhas $2$-$6$
+			\end{subproof}
+			\text{\textbf{Consequentemente},} \forall x \in \{4n \mid n \in \mathbb{N} \}.\text{[$x$ é par]}. & --- Conclusão da PG (linhas $1$-$7$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{example}\label{exe:DiagramaProva15}
+	Demonstração da asserção: $\forall X, Y \subseteq \mathbb{U}.$[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$].
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				\text{\textbf{Considere} dois conjuntos quaisquer } X, Y \subseteq \mathbb{U}&  --- Hipótese\\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } X \neq \emptyset, & --- Hipótese\\
+					\text{\textbf{logo} existe pelo menos um } x \in X,&\\
+					\text{\textbf{desde que} } x \in X \text{ tem-se que } x \in (X \cup Y),&\\ 
+					\text{\textbf{então} } (X \cup Y) \neq \emptyset.& 
+				\end{subproof}
+				\text{\textbf{Portanto}, Se } X \neq \emptyset, \text{ então }  X \cup Y \neq \emptyset. & --- Conclusão  das PD (linhas $2$-$5$)
+			\end{subproof}
+			\text{\textbf{Consequentemente},} \forall X, Y \subseteq \mathbb{U}.\text{[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$]}. & --- Conclusão da PG (linhas $1$-$6$)
+		\end{logicproof}
+	}
+\end{example}
+
+Um erro que muitos iniciantes frequentemente cometem ao tentar provar enunciados de generalização é utilizar uma (ou mais) propriedade(s) de um elemento genérico $x$  para provar $P(x)$, entretanto esta(s) propriedade(s) usada(s) não é (são) compartilhada(s) por todos os elementos de $\mathbb{U}$, isto é, apenas um subconjunto de $\mathbb{U}$ apresenta a(s) propriedade(s) usadas, para mais detalhes sobre este tipo de erro podem ser consultados em \cite{velleman2019comProvar}.
+
+\begin{example}\label{exe:DiagramaProva16}
+	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[se $n > 2$, então $x^2 > x + x$].
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				\text{\textbf{Assuma} que } x \text{ é um número inteiro,}&  --- Hipótese\\
+				\begin{subproof}
+					\text{\textbf{Suponha} que } x > 2, & --- Hipótese\\
+					\text{\textbf{logo} } x \cdot x > 2x,& --- Monotonicidade da multiplicação em $\mathbb{Z}$\\
+					\text{\textbf{então} } x^2 > x + x.& --- Reescrita da linha $3$
+				\end{subproof}
+				\text{\textbf{Dessa forma}, se } n > 2, \text{ então } x^2 > x + x. & --- Conclusão  das PD (linhas $2$-$4$)
+			\end{subproof}
+			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[se $n > 2$, então $x^2 > x + x$]}. & --- Conclusão da PG (linhas $1$-$5$)
 		\end{logicproof}
 	}
 \end{example}
