@@ -489,13 +489,13 @@ Nos termos da lógica uma asserção é uma generalização sempre que o quantif
 Agora que o leitor está a par do que é uma generalização, pode-se prosseguir o texto deste manuscrito apresentando formalmente o método de demonstração para generalizações.
 
 \begin{definition}[Prova de Generalizações (PG)]
-	Para provar uma asserção da forma, ``$\forall x.[P(x)]$'', em que $P(x)$ é uma asserção acerca da variável $x$. Deve-se assumir que a variável $x$ assume como valor um objeto qualquer no universo do discurso de que trata a  generalização, em seguida, provar que a asserção $P(x)$ é verdadeira, usando as propriedades disponível de forma genérica para os objetos do universo do discurso.
+	Para provar uma asserção da forma, ``$(\forall x)[P(x)]$'', em que $P(x)$ é uma asserção acerca da variável $x$. Deve-se assumir que a variável $x$ assume como valor um objeto qualquer no universo do discurso de que trata a  generalização, em seguida, provar que a asserção $P(x)$ é verdadeira, usando as propriedades disponível de forma genérica para os objetos do universo do discurso.
 \end{definition}
 
 Em termos do diagrama, a prova de uma generalização começa inserido na primeira linha de um bloco a informação de que $x$ é um objeto genérico (ou qualquer) do discurso, em seguida é aberto um novo bloco para a subprova em que será provado que a asserção $P(x)$ é verdadeira, com o fechamento do bloco da subprova pode-se então concluir que $P(x)$ é verdadeiro para um $x$ genérico do discurso, após isso o bloco externo é fechado e  pode-se apresentar a conclusão de que todo objeto $x$ do discurso $P(x)$ é verdadeiro. Note que esse raciocínio de demonstração garante (com explicado em \cite{velleman2019comProvar}) que a asserção $P$ é universal sobre o universo do discurso, ou seja, garante a universalidade da asserção $P$.
 
 \begin{example}\label{exe:DiagramaProva14}
-	Demonstração da asserção: $\forall x \in \{4n \mid n \in \mathbb{N} \}.$[$x$ é par].
+	Demonstração da asserção: $(\forall x \in \{4n \mid n \in \mathbb{N} \})$[$x$ é par].
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
@@ -509,13 +509,13 @@ Em termos do diagrama, a prova de uma generalização começa inserido na primei
 				\end{subproof}
 				\text{\textbf{Portanto}, quando } x \in \{4n \mid n \in \mathbb{N} \}, \text{ tem-se então que }  x \text{ é par}. & --- Conclusão  das linhas $2$-$6$
 			\end{subproof}
-			\text{\textbf{Consequentemente},} \forall x \in \{4n \mid n \in \mathbb{N} \}.\text{[$x$ é par]}. & --- Conclusão da PG (linhas $1$-$7$)
+			\text{\textbf{Consequentemente},} (\forall x \in \{4n \mid n \in \mathbb{N} \})\text{[$x$ é par]}. & --- Conclusão da PG (linhas $1$-$7$)
 		\end{logicproof}
 	}
 \end{example}
 
 \begin{example}\label{exe:DiagramaProva15}
-	Demonstração da asserção: $\forall X, Y \subseteq \mathbb{U}.$[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$].
+	Demonstração da asserção: $(\forall X, Y \subseteq \mathbb{U})$[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$].
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
@@ -528,7 +528,7 @@ Em termos do diagrama, a prova de uma generalização começa inserido na primei
 				\end{subproof}
 				\text{\textbf{Portanto}, Se } X \neq \emptyset, \text{ então }  X \cup Y \neq \emptyset. & --- Conclusão  das PD (linhas $2$-$5$)
 			\end{subproof}
-			\text{\textbf{Consequentemente},} \forall X, Y \subseteq \mathbb{U}.\text{[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$]}. & --- Conclusão da PG (linhas $1$-$6$)
+			\text{\textbf{Consequentemente},} (\forall X, Y \subseteq \mathbb{U})\text{[se $X \neq \emptyset$, então $(X \cup Y) \neq \emptyset$]}. & --- Conclusão da PG (linhas $1$-$6$)
 		\end{logicproof}
 	}
 \end{example}
@@ -536,7 +536,7 @@ Em termos do diagrama, a prova de uma generalização começa inserido na primei
 Um erro que muitos iniciantes frequentemente cometem ao tentar provar enunciados de generalização é utilizar uma (ou mais) propriedade(s) de um elemento genérico $x$  para provar $P(x)$, entretanto esta(s) propriedade(s) usada(s) não é (são) compartilhada(s) por todos os elementos de $\mathbb{U}$, isto é, apenas um subconjunto de $\mathbb{U}$ apresenta a(s) propriedade(s) usadas, para mais detalhes sobre este tipo de erro podem ser consultados em \cite{velleman2019comProvar}.
 
 \begin{example}\label{exe:DiagramaProva16}
-	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[se $n > 2$, então $n^2 > n + n$].
+	Demonstração da asserção: $(\forall n \in \mathbb{Z})$[se $n > 2$, então $n^2 > n + n$].
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
@@ -548,13 +548,13 @@ Um erro que muitos iniciantes frequentemente cometem ao tentar provar enunciados
 				\end{subproof}
 				\text{\textbf{Dessa forma}, se } n > 2, \text{ então } x^2 > n + n. & --- Conclusão  das PD (linhas $2$-$4$)
 			\end{subproof}
-			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[se $n > 2$, então $x^2 > n + n$]}. & --- Conclusão da PG (linhas $1$-$5$)
+			\text{\textbf{Portanto},} (\forall n \in \mathbb{Z})\text{[se $n > 2$, então $x^2 > n + n$]}. & --- Conclusão da PG (linhas $1$-$5$)
 		\end{logicproof}
 	}
 \end{example}
 
 \begin{example}\label{exe:DiagramaProva17}
-	Demonstração da asserção: $\forall n \in \mathbb{Z}.$[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito].
+	Demonstração da asserção: $(\forall n \in \mathbb{Z})$[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito].
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
@@ -568,7 +568,48 @@ Um erro que muitos iniciantes frequentemente cometem ao tentar provar enunciados
 				\end{subproof}
 				\text{\textbf{Dessa forma},  } 3(n^2 + 2n + 3) - 2n^2 \text{ é um quadrado perfeito.}&  --- Conclusão  das linhas $2$-$6$
 			\end{subproof}
-			\text{\textbf{Portanto},} \forall n \in \mathbb{Z}.\text{[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito]}. & --- Conclusão da PG (linhas $1$-$7$)
+			\text{\textbf{Portanto},} (\forall n \in \mathbb{Z})\text{[$3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito]}. & --- Conclusão da PG (linhas $1$-$7$)
+		\end{logicproof}
+	}
+\end{example}
+
+\section{Demonstração de Existência e Unicidade}\label{sec:DemonstrandoExistencia}
+
+Antes de falar sobre o método de demonstração existencial deve-se primeiro reforçar ao leitor o que é um enunciado existencial. Um enunciado de uma sentença do tipo existencial é qualquer asserção que inicia usando as expressões das forma seguir:
+\begin{itemize}
+	\item[(a)] Existe um(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+	\item[(b)] Há um(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+\end{itemize} 
+
+Agora sobre a metodologia para demonstrar (provar) a existência de um objeto com um determinada propriedade, ou seja, provar que um certo objeto $x$ satisfaz uma propriedade $P$,  é especificada pela definição a seguir.
+
+\begin{definition}[Prova de existência (PE)]
+	Para provar uma asserção da forma: ``$(\exists x).[P(x)]$'' é um asserção sobre a variável x. Deve-se exibir um elemento específico $a$ pertencente ao universo do discurso do enunciado, e mostrar que a asserção $P(x)$ é verdadeira quando $x$ é instância como sendo exatamente o elemento $a$, ou seja, deve-se mostrar que $P(a)$ é verdadeira.
+\end{definition}
+
+Em relação ao diagrama de bloco, uma demonstração de existência, isto é, uma prova de uma asserção $(\exists x).[P(x)]$,  irá se comportar de forma muito semelhante a uma demonstração de generalidade, as única mudanças significativas é que tal método inicia seu bloco com a declaração de que será atribuído um objeto \textbf{específico} em vez de considerar a variável genérica a $x$, além disso, a conclusão do bloco externo deve ser exatamente a $(\exists x).[P(x)]$, ou seja, a conclusão deverá ser a asserção existencial.
+
+\begin{example}\label{exe:DiagramaProva18}
+	Demonstração da asserção: $(\exists m, n \in \mathbb{I})[m^n \in \mathbb{Q}]$.
+	{\scriptsize
+		\begin{logicproof}{3}
+			\begin{subproof}
+				\text{\textbf{Deixe ser} } a = \sqrt{2} \text{ e } b = \sqrt{2}&  --- Hipótese\\
+				\text{\textbf{logo} } a,b \in \mathbb{I}, & --- Pelo Exemplo \ref{exe:DiagramaProva10}\\
+				\begin{subproof}
+					\text{\textbf{Se} } \sqrt{2}^{\sqrt{2}} \in  \mathbb{Q},&\\
+					\text{\textbf{então} não há mais nada a ser demonstrado.}&
+				\end{subproof}
+				\text{\textbf{Consequentemente}, se } \sqrt{2}^{\sqrt{2}} \in  \mathbb{Q}, \text{ então } a^b \in Q.& --- PD das linhas $3$-$4$\\
+				\begin{subproof}
+					\text{\textbf{Se} } \sqrt{2}^{\sqrt{2}} \notin  \mathbb{Q},&\\
+					\text{\textbf{logo} } \sqrt{2}^{\sqrt{2}} \in  \mathbb{I},&\\
+					\text{\textbf{assim} fazendo } c = a^b \text{ tem-se que } c \in \mathbb{I},&\\
+					\text{\textbf{então} } c^b = (\sqrt{2}^{\sqrt{2}})^{\sqrt{2}} = 2.&
+				\end{subproof}
+				\text{\textbf{Consequentemente}, se } \sqrt{2}^{\sqrt{2}} \notin \mathbb{Q}, \text{ então } c^b \in \mathbb{Q} \text{ com } c \in \mathbb{I}, c = a^b.& --- PD das linhas $6$-$9$
+			\end{subproof}
+			\text{\textbf{Portanto},} (\exists m, n \in \mathbb{I})[m^n \in \mathbb{Q}]. & --- Conclusão da PG (linhas $1$-$10$)
 		\end{logicproof}
 	}
 \end{example}
