@@ -584,7 +584,7 @@ Antes de falar sobre o método de demonstração existencial deve-se primeiro re
 Agora sobre a metodologia para demonstrar (provar) a existência de um objeto com um determinada propriedade, ou seja, provar que um certo objeto $x$ satisfaz uma propriedade $P$,  é especificada pela definição a seguir.
 
 \begin{definition}[Prova de existência (PE)]
-	Para provar uma asserção da forma ``$(\exists x).[P(x)]$'', em que $P(x)$ é um asserção sobre a variável x. Deve-se exibir um elemento específico ``$a$'' pertencente ao universo do discurso, e mostrar que a asserção $P(x)$ é verdadeira quando $x$ é instanciado como sendo exatamente o elemento $a$, ou seja, deve-se mostrar que $P(a)$ é verdadeira.
+	Para provar uma asserção da forma ``$(\exists x)[P(x)]$'', em que $P(x)$ é uma asserção sobre a variável x. Deve-se exibir um elemento específico ``$a$'' pertencente ao universo do discurso, e mostrar que a asserção $P(x)$ é verdadeira quando $x$ é instanciado como sendo exatamente o elemento $a$, ou seja, deve-se mostrar que $P(a)$ é verdadeira.
 \end{definition}
 
 Em relação ao diagrama de bloco, uma demonstração de existência, isto é, uma prova de uma asserção $(\exists x).[P(x)]$,  irá se comportar de forma muito semelhante a uma demonstração de generalidade, as única mudanças significativas é que tal método inicia seu bloco com a declaração de que será atribuído um objeto \textbf{específico} em vez de considerar a variável genérica a $x$, ou seja, é realizado uma instanciação de um elemento. Além disso, a conclusão do bloco externo deve ser exatamente a $(\exists x).[P(x)]$, ou seja, a conclusão deverá ser a asserção existencial.
@@ -645,8 +645,8 @@ Em relação ao diagrama de bloco, uma demonstração de existência, isto é, u
 						\begin{subproof}
 							\text{\textbf{Suponha por absurdo} que } (X \cup Y) \not\subseteq Y&  --- Hipótese\\
 							\text{\textbf{assim} tem-se que existe } z \in (X \cup Y) \text{ e } z \notin Y, &\\
-							\text{\textbf{dessa forma} } z \in X,& Direto da linha $7$\\
-							\text{\textbf{desde que} } X = \emptyset \text{ é um absurdo que } z \in X,& Da linha $1$ e da DEF de conjunto vazio 
+							\text{\textbf{dessa forma} } z \in X,& --- Direto da linha $7$\\
+							\text{\textbf{desde que} } X = \emptyset \text{ é um absurdo que } z \in X,& --- Da linha $1$ e da DEF de conjunto vazio 
 						\end{subproof}
 						\text{\textbf{Portanto}, se }(X \cup Y) \not\subseteq Y, \text{ então } \bot. & --- Conclusão da PD (linhas $6$-$9$)
 					\end{subproof}
@@ -660,10 +660,63 @@ Em relação ao diagrama de bloco, uma demonstração de existência, isto é, u
 \end{example}
 
 \begin{remark}
-	O leitor que leu com  atenção o Capítulo \ref{cap:Conjuntos}, ou que tenha domínio sobre a teoria dos conjuntos sabe que $(\emptyset \cup X) = X$, para qualquer conjunto $X$, assim poderia escrever uma prova bem mais curta do que a demonstração mostrada no Exercício \ref{exe:DiagramaProva20}.
+	O leitor que leu com  atenção o Capítulo \ref{cap:Conjuntos}, ou que tenha domínio sobre a teoria dos conjuntos sabe que $(\emptyset \cup X) = X$, para qualquer conjunto $X$, assim poderia escrever uma prova bem mais curta (fica como exercício) do que a demonstração mostrada no Exercício \ref{exe:DiagramaProva20}.
 \end{remark}
 
-Agora vale ressaltar uma importante questão, a prova de existência não garante que um único elemento do discurso satisfaça uma determinada propriedade, note que no Exemplo \ref{exe:DiagramaProva19} poderia ser substituído $1$ pelo número natural $0$ sem haver qualquer perca para a demonstração. De fato, o que a prova de existência garante é que \textbf{pelo menos um} elemento do discurso satisfaz a propriedade em questão. 
+Agora vale ressaltar uma importante questão, a prova de existência não garante que um único elemento do discurso satisfaça uma determinada propriedade, note que no Exemplo \ref{exe:DiagramaProva19} poderia ser substituído $1$ pelo número natural $0$ sem haver qualquer perca para a demonstração. De fato, o que a prova de existência garante é que \textbf{pelo menos um} elemento dentro do discurso satisfaz a propriedade que está sendo avaliada. Uma demonstração que garante que \textbf{um e apenas um} elemento em todo discurso satisfaz uma certa propriedade é chamada de demonstração de unicidade.
 
+Antes de falar sobre o método de demonstração de unicidade deve-se primeiro reforçar ao leitor o que é um enunciado existencial de unicidade. Basicamente tal tipod e enunciado consiste de um enunciado de existência que adiciona os termos ``único'' ou ``apenas um'' na uma sentença do tipo existencial ficando da formas:
+\begin{itemize}
+	\item[(a)] Existe apenas um(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+	\item[(b)] Há apenas um(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+\end{itemize} 
+ou ainda,
+\begin{itemize}
+	\item[(a)] Existe um(a) único(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+	\item[(b)] Há  um(a) único(a) $\underline{\ \ \ \ \ \ \ \ \ \ \ \ }$.
+\end{itemize} 
 
-Uma demonstração que garante que um (e apenas um) elemento em todo discurso satisfaz uma certa propriedade é chamada de demonstração de unicidade, 
+\begin{note}
+	Deste ponto em diante sempre que possível será substituido a escrita ``se $P$, então $Q$'' pela notação da lógica simbólica $P \Rightarrow Q$.
+\end{note}
+
+\begin{definition}[Prova de unicidade (PU)]\label{def:ProvaUnicidade}
+	Uma prova de unicidade consiste em provar uma asserção da forma ``$(\exists x)[P(x) \land (\forall y)[P(y) \Rightarrow x = y]]$'', em que $P$ é uma asserção sobre os elementos do discurso. Para tal primeiro deve-se demonstrar que a asserção ``$(\exists x)[P(x)]$'' é verdadeira, e depois prova que a generalização $(\forall y)[P(y) \Rightarrow x = y]$ também é verdadeira.
+\end{definition}
+
+\begin{remark}
+	Pela noção de contrapositiva pode-se substituir na Definição \ref{def:ProvaUnicidade} a generalização $(\forall y)[P(y) \Rightarrow x = y]$ pela asserção da forma $(\forall y)[x \neq y \Rightarrow \neg P(y)]$.
+\end{remark}
+
+Com respeito ao diagrama de blocos, uma demonstração de unicidade apresenta um diagrama similar ao de uma prova de existência, entretanto, internamente ao bloco da demonstração irá existir uma subprova para a asserção $(\forall y)[P(y) \Rightarrow x = y]$, sendo está subprova responsável pro mostrar a unicidade. Por fim após fechar o bloco mais externo deve-se enunciar a conclusão.
+
+\begin{example}\label{exe:DiagramaProva21}
+	Demonstração da asserção: $(\exists! x \in  \mathbb{N})[x + x = x \land (\forall y \in  \mathbb{N})[y + y = y \Rightarrow x = y]]$.
+	{\scriptsize
+		\begin{logicproof}{3}
+				\begin{subproof}
+					\text{\textbf{Deixe ser} } x = 0, &  --- Instanciação existencial\\
+					\text{\textbf{logo} } x + 0 = 0 + 0,&\\
+					\text{\textbf{assim} } x + 0 = 0, &\\
+					\text{\textbf{dessa forma} } x + x = x. & --- Da linha $1$ e da reescrita da linha $3$\\
+					\begin{subproof}
+						\text{\textbf{Suponha } que } y \in \mathbb{N}, &  --- Hipótese\\
+						\begin{subproof}
+							\text{\textbf{Assuma } que } y + y = y, &  --- Hipótese\\
+							\text{\textbf{logo} } y = y - y,&\\
+							\text{\textbf{assim} } y = 0,&\\
+							\text{\textbf{então} } y = x,& --- Reescrita da linha $8$
+						\end{subproof}
+						\text{\textbf{Consequentemente},} y + y = y \Rightarrow x = y. & --- Conclusão da PD (linhas $6$-$9$)
+					\end{subproof}
+					\text{\textbf{Portanto},} (\forall y \in  \mathbb{N})[y + y = y \Rightarrow x = y], & --- Conclusão da PG (linhas $5$-$10$)\\
+					\text{\textbf{logo} } x + x = x \land (\forall y \in  \mathbb{N})[y + y = y \Rightarrow x = y].& --- Direto das linhas $4$ e $11$
+				\end{subproof}
+			\text{\textbf{Portanto},} (\exists x \in  \mathbb{N})[x + x = x \land (\forall y \in  \mathbb{N})[y + y = y \Rightarrow x = y]]. & --- Conclusão da PU (linhas $2$-$13$)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{remark}
+	Obviamente uma aserção de unicidade pode muito bem ser escrita usando a abreviação $(\exists! x)[P(x)]$, para mais detalhes sobre isto veja o Capítulo \ref{cap:IntroducaoLogica} da Parte \ref{Parte:logica} deste manuscrito.
+\end{remark}
