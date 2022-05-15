@@ -720,3 +720,36 @@ Com respeito ao diagrama de blocos, uma demonstração de unicidade apresenta um
 \begin{remark}
 	Obviamente uma aserção de unicidade pode muito bem ser escrita usando a abreviação $(\exists! x)[P(x)]$, para mais detalhes sobre isto veja o Capítulo \ref{cap:IntroducaoLogica} da Parte \ref{Parte:logica} deste manuscrito.
 \end{remark}
+
+\begin{example}\label{exe:DiagramaProva22}
+	Demonstração da asserção: $(\forall x \in  \mathbb{Z})[(\exists! y \in  \mathbb{Z})[x + y = 0]]$.
+	{\scriptsize
+		\begin{logicproof}{4}
+			\begin{subproof}
+				\text{\textbf{Assuma} que } x \in \mathbb{Z}, &  --- Hipótese\\
+				\begin{subproof}
+					\text{\textbf{Deixe ser} } y = -x, &  --- Instanciação existencial\\
+					\text{\textbf{logo} } x + y = x + (-x),&\\
+					\text{\textbf{mas} } x + (-x) = 0,&\\
+					\text{\textbf{então} } x + y = 0.&
+				\end{subproof}
+				(\exists y \in  \mathbb{Z})[x + y = 0].& --- Conclusão da PE (linhas $2$-$5$)\\
+				\begin{subproof}
+					\text{\textbf{Assuma} que } z \in \mathbb{Z}, &  --- Hipótese\\
+					\begin{subproof}
+						& \\
+						\begin{subproof}
+							\text{\textbf{Suponha por absurdo} que } x + z = 0 \text{ e } z \neq y, &  --- Hipótese\\
+							\text{\textbf{desde que} } x + y = 0 \text{ tem-se que } x + z = x + y,&\\
+							\text{\textbf{mas} assim } z = y, \text{ o que contradiz a hipótese e, portanto, é um absurdo}.&
+						\end{subproof}
+						\text{\textbf{Consequentemente}, se } x + z = 0 \text{ e } z \neq -x, \text{ então } \bot.& --- Conclusão da PD (linhas $8$-$10$)
+					\end{subproof}
+					\text{\textbf{Portanto}, se } x + z = 0, \text{ então } x = y. & --- Conclusão da RAA (linhas $8$-$11$)
+				\end{subproof}
+				\text{\textbf{Dessa forma} } (\forall z \in  \mathbb{Z})[x + z = 0 \Rightarrow z = y]. & --- Conclusão da PG (linhas $7$-$13$)
+			\end{subproof}
+			\text{\textbf{Portanto},} (\forall x \in  \mathbb{Z})[(\exists! y \in  \mathbb{Z})[x + y = 0]]. & --- Conclusão da PU (linhas $2$-$13$)
+		\end{logicproof}
+	}
+\end{example}
