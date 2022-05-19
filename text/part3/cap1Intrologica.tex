@@ -13,7 +13,7 @@ Antes de apresentar uma descrição histórica da lógica, este texto começa pe
 
 Essa forma de usar os derivados da palavra lógica enquanto entidades para transmissão de certeza pode ser usada como gatilho ``fácil e preguiçoso'' para enunciar que a lógica se trata de uma ciência (ou disciplina) acerca das certezas sobre os fatos do mundo real. 
 
-Existe outra resposta comumente encontrada na literatura acadêmica (ver \cite{abe2002-logica, BenjaV1, joaoPavao2014}) para o que seria a lógica, esta segunda alternativa de resposta  descreve a lógica como sendo um mecanismo utilizado durante o raciocínio estruturado e correto\footnote{Uma visão semelhante a este é descrita em \cite{magnus2020}, que diz que a lógica está preocupada com a avaliação de argumentos e a separação dos argumentos bons dos ruins.}, isto é, uma ferramenta do raciocínio que possibilita a inferência de conclusões a partir de premissas \cite{abe2002-logica, copi1981, hodges1997}, por exemplo, dado as premissas:
+Existe outra resposta comumente encontrada na literatura acadêmica (ver \cite{abe2002-logica, BenjaV1, joaoPavao2014}) para o que seria a lógica, esta segunda alternativa de resposta  descreve a lógica como sendo um mecanismo utilizado durante o raciocínio estruturado e correto\footnote{Uma visão semelhante a esta é descrita em \cite{magnus2020}, que diz que a lógica está preocupada com a avaliação de argumentos e a separação dos argumentos bons dos ruins.}, isto é, uma ferramenta do raciocínio que possibilita a inferência de conclusões a partir de premissas \cite{abe2002-logica, copi1981, hodges1997, levin2021}, por exemplo, dado as premissas:
 
 \begin{itemize}
 	\item[(a)] Toda quinta-feira é servido peixe no almoço.
@@ -58,9 +58,9 @@ De forma sucinta pode-se então concluir que a lógica uma ciência nascida na G
 
 \section{Argumentos, Proposições e Predicados}\label{sec:Argumento-Proposicao-Predicado}
 
-Como qualquer outra disciplina para entender de fato o que é a lógica deve-se estudar a mesma \cite{copi1981}, antes de qualquer coisa é bom saber que diferente de outras ciências, a lógica não apresentar fronteiras bem definidas, na verdade como dito em \cite{joaoPavao2014}, a lógica pode ser compreendida como a tênue linha que separa as ciências da filosofia e da matemática, no que diz respeito a isto, este manuscrito irá se debruçar primariamente sobre os aspectos matemáticos da lógica.
+Como qualquer outra disciplina para entender de fato o que é a lógica deve-se estudar a mesma \cite{copi1981}, antes de qualquer coisa é bom saber que diferente de outras ciências a lógica não apresentar fronteiras bem definidas, na verdade como dito em \cite{joaoPavao2014}, a lógica pode ser compreendida como a tênue linha que separa as ciências da filosofia e da matemática, no que diz respeito a isto, este manuscrito irá se debruçar primariamente sobre os aspectos matemáticos da lógica.
 
-É sabido que para se estudar uma ciência deve-se saber quais são as entidades fundamentais de interesse dessa ciência, no caso da lógica, estas entidades fundamentais são os argumentos em um discurso. Antes de apresentar a noção formal de argumento é conveniente apresentar a ideia de frase declarativa. As frases declarativas usadas para construção de argumentos são aquelas que como dito em \cite{joaoPavao2014}, enunciam como as entidades em um certo discurso são ou poderia ter sido, em outras palavras, as frase declarativas falam sobre as propriedades das entidades.
+É sabido que para se estudar uma ciência deve-se saber quais são as entidades fundamentais de interesse dessa ciência, no caso da lógica, estas entidades fundamentais são os argumentos dentro de um discurso. Antes de apresentar a noção formal de argumento é conveniente apresentar a ideia de frase declarativa (ou asserção). As frases declarativas usadas para construção de argumentos são aquelas que como dito em \cite{joaoPavao2014}, enunciam como as entidades em um certo discurso são ou poderia ter sido, em outras palavras, as frase declarativas falam sobre as propriedades das entidades.
 
 \begin{example}\label{exe:FrasesDeclarativas}
     As frase:
@@ -95,7 +95,7 @@ Para representar um argumento pode-se como visto em \cite{copi1981, joaoPavao201
     São exemplos de argumentos:
     
 		\begin{center}
-			A sopa foi preparada  com legumes\\ 
+			A sopa foi preparada  sem cebola\\ 
 			Toda quarta-feira é servida sopa para as crianças.\\
 			Hoje é quinta-feira.\\
 			$\therefore$\\
@@ -111,6 +111,8 @@ Para representar um argumento pode-se como visto em \cite{copi1981, joaoPavao201
 			O imperador da lua é um rato.
 		\end{center}
 \end{example}
+
+A validade de um argumento pode ser analisada em dois aspectos, o semântico e o sintático, este tipo de análise será estudada em capítulos futuros deste manuscrito.
 
 \begin{definition}[Proposição]\label{def:Proposicao}
 	Uma proposição é uma frase declarativa sobre as propriedades de indivíduos específicos em um discurso.
@@ -139,7 +141,7 @@ Pela Definição \ref{def:Predicados} pode-se entender que um predicado fala das
 		\item[(b)] Para todo $x \in \mathbb{R}$ sempre existem dois números $y_1, y_2 \in \mathbb{R}$ tal que $y_1 < x < y_2$.
 		\item[(c)] Existe algum professor cujo nome da mãe é Maria de Fátima.
 		\item[(d)] Há um estado brasileiro que não tem litoral.
-		\item[(e)] Todo time carioca é Sul-Americano.
+		\item[(e)] Todo os moradores de Salgueiro são pernambucanos.
 	\end{itemize}
 \end{example}
 
@@ -164,14 +166,14 @@ As proposições e os predicados podem ser classificados em duas categorias: sim
 Os principais conectivos são: a conjunção, a disjunção, a implicação e a bi-implicação.
 
 \begin{remark}
-    Dependendo do idioma mais de um termo da linguagem pode representar um determinado conectivos.
+    Dependendo do idioma mais de um termo da linguagem pode representar um determinado conectivo.
 \end{remark}
 
 A seguir são listados os termos na língua portuguesa que são conectivos, ressaltamos que o símbolo $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ será usado como uma variável para representar a posição de proposições (ou predicados).
 
 \begin{table}[h]
 	\centering
-	\scriptsize
+	%\scriptsize
 	\begin{tabular}{cl}
 		\hline
 		\textbf{Conectivo}  & \textbf{Termo em Portugu\^es} \\ \hline
@@ -198,6 +200,8 @@ A seguir são listados os termos na língua portuguesa que são conectivos, ress
 	\label{tab:ConectivosPT-BR}
 \end{table}
 
+%No que diz respeito aos conectivos este manuscrito irá adora o ``$\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ e $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$'' para a conjunção, ``$\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ ou $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$'' para a disjunção, ``se $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$, então $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$'' para a implicação e ``$\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ se, e somente se $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$'' para a bi-implicação.
+
 \begin{example}\label{exe:Conectivos}
 	Usando as proposições do Exemplo \ref{exe:Proposicoes} e os predicados do Exemplo \ref{exe:Predicados} pode-se criar:
 	\begin{itemize}
@@ -221,7 +225,7 @@ De forma similar aos conectivos os quantificadores também são ``representados'
 
 \begin{table}[h]
 	\centering
-	\scriptsize
+	%\scriptsize
 	\begin{tabular}{cl}
 		\hline
 		\textbf{Quantificador}  & \textbf{Termo em Portugu\^es} \\ \hline
@@ -236,14 +240,14 @@ De forma similar aos conectivos os quantificadores também são ``representados'
 	\label{tab:QuantificadoresPT-BR}
 \end{table}
 
-Anteriormente já foi dito que na lógica as proposições e predicados podem ser interpretados como sendo verdadeiros ou falsos, dito isto, para qualquer proposição ou predicado sempre é possível obter uma proposição ou predicado com um valor de interpretação oposta, isto é, se a proposição (ou predicado) original for verdadeira a proposição (ou predicado) oposta será falsa, ou vice-versa. Esse operador que gerar as proposições (ou predicados) opostas(os) é chamado de negação e a tabela a seguir exibe como os termos na língua portuguesa podem ser usados para representar a negação.
+Anteriormente já foi dito que na lógica as proposições e predicados podem ser interpretados como sendo verdadeiros ou falsos, dito isto, para qualquer proposição ou predicado sempre é possível obter uma proposição ou predicado com um valor de interpretação oposta, isto é, se a proposição (ou predicado) original for verdadeira a proposição (ou predicado) oposta será falsa, ou vice-versa. Esse ``construtor'' que gerar as proposições (ou predicados) opostas(os) é chamado de negação e a tabela a seguir exibe como os termos na língua portuguesa podem ser usados para representar a negação.
 
 \begin{table}[h]
-	\scriptsize
+	%\scriptsize
 	\centering
 	\begin{tabular}{c}
 		\hline
-		Termos em português\\
+		\textbf{Termos em português}\\
 		\hline
 		Não $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ \\
 		É falso que $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
@@ -255,10 +259,50 @@ Anteriormente já foi dito que na lógica as proposições e predicados podem se
 
 \section{Representação simbólica}\label{sec:Representacao-simbolica}
 
+Ao estudar lógica é comum adotar o uso de símbolos para representar as proposições, os predicados e os conectivos. Nesse sentido o estudo da lógica está interessada na estrutura dos objetos (proposições e predicados) e não nas frases em si \cite{joaoPavao2014}. Nesta seção será apresentado a simbologia básica sem entrar propriamente nos sintáticos da lógica.
+
+A tabela a seguir apresenta a simbologia dos conectivos, dos quantificadores e também da negação que serão adotados neste manuscrito.
+
+\begin{table}[h]
+	%\scriptsize
+	\centering
+	\begin{tabular}{lc}
+		\hline
+		\textbf{Objeto} & \textbf{Símbolo}\\
+		\hline
+		Conjunção & $\land$\\
+		Disjunção & $\lor$\\
+		Implicação & $\Rightarrow$\\
+		Bi-implicação & $\Leftrightarrow$\\
+		Negação & $\neg$\\
+		Quantificador universal & $\forall$\\
+		Quantificador existencial & $\exists$\\
+		\hline
+	\end{tabular}
+	\caption{Símbolos usados na Lógica simbólica.}
+	\label{tab:SimbolosLogicos}
+\end{table}
+
+\begin{definition}[Representação das Proposições]\label{def:RepresentacaoProposicoes}
+	As proposições deve ser representadas usando letras maiúsculas do alfabeto latino.
+\end{definition}
+
+\begin{example}
+	Representando as proposições ``2 > 5'', ``hoje é quarta feira'' e ``Alice é a professor de introdução à Ciência da Computação'' respectivamente pela letras $P, Q$ e $R$ tem-se que:
+	\begin{itemize}
+		\item[(a)] $P \land Q$ representa a proposição: ``2 > 5 e hoje é quarta feira''.
+		\item[(b)] $P \lor P$ representa a proposição: ``2 > 5 ou 2 > 5''.
+		\item[(c)] $R \Rightarrow Q$ representa a proposição: ``Se Alice é a professor de introdução à Ciência da Computação, então hoje é quarta feira''.
+		\item[(d)] $\neg R \Rightarrow  P \lor R$ representa a proposição: ``Se não é verdade que Alice é a professor de introdução à Ciência da Computação, então 2 > 5 ou  Alice é a professor de introdução à Ciência da Computação''.
+		\item[(e)] $P \Leftrightarrow Q$ representa a proposição: ``2 > 5 se, e somente se hoje é quarta feira''.
+	\end{itemize}
+\end{example}
+
+
 \section{Lógica e Ciência da Computação}\label{sec:Tipos-Logica-Aplicacoes}
 
 
-Para finalizar este capítulo introdutório é conveniente falar mesmo que de forma superficial sobre os tipos de lógica. A lógica assim como a física pode ser dividida em duas categorias ou tipos bem definidos, a saber, clássicas e as não
+Para finalizar este capítulo introdutório é conveniente falar mesmo que de forma superficial sobre os tipos de lógica e suas relações com a Ciência da Computação. A lógica assim como a física pode ser dividida em duas categorias ou tipos bem definidos, a saber, clássicas e as não
 clássicas. Como mencionado em  \cite{BenjaV1, edgar2002}, as lógicas clássicas são aquelas que apresentam a característica de obedecer os seguintes princípios: 
 
 \begin{itemize}

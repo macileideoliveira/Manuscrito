@@ -739,15 +739,19 @@ Além da ideia de conjunto das partes, uma outra família muito importante dentr
 	\end{itemize}
 \end{definition} 
 
-Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamados de \textbf{células}.
+É fácil notar pela Definição   \ref{def:ParticaoConjuntos}  que partições são famílias, além disso, como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamados de \textbf{células}, isto é, dado um conjunto $A$ os subconjuntos na partição de $A$ são vistos como as células que formam o próprio conjunto $A$. O resultado a seguir garante que sempre é possível obter pelo menos uma partição de um conjunto.
 
-\begin{theorem}
+\begin{theorem}\label{teo:ParticaoTrivial}
 	Se $A$ é um conjunto não vazio, então existe pelo menos uma partição de $A$.
 \end{theorem}
 
 \begin{proof}
-	Suponha que o conjunto $A$ seja não vazio, assim definia o conjunto $PT_A = \{\{x\} \mid x \in A\}$, agora é claramente tem-se que $PT_A$ satisfaz todas as condições da Definição \ref{def:ParticaoConjuntos} e, portanto, $PT_A$ é uma partição do conjunto $A$. 
+	Suponha que o conjunto $A$ seja não vazio, assim definia o conjunto $PT_A = \{\{x\} \mid x \in A\}$, agora claramente tem-se que $PT_A$ é uma família e satisfaz todas as condições da Definição \ref{def:ParticaoConjuntos} e, portanto, $PT_A$ é uma partição do conjunto $A$. 
 \end{proof}
+
+\begin{note}
+	Neste manuscrito a partição descrita no Teorema \ref{teo:ParticaoTrivial} será chamada de \textbf{partição trivial}. 
+\end{note}
 
 \begin{example}
 	Dado o conjunto $A = \{0, 1, 2, 3, 4, 5\}$ tem-se que:
@@ -866,6 +870,8 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 	\item $a \underline{ \ \ \ \ \ \ } \{\{a\}, b\} \underline{ \ \ \ \ \ \ } \{a, b, c\}$.
 	\item $0 \underline{ \ \ \ \ \ \ }  \mathbb{Z}_+^*$.
 	\item $\frac{1}{0} \underline{ \ \ \ \ \ \ }  \mathbb{Q}$.
+	\item $\{0,1\} \underline{ \ \ \ \ \ \ } \{0,1, 2, 5\} \underline{ \ \ \ \ \ \ } \mathbb{N}$.
+	\item $\mathbb{N} \underline{ \ \ \ \ \ \ } \wp(\mathbb{N})$
 	\item $\emptyset \underline{ \ \ \ \ \ \ }  \emptyset$.
 	\item $\{1, 2, 4\} \underline{ \ \ \ \ \ \ }  \{2, 4, 6\} \underline{ \ \ \ \ \ \ } \{y \mid y = 2x \mbox{ para algum } x \in \mathbb{N}\}$.
 	\item $\{1\} \underline{ \ \ \ \ \ \ }  \mathbb{R}$.
@@ -1055,7 +1061,7 @@ Como dito em \cite{lipschutz2013-MD} os elementos em uma partição são chamado
 \end{exerList}
 
 \begin{problem}\label{prob:Conjuntos17}
-	Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ exiba duas partições diferentes para cada um dos conjuntos a seguir. 
+	Considere o universo $\mathbb{U} = \{a, b, c, d, e, f, g\}$ e seus subconjuntos $A = \{d, e, g\}, B = \{a, c\}, C =\{b, e, g\}$ exiba duas partições diferentes da partição trivial para cada um dos conjuntos a seguir. 
 \end{problem}
 
 \begin{exerList}
