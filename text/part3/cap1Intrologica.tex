@@ -259,7 +259,7 @@ Anteriormente já foi dito que na lógica as proposições e predicados podem se
 
 \section{Representação simbólica}\label{sec:Representacao-simbolica}
 
-Ao estudar lógica é comum adotar o uso de símbolos para representar as proposições, os predicados e os conectivos. Nesse sentido o estudo da lógica está interessada na estrutura dos objetos (proposições e predicados) e não nas frases em si \cite{joaoPavao2014}. Nesta seção será apresentado a simbologia básica sem entrar propriamente nos sintáticos da lógica.
+Ao estudar lógica é comum adotar o uso de símbolos para representar as proposições, os predicados e os conectivos. Nesse sentido o estudo da lógica está interessada na estrutura dos objetos (proposições e predicados) e não nas frases em si \cite{joaoPavao2014}. Nesta seção será apresentado a simbologia básica sem entrar propriamente nos aspectos sintáticos da lógica.
 
 A tabela a seguir apresenta a simbologia dos conectivos, dos quantificadores e também da negação que serão adotados neste manuscrito.
 
@@ -297,6 +297,38 @@ A tabela a seguir apresenta a simbologia dos conectivos, dos quantificadores e t
 		\item[(e)] $P \Leftrightarrow Q$ representa a proposição: ``2 > 5 se, e somente se hoje é quarta feira''.
 	\end{itemize}
 \end{example}
+
+Agora a representação de um predicado é um pouco mais complexa, primeiro entre parênteses deve-se inserir o simbolo do quantificador e as variáveis ligadas a esse quantificado, se necessário pode-se incluir também o universo a qual essa variáveis pertences. Em seguida entre colchetes é inserido sentença (fórmula) lógica, ressaltando que os predicados deve ser letras maiúscula seguidas imediatamente das variáveis do predicado entre parênteses, os exemplos a seguir ilustram estas ideias.
+
+\begin{remark}
+	Vale ressaltar que os colchetes são símbolos usados para determinar o alcance do quantificador e de suas variáveis.
+\end{remark}
+
+\begin{example}
+	O predicado: ``Existe um $professor$ que a mãe se chama Fátima'', usando $p$ para representar a variável $professor$ e $MF$ para representar a asserção da mãe do professor se chamar Fátima, pode-se representar tal predicado como: $(\exists p)[MF(p)]$.
+\end{example}
+
+\begin{example}
+	O predicado: ``Existe uma tapa, para fechar toda panela'', pode ser representada da seguinte forma, $(\exists t)[(\forall p)[F(t, p)]]$, aqui $t$ representa a variável tampa e $p$ representa a variável panela, por fim, $F(t,p)$ pode-ser interpretado como a asserção de $t$ fechar $p$.
+\end{example}
+
+\begin{remark}
+	No caso do quantificar de existência de unicidade, isto é, aquele que descreve a sentença \textbf{existe um único} é representado simbolicamente por $\exists!$, isto é, é usado o símbolo do quantificador existencial seguido de uma exclamação.
+\end{remark}
+
+
+\begin{example}
+	O predicado ``Todos os homens são mortais''. Pode ser representado por $(\forall h)[M(h)]$ aqui $h$ representa a variável homem e a asserção do homem ser mortal é representado pelo símbolo $M(h)$.
+\end{example}
+
+\begin{example}\label{exe:TraducaoPredicadoFormula}
+	O predicado: ``Para todo $x$ inteiro e todo $y$ inteiro, existe um número inteiro $z$ tal que $x + y = z$''. Pode ser representado simbolicamente como, $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x,y,z)]]$, aqui $S(x,y,z)$ representa a asserção $x + y = z$
+\end{example}
+
+
+
+O leitor deve ter notado que $x, y$ no Exemplo \ref{exe:TraducaoPredicadoFormula} estão juntos no mesmo quantificador, isso ocorre pelo fato de ambos pertencerem ao mesmo universo do discurso (conjunto) e serem enunciado de forma aninhada direta\footnote{Dois quantificadores estão aninhados diretamente quando um está logo após o outro, ou seja, o escopo de um é seguido do escopo do outro.}, outra forma para presentar tal predicado seria $(\forall x \in \mathbb{Z})[(\forall y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x,y,z)]]]$.
+
 
 
 \section{Lógica e Ciência da Computação}\label{sec:Tipos-Logica-Aplicacoes}
@@ -379,9 +411,9 @@ Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clás
 	\item Todos os números primos são números impares ou o número $\pi$ é o pode ser escrito como produto de números primos.
 	\item Vou a padaria se, e somente se, estiver fazendo frio ou se Juliane quiser tomar sopa.
 	\item Não é verdade que a terra é esférica se, e somente se, não existe pessoas morando em Recife.
-	\item Shizue e Valdi foram para o Chile, mas Luiza também foi.
+	\item Shizue e Altair foram para o Chile, mas Luiza também foi.
 	\item Basta que eu tire 8 em Matemática discreta para eu ter um noite de festa.
-	\item A gripe é um condição suficiente para ser declarado morto.
+	\item A gripe é uma condição suficiente para ser declarado morto.
 	\item Se para todo flor existe um vaso, então os jardins de Jaçanã são cheio de cerejeiras. 
 	\item Se ontem choveu a noite toda e hoje é meu aniversário de 14 anos, então Pedro vai a Califórnia se, e somente se, Tom e Frajola forem amigos do Manda-chuva.
 	\item Não é verdade que Shizue sabe desenhar com carvão, mas sabe desenhar com lápis e pincel.
