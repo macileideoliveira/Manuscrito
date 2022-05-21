@@ -232,7 +232,8 @@ De forma similar aos conectivos os quantificadores também são ``representados'
 		\multirow{3}{*}{Universal}    & Para todo(a) $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para qualquer $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para cada $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\ \hline
-		\multirow{3}{*}{Existencial} & Existe $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
+		\multirow{4}{*}{Existencial} & Existe $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
+		& Algum(a) $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para algum $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para um $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\ \hline
 	\end{tabular}
@@ -313,7 +314,7 @@ Agora a representação de um predicado é um pouco mais complexa, primeiro entr
 \end{example}
 
 \begin{remark}
-	No caso do quantificar de existência de unicidade, isto é, aquele que descreve a sentença \textbf{existe um único} é representado simbolicamente por $\exists!$, isto é, é usado o símbolo do quantificador existencial seguido de uma exclamação.
+	No caso do quantificador de existência e unicidade, isto é, aquele que descreve a sentença \textbf{existe um único}, o mesmo é representado simbolicamente por $\exists!$, isto é, é usado o símbolo do quantificador existencial seguido de uma exclamação.
 \end{remark}
 
 
@@ -322,12 +323,15 @@ Agora a representação de um predicado é um pouco mais complexa, primeiro entr
 \end{example}
 
 \begin{example}\label{exe:TraducaoPredicadoFormula}
-	O predicado: ``Para todo $x$ inteiro e todo $y$ inteiro, existe um número inteiro $z$ tal que $x + y = z$''. Pode ser representado simbolicamente como, $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x,y,z)]]$, aqui $S(x,y,z)$ representa a asserção $x + y = z$
+	O predicado: ``Para todo $x$ inteiro e todo $y$ inteiro, existe um número inteiro $z$ tal que $x + y = z$''. Pode ser representado simbolicamente como, $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[x+ y = z]]$.
 \end{example}
 
+\begin{remark}
+	Aqui vale ressaltar que não existe na que proíba representar $x + y = z$ por uma palavra da forma $S(x,y,z)$, e assim a representação exibida no exemplo \ref{exe:TraducaoPredicadoFormula} poderia ser escrita  forma $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x, y, z)]]$.
+\end{remark}
 
 
-O leitor deve ter notado que $x, y$ no Exemplo \ref{exe:TraducaoPredicadoFormula} estão juntos no mesmo quantificador, isso ocorre pelo fato de ambos pertencerem ao mesmo universo do discurso (conjunto) e serem enunciado de forma aninhada direta\footnote{Dois quantificadores estão aninhados diretamente quando um está logo após o outro, ou seja, o escopo de um é seguido do escopo do outro.}, outra forma para presentar tal predicado seria $(\forall x \in \mathbb{Z})[(\forall y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x,y,z)]]]$.
+O leitor deve ter notado que $x, y$ no Exemplo \ref{exe:TraducaoPredicadoFormula} estão juntos no mesmo quantificador, isso ocorre pelo fato de ambos pertencerem ao mesmo universo do discurso (conjunto) e serem enunciado de forma aninhada direta\footnote{Dois quantificadores estão aninhados diretamente quando um está logo após o outro, ou seja, o escopo de um é seguido do escopo do outro.}, outra forma para presentar tal predicado seria $(\forall x \in \mathbb{Z})[(\forall y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[x + y = z]]]$.
 
 
 
@@ -368,7 +372,7 @@ Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clás
 
 \section{Questionário}\label{sec:Questionario1part3}
 
-\begin{problem}
+\begin{problem}\label{prob:IntroLogica1}
     Examine cada uma das frases declarativas abaixo e diga se as mesmas são proposições ou predicados e também diga se são simples ou compostas, justifique suas respostas no caso de proposição (ou predicado) composta(o).
 \end{problem}
 
@@ -395,7 +399,7 @@ Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clás
 	\item Se o Cruzeiro é um time da primeira divisão, então todo macaco come macarrão ou não é o caso de Patricia ser professora de matemática. 
 \end{exerList}
 
-\begin{problem}
+\begin{problem}\label{prob:IntroLogica2}
 	Determine as frases simples (ou atômicas) que compõem as proposições e predicados que se seguem.
 \end{problem}
 
@@ -420,4 +424,29 @@ Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clás
 	\item O Catatau comeu o mel somente se, o Puffy saiu para passear com o Jack ou Jerry é vizinho do Mickey.
 	\item Para todo homem existe uma mulher que é sua mãe ou Valdi toca clarinete.
 	\item Existe um carro amarelo se, e somente se, todas bicicletas são roxas, mas as motos são azuis. 
+\end{exerList}
+
+\begin{problem}\label{prob:IntroLogica3}
+	Converta para notação simbólica todas as questões as sentenças no Exercício \ref{prob:IntroLogica1}.
+\end{problem}
+
+\begin{problem}\label{prob:IntroLogica4}
+	Converta para notação simbólica as frase declarativas a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item Todo número natural é maior ou igual que 0.
+	\item Rosas são vermelhas e violetas são azuis.
+	\item Rosas são vermelhas e, violetas são azuis ou açúcar é doce.
+	\item Julia gosta de doces mas Marcos prefere salgados.
+	\item Existe um número real que divide 0.
+	\item Todos os mamíferos sabem nadar.
+	\item Se a galinha nasceu de um ovo, então todas as aves são dinossauros.
+	\item Todos os cisnes são brancos.
+	\item Todos os ratos gostam de leite.
+	\item Se Abel torce para o Botafogo ou o para o Palmeiras, então ele não sabe o que é ganhar um mundial.
+	\item Zico não ganhou uma copa, mas Vampeta ganhou logo, o Vasco vai voltar a primeira divisão.
+	\item Todos os alunos passaram em Matemática Discreta, mas só alguns alunos  conseguem tirar 10 em Cálculo logo, não é verdade que todos os alunos reprovaram Administração.
+	\item Não é verdade que, Carla come peixe se, e somente se, Thiago lavar a louça.
+	\item Se Alfredo é paraibano, então Paulo passou em Física ou não é verdade que Manoel é canhoto. 
 \end{exerList}
