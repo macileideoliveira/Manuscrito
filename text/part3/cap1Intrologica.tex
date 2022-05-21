@@ -11,7 +11,7 @@ Antes de apresentar uma descrição histórica da lógica, este texto começa pe
     \item[(d)] Logicamente se eu tomar banho, vou ter que me molhar.
 \end{itemize}
 
-Essa forma de usar os derivados da palavra lógica enquanto entidades para transmissão de certeza pode ser usada como gatilho ``fácil e preguiçoso'' para enunciar que a lógica se trata de uma ciência (ou disciplina) acerca das certezas sobre os fatos do mundo real. 
+Essa forma de usar os derivados da palavra lógica enquanto entidades para transmissão de certeza pode ser usada como gatilho ``fácil e preguiçoso'' para enunciar que a lógica se trata de uma ciência (ou disciplina) acerca das certezas sobre os fatos do mundo material. 
 
 Existe outra resposta comumente encontrada na literatura acadêmica (ver \cite{abe2002-logica, BenjaV1, joaoPavao2014}) para o que seria a lógica, esta segunda alternativa de resposta  descreve a lógica como sendo um mecanismo utilizado durante o raciocínio estruturado e correto\footnote{Uma visão semelhante a esta é descrita em \cite{magnus2020}, que diz que a lógica está preocupada com a avaliação de argumentos e a separação dos argumentos bons dos ruins.}, isto é, uma ferramenta do raciocínio que possibilita a inferência de conclusões a partir de premissas \cite{abe2002-logica, copi1981, hodges1997, levin2021}, por exemplo, dado as premissas:
 
@@ -24,7 +24,7 @@ O raciocínio munido da ``ferramenta de inferência'' contida na lógica permite
 
 Essas duas formas de encarar a lógica não estão totalmente erradas, entretanto, também não exibem de forma completa o real significado do que seria a lógica em si. Uma terceira resposta para a pergunta ``O que é a lógica?'' aparece na edição de 1953 da Encyclopædia Britannica na seguinte forma: ``\textit{Logic is the systematic study of the structure of propositions and of the general conditions of valid inference by a method which abstracts from the content or matter of the propositions and deals only with their logical form}''. Note que essa resposta utiliza-se de autorreferência\footnote{Autorreferência é um fenômeno que ocorre nas linguagens naturais e formais, tal fenômeno consiste de uma oração ou fórmula que refere-se a si mesma.}, pois a mesma tenta definir o que é a lógica em função do termo ``forma lógica''. 
 
-Apesar dessa definição recursiva\footnote{Em matemática a ideia de definição recursiva está ligada a ideia de uma estrutura que apresenta autorreferência.}, a resposta da Encyclopædia Britannica apresenta duas características muitos marcantes para a apresentação da lógica enquanto ciência (ou disciplina) nos dias atuais. A primeira característica é a validade das afirmações derivadas (ou concluídas) pelo mecanismos de inferência. A segunda característica é a importância da forma de representação (a escrita) dos termos lógicos. 
+Apesar dessa definição recursiva\footnote{Em matemática a ideia de definição recursiva está ligada a ideia de uma estrutura que apresenta autorreferência.}, a resposta da Encyclopædia Britannica apresenta duas características muitos marcantes para a apresentação da lógica enquanto ciência (ou disciplina) em nossos dias atuais. A primeira característica é a validade das afirmações derivadas (ou concluídas) pelo mecanismos de inferência. A segunda característica é a importância da forma de representação (a escrita) dos termos lógicos. 
 
 A validade remonta a ideia de um significado dual (verdadeiro e falso) para as afirmações, ou seja, fornece indícios da existência de interpretações das afirmações, e isto significa que existem diferentes significados para as afirmações a depender de um fator que pode ser chamado de contexto, por exemplo considere a seguinte afirmação: 
 
@@ -194,7 +194,7 @@ A seguir são listados os termos na língua portuguesa que são conectivos, ress
 		& $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\'e uma condi\c{c}\~ao necess\'aria para $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ \\ \hline
 		\multirow{2}{*}{Bi-implicação}
 		& $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ se, e somente se $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
-		& $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ \'e condi\c{c}\~ao necess\'aria e suficiente para $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\ \hline
+		& $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$ \'e condição suficiente e necessária para $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\ \hline
 	\end{tabular}
 	\caption{Termos em português que representamos conectivos.}
 	\label{tab:ConectivosPT-BR}
@@ -229,7 +229,8 @@ De forma similar aos conectivos os quantificadores também são ``representados'
 	\begin{tabular}{cl}
 		\hline
 		\textbf{Quantificador}  & \textbf{Termo em Portugu\^es} \\ \hline
-		\multirow{3}{*}{Universal}    & Para todo(a) $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
+		\multirow{4}{*}{Universal}    & Todo(a)s $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
+		& Para todo(a) $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para qualquer $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
 		& Para cada $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\ \hline
 		\multirow{4}{*}{Existencial} & Existe $\underline{ \ \ \ \ \ \ \ \ \ \ \ \ }$\\
@@ -258,6 +259,15 @@ Anteriormente já foi dito que na lógica as proposições e predicados podem se
 	\label{tab:NegacaoPortugues}
 \end{table}
 
+\begin{example}\label{exe:Negacaotextual}
+	São exemplo de negação:
+	\begin{itemize}
+		\item[(a)] Não é verdade que a França faz fronteira com o Brasil.
+		\item[(b)] Não existe um natural maior que $0$.
+		\item[(c)] Não é verdade que todos os números pares são múltiplos de $6$. 
+	\end{itemize}
+\end{example}
+
 \section{Representação simbólica}\label{sec:Representacao-simbolica}
 
 Ao estudar lógica é comum adotar o uso de símbolos para representar as proposições, os predicados e os conectivos. Nesse sentido o estudo da lógica está interessada na estrutura dos objetos (proposições e predicados) e não nas frases em si \cite{joaoPavao2014}. Nesta seção será apresentado a simbologia básica sem entrar propriamente nos aspectos sintáticos da lógica.
@@ -284,22 +294,26 @@ A tabela a seguir apresenta a simbologia dos conectivos, dos quantificadores e t
 	\label{tab:SimbolosLogicos}
 \end{table}
 
+\begin{remark}
+	No caso do quantificador de existência e unicidade, isto é, aquele que descreve a sentença \textbf{existe um único}, o mesmo é representado simbolicamente por $\exists!$, isto é, é usado o símbolo do quantificador existencial seguido de uma exclamação.
+\end{remark}
+
 \begin{definition}[Representação das Proposições]\label{def:RepresentacaoProposicoes}
 	As proposições deve ser representadas usando letras maiúsculas do alfabeto latino.
 \end{definition}
 
 \begin{example}
-	Representando as proposições ``2 > 5'', ``hoje é quarta feira'' e ``Alice é a professor de introdução à Ciência da Computação'' respectivamente pela letras $P, Q$ e $R$ tem-se que:
+	Representando as proposições ``2 > 5'', ``hoje é quarta feira'' e ``Alice é a professor de Introdução à Ciência da Computação'' respectivamente pela letras $P, Q$ e $R$ tem-se que:
 	\begin{itemize}
 		\item[(a)] $P \land Q$ representa a proposição: ``2 > 5 e hoje é quarta feira''.
 		\item[(b)] $P \lor P$ representa a proposição: ``2 > 5 ou 2 > 5''.
-		\item[(c)] $R \Rightarrow Q$ representa a proposição: ``Se Alice é a professor de introdução à Ciência da Computação, então hoje é quarta feira''.
-		\item[(d)] $\neg R \Rightarrow  P \lor R$ representa a proposição: ``Se não é verdade que Alice é a professor de introdução à Ciência da Computação, então 2 > 5 ou  Alice é a professor de introdução à Ciência da Computação''.
+		\item[(c)] $R \Rightarrow Q$ representa a proposição: ``Se Alice é a professor de Introdução à Ciência da Computação, então hoje é quarta feira''.
+		\item[(d)] $\neg R \Rightarrow  P \lor R$ representa a proposição: ``Se não é verdade que Alice é a professor de Introdução à Ciência da Computação, então 2 > 5 ou  Alice é a professor de introdução à Ciência da Computação''.
 		\item[(e)] $P \Leftrightarrow Q$ representa a proposição: ``2 > 5 se, e somente se hoje é quarta feira''.
 	\end{itemize}
 \end{example}
 
-Agora a representação de um predicado é um pouco mais complexa, primeiro entre parênteses deve-se inserir o simbolo do quantificador e as variáveis ligadas a esse quantificado, se necessário pode-se incluir também o universo a qual essa variáveis pertences. Em seguida entre colchetes é inserido sentença (fórmula) lógica, ressaltando que os predicados deve ser letras maiúscula seguidas imediatamente das variáveis do predicado entre parênteses, os exemplos a seguir ilustram estas ideias.
+Agora a representação de um predicado é um pouco mais complexa, primeiro entre parênteses deve-se inserir o simbolo do quantificador e as variáveis ligadas a esse quantificador, se necessário pode-se incluir também o universo a qual essa variáveis pertences. Em seguida entre colchetes é inserido sentença (fórmula) lógica, ressaltando que as asserções internas aos colchetes devem ser letras maiúscula do alfabeto latino seguidas imediatamente das variáveis do predicado entre parênteses, os exemplos a seguir ilustram estas ideias.
 
 \begin{remark}
 	Vale ressaltar que os colchetes são símbolos usados para determinar o alcance do quantificador e de suas variáveis.
@@ -313,13 +327,8 @@ Agora a representação de um predicado é um pouco mais complexa, primeiro entr
 	O predicado: ``Existe uma tapa, para fechar toda panela'', pode ser representada da seguinte forma, $(\exists t)[(\forall p)[F(t, p)]]$, aqui $t$ representa a variável tampa e $p$ representa a variável panela, por fim, $F(t,p)$ pode-ser interpretado como a asserção de $t$ fechar $p$.
 \end{example}
 
-\begin{remark}
-	No caso do quantificador de existência e unicidade, isto é, aquele que descreve a sentença \textbf{existe um único}, o mesmo é representado simbolicamente por $\exists!$, isto é, é usado o símbolo do quantificador existencial seguido de uma exclamação.
-\end{remark}
-
-
 \begin{example}
-	O predicado ``Todos os homens são mortais''. Pode ser representado por $(\forall h)[M(h)]$ aqui $h$ representa a variável homem e a asserção do homem ser mortal é representado pelo símbolo $M(h)$.
+	O predicado ``Todos os homens são mortais''. Pode ser representado por $(\forall h)[M(h)]$ aqui $h$ representa a variável homem e a asserção do homem ser mortal é representado por $M(h)$.
 \end{example}
 
 \begin{example}\label{exe:TraducaoPredicadoFormula}
@@ -327,11 +336,11 @@ Agora a representação de um predicado é um pouco mais complexa, primeiro entr
 \end{example}
 
 \begin{remark}
-	Aqui vale ressaltar que não existe na que proíba representar $x + y = z$ por uma palavra da forma $S(x,y,z)$, e assim a representação exibida no exemplo \ref{exe:TraducaoPredicadoFormula} poderia ser escrita  forma $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x, y, z)]]$.
+	Aqui vale ressaltar que não existe nada que proíba representar $x + y = z$ por uma palavra da forma $S(x,y,z)$, e assim a representação exibida no exemplo \ref{exe:TraducaoPredicadoFormula} poderia ser escrita  forma $(\forall x, y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[S(x, y, z)]]$.
 \end{remark}
 
 
-O leitor deve ter notado que $x, y$ no Exemplo \ref{exe:TraducaoPredicadoFormula} estão juntos no mesmo quantificador, isso ocorre pelo fato de ambos pertencerem ao mesmo universo do discurso (conjunto) e serem enunciado de forma aninhada direta\footnote{Dois quantificadores estão aninhados diretamente quando um está logo após o outro, ou seja, o escopo de um é seguido do escopo do outro.}, outra forma para presentar tal predicado seria $(\forall x \in \mathbb{Z})[(\forall y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[x + y = z]]]$.
+O leitor deve ter notado que $x, y$ no Exemplo \ref{exe:TraducaoPredicadoFormula} estão juntos no mesmo quantificador, isso ocorre pelo fato de ambos pertencerem ao mesmo universo do discurso (conjunto), estarem ligados a quantificadores do mesmo tipo e seus quantificadores são enunciado de forma aninhada direta\footnote{Dois quantificadores estão aninhados diretamente quando um está logo após o outro, ou seja, o escopo de um é seguido do escopo do outro.}, outra forma para presentar tal predicado seria $(\forall x \in \mathbb{Z})[(\forall y \in \mathbb{Z})[(\exists z \in \mathbb{Z})[x + y = z]]]$.
 
 
 
@@ -405,29 +414,29 @@ Obviamente com dito em \cite{BenjaV1}, existem muitas outras lógicas não clás
 
 \begin{exerList}
 	\item Juca não irá a festa, mas Pedro irá ou Flaviana irá.
-	\item Fui com a minha família ontem ao parque, e me diverti muito.
-	\item Juca vai com família ou irá sozinho, mas se Anabel aparecer no parque, então Juca e Paula não vão se diverti.
+	\item Fui com a minha família ontem ao parque, e tomei sorvete de chocolate.
+	\item Juca vai com família ou irá sozinho, mas se Anabel aparecer no parque, então Juca e Paula não vão ao cinema.
 	\item Se Paulo chegou, então ele está na sala. Mas não é verdade que Paulo chegou.
-	\item Valdi toca clarinete somente se, Katia tocar flauta ou Shizue sabe desenhar com carvão.
+	\item Valdigleis toca clarinete somente se, Katia tocar flauta ou Raíssa sabe desenhar com carvão.
 	\item Eu sou aluno da computação somente se, eu passei em Matemática discreta. Mas eu não passei em Introdução à programação ou reprovei todas as disciplinas do primeiro período.
 	\item Para qualquer navio no porto, existe um marinheiro bêbado no bar ou todos os soldados estão dormindo na praia.
 	\item Se Romero tivesse vindo vê o filme, então Katia teria ido para a sorveteria com ele. Mas Romero foi para a praia com Julinha.
-	\item Todos os números primos são números impares ou o número $\pi$ é o pode ser escrito como produto de números primos.
+	\item Todos os números primos são números impares ou o número $\pi$ pode ser escrito como produto de dois números.
 	\item Vou a padaria se, e somente se, estiver fazendo frio ou se Juliane quiser tomar sopa.
 	\item Não é verdade que a terra é esférica se, e somente se, não existe pessoas morando em Recife.
-	\item Shizue e Altair foram para o Chile, mas Luiza também foi.
+	\item Raíssa e Altair foram para o Chile, mas Luiza também foi.
 	\item Basta que eu tire 8 em Matemática discreta para eu ter um noite de festa.
 	\item A gripe é uma condição suficiente para ser declarado morto.
 	\item Se para todo flor existe um vaso, então os jardins de Jaçanã são cheio de cerejeiras. 
 	\item Se ontem choveu a noite toda e hoje é meu aniversário de 14 anos, então Pedro vai a Califórnia se, e somente se, Tom e Frajola forem amigos do Manda-chuva.
-	\item Não é verdade que Shizue sabe desenhar com carvão, mas sabe desenhar com lápis e pincel.
+	\item Não é verdade que Raíssa sabe desenhar com carvão, mas sabe desenhar com lápis e pincel.
 	\item O Catatau comeu o mel somente se, o Puffy saiu para passear com o Jack ou Jerry é vizinho do Mickey.
-	\item Para todo homem existe uma mulher que é sua mãe ou Valdi toca clarinete.
+	\item Para todo homem existe uma mulher que é sua mãe ou Saturno tem várias luas.
 	\item Existe um carro amarelo se, e somente se, todas bicicletas são roxas, mas as motos são azuis. 
 \end{exerList}
 
 \begin{problem}\label{prob:IntroLogica3}
-	Converta para notação simbólica todas as questões as sentenças no Exercício \ref{prob:IntroLogica1}.
+	Converta para notação simbólica todas as questões as sentenças nos Exercícios \ref{prob:IntroLogica1} e \ref{prob:IntroLogica2}.
 \end{problem}
 
 \begin{problem}\label{prob:IntroLogica4}
