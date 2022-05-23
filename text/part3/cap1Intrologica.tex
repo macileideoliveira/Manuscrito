@@ -313,7 +313,7 @@ A tabela a seguir apresenta a simbologia dos conectivos, dos quantificadores e t
 	\end{itemize}
 \end{example}
 
-Agora a representação de um predicado é um pouco mais complexa, primeiro entre parênteses deve-se inserir o simbolo do quantificador e as variáveis ligadas a esse quantificador, se necessário pode-se incluir também o universo a qual essa variáveis pertences. Em seguida entre colchetes é inserido a representação de sentença que pode ou não conter as variáveis ligadas ao quantificador, ressaltando que as asserções internas aos colchetes devem ser letras maiúscula do alfabeto latino seguidas imediatamente das variáveis do predicado entre parênteses, os exemplos a seguir ilustram estas ideias.
+Agora a representação de um predicado é um pouco mais complexa, primeiro entre parênteses deve-se inserir o simbolo do quantificador e as variáveis ligadas a esse quantificador, se necessário pode-se incluir também o universo a qual essas variáveis pertences. Em seguida, entre colchetes é inserido a representação de sentença que pode ou não conter as variáveis ligadas ao quantificador, ressaltando que as asserções internas aos colchetes devem ser letras maiúscula do alfabeto latino seguidas imediatamente das variáveis do predicado entre parênteses caso necessário, os exemplos a seguir ilustram estas ideias.
 
 \begin{remark}
 	Vale ressaltar que os colchetes são símbolos usados para determinar o alcance do quantificador e de suas variáveis.
@@ -329,6 +329,10 @@ Agora a representação de um predicado é um pouco mais complexa, primeiro entr
 
 \begin{example}
 	O predicado: ``Existe uma tapa, para fechar toda panela'', pode ser representada da seguinte forma, $(\exists t)[(\forall p)[F(t, p)]]$, aqui $t$ representa a variável tampa e $p$ representa a variável panela, por fim, $F(t,p)$ pode-ser interpretado como a asserção de $t$ fechar $p$.
+\end{example}
+
+\begin{example}
+	O predicado ``Para todo número real, a terra é um planeta''. Pode ser representado por $(\forall n \in \mathbb{R})[P]$ aqui $P$ representa a proposição ``a terra é um planeta''.
 \end{example}
 
 \begin{example}
