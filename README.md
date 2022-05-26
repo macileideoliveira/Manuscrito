@@ -43,15 +43,7 @@ Quaisquer erros ou sugestões devem ser enviadas na página de <a href="https://
 
 ## Licença
 
-<p align="justify">
-Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License
-(the “License”). You may not use this file except in compliance with the License. You
-may obtain a copy of the License at http://creativecommons.org/licenses/by-nc/3.0.
-Unless required by applicable law or agreed to in writing, software distributed under the
-License is distributed on an “as is” basis, without warranties or conditions of
-any kind, either express or implied. See the License for the specific language governing
-permissions and limitations under the License
-</p>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />Este obra está licenciado com uma Licença <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Atribuição-NãoComercial-CompartilhaIgual 3.0 Não Adaptada</a>.
 
 ## Para compilar execute os comandos
 
