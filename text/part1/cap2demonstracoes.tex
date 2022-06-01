@@ -102,7 +102,7 @@ Esta estratégia é provavelmente a técnicas mais famosa e usada dentre todos o
 No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco, e dentro deste bloco na primeira linha irá conter a afirmação de que $\alpha$ está sendo assumido com uma hipótese verdadeira; (2) nas próximas $n$ linhas irão acontecer as deduções necessárias até que na linha $n+2$ seja deduzido o $\beta$ e o bloco é fechado e (3) na linha $n + 3$ será adicionada a conclusão do bloco. A seguir serão apresentados exemplos do uso do método de demonstração direto para implicações e seu uso junto com o diagrama de bloco.
 
 \begin{example}\label{exe:DiagramaProva2}
-	Para demonstrar da asserção \textbf{``Se $x$ é impar, então $x^2 + x$ é par''} deve-se usar o método de demonstração \textbf{PD}, assim a prova começa abrindo um bloco e inserido na primeira linha a hipótese de que o antecedente \textbf{$x$ é um número impar} é verdadeira, ou seja, tem-se:
+	Para demonstrar da asserção \textbf{``Se $x$ é ímpar, então $x^2 + x$ é par''} deve-se usar o método de demonstração \textbf{PD}, assim a prova começa abrindo um bloco e inserido na primeira linha a hipótese de que o antecedente \textbf{$x$ é um número ímpar} é verdadeira, ou seja, tem-se:
 	{\scriptsize
 	\begin{logicproof}{2}
 		\begin{subproof}
@@ -123,7 +123,7 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 		\begin{logicproof}{2}
 			\begin{subproof}
-				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{Suponha} que } x \text{ é um número ímpar}, &\\
 				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
 				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&
@@ -134,7 +134,7 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 		\begin{logicproof}{2}
 			\begin{subproof}
-				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{Suponha} que } x \text{ é um número ímpar}, &\\
 				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
 				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
@@ -146,7 +146,7 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 		\begin{logicproof}{2}
 			\begin{subproof}
-				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{Suponha} que } x \text{ é um número ímpar}, &\\
 				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
 				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
@@ -159,14 +159,14 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 	{\scriptsize
 		\begin{logicproof}{2}
 			\begin{subproof}
-				\text{\textbf{Suponha} que } x \text{ é um número impar}, &\\
+				\text{\textbf{Suponha} que } x \text{ é um número ímpar}, &\\
 				\text{\textbf{logo} } x = 2k + 1, k  \in \mathbb{Z},&\\
 				\text{\textbf{assim} } x^2 = 4k^2 + 4k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{dessa forma} } x^2 + x= 2((2k^2 + 2k) + k + 1), k \in \mathbb{Z}.&\\
 				\text{\textbf{logo} } x^2 + x = 2j \text{ com } j = (2k^2 + 2k) + k + 1, k \in \mathbb{Z},&\\
 				\text{\textbf{então} } x^2 + x \text{ por definição é um número par}.&
 			\end{subproof}
-			\text{\textbf{Portanto}, Se } x \text{ é impar, então } x^2 + x \text{ é par.} &
+			\text{\textbf{Portanto}, Se } x \text{ é ímpar, então } x^2 + x \text{ é par.} &
 		\end{logicproof}
 	}
 	\noindent assim o objetivo a ser demonstrado foi atingido e, portanto, a prova está completa.
@@ -201,15 +201,15 @@ No que diz respeito ao diagrama tal estratégia consistem em: (1) criar um bloco
 O leitor deve ter notado nos Exemplos \ref{exe:DiagramaProva2} e \ref{exe:DiagramaProva3} as demonstrações sempre iniciam das hipótese que estão sendo assumidas, isto é, os antecedentes das implicações, isso ocorrer por que nenhuma informação adicional (necessária) é apresentada como premissa, há caso entretanto, que as premissas são importantes para o desenvolvimento da prova, como será visto no próximo exemplo.
 
 \begin{example}\label{exe:DiagramaProva4}
-	Demonstração da asserção: Dado $m$ inteiro maior ou igual que 5 e $n$ um número impar positivo. Se $n$ é impar, então $m+n$ é um par maior ou igual que 6.
+	Demonstração da asserção: Dado $m$ inteiro maior ou igual que 5 e $n$ um número ímpar positivo. Se $n$ é ímpar, então $m+n$ é um par maior ou igual que 6.
 	
 	{\scriptsize
 		\begin{logicproof}{2}
 			m \geq 5, m \in \mathbb{Z} & --- Premissa\\
 			n = 2k + 1, k \in  \mathbb{Z}^+ & --- Premissa\\
 			\begin{subproof}
-				\text{\textbf{Suponha} que } m \text{ é impar}, & --- Hipótese\\
-				\text{\textbf{logo} } m = 2j +1, j  \in \mathbb{Z},& --- DEF  de número impar\\
+				\text{\textbf{Suponha} que } m \text{ é ímpar}, & --- Hipótese\\
+				\text{\textbf{logo} } m = 2j +1, j  \in \mathbb{Z},& --- DEF  de número ímpar\\
 				\text{\textbf{assim} } m + n = 2(j + k + 1)&\\
 				\text{\textbf{desde que} } m \geq 5 \text{ tem-se que } j \geq 2, &\\
 				\text{\textbf{mas} como } n \in \mathbb{Z}_+ \text{ tem-se que } k \geq 0, &\\
@@ -217,7 +217,7 @@ O leitor deve ter notado nos Exemplos \ref{exe:DiagramaProva2} e \ref{exe:Diagra
 				\text{\textbf{logo} } 2(j + k + 1) \geq 6 &\\
 				\text{\textbf{então} } m + n \geq 6. & --- Reescrita da linha 9 
 			\end{subproof}
-			\text{\textbf{Portanto}, Se } n \text{ é impar}, \text{ então } m + n \text{ é um par maior ou igual } 6. & --- Conclusão da PD (linhas 3-10)
+			\text{\textbf{Portanto}, Se } n \text{ é ímpar}, \text{ então } m + n \text{ é um par maior ou igual } 6. & --- Conclusão da PD (linhas 3-10)
 		\end{logicproof}
 	}
 \end{example}
@@ -390,7 +390,7 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 \end{remark}
 
 \begin{example}\label{exe:DiagramaProva11}
-	Demonstração da asserção: Não existe solução inteira positiva não nula para a equação diofantina\footnote{Equações diofontinas são equações polinomiais, que permite a duas ou mais variáveis assumirem apenas valores inteiros.} $x^2 - y^2 = 1$.
+	Demonstração da asserção: Não existe solução inteira positiva não nula para a equação diofantina\footnote{Equações diofantinas são equações polinomiais, que permite a duas ou mais variáveis assumirem apenas valores inteiros.} $x^2 - y^2 = 1$.
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
@@ -413,7 +413,7 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 \end{example}
 
 \begin{remark}
-	Equações diofontinas tem papel central para computação, assim vale mencionar aqui que um importante resultado sobre essas equações que possui forte impacto na lógica, computabilidade e teoria dos números  foi demonstrado pela combinação dos trabalhos de Julia Robinson (1919--1985) e Yuri Matiyasevich(1947--.) \cite{yuri1993hilbert}. Tal resultado é a prova do problema de número dez da famosa lista de Hilbert\footnote{A lista de Hilbert é um lista inicialmente composta por 10 problemas e depois expandida para 23, que foi apresentada pelo matemático alemão David Hilbert (1862-1943) como uma forma de guia a atenção dos matemáticos no século XX.}, de forma sucinta a prova do resultado diz que não existe um algoritmo (ou método) universal para determinar se uma equação diofantina tem raízes inteiras.
+	Equações diofantinas tem papel central para computação, assim vale mencionar aqui que um importante resultado sobre essas equações que possui forte impacto na lógica, computabilidade e teoria dos números  foi demonstrado pela combinação dos trabalhos de Julia Robinson (1919--1985) e Yuri Matiyasevich(1947--.) \cite{yuri1993hilbert}. Tal resultado é a prova do problema de número dez da famosa lista de Hilbert\footnote{A lista de Hilbert é um lista inicialmente composta por 10 problemas e depois expandida para 23, que foi apresentada pelo matemático alemão David Hilbert (1862-1943) como uma forma de guia a atenção dos matemáticos no século XX.}, de forma sucinta a prova do resultado diz que não existe um algoritmo (ou método) universal para determinar se uma equação diofantina tem raízes inteiras.
 \end{remark}
 
 \begin{example}\label{exe:DiagramaProva12}
@@ -443,21 +443,21 @@ Em termos do diagrama de blocos o método RAA consiste nos seguintes passo: (1) 
 \end{note}
 
 \begin{example}\label{exe:DiagramaProva13}
-	Demonstração da asserção: Se $3n + 2$ é impar, então $n$ é impar.
+	Demonstração da asserção: Se $3n + 2$ é ímpar, então $n$ é ímpar.
 	{\scriptsize
 		\begin{logicproof}{3}
 			\begin{subproof}
 				&  \\
 				\begin{subproof}
-					\text{\textbf{Suponha por absurdo} que }3n + 2 \text{ é impar e } n \text{ é par}, & --- Hipótese\\
+					\text{\textbf{Suponha por absurdo} que }3n + 2 \text{ é ímpar e } n \text{ é par}, & --- Hipótese\\
 					\text{\textbf{logo} } n = 2k, k \in \mathbb{Z},& --- DEF de paridade\\
 					\text{\textbf{dessa forma} } 3n + 2 = 2(3k + 1), k \in \mathbb{Z},&\\ 
 					\text{\textbf{assim} } 3n + 2 \text{ é par},& --- Da linha $4$ e da DEF de paridade\\
-					\text{\textbf{mas} } 3n + 2 \text{ ser impar e } 3n + 2 \text{ ser par, é um absurdo}.& --- Das linhas $2$ e $5$
+					\text{\textbf{mas} } 3n + 2 \text{ ser ímpar e } 3n + 2 \text{ ser par, é um absurdo}.& --- Das linhas $2$ e $5$
 				\end{subproof}
-				\text{\textbf{Portanto}, se } 3n + 2 \text{ é impar e } n \text{ é par}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$7$)
+				\text{\textbf{Portanto}, se } 3n + 2 \text{ é ímpar e } n \text{ é par}, \text{ então }  \bot. & --- Conclusão da PD (linhas $2$-$7$)
 			\end{subproof}
-			\text{\textbf{Consequentemente}, se $3n + 2$ é impar, então $n$ é impar}. & --- Conclusão da RAA (linhas $2$-$8$)
+			\text{\textbf{Consequentemente}, se $3n + 2$ é ímpar, então $n$ é ímpar}. & --- Conclusão da RAA (linhas $2$-$8$)
 		\end{logicproof}
 	}
 \end{example}
@@ -795,7 +795,7 @@ Com respeito ao diagrama de blocos uma prova por casos consiste de um diagrama q
 					\text{\textbf{assim} } x^2 = 2j + 1, \text{ com } j = (2i^2), i \in \mathbb{Z} & --- Reescrita\\
 					\text{\textbf{então} } x \text{ é par} & --- DEF de paridade
 				\end{subproof}
-				\text{\textbf{Portanto}, se } x \text{ é impar, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 6-9)
+				\text{\textbf{Portanto}, se } x \text{ é ímpar, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 6-9)
 			\end{subproof}
 			\text{\textbf{Consequentemente}, se } x \in \mathbb{Z}, \text{então } x^2 \text{ tem a mesma paridade que } x. & --- Conclusão da PPC (linhas 1-10)
 		\end{logicproof}
@@ -803,7 +803,7 @@ Com respeito ao diagrama de blocos uma prova por casos consiste de um diagrama q
 \end{example}
 
 \begin{remark}
-	Note que os casos que guiam a prova do Exemplo \ref{exe:DiagramaProva23} são o caso do $x$ ser par e o caso do $x$ ser impar.
+	Note que os casos que guiam a prova do Exemplo \ref{exe:DiagramaProva23} são o caso do $x$ ser par e o caso do $x$ ser ímpar.
 \end{remark}
 
 \begin{example}\label{exe:DiagramaProva24}
@@ -841,3 +841,91 @@ Com respeito ao diagrama de blocos uma prova por casos consiste de um diagrama q
 		\end{logicproof}
 	}
 \end{example}
+
+\section{Outras Formas de Representação de Provas}\label{sec:OutrasFormasProvas}
+
+Durante este capítulo foram apresentadas diversas metodologias para se realizar demonstrações, e para representar as provas (demonstrações) usando tais metodologias foi empregado o uso de representação por diagrama de blocos. Este manuscrito utilizou-se dessa representação por ela ser mais amigável ao leitor iniciante na tarefa de provar teoremas.
+
+Existem diversas outras formas de representar a demonstração de um teorema, por exemplo, o professor Thanos Tsouanas em seu livro \cite{fmcbook}, usa o conceito de tabuleiro do ``jogo''da demonstração para representar as demonstrações. Por fim, vale destacar a representação das demonstrações por meio de texto formal, que consiste basicamente em descrever a prova usando um texto utilizando o máximo de formalismo matemático possível, o exemplo a seguir ilustra a representação em texto formal.
+
+\begin{example}
+	A representação por texto formal da demonstração da asserção: ``Se $n$ é par, então $n^2$ é par'', pode ser da seguinte forma.
+	\begin{proof}
+		Suponha que $n$ é par, logo $n = 2k$ para algum $k \in \mathbb{Z}$, dessa forma tem-se que $n^2 = n \cdot n = 2k \cdot 2k = 4k^2 = 2(2k^2)$, mas desde que a multiplicação e potenciação são fechadas em $\mathbb{Z}$ tem-se que existe $r \in \mathbb{Z}$ tal que $r = 2k^2$ e, portanto, $n^2 = 2r$, consequentemente,  $n^2$ é par.
+	\end{proof}
+\end{example}
+
+A representação por texto formal é em geral a maneira utilizada de fato no meio acadêmico, para mais exemplos dessa representação veja \cite{valdi2016master, valdi2020phd, annax2019phd, thadeu2021phd, rui2019phd} e com texto em inglês é sugerido a leitura de \cite{vania2019phd}.
+
+\begin{remark}
+	A partir deste ponto do manuscrito será adotado a escrita de demonstração em texto formal, ficando assim a representação por bloco ``confinada'' neste capítulo.
+\end{remark}
+
+\section{Refutação por Contraexemplo}
+
+Escrever futuramente sobre contraexemplos\footnote{A grafia contra-exemplos era usando no AO de 1945 e não é mais usada!}...!
+
+\section{Questionário}\label{sec:Questionario2part1}
+
+\begin{problem}\label{prob:Demosntracoes1}
+	Demonstre as seguintes asserções.
+\end{problem}
+
+\begin{exerList}
+	\item Dado $a, b, \in \mathbb{R}$. Se $a < b < 0$, então $a^2 > b^2$.
+	\item Dado $a, b, \in \mathbb{R}$. Se $0 < a < b$, então $\frac{1}{b} < \frac{1}{a}$.
+	\item Dado $a, \in \mathbb{R}$. Se $a^3 > a$, então $a^5 > a$.
+	\item Sejam $(A - B) \subseteq (C \cap D)$ e $x \in A$. Se $x \notin D$, então $x \in B$.
+	\item Sejam $a, b \in \mathbb{R}$. Se $a < b$, então $\frac{a + b}{2} < b$.
+	\item Dado $x \in \mathbb{R}$ e $x \neq 0$. Se $\frac{\sqrt[3]{x} + 5}{x^2 + 6} = \frac{1}{x}$, então $x \neq 8$.
+	\item Sendo $a, b, c, d \in \mathbb{R}$ com $0 < a < b$ e $d > 0$. Se $ac \geq bd$, então $c > d$.
+	\item Dado $x, y \in \mathbb{R}$ e $3x + 2y \leq 5$. Se $x > 1$, então $y < 1$.
+	\item Sejam $x, y \in \mathbb{R}$. Se $x^2 + y = -3$ e $2x - y = 2$, então $x = -1$.
+	\item Se $n \in \mathbb{Z}$ e $4 \leq n \leq 12$, então $n$ é a soma de dois números primos.
+	\item Dado $n \in \mathbb{N}$. Se $n \leq 3$, então $n! \leq 2^n$.
+	\item Dado $n \in \mathbb{N}$. Se $2 \leq n \leq 4$, então $n^2 \geq 2^n$. 
+	\item Se $n$ é um inteiro par, então $n^2 - 1$ é ímpar.
+	\item Seja $n_0 \in \mathbb{N}$ e $n_1 = n_0 + 1$. Tem-se que $n_0n_1$ é par.
+	\item Se $n \in \mathbb{Z}$, então $n^2 + n$ é par.
+	\item Se $n \in \mathbb{Z}$ e $n$ é par, então $n^2$ é divisível por $4$. 
+	\item Para todo $n \in \mathbb{Z}$ o número $3(n^2 + 2n + 3) - 2n^2$ é um quadrado perfeito.
+	\item Dado $n \in \mathbb{Z}$. Se $x > 0$, então $x + 1 > 0$.
+	\item Se $n$ é ímpar, então $n$ é a diferença de dois quadrados.
+	\item Se $3n + 5 = 6k + 8$ com $k \in \mathbb{Z}$, então $n$ é ímpar.
+	\item Se $n$ é par, então $3n + 2 = 6k + 2$ com $k \in \mathbb{Z}$.
+	\item Se $x^2 + 2x - 3 = 0$, então $x \neq 2$.
+	\item Dado $n, n_0, n_1 \in \mathbb{Z}$. Se $n_0$ e $n_1$ são ambos divisíveis por $n$, então $n_0 + n_1$ é também divisível por $n$.
+	\item Dado $x, y \in \mathbb{Z}$. Se $xy$ não é divisível por $n$ tal que $n \in \mathbb{Z}$, então $x + y$ é divisível por $n$.
+	\item Dado $m, n, p \in \mathbb{Z}$. Se $m$ é divisível por $n$ e $n$ é divisível por $p$, então $m$ é divisível por $p$.
+	\item Se $x$ é ímpar, então $x^2 - x$ é par.
+\end{exerList}
+
+\begin{problem}\label{prob:Demosntracoes2}
+	Prove que se $A$ e $(B - C)$ são disjuntos, então $(A \cap B) \subseteq C$.
+\end{problem}
+
+\begin{problem}\label{prob:Demosntracoes3}
+	Prove que se $A \subseteq (B - C)$, então $A$ e $C$ são disjuntos.
+\end{problem}
+
+\begin{problem}\label{prob:Demosntracoes4}
+	Dado $x \in \mathbb{R}$ prove que:
+\end{problem}
+
+\begin{exerList}
+	\item Se $x \neq 1$, então existe $y \in \mathbb{R}$ tal que $\frac{y+1}{y-2} = x$.
+	\item Se existe um $y \in \mathbb{R}$ tal que  $\frac{y+1}{y-2} = x$, então $x \neq 1$.
+\end{exerList}
+
+\begin{problem}\label{prob:Demosntracoes5}
+	Dado um conjunto $A$ e $\mathcal{G}$ uma família demonstre que:
+\end{problem}
+
+\begin{exerList}
+	\item Se $A \in \mathcal{G}$, então $A \subseteq \mathcal{G}_{\cup}$.
+	\item Se $A \in \mathcal{G}$, então $\mathcal{G}_{\cap} \subseteq A$.
+\end{exerList}
+
+\begin{problem}\label{prob:Demosntracoes6}
+	Se $B$ é um conjunto, $\mathcal{G}$ uma família não vazia e $(\forall A \in \mathcal{G})[B \subseteq A]$, então $B \subseteq \mathcal{G}_{\cap}$.
+\end{problem}
