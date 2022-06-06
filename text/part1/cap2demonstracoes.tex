@@ -587,7 +587,7 @@ Agora sobre a metodologia para demonstrar (provar) a existência de um objeto co
 	Para provar uma asserção da forma ``$(\exists x)[P(x)]$'', em que $P(x)$ é uma asserção sobre a variável x. Deve-se exibir um elemento específico ``$a$'' pertencente ao universo do discurso, e mostrar que a asserção $P(x)$ é verdadeira quando $x$ é instanciado como sendo exatamente o elemento $a$, ou seja, deve-se mostrar que $P(a)$ é verdadeira.
 \end{definition}
 
-Em relação ao diagrama de bloco, uma demonstração de existência, isto é, uma prova de uma asserção $(\exists x).[P(x)]$,  irá se comportar de forma muito semelhante a uma demonstração de generalidade, as única mudanças significativas é que tal método inicia seu bloco com a declaração de que será atribuído um objeto \textbf{específico} em vez de considerar a variável genérica a $x$, ou seja, é realizado uma instanciação de um elemento. Além disso, a conclusão do bloco externo deve ser exatamente a $(\exists x).[P(x)]$, ou seja, a conclusão deverá ser a asserção existencial.
+Em relação ao diagrama de bloco, uma demonstração de existência, isto é, uma prova de uma asserção $(\exists x)[P(x)]$,  irá se comportar de forma muito semelhante a uma demonstração de generalidade, as única mudanças significativas é que tal método inicia seu bloco com a declaração de que será atribuído um objeto \textbf{específico} em vez de considerar a variável genérica a $x$, ou seja, é realizado uma instanciação de um elemento. Além disso, a conclusão do bloco externo deve ser exatamente a $(\exists x)[P(x)]$, ou seja, a conclusão deverá ser a asserção existencial.
 
 \begin{example}\label{exe:DiagramaProva18}
 	Demonstração da asserção: $(\exists m, n \in \mathbb{I})[m^n \in \mathbb{Q}]$.
@@ -863,6 +863,8 @@ A representação por texto formal é em geral a maneira utilizada de fato no me
 
 \section{Demonstração de Suficiência e Necessidade}
 
+Escrever futuramente sobre as noções de provas de suficiência e de necessidade.
+
 \section{Refutação por Contraexemplo}
 
 Escrever futuramente sobre contraexemplos\footnote{A grafia contra-exemplos era usando no AO de 1945 e não é mais usada!}...!
@@ -989,5 +991,4 @@ Escrever futuramente sobre contraexemplos\footnote{A grafia contra-exemplos era 
 \begin{exerList}
 	\item $(\exists! A \in \wp(U))[(\forall B \in \wp(U))[A \cup B = B]]$.
 	\item $(\exists! A \in \wp(U))[(\forall B \in \wp(U))[A \cap B = B]]$.
-	\item $(\exists! A \in \wp(U))[(\forall B \in \wp(U))[(\forall C \in \wp(U))[C - A = \cap B]]]$.
 \end{exerList}
