@@ -420,6 +420,14 @@ Os próximos resultados estabelece propriedades algébricas importantes para a o
 	 Suponha que $R_1 \subset A \times B$ e $R_2 \subset B \times C$ logo tem-se que se $(x, y) \in R_1 \bullet R_2$ logo por definição existe $z \in B$ tal que $(x, z) \in R_1$ e $(z, y) \in R_2$, mas assim é claro que $(x, z) \in A \times B$ e $(z, y) \in B \times C$ e, portanto, $(x, y) \in A \times C$. Consequentemente, $R_1 \bullet R_2 \subset A \times C$.
 \end{proof}
 
+\begin{theorem}\label{teo:InclusaoDaInversa}
+	Seja $R$ uma relação tem-se que se $R \subset A \times B$, então $R^{-1} \subset B \times A$.
+\end{theorem}
+
+\begin{proof}
+	considere que $R$ é uma relação, além disso, assuma que $R \subset A \times B$, logo todo $(x, y) \in R$ é tal que $x \in A$ e $y \in B$, logo por definição $(y, x) \in R^{-1}$, mas desde que $x \in A$ e $y \in B$ tem-se que $(y, x) \in B \times A$ e, portanto, $R^{-1} \subset B \times A$.
+\end{proof}
+
 \begin{theorem}
 	Seja $A, B$ e $C$ conjuntos. Então tem-se que:
 	\begin{itemize}
@@ -451,7 +459,7 @@ Os próximos resultados estabelece propriedades algébricas importantes para a o
 
 \section{Tipos e Propriedades das Relações Binárias}\label{sec:TipoDasRelacoesBinarias}
 
-Deste ponto em diante todas as relações consideradas até o final deste capítulo serão relações binárias sobre um conjunto não vazio $A$ genérico, ou seja, tem-se que se $R$ for uma relação, então $R \subseteq A \times A$. Dito isto, pode-se apresentar alguns ``tipos'' em que as relações binárias podem ser classificadas.
+Deste ponto em diante todas as relações consideradas até o final deste capítulo serão relações binárias sobre um conjunto não vazio $A$ genérico, ou seja, tem-se que se $R$ for uma relação, então $R \subseteq A \times A$. Dito isto, pode-se apresentar alguns ``tipos'' ou propriedades que as relações binárias podem ~apresentar.
 
 \begin{definition}[Tipo Identidade]\label{def:RelacaoIdentica}
 	Uma relação $R$ é dita ser relação de identidade (ou relação idêntica \cite{abe1991-TC}) sempre que $R$ é igual ao conjunto $\{(x, x) \mid x \in A\}$.
@@ -679,7 +687,7 @@ Agora será mostrado que união e interseção são operações fechadas sobre o
 	Uma relação $R$ é dita ser assimétrica quando para todo $x, y \in A$ se $x \mathrel{R} y$, então $y \centernot{R} x$.
 \end{definition}
 
-\begin{example}
+\begin{example}\label{exe:RelacaoPai}
 	Considere que $P$ é a relação de paternidade definida sobre o conjunto dos seres humanos, isto é, $x \mathrel{P} y$ significa que $x$ é pai de $y$, obviamente esta relação é assimétrica pois dado que um indivíduo $x$ é pai de um certo $y$ é impossível que $y$ seja pai de $x$, ou seja, sempre que $x \mathrel{R} y$ será verdade que $y \centernot{R} x$.
 \end{example}
 
@@ -712,7 +720,7 @@ O leitor deve ficar atento ao fato de que uma relação $R$ será dita não ser 
 \end{example}
 
 \begin{example}
-	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é anti-simétrica, pois para todo $A, B \in \wp(A)$ quando $A \subseteq B$ e $B \subseteq A$ tem-se por definição que $A = B$.
+	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é anti-simétrica, pois para todo $X, Y \in \wp(A)$ quando $X \subseteq Y$ e $Y \subseteq X$ tem-se por definição que $X = Y$.
 \end{example}
 
 O leitor deve ter notado que uma relação $R$ sonre um conjunto $A$ não será anti-simétrica se existir pelo menos $x,y \in A$ tais que $x \mathrel{R} y$ e $y \mathrel{R} x$, mas $x \neq y$. 
@@ -722,19 +730,70 @@ O leitor deve ter notado que uma relação $R$ sonre um conjunto $A$ não será 
 \end{example}
 
 \begin{theorem}[Caracterização das Relações Anti-simétricas]\label{teo:CaracterizacaoRelacaoAntiSimetricas}
-	Uma relação $R$ é anti-simétrica sobre $A$ se, e somente se, $R \bullet R^{-1} \subseteq I_A$.
+	Uma relação $R$ é anti-simétrica sobre $A$ se, e somente se, $R \bullet R^{-1} \subset I_A$.
 \end{theorem}
 
 \begin{proof}
-	$(\Rightarrow)$ Ficará como exercício ao leitor. $(\Leftarrow)$ Suponha que $R \bullet R^{-1} \subseteq I_A$, assim seja $x, y \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} x$, ou seja, $(x, y) \in R$ e $(x, y) \in R^{-1}$, logo $(x, y) \in R \cap R^{-1}$ e assim tem-se que $x = y$ e, portanto, $R$ é anti-simétrica.
+	$(\Rightarrow)$ Assuma que $R$ é anti-simétrica sobre $A$, para todo $(x, y) \in R \cap R^{-1}$ tem-se que $x \mathrel{R} y$ e $x \mathrel{R^{-1}} y$, ou seja, $(x, y) \in R$ e $(y,x) \in R$ e, portanto, $x = y$, assim tem-se que $(x, y) \in I_A$, consequentemente, $R \bullet R^{-1} \subset I_A$. $(\Leftarrow)$ Suponha que $R \bullet R^{-1} \subset I_A$, assim seja $x, y \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} x$, ou seja, $(x, y) \in R$ e $(x, y) \in R^{-1}$, logo $(x, y) \in R \cap R^{-1}$ e assim tem-se que $x = y$ e, portanto, $R$ é anti-simétrica.
 \end{proof}
 
 \begin{corollary}
 	Uma relação $R$ é anti-simétrica se, e somente se, $R^{-1}$ for anti-simétrica.
 \end{corollary}
 
+\begin{proof}
+	Ficará como exercício ao leitor.
+\end{proof}
+
 \begin{theorem}
-	Se $R$ e $S$ são relações anti-simétricas, então $R \cap S$ também é anti-simétrica.
+	Se $R$ e $S$ são relações anti-simétricas sobre um conjunto $A$, então $R \cap S$ também é anti-simétrica.
 \end{theorem}
+
+\begin{proof}
+	A demonstração segue do Teorema \ref{teo:CaracterizacaoRelacaoAntiSimetricas} e do Teorema \ref{teo:InclusaoDaInversa}, a prova em detalhes fica como exercício.
+\end{proof}
+
+\begin{definition}[Tipo Transitivo]\label{def:RelacaoTransitiva}
+	Uma relação $R$ é dita ser transitiva quando para todo $x, y, z \in A$ se $x \mathrel{R} y$ e $y \mathrel{R} z$, então $x \mathrel{R} z$.
+\end{definition}
+
+\begin{example}
+	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é transitiva, pois para todo $X, Y, Z \in \wp(A)$ sempre que $X \subseteq Y$ e $Y \subseteq Z$ tem-se que $X \subseteq Z$.
+\end{example}
+
+\begin{example}
+	Dado $\mathbb{Z}$ a relação $R = \{(x, y) \in \mathbb{Z}^2 \mid (\exists z \in \mathbb{Z})[x = yz]\}$ é uma relação transitiva. ({\color{red}Provar isto é um bom exercício ao leitor})
+\end{example}
+
+\begin{example}
+	A relação sobre o conjunto de todos os seres humanos (vivos ou mortos) descrita por ``x é ancestral de y'' é uma relação transitiva.
+\end{example}
+
+Note que uma relação $R$ sobre um conjunto $A$ não será transitiva se existirem pares $(x,y), (y,z) \in A^2$ tais que $x \mathrel{R} y$ e $y \mathrel{R} z$, mas $x \centernot{R} z$, nesse caso ela é dito intransitiva.
+
+\begin{example}
+	A relação no Exemplo \ref{exe:RelacaoPai} é intransitiva pois se $x$ é pai de $y$ e $y$ é pai de $z$, então $x$ não pode ser pai de $z$.
+\end{example}
+
+\begin{theorem}[Caracterização das Relações Transitivas]\label{teo:CaracterizacaoRelacaoTransitivas}
+	Uma relação $R$ sobre $A$ é transitiva se, e somente se, $R \bullet R \subset R$.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha que $R$ é uma relação sobre $A$ transitiva, agora para todo $(x, z) \in R \bullet R$ por $R$ ser transitiva existe $y \in A$ tal que $(x, y), (y, z) \in R$ e, portanto, $(x, z) \in R$ logo $R \bullet R \subset R$. $(\Leftarrow)$ Assuma que $R \bullet R \subset R$, assim por definição todo $(x, z) \in R \bullet R$ é tal que $(x, z) \in R$, mas por definição, $(x, z) \in R \bullet R$ se, e somente se, existe $y \in A$ tal que $(x, y), (y, z) \in R$ e, portanto, por definição $R$ é transitiva.
+\end{proof}
+
+\begin{corollary}
+	Uma relação $R$ sobre $A$ é transitiva se, e somente se, $R^{-1}$ é transitiva.
+\end{corollary}
+
+\begin{theorem}
+	Se $R$ e $S$ são relações transitivas sobre um conjunto $A$, então $R \cap S$ também é transitiva.
+\end{theorem}
+
+\begin{proof}
+	Refazer a prova...
+\end{proof}
+
 
 % Nada q vale a pena é fácil --- Eric Cartman
