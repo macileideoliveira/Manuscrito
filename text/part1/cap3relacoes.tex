@@ -341,6 +341,28 @@ Dada qualquer relação $R$ sempre é possível obter uma nova relação a parti
 	Um fato básico para qualquer relação $R$ é que $(R^{-1})^{-1} = R$. Em outras palavras, tal igualdade descreve que a reversa de uma relação, vista como uma operação é sempre involutiva, assim como a negação e o complemento.
 \end{remark}
 
+\begin{proposition}\label{prop:ReversaPreservaInclusão}
+	Se $R \subseteq A \times B$, então $R^{-1} \subseteq B \times A$.
+\end{proposition}
+
+\begin{proof}
+	Suponha que $R \subseteq A \times B$, logo todo $(x, y) \in A$ é tal que $(y, x) \in R^{-1}$, mas de $R \subseteq A \times B$ tem-se que $(x, y) \in A \times B$, consequentemente, por definição $x \in A$ e $y \in B$ e, portanto, $(y, x) \in B \times A$, consequentemente, $R^{-1} \subseteq B \times A$.
+\end{proof}
+
+\begin{remark}\label{rema:ReversaoRelacao}
+	É fácil ver que para qualquer Cartesiano $A \times B$ tem-se que $(A \times B)^{-1} = B \times A$. 
+\end{remark}
+
+O leitor atento pode notar que o resultado da Proposição \ref{prop:ReversaPreservaInclusão} pode ser estendido para relacionar diretamente duas relações, e isso é feito como se segue.
+
+\begin{theorem}\label{teo:ReversaPreservaInclusão}
+	Se $R$ e $S$ são relações tais que $R \subseteq S$, então $R^{-1} \subseteq S^{-1}$.
+\end{theorem}
+
+\begin{proof}
+	Similar ao raciocínio da demonstração da Proposição \ref{prop:ReversaPreservaInclusão}.
+\end{proof}
+
 Uma vez que relações são conjuntos pode-se falar sobre as operações sobre relações, aqui não serão tratadas as operações triviais de união, interseção, complemento e diferença. Para essas operações é recomendável que o leitor retorne para revisar o texto apresentado na Seção \ref{sec:OperacoesConjuntos} que trata exatamente de tais operações. 
 
 Uma operação natural que surge para as relações é a noção de composição entre duas relações $R_1$ e $R_2$, a ideia da composição é gerar uma terceira relação a partir das relações iniciais. A seguir este manuscrito apresenta formalmente o conceito de composição.
@@ -379,11 +401,11 @@ Uma operação natural que surge para as relações é a noção de composição
 \end{proof}
 
 \begin{corollary}\label{col:MonotonicidadeComposicaoRelacoes}
-	Se $R_1, R_2, S_1, S_2$ são relações tais que $R_1 \subseteq R_2$ e $S_1 \subseteq S_2$ com $Ima(R_1) = Dom(S_1)$ e $Ima(R_2) = Dom(S_2)$, então $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_2)$.
+	Se $R_1, R_2, S_1, S_2$ são relações tais que $R_1 \subseteq R_2$ e $S_1 \subseteq S_2$, então $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_2)$.
 \end{corollary}
 
 \begin{proof}
-	Suponha que $R_1, R_2, S_1, S_2$ são relações tais que $R_1 \subseteq R_2$ e $S_1 \subseteq S_2$ com $Ima(R_1) = Dom(S_1)$ e $Ima(R_2) = Dom(S_2)$, assim pelo Teorema \ref{teo:MonotonicidadeComposicaoRelacoes} tem-se que $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_1)$. Agora note que por definição $(x, z) \in (R_2 \bullet S_1)$ se, e somente se, $(\exists y \in Dom(S_1))[x\mathrel{R_2}y \text{ e } y\mathrel{S_1}z]$, mas uma vez que $S_1 \subseteq S_2$ tem-se que $Dom(S_1) \subseteq Dom(S_2)$ e $Ima(S_1) \subseteq Ima(S_2)$ e assim é claro que $(\exists y \in Dom(S_2))[x\mathrel{R_2}y \text{ e } y\mathrel{S_2}z]$, logo $(x, z) \in (R_2 \bullet S_2)$, consequentemente pela definição de subconjunto tem-se que $(R_2 \bullet S_1) \subseteq (R_2 \bullet S_2)$. E portanto, $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_2)$.
+	Suponha que $R_1, R_2, S_1, S_2$ são relações tais que $R_1 \subseteq R_2$ e $S_1 \subseteq S_2$, assim pelo Teorema \ref{teo:MonotonicidadeComposicaoRelacoes} tem-se que $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_1)$. Agora note que por definição $(x, z) \in (R_2 \bullet S_1)$ se, e somente se, $(\exists y \in Dom(S_1))[x\mathrel{R_2}y \text{ e } y\mathrel{S_1}z]$, mas uma vez que $S_1 \subseteq S_2$ tem-se que $Dom(S_1) \subseteq Dom(S_2)$ e $Ima(S_1) \subseteq Ima(S_2)$ e assim é claro que $(\exists y \in Dom(S_2))[x\mathrel{R_2}y \text{ e } y\mathrel{S_2}z]$, logo $(x, z) \in (R_2 \bullet S_2)$, consequentemente pela definição de subconjunto tem-se que $(R_2 \bullet S_1) \subseteq (R_2 \bullet S_2)$. E portanto, $(R_1 \bullet S_1) \subseteq (R_2 \bullet S_2)$.
 \end{proof}
 
 Os próximos resultados estabelece propriedades algébricas importantes para a operação de composição de relações.
@@ -420,14 +442,6 @@ Os próximos resultados estabelece propriedades algébricas importantes para a o
 	 Suponha que $R_1 \subset A \times B$ e $R_2 \subset B \times C$ logo tem-se que se $(x, y) \in R_1 \bullet R_2$ logo por definição existe $z \in B$ tal que $(x, z) \in R_1$ e $(z, y) \in R_2$, mas assim é claro que $(x, z) \in A \times B$ e $(z, y) \in B \times C$ e, portanto, $(x, y) \in A \times C$. Consequentemente, $R_1 \bullet R_2 \subset A \times C$.
 \end{proof}
 
-\begin{theorem}\label{teo:InclusaoDaInversa}
-	Seja $R$ uma relação tem-se que se $R \subset A \times B$, então $R^{-1} \subset B \times A$.
-\end{theorem}
-
-\begin{proof}
-	considere que $R$ é uma relação, além disso, assuma que $R \subset A \times B$, logo todo $(x, y) \in R$ é tal que $x \in A$ e $y \in B$, logo por definição $(y, x) \in R^{-1}$, mas desde que $x \in A$ e $y \in B$ tem-se que $(y, x) \in B \times A$ e, portanto, $R^{-1} \subset B \times A$.
-\end{proof}
-
 \begin{theorem}
 	Seja $A, B$ e $C$ conjuntos. Então tem-se que:
 	\begin{itemize}
@@ -457,20 +471,24 @@ Os próximos resultados estabelece propriedades algébricas importantes para a o
 	\end{itemize}
 \end{proof}
 
-\section{Tipos e Propriedades das Relações Binárias}\label{sec:TipoDasRelacoesBinarias}
+\section{Tipos ou Propriedades das Relações Binárias}\label{sec:TipoDasRelacoesBinarias}
 
-Deste ponto em diante todas as relações consideradas até o final deste capítulo serão relações binárias sobre um conjunto não vazio $A$ genérico, ou seja, tem-se que se $R$ for uma relação, então $R \subseteq A \times A$. Dito isto, pode-se apresentar alguns ``tipos'' ou propriedades que as relações binárias podem ~apresentar.
+Deste ponto em diante todas as relações consideradas até o final deste capítulo serão relações binárias sobre um conjunto não vazio $A$ genérico, ou seja, tem-se que se $R$ for uma relação, então $R \subseteq A \times A$. Dito isto, agora serão apresentados os ``tipos'', ou na visão de \cite{abe1991-TC}, as propriedades que as relações binárias sobre um conjunto podem ser possuir.
 
 \begin{definition}[Tipo Identidade]\label{def:RelacaoIdentica}
-	Uma relação $R$ é dita ser relação de identidade (ou relação idêntica \cite{abe1991-TC}) sempre que $R$ é igual ao conjunto $\{(x, x) \mid x \in A\}$.
+	Uma relação $R$ é dita ser uma relação de identidade (ou relação idêntica \cite{abe1991-TC}) sempre que $R$ é igual ao conjunto $\{(x, x) \mid x \in A\}$.
 \end{definition}
 
 \begin{example}
 	Seja $A = \{1, 2, 3, 4\}$ a relação $M = \{(3, 3), (1, 1), (2,2)\}$ é uma relação de identidade, já a relação $Q = \{(1, 1), (2,2), (3,4)\}$ não é uma relações de identidade.
 \end{example}
 
+\begin{example}
+	Dado o conjunto $\mathbb{N}$, a relação $R = \{(x, y) \in \mathbb{N}^2 \mid x - y = 0\}$ é uma relação de identidade, já a relação $S =  \{(x, y) \in \mathbb{N}^2 \mid x - y > 0\}$ não é uma relação de identidade pois $(5, 4) \in S$.
+\end{example}
+
 \begin{remark}
-	Quando $\forall x \in A$ uma relação de identidade possuir exatamente todos os pares da forma $(x, x)$, essa relação é chamada de identidade de $A$, e nesse caso tal relação é denotado por $Id_A$.
+	Dado que a relação de identidade possui exatamente todos os pares da forma $(x, x)$, é comum chamar esta relação de identidade do conjunto $A$, ou simplesmente identidade de $A$, que costuma também ser denotado por $Id_A$.
 \end{remark}
 
 \begin{theorem}[Neutralidade da relação de identidade]\label{teo:NeutralidadeRelacaoIdentidade}
@@ -485,14 +503,13 @@ Deste ponto em diante todas as relações consideradas até o final deste capít
 	(i) Suponha que $R$ é uma relação sobre $A$, assim tem-se que:
 	\begin{eqnarray*}
 		(x, y) \in R \bullet Id_A  & \Longleftrightarrow & (\exists y \in A)[x \mathrel{R} y \text{ e } y \mathrel{Id_A} y]\\
-		& \Longleftrightarrow & (\exists x \in A)[x \mathrel{R} y]\\
 		& \Longleftrightarrow & (x, y) \in R 
 	\end{eqnarray*}
 	Portanto,  $R \bullet Id_A = R$. (ii) Similar a demonstração do item anterior.
 \end{proof}
 
 \begin{proposition}\label{prop:ComplementarDaRelacaoIdentica}
-	Se $A$ é um conjunto não vazio, então $I_A^{-1} = I_A$.
+	Se $A$ é um conjunto não vazio, então $Id_A^{-1} = Id_A$.
 \end{proposition}
 
 \begin{proof}
@@ -500,7 +517,7 @@ Deste ponto em diante todas as relações consideradas até o final deste capít
 \end{proof}
 
 \begin{remark}\label{rema:UnicidadeDaRelacaoIdentica}
-	É fácil notar que para qualquer que seja o conjunto não vazio $A$ tem-se que a relação identidade $I_A$ é única.
+	É fácil notar que para qualquer que seja o conjunto não vazio $A$ tem-se que a relação identidade $Id_A$ é única.
 \end{remark}
 
 \begin{definition}[Tipo Reflexivo]\label{def:RelacaoReflexiva}
@@ -526,13 +543,13 @@ Como dito em \cite{abe1991-TC}, uma relação $R$ não será reflexiva quando ex
 O próximo resultado estabelece uma caracterização para as relações serem reflexivas, isto é, tal resultado apresenta as condições suficientes e necessárias para que uma relação seja reflexiva.
 
 \begin{theorem}[Caracterização das Relações Reflexivas]\label{teo:CaracterizacaoRelacaoReflexivda}
-	Uma relação $R$ é reflexiva se, e somente se, $I_A \subset R$.
+	Uma relação $R$ é reflexiva se, e somente se, $Id_A \subset R$.
 \end{theorem}
 
 \begin{proof}
-	$(\Rightarrow)$ Suponha que $R$ seja reflexiva, logo por definição para todo $x \in A$ tem-se que $x \mathrel{R} x$, e portanto, pela Definição \ref{def:RelacaoIdentica} é claro que $I_A \subset R$.
+	$(\Rightarrow)$ Suponha que $R$ seja reflexiva, logo por definição para todo $x \in A$ tem-se que $x \mathrel{R} x$, e portanto, pela Definição \ref{def:RelacaoIdentica} é claro que $Id_A \subset R$.
 	
-	$(\Leftarrow)$ Assuma que $I_A \subset R$, agora uma vez que para todo $x \in A$ tem-se que $(x, x) \in I_A$, pela Definição \ref{def:RelacaoInclusao} segue que $(x, x) \in R$, isto é, tem-se que $x \mathrel{R} x$, e portanto, $R$ é reflexiva.
+	$(\Leftarrow)$ Assuma que $Id_A \subset R$, agora uma vez que para todo $x \in A$ tem-se que $(x, x) \in Id_A$, pela Definição \ref{def:RelacaoInclusao} segue que $(x, x) \in R$, isto é, tem-se que $x \mathrel{R} x$, e portanto, $R$ é reflexiva.
 \end{proof}
 
 \begin{corollary}\label{col:CaracterizacaoRelacaoReflexivda}
@@ -548,9 +565,9 @@ O próximo resultado estabelece uma caracterização para as relações serem re
 \end{theorem}
 
 \begin{proof}
-	Assuma que $R_1$ e $R_2$ são relações reflexivas sobre um conjunto $A$, assim pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $I_A \subset R_1$ e $I_A \subset R_2$, agora pelo Teorema \ref{teo:MonotonicidadeDaUniaoIntersecao} tem-se a seguinte relação de inclusão:
+	Assuma que $R_1$ e $R_2$ são relações reflexivas sobre um conjunto $A$, assim pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $Id_A \subset R_1$ e $Id_A \subset R_2$, agora pelo Teorema \ref{teo:MonotonicidadeDaUniaoIntersecao} tem-se a seguinte relação de inclusão:
 	$$R_1 \subseteq R_1 \cup R_2$$
-	logo, tem-se que $I_A \subset R_1 \subseteq R_1 \cup R_2$, consequentemente pelo Teorema \ref{teo:MonotonicidadeDaUniaoIntersecao} tem-se que $R_1 \cup R_2$ é uma relação reflexiva. Agora suponha por absurdo que $I_A \not\subset (R_1 \cap R_2)$, logo existe $(x, x) \in I_A$ tal que $(x, x) \notin (R_1 \cap R_2)$, consequentemente pela Definição \ref{def:IntersecaoConjuntos} tem-se que $(x, x) \notin R_1$ e $(x, x) \notin R_2$, o que contradiz a hipótese de que $R_1$ e $R_2$ sejam relações reflexivas, isto é, contradiz a hipótese de $I_A \subset R_1$ e $I_A \subset R_2$, e portanto, $I_A \subset (R_1 \cap R_2)$, logo pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $R_1 \cap R_2$ é também uma relação reflexiva.
+	logo, tem-se que $Id_A \subset R_1 \subseteq R_1 \cup R_2$, consequentemente pelo Teorema \ref{teo:MonotonicidadeDaUniaoIntersecao} tem-se que $R_1 \cup R_2$ é uma relação reflexiva. Agora suponha por absurdo que $Id_A \not\subset (R_1 \cap R_2)$, logo existe $(x, x) \in Id_A$ tal que $(x, x) \notin (R_1 \cap R_2)$, consequentemente pela Definição \ref{def:IntersecaoConjuntos} tem-se que $(x, x) \notin R_1$ e $(x, x) \notin R_2$, o que contradiz a hipótese de que $R_1$ e $R_2$ sejam relações reflexivas, isto é, contradiz a hipótese de $Id_A \subset R_1$ e $Id_A \subset R_2$, e portanto, $Id_A \subset (R_1 \cap R_2)$, logo pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $R_1 \cap R_2$ é também uma relação reflexiva.
 \end{proof}
 
 \begin{theorem}
@@ -566,7 +583,7 @@ O próximo resultado estabelece uma caracterização para as relações serem re
 \end{theorem}
 
 \begin{proof}
-	Assuma que $R$ é uma relação reflexiva sobre um conjunto $A$, assim pelo Corolário \ref{col:CaracterizacaoRelacaoReflexivda} tem-se que $R^{-1}$ é uma relação reflexiva. Assim pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $I_A \subseteq R$ e $I_A \subseteq R^{-1}$, consequentemente, pelo Corolário \ref{col:MonotonicidadeComposicaoRelacoes} tem-se que $(I_A \bullet I_A) \subseteq (R \bullet R^{-1})$ e $(I_A \bullet I_A) \subseteq (R^{-1} \bullet R)$, mas pela neutralidade da relação identidade (Teorema \ref{teo:NeutralidadeRelacaoIdentidade}) tem-se que $I_A \bullet I_A = I_A$, assim tem-se que  $I_A \subseteq (R \bullet R^{-1})$ e $I_A \subseteq (R^{-1} \bullet R)$, e portanto, $R \bullet R^{-1}$ e $R^{-1} \bullet R$ são relações reflexivas.
+	Assuma que $R$ é uma relação reflexiva sobre um conjunto $A$, assim pelo Corolário \ref{col:CaracterizacaoRelacaoReflexivda} tem-se que $R^{-1}$ é uma relação reflexiva. Assim pelo Teorema \ref{teo:CaracterizacaoRelacaoReflexivda} tem-se que $Id_A \subseteq R$ e $Id_A \subseteq R^{-1}$, consequentemente, pelo Corolário \ref{col:MonotonicidadeComposicaoRelacoes} tem-se que $(Id_A \bullet Id_A) \subseteq (R \bullet R^{-1})$ e $(Id_A \bullet Id_A) \subseteq (R^{-1} \bullet R)$, mas pela neutralidade da relação identidade (Teorema \ref{teo:NeutralidadeRelacaoIdentidade}) tem-se que $Id_A \bullet Id_A = Id_A$, assim tem-se que  $Id_A \subseteq (R \bullet R^{-1})$ e $Id_A \subseteq (R^{-1} \bullet R)$, e portanto, $R \bullet R^{-1}$ e $R^{-1} \bullet R$ são relações reflexivas.
 \end{proof}
 
 \begin{theorem}
@@ -581,7 +598,7 @@ O próximo resultado estabelece uma caracterização para as relações serem re
 	A demonstração é simples e fica como exercício ao leitor.
 \end{proof}
 
-Um segundo tipo de relações binárias é o tipo irreflexivo, de um certo ponto de vista, tal tipo de relação pode ser visto como sendo o contraponto do tipo reflexivo.
+Um terceiro tipo de relações binárias é o tipo irreflexivo, de um certo ponto de vista, tal tipo de relação pode ser visto como sendo o contraponto do tipo reflexivo.
 
 \begin{definition}[Tipo Irreflexivo]\label{def:RelacaoIrreflexiva}
 	Uma relação $R$ é dita ser irreflexiva quando para todo $x \in A$ tem-se que $x \centernot{R} x$.
@@ -632,8 +649,6 @@ Pela Definição \ref{def:RelacaoSimétrica} é fácil notar que uma relação $
 \begin{proof}
 	Direto do Teorema \ref{teo:CaracterizacaoRelacaoSimetricas}.
 \end{proof}
-
-
 
 Agora será mostrado que união e interseção são operações fechadas sobre o conjunto de todas as relações binárias simétricas.
 
@@ -687,7 +702,7 @@ Agora será mostrado que união e interseção são operações fechadas sobre o
 	Uma relação $R$ é dita ser assimétrica quando para todo $x, y \in A$ se $x \mathrel{R} y$, então $y \centernot{R} x$.
 \end{definition}
 
-\begin{example}\label{exe:RelacaoPai}
+\begin{example}
 	Considere que $P$ é a relação de paternidade definida sobre o conjunto dos seres humanos, isto é, $x \mathrel{P} y$ significa que $x$ é pai de $y$, obviamente esta relação é assimétrica pois dado que um indivíduo $x$ é pai de um certo $y$ é impossível que $y$ seja pai de $x$, ou seja, sempre que $x \mathrel{R} y$ será verdade que $y \centernot{R} x$.
 \end{example}
 
@@ -720,21 +735,21 @@ O leitor deve ficar atento ao fato de que uma relação $R$ será dita não ser 
 \end{example}
 
 \begin{example}
-	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é anti-simétrica, pois para todo $X, Y \in \wp(A)$ quando $X \subseteq Y$ e $Y \subseteq X$ tem-se por definição que $X = Y$.
+	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é anti-simétrica, pois para todo $A, B \in \wp(A)$ quando $A \subseteq B$ e $B \subseteq A$ tem-se por definição que $A = B$.
 \end{example}
 
-O leitor deve ter notado que uma relação $R$ sonre um conjunto $A$ não será anti-simétrica se existir pelo menos $x,y \in A$ tais que $x \mathrel{R} y$ e $y \mathrel{R} x$, mas $x \neq y$. 
+O leitor deve ter notado que uma relação $R$ sobre um conjunto $A$ não será anti-simétrica se existir pelo menos $x,y \in A$ tais que $x \mathrel{R} y$ e $y \mathrel{R} x$, mas $x \neq y$. 
 
 \begin{example}
 	Considere que $A = \{1,2,3,4\}$ e $R = {(1,1), (3,2), (2,3), (3,4)}$ obviamente $R$ não é anti-simétrica pois $3 \mathrel{R} 2$ e $2 \mathrel{R} 3$ mas claramente $2$ e $3$ são elementos distintos de $A$. 
 \end{example}
 
 \begin{theorem}[Caracterização das Relações Anti-simétricas]\label{teo:CaracterizacaoRelacaoAntiSimetricas}
-	Uma relação $R$ é anti-simétrica sobre $A$ se, e somente se, $R \bullet R^{-1} \subset I_A$.
+	Uma relação $R$ é anti-simétrica sobre $A$ se, e somente se, $R \cap R^{-1} \subset Id_A$.
 \end{theorem}
 
 \begin{proof}
-	$(\Rightarrow)$ Assuma que $R$ é anti-simétrica sobre $A$, para todo $(x, y) \in R \cap R^{-1}$ tem-se que $x \mathrel{R} y$ e $x \mathrel{R^{-1}} y$, ou seja, $(x, y) \in R$ e $(y,x) \in R$ e, portanto, $x = y$, assim tem-se que $(x, y) \in I_A$, consequentemente, $R \bullet R^{-1} \subset I_A$. $(\Leftarrow)$ Suponha que $R \bullet R^{-1} \subset I_A$, assim seja $x, y \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} x$, ou seja, $(x, y) \in R$ e $(x, y) \in R^{-1}$, logo $(x, y) \in R \cap R^{-1}$ e assim tem-se que $x = y$ e, portanto, $R$ é anti-simétrica.
+	$(\Rightarrow)$ Suponha por absurdo que $R$ é anti-simétrica sobre $A$ e que  $R \cap R^{-1} \not\subset Id_A$, logo existe $(x, y) \in R \cap R^{-1}$ tal que $(x, y) \notin Id_A$, mas pelo fato de que $(x, y) \in R \cap R^{-1}$ tem-se que $(x, y) \in R$ e $(x, y) \in R^{-1}$ e assim $(y, x) \in R$ e como $R$ é anti-simétrica tem-se que $x = y$, logo $(x, y) \in Id_A$ o que é um absurdo, portanto, se $R$ é anti-simétrica sobre $A$, então tem-se que $R \cap R^{-1} \subset Id_A$. $(\Leftarrow)$ Suponha que $R \cap R^{-1} \subset Id_A$, assim seja $x, y \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} x$, ou seja, $(x, y) \in R$ e $(x, y) \in R^{-1}$, logo $(x, y) \in R \cap R^{-1}$ e assim tem-se que $x = y$ e assim $R$ é anti-simétrica.
 \end{proof}
 
 \begin{corollary}
@@ -742,58 +757,308 @@ O leitor deve ter notado que uma relação $R$ sonre um conjunto $A$ não será 
 \end{corollary}
 
 \begin{proof}
-	Ficará como exercício ao leitor.
+	Note que,
+	\begin{eqnarray*}
+		R \text{ é uma relação anti-simétrica} & \stackrel{Teo. \ref{teo:CaracterizacaoRelacaoAntiSimetricas}}{\Longleftrightarrow }& R \cap R^{-1} \subset Id_A\\
+		& \stackrel{Teo. \ref{teo:ReversaPreservaInclusão}}{\Longleftrightarrow} & 		 (R \cap R^{-1})^{-1} \subset Id_A^{-1}\\
+		& \stackrel{Prop. \ref{prop:ComplementarDaRelacaoIdentica}}{\Longleftrightarrow} & (R \cap R^{-1})^{-1} \subset Id_A\\
+		& \stackrel{Teo. \ref{teo:DistributividadeDaRelacaoInversa}(2)}{\Longleftrightarrow} & R^{-1} \cap (R^{-1})^{-1} \subset Id_A\\
+		& \stackrel{Teo. \ref{teo:CaracterizacaoRelacaoAntiSimetricas}}{\Longleftrightarrow }& R^{-1} \text{ é uma relação anti-simétrica} 
+	\end{eqnarray*}
+	E isto conclui a prova.
 \end{proof}
 
 \begin{theorem}
-	Se $R$ e $S$ são relações anti-simétricas sobre um conjunto $A$, então $R \cap S$ também é anti-simétrica.
+	Se $R$ e $S$ são relações anti-simétricas, então $R \cap S$ também é anti-simétrica.
 \end{theorem}
 
 \begin{proof}
-	A demonstração segue do Teorema \ref{teo:CaracterizacaoRelacaoAntiSimetricas} e do Teorema \ref{teo:InclusaoDaInversa}, a prova em detalhes fica como exercício.
+	Suponha que $R$ e $S$ são relações anti-simétricas, logo pela Teorema \ref{teo:CaracterizacaoRelacaoAntiSimetricas} tem-se que $R \cap R^{-1} \subset Id_A$ e $S \cap S^{-1} Id_A$, agora note que,
+	\begin{eqnarray*}
+		(R \cap S) \cap (R \cap S)^{-1} & \stackrel{Teo. \ref{teo:DistributividadeDaRelacaoInversa}(2)}{=} & (R \cap S) \cap (R^{-1} \cap S^{-1})\\
+		& \stackrel{Tab. \ref{tab:PropriedadesUniaoIntersecao}(p2) \ e \ (p3)}{=} & (R \cap R^{-1}) \cap (S \cap S^{-1})\\
+		& \stackrel{Hip.}{\subset} & Id_A \cap Id_A\\
+		& = & Id_A
+	\end{eqnarray*}
+	Portanto, $(R \cap S) \cap (R \cap S)^{-1} \subset Id_A$ e assim pelo Teorema \ref{teo:CaracterizacaoRelacaoAntiSimetricas} tem-se que $R \cap S$ é anti-simétrica.
 \end{proof}
+
+Continuando a apresentação dos tipos (propriedades) das relações binárias, agora será introduzida o tipo transitivo.
 
 \begin{definition}[Tipo Transitivo]\label{def:RelacaoTransitiva}
 	Uma relação $R$ é dita ser transitiva quando para todo $x, y, z \in A$ se $x \mathrel{R} y$ e $y \mathrel{R} z$, então $x \mathrel{R} z$.
 \end{definition}
 
 \begin{example}
-	Dado um conjunto $A$ qualquer a relação de subconjunto $\subseteq$ sobre $\wp(A)$ é uma relação que é transitiva, pois para todo $X, Y, Z \in \wp(A)$ sempre que $X \subseteq Y$ e $Y \subseteq Z$ tem-se que $X \subseteq Z$.
+	Dado um conjunto não vazio $A$ a relação $\subseteq$ definida sobre $\wp(A)$ é um clássico exemplo de relação transitiva.
 \end{example}
 
 \begin{example}
-	Dado $\mathbb{Z}$ a relação $R = \{(x, y) \in \mathbb{Z}^2 \mid (\exists z \in \mathbb{Z})[x = yz]\}$ é uma relação transitiva. ({\color{red}Provar isto é um bom exercício ao leitor})
+	A relação $R = \{(x, y) \in \mathbb{R}^2 \mid (\exists k \in \mathbb{R})[x = ky]\}$ é uma relação transitiva\footnote{A prova disso ficará como exercício ao leitor.a prova disso ficará como exercício ao leitor}.
 \end{example}
 
 \begin{example}
-	A relação sobre o conjunto de todos os seres humanos (vivos ou mortos) descrita por ``x é ancestral de y'' é uma relação transitiva.
+	A relação ``ser ancestral de'', definida sobre o conjunto de todos os seres humanos (vivos e mortos) é uma relação transitiva.
 \end{example}
 
-Note que uma relação $R$ sobre um conjunto $A$ não será transitiva se existirem pares $(x,y), (y,z) \in A^2$ tais que $x \mathrel{R} y$ e $y \mathrel{R} z$, mas $x \centernot{R} z$, nesse caso ela é dito intransitiva.
+Como muito explicado em \cite{abe1991-TC} uma relação não será transitiva sempre que existirem $x, y, z \in A$ tais que  $x \mathrel{R} y$ e $y \mathrel{R} z$ mas $x \centernot{R} z$.
 
 \begin{example}
-	A relação no Exemplo \ref{exe:RelacaoPai} é intransitiva pois se $x$ é pai de $y$ e $y$ é pai de $z$, então $x$ não pode ser pai de $z$.
+	Seja $P = \{1, 2, 3, 4\}$ a relação $R_1 = \{(1, 1), (1, 2), (2, 4), (3, 2), (1, 4)\}$ é transitiva, já a relação $R_2 = \{(1, 1), (3, 1), (1, 2), (2,3), (2, 4), (3, 3), (4, 1)\}$ não é transitiva pois $(3, 1), (1, 2) \in R_2$ mas $(3, 2) \notin R_2$.
 \end{example}
 
 \begin{theorem}[Caracterização das Relações Transitivas]\label{teo:CaracterizacaoRelacaoTransitivas}
-	Uma relação $R$ sobre $A$ é transitiva se, e somente se, $R \bullet R \subset R$.
+	Uma relação $R$ é transitiva sobre $A$ se, e somente se, $R \bullet R \subset R$.
 \end{theorem}
 
 \begin{proof}
-	$(\Rightarrow)$ Suponha que $R$ é uma relação sobre $A$ transitiva, agora para todo $(x, z) \in R \bullet R$ por $R$ ser transitiva existe $y \in A$ tal que $(x, y), (y, z) \in R$ e, portanto, $(x, z) \in R$ logo $R \bullet R \subset R$. $(\Leftarrow)$ Assuma que $R \bullet R \subset R$, assim por definição todo $(x, z) \in R \bullet R$ é tal que $(x, z) \in R$, mas por definição, $(x, z) \in R \bullet R$ se, e somente se, existe $y \in A$ tal que $(x, y), (y, z) \in R$ e, portanto, por definição $R$ é transitiva.
+	$(\Rightarrow)$ Suponha que $R$ seja transitiva, assim para todo $(x, y), (y, z) \in R$ é tal que $(x, z) \in R$, mas note que $(x, y), (y, z) \in R$ implica que $(x, z) \in R \bullet R$ e, portanto, $R \bullet R \subseteq R$. $(\Leftarrow)$ Assuma que $R \bullet R \subset R$, logo todo $(x, z) \in R \bullet R$ é tal que $(x, z) \in R$, mas note que $(x, z) \in R \bullet R$ implica que existe $y \in A$ tal que $(x, y), (y, z) \in R$ e assim por definição $R$ é transitiva. 
 \end{proof}
 
 \begin{corollary}
-	Uma relação $R$ sobre $A$ é transitiva se, e somente se, $R^{-1}$ é transitiva.
+	Uma relação $R$ é transitiva se, e somente se, $R^{-1}$ é também transitiva.
 \end{corollary}
 
+\begin{proof}
+	Note que,
+	\begin{eqnarray*}
+		R \text{ é uma relação transitiva} & \stackrel{Teo. \ref{teo:CaracterizacaoRelacaoTransitivas}}{\Longleftrightarrow }& R \bullet R \subset R\\
+		& \stackrel{Obs. \ref{rema:ReversaoRelacao}}{\Longleftrightarrow} & (R \bullet R)^{-1} \subset R^{-1}\\
+		& \stackrel{Teo. \ref{teo:PseudoMorganRelacoes}}{\Longleftrightarrow} & R^{-1} \bullet R^{-1} \subset R^{-1}\\
+		&  \stackrel{Teo. \ref{teo:CaracterizacaoRelacaoTransitivas}}{\Longleftrightarrow } & R^{-1} \text{ é uma relação transitiva}
+	\end{eqnarray*}
+	E isto conclui a prova.
+\end{proof}
+
 \begin{theorem}
-	Se $R$ e $S$ são relações transitivas sobre um conjunto $A$, então $R \cap S$ também é transitiva.
+	Se $R$ é transitiva, então $R \bullet R$ é transitiva.
 \end{theorem}
 
 \begin{proof}
-	Refazer a prova...
+	Direto do Teorema \ref{teo:CaracterizacaoRelacaoTransitivas}.
 \end{proof}
 
+Por fim será agora apresentado o último tipo das relação binárias, sendo este último tipo a contra parte do tipo transitivo.
+
+\begin{definition}[Tipo Intransitivo]\label{def::RelacaoIntransitiva}
+	Uma relação $R$ é dita ser intransitiva quando para todo $x, y, z \in A$ se $x \mathrel{R} y$ e $y \mathrel{R} z$, então $x \centernot{R} z$.
+\end{definition}
+
+\begin{example}
+	A relação ``$x$ é mãe de $y$'' definida sobre o conjunto de todas as pessoas (vivas e mortas) é uma relação intransitiva, pois se ``Maria é mão de Julia'' e ``Julia é mãe de Rebeca'' tem-se que ``Maria não pode ser mãe de Rebeca''.
+\end{example}
+
+O leitor atento pode notar que uma relação $R$ sobre um conjunto não vazio $A$ qualquer, será dita não ser intransitiva quando existir pelo menos três elementos $x, y, z \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} z$ e $x \mathrel{R} z$.
+
+\section{Fecho das Relações Binárias}\label{sec:FechoDasRelacoesBinarias}
+
+Como explicado no Capítulo \ref{cap:Conjuntos} um conjunto é definido por uma propriedade, assim dado que uma relação é também um conjunto é natural que ela seja descrita por uma ou mais propriedades , e como dito em \cite{judith2021}, as vezes dado uma relação $R$ pode-se questionar ``o que seria necessário para que  $R$ também tenha a propriedade  $P$?'', a resposta para essa pergunta é clara, \textbf{nada pode ser feito}, pois uma vez que, $R$ não possui a propriedade $P$ se for adicionado uma restrição sobre o elementos de $R$ para que eles também passem a satisfazer $P$ significa que foi na verdade criada uma nova relação $R'$, essa ação costuma ser chamada de fechamento da relação e essa nova relação $R'$ é chamada de fecho de $R$ definido formalmente a seguir.
+
+\begin{definition}[Fecho de uma relação]
+	Se $R$ uma relação sobre $A$ e $P$ uma propriedade, a relação $\widehat{R}$ definida sobre $A$ é dita ser o fecho de $R$ com respeito a $P$ sempre que:
+	\begin{enumerate}
+		\item $\widehat{R}$ possui a propriedade $P$.
+		\item $R \subseteq \widehat{R}$.
+		\item Para toda relação $R^*$ que satisfaça as condições $(1)$ e $(2)$ tem-se que $\widehat{R} \subseteq R^*$. 
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Em capítulos futuros a noção de fecho será visto como um operador, isto é, como uma função.
+\end{remark}
+
+Para fins de interesse de estudantes de computação e também para fins didáticos neste manuscrito serão estudados os métodos de construção dos fechos para propriedades específicas, a saber, as propriedades de reflexividade, transitividade e simetria.
+
+Um ponto importante a se destacar ao leitor iniciante é que se $R$ já possui uma certa propriedade $P$, o fecho de $R$ com respeito a $P$ é exatamente o próprio $R$.
+
+\begin{definition}\label{def:FechoReflexivo}
+	Seja $R$ uma relação binária sobre $A$ o fecho reflexivo de $R$, denotado por $ref(R)$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		ref(R) = R \cup Id_A
+	\end{eqnarray*}
+\end{definition}
+
+\begin{example}
+	Seja $A = \{a, b, c\}$ e $R = \{(a, a), (a, b), (a, c), (c, a), (b, c)\}$ uma relação sobre $A$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		ref(R)  & = & R \cup Id_A\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c)\} \cup \{(a,a), (b, b), (c,c)\}\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c), (b, b), (c,c)\}
+	\end{eqnarray*}
+\end{example}
+
+\begin{example}
+	Seja $B = \{0, 1\}$ e $K= \{(0, 0), (1, 0), (0, 1)\}$ uma relação sobre $B$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		ref(K)  & = & R \cup Id_B\\
+		& = & \{(0, 0), (1, 0), (0, 1)\} \cup \{(0,0), (1, 1)\}\\
+		& = & \{(0, 0), (1, 0), (0, 1), (1, 1)\} 
+	\end{eqnarray*}
+\end{example}
+
+\begin{example}
+	Dado o conjunto $\mathbb{N}$ e a relação ``menor que'' definida nos número naturais corresponde ao conjunto $\{(x, y) \in \mathbb{N}^2 \mid (\exists z \in \mathbb{N}_*)[x = y + k]\}$ e o fecho reflexivo para tal relação é exatamente a relação ``menor ou igual que'' e corresponde exatamente ao conjunto $\{(x, y) \in \mathbb{N}^2 \mid (\exists z \in \mathbb{N})[x = y + k]\}$.
+\end{example}
+
+\begin{definition}\label{def:FechoSimetrico}
+	Seja $R$ uma relação binária sobre $A$ o fecho simétrico de $R$, denotado por $sim(R)$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		sim(R) = R \cup \{(y, x) \mid (x, y) \in R\}
+	\end{eqnarray*}
+\end{definition}
+
+\begin{remark}
+	O fecho simétrico também pode ser chamado de fecho dual, no sentido de descrever uma dualidade de propriedades que descrever o conjunto.
+\end{remark}
+
+\begin{example}
+	Seja $A = \{a, b, c\}$ e $R = \{(a, a), (a, b), (a, c), (c, a), (b, c)\}$ uma relação sobre $A$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		sim(R) & = &   R \cup \{(y, x) \mid (x, y) \in R\}\\
+		& = &  \{(a, a), (a, b), (a, c), (c, a), (b, c)\} \cup \{(a, a), (b, a), (c, a), (a, c), (c, b)\}\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c), (b, a), (c, b)\}
+	\end{eqnarray*}
+\end{example}
+
+\begin{example}
+	Se $X$ é o conjunto dos humanos (vivos ou mortos) e $M$ é a relação ``pai de'', então $sim(M) = \{(x, y) \in X^2 \mid x \text{ é pai de } y \text{ ou } x \text{ é filho de} y\}$.
+\end{example}
+
+\begin{example}
+	Dado o conjunto $\mathbb{R}$ e a relação $D = \{(x,y) \in \mathbb{R}^2 \mid (\exists z \in \mathbb{R})[x = yz]\}$ o fecho reflexivo de $D$ é dado por
+	\begin{eqnarray*}
+		sim(D) & = &   D \cup \{(y, x) \mid (x, y) \in R\}\\
+		& = & \{(x,y) \in \mathbb{R}^2 \mid (\exists z \in \mathbb{R})[x = yz]\} \cup \{(y, x) \in \mathbb{R}^2 \mid (\exists z \in \mathbb{R})[y = \frac{x}{z}]\}\\
+		& = & \{(x,y) \in \mathbb{R}^2 \mid (\exists z \in \mathbb{R})[x = yz \lor y = \frac{x}{z}]\}
+	\end{eqnarray*}
+\end{example}
+
+\begin{definition}\label{def:FechoTransitivo}
+	Seja $R$ uma relação binária sobre $A$ o fecho transitivo de $R$, denotado por $R^+$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		R^+ = \bigcup_{i = 1}^\infty R_i
+	\end{eqnarray*}
+	em que, $R^1 = R$ e $R^{i+1} = R \bullet R^i$.
+\end{definition}
+
+O fecho transitivo é especialmente importante para diversas áreas que são usualmente de interesse dos cientistas da computação tais como a teoria dos grafos, a lógica e teoria da complexidade. Particularmente é sabido que diversos bancos de dados são construídos de forma a ser possível realizar a implementação de fechos transitivos.
+
+\begin{remark}
+	Como dito em \cite{carmo2013} sempre que a relação $R$ é definida sobre um conjunto finito $A$ a Definição \ref{def:FechoTransitivo} pode ser reescrita como:
+	\begin{eqnarray*}
+		R^+ = \bigcup_{i = 1}^n R_i
+	\end{eqnarray*}
+	em que $n$ é o número de elemento em $A$.
+\end{remark}
+
+\begin{example}
+	Dado o conjunto $B = \{0,1\}$ e a relação $T = \{(1, 0), (0, 1)\}$ definida sobre $B$ tem-se que o fecho transitivo de $T$ é dado por, 
+	\begin{eqnarray*}
+		T^+ & = & \bigcup_{i = 1}^2 T_i\\
+		& = & T_1 \cup T_2\\
+		& = & T \cup (T \bullet T_1)\\
+		& = & T \cup (T \bullet T)\\
+		& = &  \{(1, 0), (0, 1)\} \cup  \{(1, 0), (0, 1), (1, 1), (0, 0)\}\\
+		& = &  \{(1, 0), (0, 1), (1, 1), (0, 0)\}\\
+	\end{eqnarray*}
+\end{example}
+
+\begin{example}
+	Seja $A = \{1, 2, 3\}$ e $S =\{(1, 2), (2, 2), (3, 1), (2, 3)\}$ uma relação sobre $A$ o fecho transitivo de $R$ é exatamente o conjunto:
+	\begin{eqnarray*}
+		S^+ & = & \bigcup_{i = 1}^3 S_i\\
+		 & = & S_1 \cup S_2 \cup S_3\\
+		 & = & S \cup (S \bullet S_1) \cup (S \bullet S_2)\\
+		 & = & \{(1, 2), (2, 2), (3, 1), (2, 3), (1, 3), (1, 1), (3, 3)\}
+	\end{eqnarray*}
+\end{example}
+
+\begin{example}
+	Para qualquer conjunto $A$ a relação binária $\subseteq$ definida sobre $\wp(A)$ é um clássico exemplo de relação cujo fecho transitivo é igual a ela mesmo.
+\end{example}
+
+\section{Questionário}\label{sec:Questionario3part1}
+
+\begin{problem}\label{prob:Relcacoes1}
+	Dado os conjuntos $A = \{1, 2, 3\}, B = \{x, y\}, C = \{q, v\}$ e $D = \{-1, 0, 1\}$ construa os conjuntos a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $A \times B$.
+	\item $A \times C$.
+	\item $B \times D$.
+	\item $C \times A$.
+	\item $A \times A$.
+	\item $A \times (B \times D)$.
+	\item $((A \times B) \cap (D \times A)) \times C$.
+	\item $C \times ((B \times A) \cap (A \times D))$.
+	\item $B^3 \times D^2$.
+	\item $A^2 \times (C^3 \times D)$.
+	\item $A \times B \times C$.
+	\item $A \times (B \times C)$.
+	\item $A^2 \times (B \times C)$.
+	\item $(D^3 \times C) \times B$.
+	\item $A^2 \times A^2$.
+\end{exerList}
+
+\begin{problem}\label{prob:Relcacoes2}
+	Considerando $X = \{1, 2\}, Y = \{a, b\}$ e $Z = \{b, c\}$ determine:
+\end{problem}
+
+\begin{exerList}
+	\item $X  \times (Y \cup Z)$.
+	\item $X  \times (Y - Z)$.
+	\item $(X \times Y) \times Z$.
+	\item $(X \times Z) \times Y$.
+	\item $X  \times (Y \ominus Z)$.
+	\item $X  \times (Y \cap Z)$.
+	\item $(X \times Y) \times (X \times Z)$.
+	\item $(X \times Y) \cap (X \times Z)$.
+	\item $X^2 \times Y^2$
+	\item $Z^2 \times Y^2$
+\end{exerList}
+
+\begin{problem}\label{prob:Relcacoes3}
+	Sendo $(x + y, 1), (3, x - y) \in \mathbb{N}^2$ dado que $(x + y, 1) = (3, x - y)$, determine o valor de $x$ e $y$.
+\end{problem}
+
+\begin{problem}\label{prob:Relcacoes4}
+	Dado os conjuntos $A = \{P, R\}, B = \{N, E\}$ e $C = \{1, 2\}$ construa os diagramas de árvore para os seguintes produtos Cartesianos.
+\end{problem}
+
+\begin{exerList}
+	\item $A^2$.
+	\item $B \times C$.
+	\item $A \times (B \times C)$.
+	\item $B \times (A \times C)$.
+	\item $C^2 \times B$.
+	\item $C^3 \times C$.
+	\item $A \times C^2$.
+	\item $B \times (C \cup A)$.
+	\item $(A \cup C)^2 \times A$.
+	\item $A^2 \times B \times C^2$.
+\end{exerList}
+
+\begin{problem}\label{prob:Relcacoes5}
+	Determine o domínio e a imagem das seguintes relações binárias.
+\end{problem}
+
+\begin{exerList}
+	\item $R_1 = \{(x, y) \in \mathbb{N} \times \mathbb{N} \mid 0 \leq x, y \leq 6, y = 2x\}$\footnote{Na relação $\leq$ quando é escrito que $0 \leq x, y \leq z$ significa que ambas as desigualdades $0 \leq x\leq z$ e $0 \leq y \leq z$ são verdadeiras, porém, não se tem qualquer informação acerca da tricotomia entre os elementos $x$ e $y$.}.
+	\item $R_2 = \{(x, y) \in \mathbb{N} \times \mathbb{N} \mid 0 \leq x \leq 5, 1 \leq y \leq 4, (x-y) \in \mathbb{N} \}$.
+	\item $R_3 = \{(a,b), (e, c), (a, c), (o, c), (i, (d,f)), ((o, u), b), ((o, u), c), (u, b) \}$.
+	\item $R_4 = \{(x_0, x_1) \mid x_0 \text{ é uma concoante e } x_1 \text{ é uma vogal} \}$.
+	\item $R_5 = \{(x, y) \in \mathbb{N} \times \mathbb{N} \mid x + x = x, x + y = y\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Relcacoes6}
+	Determine o domínio, imagem e a relação inversa das seguintes relações binárias.
+\end{problem}
+
+\begin{exerList}
+	\item Relação igualdade sobre o conjunto $\mathbb{N}_1$ com $\mathbb{N}_1 = \{x \in \mathbb{N} \mid x > 0\}$. 
+	\item Relação ``maior que'' sobre o conjunto $\{1,2,3,4,5,6\}$.
+	\item Relação $\subseteq$ sobre um conjunto $\wp(A)$ com $A$ sendo um conjunto arbitrário.
+\end{exerList}
 
 % Nada q vale a pena é fácil --- Eric Cartman
