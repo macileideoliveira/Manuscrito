@@ -1,8 +1,8 @@
 \chapter{Métodos de Demonstração}\label{cap:Demonstracoes}
 
-\epigraph{Mais um colchão, mais uma demonstração}{Paul Erdös}
+\epigraph{``Mais um colchão, mais uma demonstração''.}{Paul Erdös}
 
-\epigraph{Um matemático é uma máquina que transforma café em teoremas.}{Paul Erdös}
+\epigraph{``Um matemático é uma máquina que transforma café em teoremas''.}{Paul Erdös}
 
 \section{Introdução}\label{sec:Introducao-Demonstracoes}
 
@@ -776,35 +776,6 @@ A justificativa da validade  da metodologia da prova por casos é que um enuncia
 \end{remark}
 	
 Com respeito ao diagrama de blocos uma prova por casos consiste de um diagrama que possui em seu interior $n$ provas da forma $\alpha_i \Rightarrow \beta$ com $1 \leq i \leq n$, após todas as sub-provas serem apresentadas a última linha no diagrama mais externo irá expressar uma sentença da forma $(\alpha_1 \Rightarrow \beta) \land \cdots \land (\alpha_n \Rightarrow \beta)$, então o diagrama será fechado e será escrita a conclusão do diagrama. O exemplo a seguir ilustram esse procedimento.
-	
-\begin{example}\label{exe:DiagramaProva23}
-	Demonstração da asserção: Se $x \in  \mathbb{Z}$, então $x^2$ tem a mesma paridade de $x$.
-	{\scriptsize
-		\begin{logicproof}{4}
-			\begin{subproof}
-				&\\
-				\begin{subproof}
-					\text{\textbf{Assuma} que } x = 2i \text{ com } i \in \mathbb{Z}, &  --- Hipótese\\
-					\text{\textbf{logo} } x^2 = 2(2i^2), \text{ com } i \in \mathbb{Z} &\\
-					\text{\textbf{então} } x \text{ é par} & --- DEF de paridade
-				\end{subproof}
-				\text{\textbf{Portanto}, se } x \text{ é par, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 2-4)\\
-				\begin{subproof}
-					\text{\textbf{Assuma} que } x = 2i + 1\text{ com } i \in \mathbb{Z}, &  --- Hipótese\\
-					\text{\textbf{logo} } x^2 = 2(2i^2) + 1, \text{ com } i \in \mathbb{Z} & \\
-					\text{\textbf{assim} } x^2 = 2j + 1, \text{ com } j = (2i^2), i \in \mathbb{Z} & --- Reescrita\\
-					\text{\textbf{então} } x \text{ é par} & --- DEF de paridade
-				\end{subproof}
-				\text{\textbf{Portanto}, se } x \text{ é ímpar, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 6-9)
-			\end{subproof}
-			\text{\textbf{Consequentemente}, se } x \in \mathbb{Z}, \text{então } x^2 \text{ tem a mesma paridade que } x. & --- Conclusão da PPC (linhas 1-10)
-		\end{logicproof}
-	}
-\end{example}
-
-\begin{remark}
-	Note que os casos que guiam a prova do Exemplo \ref{exe:DiagramaProva23} são o caso do $x$ ser par e o caso do $x$ ser ímpar.
-\end{remark}
 
 \begin{example}\label{exe:DiagramaProva24}
 	Demonstração da asserção: Dado $n \in \mathbb{N}$. Se $n \leq 2$, então $n! \leq n + 1$.
@@ -841,6 +812,35 @@ Com respeito ao diagrama de blocos uma prova por casos consiste de um diagrama q
 		\end{logicproof}
 	}
 \end{example}
+	
+\begin{example}\label{exe:DiagramaProva23}
+	Demonstração da asserção: Se $x \in  \mathbb{Z}$, então $x^2$ tem a mesma paridade de $x$.
+	{\scriptsize
+		\begin{logicproof}{4}
+			\begin{subproof}
+				&\\
+				\begin{subproof}
+					\text{\textbf{Assuma} que } x = 2i \text{ com } i \in \mathbb{Z}, &  --- Hipótese\\
+					\text{\textbf{logo} } x^2 = 2(2i^2), \text{ com } i \in \mathbb{Z} &\\
+					\text{\textbf{então} } x \text{ é par} & --- DEF de paridade
+				\end{subproof}
+				\text{\textbf{Portanto}, se } x \text{ é par, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 2-4)\\
+				\begin{subproof}
+					\text{\textbf{Assuma} que } x = 2i + 1\text{ com } i \in \mathbb{Z}, &  --- Hipótese\\
+					\text{\textbf{logo} } x^2 = 2(2i^2) + 1, \text{ com } i \in \mathbb{Z} & \\
+					\text{\textbf{assim} } x^2 = 2j + 1, \text{ com } j = (2i^2), i \in \mathbb{Z} & --- Reescrita\\
+					\text{\textbf{então} } x \text{ é par} & --- DEF de paridade
+				\end{subproof}
+				\text{\textbf{Portanto}, se } x \text{ é ímpar, então }, x^2 \text{ é par} & --- Conclusão da PD (linhas 6-9)
+			\end{subproof}
+			\text{\textbf{Consequentemente}, se } x \in \mathbb{Z}, \text{então } x^2 \text{ tem a mesma paridade que } x. & --- Conclusão da PPC (linhas 1-10)
+		\end{logicproof}
+	}
+\end{example}
+
+\begin{remark}
+	Note que os casos que guiam a prova do Exemplo \ref{exe:DiagramaProva23} são o caso do $x$ ser par e o caso do $x$ ser ímpar.
+\end{remark}
 
 \section{Outras Formas de Representação de Provas}\label{sec:OutrasFormasProvas}
 

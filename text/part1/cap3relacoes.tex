@@ -1,6 +1,8 @@
 \chapter{Relações}\label{cap:Relacoes}
 
-\epigraph{``A única coisa perfeita é o conjunto vazio.''}{Elon Lages Lima}
+\epigraph{``O cliente pode ter um carro pintado com a cor que desejar, contanto que esta seja preto''.}{Henry Ford}
+
+%\epigraph{``A única coisa perfeita é o conjunto vazio.''}{Elon Lages Lima}
 
 \section{Noções Básicas de Relações}\label{sec:RelacaoParOdenado}
 
@@ -941,7 +943,7 @@ Um ponto importante a se destacar ao leitor iniciante é que se $R$ já possui u
 	em que, $R^1 = R$ e $R^{i+1} = R \bullet R^i$.
 \end{definition}
 
-O fecho transitivo é especialmente importante para diversas áreas que são usualmente de interesse dos cientistas da computação tais como a teoria dos grafos, a lógica e teoria da complexidade. Particularmente é sabido que diversos bancos de dados são construídos de forma a ser possível realizar a implementação de fechos transitivos.
+O fecho transitivo é especialmente importante para diversas áreas que são usualmente de interesse dos cientistas da computação tais como a teoria dos grafos, a lógica e teoria da complexidade. Particularmente é sabido que diversos bancos de dados são construídos desde a década de 70 de forma que seja sempre possível realizar a implementação de fechos transitivos \cite{Gerard2021discreta}.
 
 \begin{remark}
 	Como dito em \cite{carmo2013} sempre que a relação $R$ é definida sobre um conjunto finito $A$ a Definição \ref{def:FechoTransitivo} pode ser reescrita como:
@@ -976,6 +978,10 @@ O fecho transitivo é especialmente importante para diversas áreas que são usu
 \begin{example}
 	Para qualquer conjunto $A$ a relação binária $\subseteq$ definida sobre $\wp(A)$ é um clássico exemplo de relação cujo fecho transitivo é igual a ela mesmo.
 \end{example}
+
+\section{Relações e Grafos}\label{sec:RelacoesGrafos}
+
+Escrever depois...
 
 \section{Questionário}\label{sec:Questionario3part1}
 
@@ -1125,6 +1131,10 @@ O fecho transitivo é especialmente importante para diversas áreas que são usu
 \end{exerList}
 
 \begin{problem}\label{prob:Relacoes12}
+	Esboce a relação inversa de cada uma das relações dos Exercícios \ref{prob:Relacoes10} e \ref{prob:Relacoes11}.
+\end{problem}
+
+\begin{problem}\label{prob:Relacoes13}
 	Considere o universo do discurso $\mathbb{U} = \{1, 2, 0, 4\}$ e construa sobre $\mathbb{U}$:
 \end{problem}
 
@@ -1135,12 +1145,10 @@ O fecho transitivo é especialmente importante para diversas áreas que são usu
 	\item Uma relação que não seja reflexiva e nem  transitiva, e também não seja simétrica.
 \end{exerList}
 
-\begin{problem}\label{prob:Relacoes13}
+\begin{problem}\label{prob:Relacoes14}
 	Esboce os fechos reflexivo, simétrico e transitivo de cada relação no Exercício \ref{prob:Relacoes10}.
 \end{problem}
 
-\begin{problem}\label{prob:Relacoes14}
+\begin{problem}\label{prob:Relacoes15}
 	Esboce os fechos reflexivo, simétrico e transitivo de cada relação no Exercício \ref{prob:Relacoes11}.
 \end{problem}
-
-% Nada q vale a pena é fácil --- Eric Cartman

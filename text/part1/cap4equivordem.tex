@@ -1,0 +1,293 @@
+\chapter{Equivalência e Ordem}\label{cap:EquivalenciaOrdem}
+
+\epigraph{``Matemática não é difícil, matemática tem muita lógica e o que é lógico não pode ser difícil''.}{João Lucas Marques Barbosa}
+
+\epigraph{``O grande inimigo do conhecimento não é a ignorância, é a ilusão de ter conhecimento''.}{Stephen Hawking}
+
+%\epigraph{``O problema do mundo hoje é que as pessoas inteligentes estão cheias de dúvidas, e as pessoas idiotas estão cheias de certezas...''}{Bertrand Russell}`
+
+\section{Introdução}\label{sec:IntroEquivalenciaOrdem}
+
+No Capítulo \ref{cap:Relacoes} anterior este manuscrito apresentou ao leitor a ideia de relações entre conjuntos, em especial foram tratadas as relações binários sobre um conjunto dado. Agora nesta seção será apresentada de forma mais profunda as relações de equivalência. Como dito em \cite{abe1991-TC, carmo2013}, as relações de equivalência ao lado das relações de ordem (estudadas na Seção \ref{sec:Ordem}) são de importante central para toda a matemática, além disso, as relações de equivalência também desempenho importantes papéis nas área de mineração de dados \cite{lin1999data, lingras1998data}, aprendizado de máquina \cite{bar2003learning} e processamento de sinais \cite{li2007equivalent} e imagens \cite{acharya2003classification, myasnikov2018description}. E por sua vez, as relações de ordem também aparecem em diversas áreas de caráter prática tais como processamento de imagens \cite{farias2016image, cressie1998image}, criptografia \cite{giri2008crypto}, otimização \cite{karaman2018partial} e etc.
+
+\section{Relações de Equivalência e Espaço Quociente}\label{sec:Equivalencia}
+
+Mas o que seria uma relação de equivalência? Bem, uma resposta satisfatória para essa pergunta é que uma relação de equivalência pode ser entendida como sendo uma forma de parear os elementos de um conjunto que apresentam similaridade entre si com respeito a uma ou mais propriedades específicas, isto é, uma relação de equivalência junta os elementos em pares pela similaridade deles. A seguir será apresentado de forma precisa o conceito de relação de equivalência.
+
+\begin{definition}[Relação de Equivalência]\label{def:RelacaoEquivalencia}
+	Seja $A$ um conjunto uma relação binária $\equiv$ sobre $A$ é dita ser uma relação de equivalência sempre que $\equiv$ for reflexiva, simétrica e transitiva.
+\end{definition}
+
+\begin{remark}
+	Como dito em \cite{carmo2013} além da notação $\equiv$ outros símbolos também são comumente encontrados na literatura para representar relações de equivalência, entre, tais símbolos destacam-se $\approx$ e $\sim$. Neste manuscrito tais símbolos apareceram mais adiante representando outros conceitos, assim neste manuscrito será usado sempre usado o símbolo $\equiv$, a menos que seu uso gere confusão e nesse caso será usado notações como $R_i$ para denotar relação de equivalência, em que $i$ poderá ser um número natural ou o rótulo de um conjunto.
+\end{remark}
+
+\begin{example}\label{exe:Equivalencia1}
+	Dado um conjunto $C$ qualquer, a relação de igualdade $(=)$ definida em $C$ é obviamente uma relação de equivalência.
+\end{example}
+
+\begin{example}\label{exe:Equivalencia2}
+	Dado o conjunto $A =\{a, b, c, d\}$ a relação definida por $a \equiv a$, $a \equiv b$, $b \equiv a$, $b \equiv b$, $c \equiv c$ e $d \equiv d$, é claramente uma relação de equivalência.
+\end{example}
+
+Os Exemplos \ref{exe:Equivalencia1} e \ref{exe:Equivalencia2} permite o leitor perceber uma importante verdade matemática, tal verdade como expressa em \cite{carmo2013} pode ser escrita como: ``objetos iguais são equivalentes, mas objetos equivalentes nem sempre são iguais''.
+
+\begin{example}
+	Dado um plano $P$ a relação de paralelismo definido sobre o conjunto de retas de $P$ é uma relação de equivalência, outro exemplo clássico da geometria é a semelhança entre triângulos neste mesmo plano $P$.
+\end{example}
+
+\begin{example}
+	A relação $R = \{(x, y) \in \mathbb{N}^2 \mid x, y \text{ possuem o mesmo resto da divisão por } 5\}$ é um relação de equivalência.
+\end{example}
+
+\begin{example}
+	A relação $I =  \{(x, y) \in PERS^2 \mid x, y \text{ possuem a mesma idade}\}$ é um relação de equivalência sobre o conjunto de todas as pessoas $(PERS)$.
+\end{example}
+
+\begin{example}
+	Dado o conjunto de todos os times de futebol do Brasil a relação $T$ definida como $x \mathrel{T} y \Longleftrightarrow x, y \text{ nunca foram rebaixados para a segunda divisão}$, é uma relação de equivalência.
+\end{example}
+
+%A partir da noção de relação de equivalência é possível como destacado em \cite{abe1991-TC} definir a noção de classes de equivalência. 
+
+\begin{definition}[Classes de Equivalência]
+	Seja $\equiv$ uma relação de equivalência sobre um conjunto $A$, para todo $x \in A$ é definida a classe de equivalência de $x$, denotado por $[x]$, como sendo o conjunto de todos os elementos equivalentes a $x$, simbolicamente tem-se que:
+	$$[x] = \{y \in A \mid y \equiv x\}$$
+\end{definition}
+
+Obviamente toda classe de equivalência $[x]$ é um subconjunto do conjunto base\footnote{Conjunto base aqui diz respeito ao conjunto sobre o qual a relação de equivalência está definida.}. Além disso,  obviamente tem-se que $[x] = \emptyset$ se, e somente se, o conjunto base for vazio. 
+
+\begin{example}\label{exe:ClasseEquivalencia1}
+	Seja $A = \{0, 1, 2, 3\}$ e $0 \equiv 0$, $1 \equiv 1$, $2 \equiv 2$, $3 \equiv 3$, $0 \equiv 2$, $1 \equiv 3$, $2 \equiv 0$, $3 \equiv 1$ tem-se que: $[0] = \{0, 2\}$, $[1] = \{1, 3\}$, $[2] = \{0, 2\}$ e $[3] = \{1, 3\}$.
+\end{example}
+
+\begin{example}
+	A relação $a \equiv a$, $b \equiv b$, $c \equiv c$, $a \equiv b$, $b \equiv a$ definida sobre o conjunto $\{a, b, c\}$ é uma relação de equivalência e existem as seguintes classes de equivalência $[a] = [b] = \{a, b\}$ e $[c] =\{c\}$.
+\end{example}
+
+\begin{theorem}\label{teo:EquivalenciaPropriedade1}
+	Seja $\equiv$ uma relação de equivalência sobre um conjunto $A$ não vazio e sejam $a, b \in A$ tem-se que $a \equiv b$ se, e somente se, $[a] = [b]$.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha que $a \equiv b$, assim dado  qualquer $x \in [a]$ tem-se que $x \equiv a$, agora pela transitiva de $\equiv$ é claro que $x \equiv b$ e, portanto, $x \in [b]$, logo $[a] \subseteq [b]$ e com raciocínio similar pode-se concluir que $[b] \subseteq [a]$ e assim pela Definição \ref{def:IgualdadeConjuntos} tem-se que $[a] = [b]$. $(\Leftarrow)$ Suponha que $[a] = [b]$, por $\equiv$ ser reflexiva é claro que $a \equiv a$ e assim $a \in [a]$, mas como $[a] = [b]$ tem-se que $a \in [b]$, e portanto, por definição $a \equiv b$.
+\end{proof}
+
+\begin{theorem}\label{teo:EquivalenciaPropriedade2}
+	Seja $\equiv$ uma relação de equivalência sobre um conjunto $A$ não vazio e sejam $a, b \in A$ tem-se que $a \not\equiv b$ se, e somente se, $[a] \cap [b] = \emptyset$.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha por absurdo que $a \not\equiv b$ e $[a] \cap [b] \neq \emptyset$, logo existe um $x \in A$ tal que $x \in [a] \cap [b]$, mas assim pela Definição \ref{def:IntersecaoConjuntos} tem-se que $x \in [a]$ e $x \in [b]$, logo $x \equiv a$ e $y \equiv b$, mas uma vez que $\equiv$ é simétrica tem-se que $a \equiv x$, e como $\equiv$ é transitiva tem-se que $a \equiv b$, o que contradiz a hipótese, caraterizando um absurdo, consequentemente, se $a \not\equiv b$ tem-se então que $[a] \cap [b] = \emptyset$. $(\Leftarrow)$ Suponha que $[a] \cap [b] = \emptyset$, como $a \in [a]$ e pela hipótese $a \notin [a] \cap [b]$ tem-se que $a \notin [b]$ e, portanto, $a \not\equiv b$.
+\end{proof}
+
+\begin{definition}[Espaço Quociente]
+	Seja $A$ um conjunto e $\equiv$ uma relação de equivalência sobre $A$, o espaço quociente de $A$ com respeito (ou módulo) $\equiv$, denotado por $A_{/_\equiv}$, é o conjunto de todas as classes de equivalência do conjunto $A$, na linguagem na teoria dos conjuntos tem-se que:
+	$$A_{/_\equiv} = \{[x] \mid x \in A\}$$
+\end{definition}
+
+\begin{example}
+	Seja $A = \{1, 2, 3\}$ e $R = \{(a, a), (b, b), (c, c), (a, b), (b, a)\}$ claramente $R$ é uma relação de equivalência e além disso $[a] = [b] = \{a, b\}$ e $[c] = \{c\}$ assim $A_{/_R} = \{[a], [c]\}$.
+\end{example}
+
+\begin{example}
+	Dado que a relação $P = \{(x,y) \in \mathbb{Z}_+ \mid x, y\text{ tem o mesmo resto da divisão por } 2\}$ é uma relação de equivalência sobre $\mathbb{Z}_+$ (a prova fica como exercício ao leitor) tem-se claramente que, 
+	$$[0] = \{0, 2, 4, 6, 8, \cdots\}$$
+	e
+	$$[1] = \{1, 3, 5, 7, 9, \cdots\}$$
+	ou seja, $[0]$ é o conjunto dos pares positivos e $[1]$ é o conjunto dos impares positivos, assim claramente tem-se que $\mathbb{Z}_{+/_P} = \{[0], [1]\}$.
+\end{example}
+
+Uma fato importante sobre o espaço quociente de uma relação de equivalência $\equiv$ é que sempre que o conjunto base $A \neq \emptyset$ tem-se que $A_{/_\equiv} \neq \emptyset$, e mais do que isso, como mostrado a seguir o espaço quociente é sempre uma partição sobre o conjunto base $A$.
+
+\begin{theorem}
+	Seja $\equiv$ uma relação de equivalência sobre um conjunto não vazio $A$, então $A_{/_\equiv}$ é uma partição de $A$.
+\end{theorem}
+
+\begin{proof}
+	Primeiramente note que como $\equiv$ é uma relação reflexiva tem-se para todo $x \in A$ que $x \in [x]$ e assim claramente $[x] \in A_{/_\equiv}$ e $[x] \neq \emptyset$, satisfazendo assim a condição (1) da Definição \ref{def:ParticaoConjuntos}. Por outro lado, os Teoremas \ref{teo:EquivalenciaPropriedade1} e \ref{teo:EquivalenciaPropriedade2} mostram que dado $[x], [y] \in A_{/_\equiv}$ sempre que $[x] \neq [y]$ tem-se que  $[x] \cap [y] = \emptyset$ e, portanto, a condição (2) da Definição \ref{def:ParticaoConjuntos} é satisfeita, desde que as condições (1) e (2) são satisfeita pelo elementos de $A_{/_\equiv}$ tem-se que $A_{/_\equiv}$ é uma partição de $A$.
+\end{proof}
+
+Um interessante uso das relações de equivalência é como dito em \cite{carmo2013} a construção do conjunto dos números racionais $(\mathbb{Q})$ a partir dos números inteiros $(\mathbb{Z})$.
+
+%Um interessante uso das relações de equivalência é como dito em \cite{carmo2013} a construção do conjunto dos números racionais $(\mathbb{Q})$ a partir dos números inteiros $(\mathbb{Z})$, para o leitor interessando tal construção está detalhada no apêndice \ref{ape:Racionais}.
+
+\section{Relações de Ordem}\label{sec:Ordem}
+
+Em algumas situação é interessante que seja possível definir uma hierarquia entre os elementos de um determinado conjunto, de fato, como dito em \cite{abe1991-TC} diversos campos das ciências empíricas, tais como a área da biologia comparada, são dependentes de construções hierárquicas. Dentro da própria ciência da computação diversas áreas (estrutura de dados, classificação de dado e etc.) também utilizam de ordens de hierarquia. Assim é conveniente apresentar o estudo das relações de ordem e das estruturas existentes envolta de tais relações, para isso apresenta-se primeiro as ideias de pré-ordem e ordem estrita.
+
+\begin{definition}[Ordem Estrita]\label{def:OrdemParcialEstrita}
+	Seja $A$ um conjunto uma relação $\sqsubset$ sobre $A$, é dita ser uma relação de ordem parcial estrita, ou simplesmente ordem estrita, sempre que $\sqsubset$ for irreflexiva e transitiva.
+\end{definition}
+
+\begin{example}
+	A relação $\{(x, y) \in \mathbb{N}^2 \mid y = x + 1\}$ é uma ordem estrita.
+\end{example}
+
+\begin{example}
+	Dado um conjunto $A$ qualquer a relação de ser subconjunto próprio $(\subset)$ é um ordem estrita sobre o conjunto $\wp(A)$.
+\end{example}
+
+\begin{example}
+	Dado o conjunto $\{1, 2, 3\}$ a relação $\{(1, 2), (2, 3), (2, 2), (1, 3)\}$ não é uma ordem estrita pois $(2, 2)$ é um par pertencente a relação.
+\end{example}
+
+\begin{definition}[Pré-ordem]
+	Seja $A$ um conjunto uma relação $\sqsubseteq$ sobre $A$, é dita ser uma relação de pré-ordem sempre que $\sqsubseteq$ for reflexiva e transitiva.
+\end{definition}
+
+\begin{example}
+	Dado o conjunto $\{a, b, c\}$ a relação $\{(a, a), (b, b), (c, c), (b, c), (c, a), (b, a)\}$ é uma relação de pré-ordem.
+\end{example}
+
+\begin{example}
+	A relação $\{(x, y) \in \mathbb{N}^2 \mid (\exists x \in \mathbb{N})[y = xk]\}$ é uma pré-ordem.
+\end{example}
+
+\begin{example}
+	A relação $\{(x, y) \in \mathbb{N}^2 \mid x + y \neq x \text{ e } x + y \neq y\}$ não é uma pré-ordem pois não é reflexiva, basta notar que $(0,0)$ não pertence a tal relação.
+\end{example}
+
+Aumentando as restrições sobre uma pré-ordem, isto é, adicionando mais propriedades a serem exigidas, é construída a noção de ordem parcial, tal conceito é formalizado a seguir. 
+
+\begin{definition}[Ordem Parcial]\label{def:OrdemParcial}
+	Seja $A$ um conjunto uma relação $\sqsubseteq$ sobre $A$, é dita ser uma relação de ordem parcial sempre que $\sqsubseteq$ for reflexiva, antissimétrica e transitiva.
+\end{definition}
+
+Como dito em \cite{abe1991-TC} se $\sqsubseteq$ é uma ordem parcial sobre um conjunto $A$, então tem-se que $\sqsubseteq$ organizar (ou ordena) o conjunto $A$ em uma determinada hierarquia (ou ordem), obviamente um mesmo conjunto pode apresentar diferentes ordenações, ou seja, podem existir diversas ordens parciais sobre $A$.
+
+\begin{remark}\label{rema:SematicaOrdemParcial}
+	De forma geral quando $x \sqsubseteq y$ pode ser interpretado como $x$ é anterior ou igual a $y$, entretanto, para o caso especifico das relações de ordem parcial $\leq$ e $\subseteq$ suas semânticas sãos as aquelas que o leitor já conhece, isto é, $x \leq y$ significa $x$ é menor ou igual a $y$ e $X \subseteq Y$ significa que $X$ é subconjunto de $Y$.
+\end{remark}
+
+Além das duas famosas ordens parciais mencionadas na Observação \ref{rema:SematicaOrdemParcial} a seguir serão apresentados mais algumas ordens parciais.
+
+\begin{example}\label{exe:OrdemParcialSimples}
+	As seguintes relações são exemplos de ordens parciais:
+	\begin{itemize}
+		\item[(a)] $\{(x, y) \in \mathbb{N}^2 \mid (\exists k \in \mathbb{N})[y = x + k]\}$.
+		\item[(b)] $\{(x, y) \in \mathbb{N}^2 \mid (\exists k \in \mathbb{N})[y = xk]\}$.
+		\item[(c)] Dado um conjunto $A$ de todas as pessoas da terra a relação $x \mathrel{R} y$ se, e somente se, $x$ tem a mesma altura ou é mais alto que $y$, é uma ordem parcial sobre $A$.
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	O leitor atendo pode notar que a ordem no item $(b)$ do Exemplo \ref{exe:OrdemParcialSimples} foi anteriormente usado como exemplo de uma pré-ordem, isso ocorre por que toda ordem parcial é uma pré-ordem.
+\end{remark}
+
+\begin{example}
+	Seja $A = \{a, b, c, d\}$ a relação $\{(a, a), (b, b), (c, c), (d, d), (a, b), (b, c), (a, c), (a, d)\}$ é uma ordem parcial sobre $A$.
+\end{example}
+
+\begin{example}
+	Dado o $\{0,1\}$ a relação $\{(0,0), (0, 1), (1, 1)\}$ é uma ordem parcial.
+\end{example}
+
+\begin{example}
+	Dado um conjunto $\{0, 1, 2, 3\}$ a relação $\{(0, 0), (0, 1), (2, 2), (1, 2), (0, 2), (3, 3)\}$ não é um ordem parcial pois o par $(1, 1)$ não pertence a relação e por definição uma ordem parcial deve ser reflexiva.
+\end{example}
+
+A partir da ideia de ordem parcial é possível definir o conceito de comparabilidade como se segue.
+
+\begin{definition}[Comparabilidade]\label{def:Comparabilidade}
+	Seja $A$ um conjunto não vazio, $\sqsubseteq$ uma ordem parcial sobre $A$ e seja $x, y \in A$, é dito que $x$ e $y$ são comparáveis sempre que $x \sqsubseteq y$ ou $y \sqsubseteq x$.
+\end{definition}
+
+Como dito em \cite{abe1991-TC, carmo2013} tem-se que a noção de comparabilidade está ligada a ordem em questão, assim pode haver um conjunto $A$ e uma ordem parcial $\sqsubseteq_1$ tal que dois elementos $x$ e $y$ são comparáveis, entretanto, pode haver outra ordem parcial $\sqsubseteq_2$ sobre o mesmo conjunto tal que os elementos $x$ e $y$ não pode ser comparáveis\footnote{Em algumas obras é usado a escrita $x \not\sqsubseteq y$ para esboça que $x$ e $y$ são incomparáveis por uma ordem parcial $\sqsubseteq$.}.
+
+\begin{example}
+	Considere o conjunto $A = \{1, 2, 3\}$ tem-se que $\subseteq$ será obviamente um ordem parcial sobre $\wp(A)$, agora note que $\{1, 2\} \subseteq A$, portanto, $\{1, 2\}$ e $A$ são comparáveis, por outro lado, $\{1, 2\} \not\subseteq \{1, 3\}$ e $\{1, 3\} \not\subseteq \{1, 2\}$, logo $\{1, 2\}$ e $\{1, 3\}$ são incomparáveis.
+\end{example}
+
+\begin{example}
+	Dado o conjunto $\mathbb{R}$ e a ordem parcial $\leq$ sobre $R$ tem-se que todo par de números reais $(x, y)$ é sempre comparável.
+\end{example}
+
+Por fim é apresentado a ideia de ordem parcial, pela definição a seguir é fácil para o leitor perceber que toda ordem total é uma ordem parcial, porém, o oposto não é verdade.
+
+\begin{definition}[Ordem total]
+	Uma ordem parcial $\sqsubseteq$ sobre um conjunto $A$ é dita ser total quando para todo par de elementos $x, y \in A$ é comparável.
+\end{definition}
+
+\begin{example}
+	São exemplos de ordem totais:
+	\begin{itemize}
+		\item[(a)] A ordem usual ``menor igual'' $(\leq)$ sobre o conjunto $\mathbb{R}$.
+		\item[(b)] A relação $\{(a_0, a_0), (a_0, a_1), (a_0, a_2), (a_1, a_1), (a_1, a_2), (a_2, a_2)\}$ sobre o conjunto $\{a_0, a_1, a_2\}$.
+	\end{itemize}
+\end{example}
+
+Nesta seção ao apresentar a ideia de relações de ordem isso era feito pelo estudo da relação em si ficando seu conjunto base em segundo plano e com pouco interesse, agora será considera simultaneamente os dois conceitos juntos, ou seja, será agora apresentado o conceito de conjunto parcialmente ordenado.
+
+\section{\textit{Posets} e Diagramas de Hasse}\label{sec:Poset}
+
+Como dito em \cite{neggers1998poset},  os conjuntos parcialmente ordenados ou \textit{posets} (em inglês) têm uma longa história que remonta ao início do século XIX, onde as propriedades da ordenação dos subconjuntos de um conjunto foram investigadas.  Embora o matemático Felix Hausdorff\footnote{Famoso por seus trabalhos em topologia.} (1868-1942) não tenha sido a pessoa que introduziu a ideia de conjunto parcialmente ordenado, foi ele que fez o primeiro estudo sério de uma teoria geral dos posets em seu trabalho \cite{hausdorff1914poset}. 
+
+\begin{definition}[Poset]
+	Um conjunto parcialmente ordenado ou \textit{poset} é uma estrutura $\langle A, \sqsubseteq \rangle$ onde $A$ é um conjunto não vazio e $\sqsubseteq$ é uma ordem parcial sobre $A$.
+\end{definition}
+
+\begin{example}
+	São exemplos de conjuntos parcialmente ordenados:
+	\begin{itemize}
+		\item[(a)] $\langle \wp(A), \subseteq \rangle$.
+		\item[(b)] $\langle C,  : \rangle$ onde $C = \{1, 2, 3, 4, 5, 6, 12\}$ e $x : y$ se, e somente se, $x$ é um divisor de $y$.
+		\item[(c)] $\langle \mathbb{Z}, \geq \rangle$.
+		\item[(d)] $\langle B, \subseteq \rangle$ onde $B = \{R_1, R_2, \cdots\}$ é o conjunto de todas as relações binárias sobre um conjunto $A$.
+	\end{itemize}
+\end{example}
+
+Agora como dito em \cite{morgado1962poset}, muitas vezes é conveniente utilizar uma representação gráfica para os \textit{posets} que possa evidenciar as relações hierárquicas existentes entre os elementos do conjunto base. Essa representação como dito em \cite{abe1991-TC}, é chamada de diagrama de Haase\footnote{Em homenagem ao matemático alemão Helmut Hasse (1898-1979) que introduziu tais diagramas.}. Vale salientar que tal representação não é para qualquer \textit{poset} apenas os \textit{posets} finitos podem ser representados por tais diagramas de forma completa.
+
+O diagrama de Hasse é um grafo orientado acíclico construído utilizando a relação ``$x$ cobre $y$'' sempre que $x \sqsubseteq y$, o diagrama é construído para um \textit{poset} $\langle A, \sqsubseteq \rangle$ usando as seguintes regras:
+
+\begin{itemize}
+	\item[$(r_1)$] Para todo $x, y \in A$ se $x \sqsubseteq  y$ e não existe um $z$ tal que $x \sqsubseteq  z$ e $z \sqsubseteq  y$ com $x \neq y$, então o ponto de $x$ aparece inferior no diagrama ao ponto de $y$.
+	\item[$(r_2)$] Para todo $x, y \in A$ se $x$ e $y$ satisfazem $(r_1)$, então os pontos de $x$ e $y$ são ligados por segmento de reta.
+	\item[$(r_3)$] Todos os elementos $x \in A$ devem aparecer no diagrama como um ponto (ou nó).
+\end{itemize}
+
+\begin{example}
+	Considere o \textit{poset} $\langle \{a, 2, 1, b\}, R \rangle$ onde $R = \{(1, 1), (a, a), (1, a), (b, b), (1, b), (2, 2),$ $(b, 2), (a, 2), (1, 2)\}$. Agora note que como $(1, a)$ satisfaz a regra $(r_1)$, assim o ponto de $1$ aparece inferior no diagrama ao ponto de $a$ e o mesmo iriá valer para os casos $(1, b)$, $(a, 2)$ e $(b, 2)$, logo pode-se estabelecer a seguinte distribuição espacial dos pontos:
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (max) at (0, 3)  {$2$};
+			\node (a)   at (-1.5,1.5) {$a$};
+			\node (b)   at (1.5,1.5)  {$b$};
+			\node (min)   at (0, 0)  {$1$};
+		\end{tikzpicture}
+		\caption{Distribuição espacial dos pontos para o diagrama de Hasse do \textit{poset} $\langle \{a, 2, 1, b\}, R \rangle$.}
+		\label{fig:PreDiagramaHasse}
+	\end{figure}
+
+	Agora executando a regra $(r_2)$ são ligados os pontos afim de ilustrar as relações entre os elementos, ficando a figura como se segue:
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (max) at (0, 3)  {$2$};
+			\node (a)   at (-1.5,1.5) {$a$};
+			\node (b)   at (1.5,1.5)  {$b$};
+			\node (min)   at (0, 0)  {$1$};
+			
+			\draw (min) -- (a) -- (max);
+			\draw (min) -- (b) -- (max);
+		\end{tikzpicture}
+		\caption{Diagrama de Hasse do \textit{poset} $\langle \{a, 2, 1, b\}, R \rangle$.}
+		\label{fig:DiagramaHasse1}
+	\end{figure}
+
+	Como todos os elementos de $\{a, 2, 1, b\}$ já estão no diagrama então não há nada mais a fazer.
+\end{example}
+
+\begin{remark}
+	Vale salientar que a representação por diagrama não é única, em termos de distribuição espacial (desenho do grafo).
+\end{remark}
+
+\begin{example}
+	O \textit{poset} $\langle \wp(\{a, b, c\}), \subseteq \rangle$ pode ser representado pelo dois diagramas a seguir.
+	
+	
+\end{example}

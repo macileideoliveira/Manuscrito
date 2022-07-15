@@ -1,0 +1,29 @@
+\chapter{Construções dos Racionais como classe de Equivalência}\label{ape:Racionais}
+
+Para a construção do conjunto $\mathbb{Q}$ é necessário considerar que todos os símbolos de números inteiros são conhecidos, isto é, que o conjunto $\mathbb{Z}$ existe. 
+
+\begin{definition}
+	A relação $\sim$ sobre o conjunto $\mathbb{Z} \times \mathbb{Z}^*$ é construída como:
+	$$(m, n) \sim (p, q) \Longleftrightarrow mq = np$$
+\end{definition}
+
+Para que fique claro a construção como classe de equivalência segue a prova que a relação anterior é uma equivalência.
+
+\begin{lemma}
+	$\sim$ é uma relação de equivalência.
+\end{lemma}
+
+\begin{proof}
+	Note que:
+	
+	(Reflexividade) Para todo $m \in \mathbb{Z}$ e $n \in \mathbb{Z}^*$ tem-se que $mn = nm$, portanto, $(m,n) \sim (m,n)$.
+	
+	(Simetria) Suponha que $(m, n) \sim (p, q)$, logo por definição tem-se que $mq = np$, mas $mq = np \Longleftrightarrow qm = pn \Longleftrightarrow pn = qm$, mas assim $(p, q) \sim (m,n)$.
+	
+	(Transitividade) Suponha que $(m, n) \sim (p, q)$ e $(p, q) \sim (s, t)$, assim tem-se que $mq = np$ e $pt = qs$, logo $mqt = npt$ e $npt = nqs$. Consequentemente $mqt = nqs$. Como $q \neq 0$, usando a lei do corte da multiplicação tem-se que, $mt = ns$ e, portanto, $(m,n) \sim (s, t)$.
+	
+	Desde que $\sim$ é reflexiva, simétrica e transitiva tem-se que $\sim$ é uma relação de equivalência.
+\end{proof}
+
+Agora o espaço quociente $(\mathbb{Z} \times \mathbb{Z}^*)_{/_\sim}$ é exatamente o conjunto de todo os $[(m,n)]$, e por definição tem-se que 
+$$[(m,n)] = \{(a, b) \in \mathbb{Z} \times \mathbb{Z}^* \mid (a, b) \sim (m, n)\}$$
