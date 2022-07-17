@@ -239,7 +239,7 @@ Como dito em \cite{neggers1998poset},  os conjuntos parcialmente ordenados ou \t
 
 Agora como dito em \cite{morgado1962poset}, muitas vezes é conveniente utilizar uma representação gráfica para os \textit{posets} que possa evidenciar as relações hierárquicas existentes entre os elementos do conjunto base. Essa representação como dito em \cite{abe1991-TC}, é chamada de diagrama de Haase\footnote{Em homenagem ao matemático alemão Helmut Hasse (1898-1979) que introduziu tais diagramas.}. Vale salientar que tal representação não é para qualquer \textit{poset} apenas os \textit{posets} finitos podem ser representados por tais diagramas de forma completa.
 
-O diagrama de Hasse é um grafo orientado acíclico construído utilizando a relação ``$x$ cobre $y$'' sempre que $x \sqsubseteq y$, o diagrama é construído para um \textit{poset} $\langle A, \sqsubseteq \rangle$ usando as seguintes regras:
+O diagrama de Hasse é um grafo orientado acíclico construído utilizando a relação ``$x$ cobre $y$'' sempre que $x \sqsubseteq y$, o diagrama é construído para um \textit{poset} $\langle A, \sqsubseteq \rangle$ com $A$ finito usando as seguintes regras:
 
 \begin{itemize}
 	\item[$(r_1)$] Para todo $x, y \in A$ se $x \sqsubseteq  y$ e não existe um $z$ tal que $x \sqsubseteq  z$ e $z \sqsubseteq  y$ com $x \neq y$, então o ponto de $x$ aparece inferior no diagrama ao ponto de $y$.
@@ -282,6 +282,26 @@ O diagrama de Hasse é um grafo orientado acíclico construído utilizando a rel
 	Como todos os elementos de $\{a, 2, 1, b\}$ já estão no diagrama então não há nada mais a fazer.
 \end{example}
 
+\begin{example}
+	O \textit{poset} $\langle \{0, 1, c, d\}, Lip \rangle$ onde $Lip = \{(x, y) \mid x \leq y \text{ ou } (x \in \{0, 1\}, y \in \{a,b\}) \}$ pode ser representado pelo diagrama a seguir.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (min)   at (0, 0)  {$0$};
+			\node (1)   at (0, 1.5)  {$1$};
+			\node (c)   at (1, 3)  {$c$};
+			\node (d)   at (-1, 3)  {$d$};
+			
+			\draw (min) -- (1) -- (c);
+			\draw (1) -- (d);
+		\end{tikzpicture}
+		\caption{Diagrama de Hasse do \textit{poset} $\langle \{0, 1, c, d\}, Lip \rangle$}
+		\label{fig:DiagramaHasse2}
+	\end{figure}
+\end{example}
+
+
 \begin{remark}
 	Vale salientar que a representação por diagrama não é única, em termos de distribuição espacial (desenho do grafo).
 \end{remark}
@@ -289,5 +309,264 @@ O diagrama de Hasse é um grafo orientado acíclico construído utilizando a rel
 \begin{example}
 	O \textit{poset} $\langle \wp(\{a, b, c\}), \subseteq \rangle$ pode ser representado pelo dois diagramas a seguir.
 	
-	
+	\begin{figure}[h]
+		\centering
+		\subfloat[Representação em forma de cubo.]{
+			\begin{tikzpicture}
+				\node (max) at (0, 5)		{$\{a, b, c\}$};
+				\node (d1)   at (-1.5,3.5)	{$\{a, b\}$};
+				\node (d2)   at (0,3.5)		 {$\{a, c\}$};
+				\node (d3)   at (1.5,3.5)   {$\{b, c\}$};
+				\node (a)   at (-1.5,1.5)	  {$\{a\}$};
+				\node (b)   at (0,1.5)			{$\{b\}$};
+				\node (c)   at (1.5,1.5)        {$\{c\}$};
+				\node (min)   at (0, 0)  {$\emptyset$};
+				
+				\draw (min) -- (a);
+				\draw (min) -- (b);
+				\draw (min) -- (c);
+				\draw (a) -- (d1);
+				\draw (a) -- (d2);
+				\draw (b) -- (d1);
+				\draw (b) -- (d3);
+				\draw (c) -- (d2);
+				\draw (c) -- (d3);
+				\draw (d1) -- (max);
+				\draw (d2) -- (max);
+				\draw (d3) -- (max);
+				%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+			\end{tikzpicture}
+			\label{fig:DiagramaHasse3-A}
+		}\quad\quad\quad %espaco separador
+		\subfloat[Representação em forma de quase cubo.]{
+			\begin{tikzpicture}
+				\node (max) at (0, 5)		{$\{a, b, c\}$};
+				\node (d1)   at (-1.5,3.5)	{$\{a, c\}$};
+				\node (d2)   at (0,3.5)		 {$\{b, c\}$};
+				\node (d3)   at (1.5,3.5)   {$\{a, b\}$};
+				\node (a)   at (-1.5,1.5)	  {$\{a\}$};
+				\node (b)   at (0,1.5)			{$\{c\}$};
+				\node (c)   at (1.5,1.5)        {$\{b\}$};
+				\node (min)   at (0, 0)  {$\emptyset$};
+				
+				\draw (min) -- (a);
+				\draw (min) -- (b);
+				\draw (min) -- (c);
+				\draw (a) -- (d1);
+				\draw (a) -- (d3);
+				\draw (b) -- (d1);
+				\draw (b) -- (d2);
+				\draw (c) -- (d2);
+				\draw (c) -- (d3);
+				\draw (d1) -- (max);
+				\draw (d2) -- (max);
+				\draw (d3) -- (max);
+				%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+			\end{tikzpicture}
+			\label{fig:DiagramaHasse3-B}
+		}
+		\caption{Diagramas de Hasse para o \textit{poset} $\langle \wp(\{a, b, c\}), \subseteq \rangle$.}
+		\label{fig:DiagramaHasse3}
+	\end{figure}
 \end{example}
+
+\begin{example}\label{exe:PosetCadeia}
+	O \textit{poset} $\langle \{5, 6, 7, 8, 9\}, \leq \rangle$ é representado pelo diagrama a seguir.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (min)   at (0, 0)  {$5$};
+			\node (1)   at (0, 1.5)  {$6$};
+			\node (2)   at (0, 3)  {$7$};
+			\node (3)   at (0, 4.5)  {$8$};
+			\node (4)   at (0, 6)  {$9$};
+			
+			\draw (min) -- (1) -- (2) -- (3) -- (4);
+		\end{tikzpicture}
+		\caption{Diagrama de Hasse do \textit{poset} $\langle \{5, 6, 7, 8, 9\}, \leq \rangle$}
+		\label{fig:DiagramaHasse4}
+	\end{figure}
+\end{example}
+
+\begin{note}
+	\textit{Posets} cuja ordem é total também são chamados de cadeias (ver \cite{abe1991-TC, morgado1962poset}) e nesse caso o diagrama será uma linha reta com todos os elementos sobre essa linha, exatamente como no Exemplo \ref{exe:PosetCadeia}. O leitor sem saber já usava esse conceito em seus estudo matemáticos a proferir frases como ``a reta real'' ou ``a reta dos números reais''.
+\end{note}
+
+Agora obviamente dado um diagrama de Hasse sempre é possível recuperar a estrutura do \textit{poset} do mesmo, isto é, recuperar o conjunto base e a relação de ordem parcial que define o \textit{poset}, a seguir são apresentados alguns exemplos disto.
+
+\begin{example}
+	Dado o diagrama de Hasse da Figura \ref{fig:DiagramaHasse5} a seguir,  dado que $6$ está ligado e abaixo de $3$ e $2$ tem-se que $(6,3), (6, 2) \in R$ onde $R$ é uma relação, o mesmo vale para os pares $(3, 5), (2, 4), (5, 1)$  e $(4, 1)$. Desse modo tal figura representa o \textit{poset} $\langle A, R \rangle$ em que $A = \{1, 2, 3, 4, 5, 6\}$ e $R$ corresponde a relação $\{(6,3), (6, 2), (3, 5), (2, 4), (5, 1), (4, 1), (6, 5), (6, 4), (6, 1), (2, 1), (5, 1)\} \cup Id_A$.
+	
+		\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (min)   at (0, 0)  {$6$};
+			\node (1)   at (2, 2)  {$2$};
+			\node (2)   at (-2, 2)  {$3$};
+			\node (3)   at (2, 4)  {$4$};
+			\node (4)   at (-2, 4)  {$5$};
+			\node (max)   at (0, 6)  {$1$};
+			
+			\draw (min) -- (1) -- (3) -- (max);
+			\draw (min) -- (2) -- (4) -- (max);
+		\end{tikzpicture}
+		\caption{Um diagrama de Hasse.}
+		\label{fig:DiagramaHasse5}
+	\end{figure}
+\end{example}
+
+\begin{example}
+	Dado o diagrama de Hasse da Figura \ref{fig:DiagramaHasse6} a seguir representa o \textit{poset} $\langle B, R_B \rangle$ em que $B = \{0, 1, 2, 3, 4, 5, 6\}$ e $R_B = Id_B \cup \{(5, 1), (6, 1), (1, 2), (5, 2), (6, 2), (2, 3), (2, 4), (1, 3), (1, 4)\}$.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (min1)   at (2, 0)  {$6$};
+			\node (min2)   at (-2, 0)  {$5$};
+			\node (1)   at (0, 1)  {$1$};
+			\node (2)   at (0, 3)  {$2$};
+			\node (max1)   at (2, 4)  {$4$};
+			\node (max2)   at (-2, 4)  {$3$};
+			\node (min3) at (4, 0) {$0$};
+			
+			\draw (min1) -- (1) -- (2) -- (max1);
+			\draw (min2) -- (1);
+			\draw (2) -- (max2);
+		\end{tikzpicture}
+		\caption{Um diagrama de Hasse.}
+		\label{fig:DiagramaHasse6}
+	\end{figure}
+\end{example}
+
+Como dito em \cite{carmo2013} um \textit{poset} é uma estrutura relacional ordenado, ou ainda, uma álgebra\footnote{O conceito de álgebra será melhor formalizado em capítulos futuros deste manuscrito, por hora o leitor pode pensar em uma álgebra como uma estrutura.} relacional\footnote{Uma álgebra relacional é uma estrutura criada na interseção da lógica de primeira ordem e da álgebra booleana (ou álgebra de conjuntos) finita, tal tipo de álgebra é de suma importância para a área de banco de dados.}, e como uma álgebra pode-se estudar: os elementos destacados, suas sub-álgebras (sub-estruturas) ou ainda os mecanismo de extensão da mesma. Na próxima seção este manuscrito irá realizar um estudo sobre os pontos.
+
+\section{Elementos Notáveis de um \textit{Poset}}\label{sec:ElementosNotaveisPoset}
+
+Como muito bem aprofundado em \cite{carmo2013, morgado1962poset, neggers1998poset}, existem diverso conceitos e aplicações interessantes ligados a ideia de \textit{posets}, assim para ajudar que leitor tenha uma formação sólida na área de teoria dos \textit{posets} é interessante apresentar alguns deste conceitos chaves da teoria, neste seção serão trabalhos os elementos notáveis existes nos \textit{posets} e suas propriedades.
+
+\begin{definition}[Máximo e Mínimo de um subconjunto]\label{def:MaxMinPoset}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$ o máximo de $X$, denotado por $max(X)$, é um elemento $x \in X$ tal que para todo $y \in X$ tem-se que $y \sqsubseteq x$. O mínimo de $X$, denotado por $min(X)$,  é um elemento $x \in X$ tal que  para todo $y \in X$ tem-se que $x \sqsubseteq y$.
+\end{definition}
+
+\begin{example}
+	Considere o \textit{poset} da Figura \ref{fig:DiagramaHasse1} para o conjunto $X = \{1, 2, a\}$ tem-se que $min(X) = 1$ e $max(X) = 2$.
+\end{example}
+
+\begin{example}
+	Considere o \textit{poset} da Figura \ref{fig:DiagramaHasse2} para o conjunto $X = \{0, 1\}$ tem-se que $min(X) = 0$ e $max(X) = 1$.
+\end{example}
+
+\begin{example}
+	Considere o \textit{poset} da Figura \ref{fig:DiagramaHasse3-A} para o conjunto $X = \{\{a, b\}, \{a\}, \{b\}, \emptyset\}$ tem-se que $min(X) = \emptyset$ e $max(X) = \{a, b\}$.
+\end{example}
+
+Agora é conveniente ressaltar que tanto máximo quando o mínimo podem vir há não existir, isto é, dado um \textit{poset} $\langle A, \sqsubseteq \rangle$ um subconjunto $X$ de $A$ pode-se de tal forma que ele não contenha máximo e(ou) mínimo.
+
+\begin{example}
+	Considere o \textit{poset} ilustrado pela Figura \ref{fig:DiagramaHasse5} o subconjunto $\{3, 2, 5, 4\}$ deste \textit{poset} não apresenta máximo e nem mínimo.
+\end{example}
+
+\begin{example}
+	Considere o \textit{poset} ilustrado pela Figura \ref{fig:DiagramaHasse6} o subconjunto $\{1, 5, 6\}$ deste \textit{poset} possui máximo mas não possui mínimo.
+\end{example}
+
+\begin{theorem}[Unicidade do máximo]\label{teo:UnicidadeMaximoPoset}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$. Se existe $x \in X$ tal que $max(X) = x$, então $x$ é único.
+\end{theorem}
+
+\begin{proof}
+	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$. Suponha por absurdo que existem $x, x' \in X$ tal que $max(X) = x$ e $max(X) = x'$ com $x \neq x'$, logo por definição para todo $a \in X$ tem-se que $a \sqsubseteq x$ e $a \sqsubseteq x'$, mas desde que $x, x '\in X$ tem-se que $x \sqsubseteq x'$ e $x' \sqsubseteq x$ e, desde que, $\sqsubseteq$ é antissimétrica tem-se que $x = x'$ o que contradiz a hipótese e, portanto, se existe o máximo de $X$ ele é único.
+\end{proof}
+
+\begin{theorem}[Unicidade do mínimo]\label{teo:UnicidadeMinimoPoset}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$. Se existe $x \in X$ tal que $min(X) = x$, então $x$ é único.
+\end{theorem}
+
+\begin{proof}
+	Similar a demonstração do Teorema \ref{teo:UnicidadeMaximoPoset}.
+\end{proof}
+
+Além da ideia de máximo e mínimo sobre os \textit{posets} também definido a ideia de maximais e minimais.
+
+\begin{definition}[Elementos maximais]\label{def:MaximaisPoset}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset}  um elemento $x \in A$ é dito ser um maximal se para todo $y \in A$ tem-se que se $x \sqsubseteq y$, então $x = y$.
+\end{definition}
+
+\begin{example}
+	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse7} a seguir. Para tal \textit{poset} tem-se que o elemento $g$ é um maximal e também é o máximo do conjunto.
+	
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (a)   at (0, 0)  {$a$};
+			\node (b) at (1, 1) {$b$};
+			\node (c) at (2, 2) {$c$};
+			\node (d) at (-2, 2) {$d$};
+			\node (e) at (0, 2) {$e$};
+			\node (f) at (1, 3) {$f$};
+			\node (g) at (0, 4) {$g$};
+			
+			\draw (a) -- (b) -- (c);
+			\draw (a) -- (d) -- (g);
+			\draw (c) -- (f) -- (g);
+			\draw (b) -- (e);
+			\draw (e) -- (f);
+		\end{tikzpicture}
+		\caption{Um \textit{poset} representado por um diagrama de Hasse.}
+		\label{fig:DiagramaHasse7}
+	\end{figure}
+\end{example}
+
+\begin{example}
+	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse5}. Para tal \textit{poset} tem-se que o elemento $1$ é um maximal e também é o máximo do conjunto.
+\end{example}
+
+Em algumas situações elementos maximais coincidem com o máximo, entretanto, como mostrado a seguir ser maximal não é garantia de ser o máximo do conjunto.
+
+\begin{example}
+	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse8} a seguir. Para tal \textit{poset} tem-se que os elementos $4$ e $5$ satisfazem a Definição \ref{def:MaximaisPoset} logo ambos são maximais do conjunto, porém, ambos são incomparáveis, portanto, não nenhum é o máximo do conjunto.
+	
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (1)   at (0, 0)  {$1$};
+			\node (2)   at (-1, 1)  {$2$};
+			\node (3)   at (1, 1)  {$3$};
+			\node (4)   at (0, 2)  {$4$};
+			\node (5)   at (2, 2)  {$5$};
+			
+			\draw (1) -- (2) -- (4);
+			\draw (1) -- (3) -- (4);
+			\draw (3) -- (5);
+		\end{tikzpicture}
+		\caption{Um \textit{poset} representado por um diagrama de Hasse.}
+		\label{fig:DiagramaHasse8}
+	\end{figure}
+\end{example} 
+
+De forma dual ao conceito de maximal pode-se definir a ideia de elemento minimal, e isto é feito como se segue.
+
+\begin{definition}[Elementos maximais]\label{def:MinimalPoset}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset}  um elemento $x \in A$ é dito ser um minimal se para todo $y \in A$ tem-se que se $y\sqsubseteq x$, então $x = y$.
+\end{definition}
+
+\begin{example}
+	Considerando o \textit{poset} da Figura \ref{fig:DiagramaHasse7} tem-se que o elemento $a$ é minimal de tal conjunto e também apresenta a característica de ser o mínimo.
+\end{example}
+
+\begin{example}
+	Considerando o \textit{poset} da Figura \ref{fig:DiagramaHasse8} tem-se que o elemento $1$ é minimal de tal conjunto e também apresenta a característica de ser o mínimo.
+\end{example}
+
+\begin{example}
+	Considerando o \textit{poset} da Figura \ref{fig:DiagramaHasse6} tem-se que os elementos $5$ e $6$ são ambos minimais, porém, como são ambos incomparáveis tem-se que nenhum dos dois é o mínimo do conjunto base do \textit{poset}.
+\end{example}
+
+\section{Posets e Somas Ordinais}\label{sec:SomaOrdinalPosets}
+
+\section{Ordem Produto e Ordem Lexicográfica}\label{sec:OrdemLexicoPoset}
+
+
