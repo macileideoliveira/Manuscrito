@@ -496,7 +496,6 @@ Além da ideia de máximo e mínimo sobre os \textit{posets} também definido a 
 \begin{example}
 	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse7} a seguir. Para tal \textit{poset} tem-se que o elemento $g$ é um maximal e também é o máximo do conjunto.
 	
-	
 	\begin{figure}[h]
 		\centering
 		\begin{tikzpicture}
@@ -528,7 +527,6 @@ Em algumas situações elementos maximais coincidem com o máximo, entretanto, c
 \begin{example}
 	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse8} a seguir. Para tal \textit{poset} tem-se que os elementos $4$ e $5$ satisfazem a Definição \ref{def:MaximaisPoset} logo ambos são maximais do conjunto, porém, ambos são incomparáveis, portanto, não nenhum é o máximo do conjunto.
 	
-	
 	\begin{figure}[h]
 		\centering
 		\begin{tikzpicture}
@@ -549,7 +547,7 @@ Em algumas situações elementos maximais coincidem com o máximo, entretanto, c
 
 De forma dual ao conceito de maximal pode-se definir a ideia de elemento minimal, e isto é feito como se segue.
 
-\begin{definition}[Elementos maximais]\label{def:MinimalPoset}
+\begin{definition}[Elementos minimais]\label{def:MinimalPoset}
 	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset}  um elemento $x \in A$ é dito ser um minimal se para todo $y \in A$ tem-se que se $y\sqsubseteq x$, então $x = y$.
 \end{definition}
 
@@ -565,8 +563,211 @@ De forma dual ao conceito de maximal pode-se definir a ideia de elemento minimal
 	Considerando o \textit{poset} da Figura \ref{fig:DiagramaHasse6} tem-se que os elementos $5$ e $6$ são ambos minimais, porém, como são ambos incomparáveis tem-se que nenhum dos dois é o mínimo do conjunto base do \textit{poset}.
 \end{example}
 
-\section{Posets e Somas Ordinais}\label{sec:SomaOrdinalPosets}
+\begin{example}
+	Considere o \textit{poset} da Figura \ref{fig:DiagramaHasse9} a seguir, tem-se que $g$ e $f$ são elementos maximais e $c, a$ e $b$ são elementos minimais, note que tal \textit{poset} não possui máximo e mínimo.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (a)   at (0, 0)  {$a$};
+			\node (b)   at (2, 0)  {$b$};
+			\node (c)   at (-2, 0)  {$c$};
+			\node (d)   at (0, 1)  {$d$};
+			\node (e)   at (0, 2)  {$e$};
+			\node (f)   at (1, 3)  {$f$};
+			\node (g)   at (-1, 3)  {$g$};
+			
+			\draw (d) -- (c);
+			\draw (d) -- (a);
+			\draw (d) -- (b);
+			\draw (d) -- (e);
+			\draw (e) -- (g);
+			\draw (e) -- (f);
+		\end{tikzpicture}
+		\caption{Um \textit{poset} representado por um diagrama de Hasse.}
+		\label{fig:DiagramaHasse9}
+	\end{figure}
+\end{example}
 
-\section{Ordem Produto e Ordem Lexicográfica}\label{sec:OrdemLexicoPoset}
+\begin{definition}[Majorante]\label{def:Majorante}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, um elemento $x \in A$ é dito ser um majorante (ou cota superior) de $X$ sempre que para todo $y \in X$ tem-se que $y\sqsubseteq x$.
+\end{definition}
 
+\begin{example}
+	Considere o \textit{poset} esboçado na Figura \ref{fig:DiagramaHasse9} e o subconjunto $X = \{e, d, c\}$ tem-se que os elementos $e, f$ e $g$ são todos majorantes de $X$. Já os subconjuntos $Y = \{g, f, e\}$ e $Z = \{g, f, a\}$ não possuem majorantes.
+\end{example}
 
+\begin{example}
+	Considere o \textit{poset} esboçado na Figura \ref{fig:DiagramaHasse8} e o subconjunto $X = \{2, 3, 5\}$  não possui majorantes, já o conjunto $Y = \{1,2, 3, 4\}$ possui o elemento $4$ como majorante.
+\end{example}
+
+\begin{example}
+	Considere o \textit{poset} esboçado na Figura \ref{fig:DiagramaHasse7} e o subconjunto $X = \{d, e, f\}$ tem-se que o elemento $g$ é o majorante de $X$.
+\end{example}
+
+Como mencionado em \cite{abe1991-TC} se $x$ é um majorante (ou cota superior) de um conjunto $X$, é dito que $X$ é um conjunto majorado pelo elemento $x$ ou que o conjunto $X$ possui uma cota superior $x$.
+
+\begin{definition}[Conjunto dos majorantes]\label{def:ConjuntoDosMajorantes}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, o conjunto de todos os majorantes de $X$ é denotado por $X_\curlywedge$.
+\end{definition}
+
+Como dito em \cite{abe1991-TC, carmo2013, morgado1962poset} a maior parte dos conceito na teoria dos \textit{posets} tem natureza dual, assim é natural que seja imediatamente apresentadas as definições de minorantes e conjunto dos minorantes.
+
+\begin{definition}[Majorante]\label{def:Mjnorante}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, um elemento $x \in A$ é dito ser um minorante (ou cota inferior) de $X$ sempre que para todo $y \in X$ tem-se que $x\sqsubseteq y$.
+\end{definition}
+
+\begin{definition}[Conjunto dos majorantes]\label{def:ConjuntoDosMjnorantes}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, o conjunto de todos os minorantes de $X$ é denotado por $X_\curlyvee$.
+\end{definition}
+
+\section{Somas Ordinais, Ordem Produto e Ordem Lexicográfica}\label{sec:OperacoesPoset}
+
+\section{Questionário}\label{sec:Questionario4part1}
+
+\begin{problem}\label{prob:EquivalenciaOrdem1}
+	Seja $B$ o conjunto de todos os brasileiros e $R$ uma relação definida sobre $B$ como $x \mathrel{R}$ se, e somente se, $x$ e $y$ são nascidos no mesmo estado ou território do Brasil. Responda as questões a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item Quantas classes de equivalência diferentes são determinadas por $R$?
+	\item Escreva em notação compacta a classe de equivalência definida por Heitor Villa-Lobos.
+	\item Responda se Getúlio Vargas $\in$ [Heitor Villa-Lobos].
+	\item Escreva em notação compacta a classe de equivalência definida por Leopoldo Nachbin.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem2}
+	Considerando o conjunto $A = \mathbb{N}^2$ demonstre que a relação $R = \{((a, b), (c, d)) \mid a+b = c+d\}$ é uma relação de equivalência sobre $A^2$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem3}
+	Considerando os conjuntos e as relações de equivalência a seguir sobre tais conjuntos, esboce os conjuntos quociente formado por cada relação.
+\end{problem}
+
+\begin{exerList}
+	\item $A = \{a,b,c,d,e \}$ e $R =\{(a,a),(a,e),(b,b),(b,d),(c,c),(d,b),(d,d), (e, a), (e, e)\}$.
+	\item $C = \{1, 2, 3, 4\}$ e $S = \{(1, 1), (2, 2), (3, 3), (4, 4), (2, 4), (4, 2)\}$.
+	\item $A = \{x \in \mathbb{N} \mid x \leq 20\}$ e $K = \{(x, y) \in A^2 \mid (\exists k \in \mathbb{N})[[\displaystyle\frac{(x - y)}{4} = k]\}$.
+	\item $D = \{x \in \mathbb{Z} \mid -4 \leq x \leq 5\}$ e $T = \{(x, y) \in D^2 \mid (\exists k \in \mathbb{Z})[\displaystyle\frac{(x - y)}{3} = k]\}$.
+	\item $E = \{(1, 3), (2,4), (0, 3), (-4, -8), (3, 9), (-1, 5), (2, -4), (1, 5), (3, 6)\}$ e $L$ é a relação definida sobre $E$ da seguinte forma $(x_1, y_1) \mathrel{L} (x_2, y_2)$ se, e somente se, $x_0y_1 = x_1y_0$.
+	\item $A = \{-1, 0, 1\}$ e $M = \{(X, Y) \in \wp(A) \mid num(X) = num(Y)\}$ em que $num(D)$ é o número de elementos em $D$ para qualquer $D \in \wp(A)$.
+	\item $N = \{1, -2, 3\}$ e $M = \Big\{(X, Y) \in \wp(N) \mid \displaystyle\sum_{x \in X} x = \displaystyle\sum_{y \in Y} y\Big\}$ em que $\displaystyle\sum_{a \in D} a$  representa a soma de todo os elementos $a$ pertencentes ao conjunto $D$ para qualquer que seja o $D \in \wp(N)$.
+	\item $D = \{x \in \mathbb{Z} \mid -5 \leq x \leq 5\}$ e $T = \{(x, y) \in D^2 \mid (\exists k \in \mathbb{Z})[\displaystyle\frac{(x^2 - y^2)}{3} = k]\}$.
+	\item $F = \{x \in \mathbb{Z} \mid -4 \leq x \leq 5\}$ e $T = \{(x, y) \in F^2 \mid (\exists k \in \mathbb{Z})[\displaystyle\frac{(x^2 - y^2)}{3} = k]\}$.
+	\item $B = \{00, 01, 02, 10, 11, 12, 20, 21, 22\}$ $R = \{(x, y) \in B^2 \mid  sC(x) = sC(y)\}$ onde $sC(x)$ denotada a soma dos caracteres para qualquer $x \in B$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem4}
+	Seja $A$ o conjunto de todos os estudantes do seu campus demonstre que a relação $T$ definida sobre $A$ como ``$x \mathrel{T} y$ se, e somente se, $x$ é do mesmo curso que $y$'' é uma relação de equivalência.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem5}
+	Seja $A = \{a, b, c, d\}$ e $R = \{(a, a), (a, b), (b, a), (b, b), (c, d), (d, c), (d,d), (c, c)\}$. Prove que $R$ é uma relação de equivalência sobre $A$ e esboce também o espaço quociente $A_{/_R}$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem6}
+	Sendo $R$ uma relação de equivalência sobre $X$ é correto afirma que $dom(R) = X$?
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem7}
+	Suponha que  $R$ e $S$ são duas relações de equivalência sobre um conjunto $A$. Prove que $R \cap S$ é também uma relação de equivalência sobre $A$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem8}
+	Demonstre que a relação $R = \{(x, y) \in \mathbb{Z}^2 \mid x - y \in \mathbb{Z} \}$ é uma relação de equivalência sobre o conjunto $\mathbb{Z}$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem9}
+	Considerando para todo $n \in \mathbb{Z}$ realize o que é solicitado a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item Demonstre que $R_n = \{(x, y) \in \mathbb{Z}^2 \mid \displaystyle\frac{x - y}{n} = k\}$ é uma relação de equivalência.
+	\item Para o caso particular de $n = 2$ esboce usando notação compacta a classe $[1]$ com respeito a relação $R_n$.
+	\item Para o caso particular de $n = 5$ esboce usando notação compacta a classe $[-4]$ com respeito a relação $R_n$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem10}
+	Sejam $A = \{1, 2\}$ e $B = \{3, 4\}$ dois elementos de uma partição de $\{1, 2, 3, 4\}$ liste os pares ordenados que compõem a relação de equivalência que definiu a partição que contém $A$ e $B$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem11}
+	Demonstre que a relação $P = \{(x, y) \in \mathbb{Z}^2 \mid (\exists k \in \mathbb{Z})[x^2 - y^2 = 2k]\}$ é uma relação de equivalência sobre o conjunto $\mathbb{Z}$ e usando notação compacta a classe escreve o espaço quociente gerado por tal relação.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem12}
+	Seja $S = \mathbb{N}^2$. Demonstre que a relação $P = \{((x, y), (w, z)) \in S^2 \mid x = z \}$ é uma relação de equivalência sobre o conjunto $S$ e usando notação compacta a classe escreve o espaço quociente gerado por tal relação.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem13}
+	Seja $S = \mathbb{Z}^2$. Verifique se a relação $T = \{((x, y), (w, z)) \in S^2 \mid x - y = w - z \}$ é uma relação de equivalência sobre o conjunto $S$, se for então usando notação compacta a classe escreve o espaço quociente gerado por tal relação.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdem14}
+	Verifique se as seguintes estruturas são \textit{posets}.
+\end{problem}
+
+\begin{exerList}
+	\item $\langle \mathbb{N}, \alpha \rangle$ onde $\alpha = \{(x, y) \in \mathbb{N}^2 \mid \text{ o resto da divisão de $y$ por $x$ é igual a } 1\}$.
+	\item $\langle \mathbb{Z}, \alpha \rangle$ onde $\alpha = \{(x, y) \in \mathbb{Z}^2  \mid y = x + 3\}$.
+	\item $\langle \mathbb{N}, \alpha \rangle$ onde $\alpha = \{(x, y) \in \mathbb{N}^2  \mid y - x \in \mathbb{N}\}$.
+	\item $\langle \mathbb{Z}, \alpha \rangle$ onde $\alpha = \{(x, y) \in \mathbb{Z}^2  \mid 2y - x \in \mathbb{N}\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem15}
+	Para cada um dos diagrama na Figura \ref{fig:DiagramaExercicioPoset1} a seguir construa sua estrutura de \textit{poset}.
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\subfloat[]{
+		\begin{tikzpicture}
+			\node (max1)  at  (0, 4){$1$};
+			\node (max2)  at  (2, 4){$2$};
+			\node (max3)  at  (4, 4){$3$};
+			
+			\node (mid1)  at  (0, 2){$7$};
+			\node (mid2)  at  (2, 2){$8$};
+			\node (mid3)  at  (4, 2){$9$};
+			
+			\node (min1)  at  (0, 0){$4$};
+			\node (min2)  at  (2, 0){$5$};
+			\node (min3)  at  (4, 0){$6$};
+			
+			\draw (min1) -- (mid1) -- (max1);
+			\draw (min2) -- (mid2) -- (max2);
+			\draw (min3) -- (mid3) -- (max3);
+			%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+		\end{tikzpicture}
+		\label{fig:DiagramaHasseExe-A}
+	}\quad\quad\quad %espaco separador
+	\subfloat[]{
+		\begin{tikzpicture}
+			\node (max) at (0, 5)		{$101$};
+			
+			\node (mid1)  at  (-2, 2)   {$011$};
+			\node (mid2)  at  (2, 1)   {$110$};
+			\node (mid3)  at  (0, 3)   {$001$};
+			
+			\node (min) at (0,0)       {$111$};
+			
+			\draw (min) -- (mid1) -- (max);
+			\draw (min) -- (mid2) -- (mid3) -- (max);
+			%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+		\end{tikzpicture}
+		\label{fig:DiagramaHasseExe-B}
+	}
+	\caption{Diagramas de Hasse para a questão \ref{prob:EquivalenciaOrdem15}.}
+	\label{fig:DiagramaExercicioPoset1}
+\end{figure}
+
+\begin{problem}
+	Para cada \textit{poset} a seguir desenhe o diagrama um Hasse para o mesmo.
+\end{problem}
+
+\begin{exerList}
+	\item $\langle \{1, 2, 3, 4, 5, 6, 10, 15, 20, 60\}, M \rangle$ onde $x \mathrel{M} y$ se, e somente se, $\displaystyle\frac{60}{x} = y$.
+	\item $\langle \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}, D\rangle$ onde $x \mathrel{D} y$ se, e somente se, $\displaystyle\frac{y}{x} = k$ tal que $k \in \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$.
+	\item $\langle \{1, 2, 3\}, \{(1, 1), (1, 2), (2, 2), (3, 3), (1, 3), (2, 3)\} \rangle$.
+	\item $\langle \{a, b, c, d\}, \{(d, d), (b, b), (a, a), (c, c), (d, c), (d, a), (a, c)\} \rangle$.
+\end{exerList}
