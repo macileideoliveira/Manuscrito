@@ -487,6 +487,18 @@ Agora é conveniente ressaltar que tanto máximo quando o mínimo podem vir há 
 	Similar a demonstração do Teorema \ref{teo:UnicidadeMaximoPoset}.
 \end{proof}
 
+\begin{theorem}\label{teo:MonotonicidadeInclusaoMaxMin}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$ com $X \subseteq Y$ tem-se que:
+	\begin{itemize}
+		\item[(i)] Se $max(X) = a$ e $max(Y) = b$, então $a \sqsubseteq b$.
+		\item[(ii)] Se $min(X) = a$ e $min(Y) = b$, então $b \sqsubseteq a$.
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	A demonstração é simples e fica como exercício ao leitor.
+\end{proof}
+
 Além da ideia de máximo e mínimo sobre os \textit{posets} também definido a ideia de maximais e minimais.
 
 \begin{definition}[Elementos maximais]\label{def:MaximaisPoset}
@@ -644,10 +656,10 @@ Como dito em \cite{abe1991-TC, carmo2013, morgado1962poset} a maior parte dos co
 O próximo resultado estabelece que o conjunto de majorantes e minorantes respeita a monotonicidade da relação inclusão.
 
 \begin{theorem}\label{teo:MonotonicidadeMajoranteMinorante}
-	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subset A$. Se $X \subset Y$, então: 
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$. Se $X \subseteq Y$, então: 
 	\begin{itemize}
-		\item[(i)] $Y_\curlywedge \subset X_\curlywedge$.
-		\item[(ii)] $Y_\curlyvee \subset X_\curlyvee$.
+		\item[(i)] $Y_\curlywedge \subseteq X_\curlywedge$.
+		\item[(ii)] $Y_\curlyvee \subseteq X_\curlyvee$.
 	\end{itemize}
 \end{theorem}
 
@@ -660,7 +672,7 @@ O próximo resultado estabelece que o conjunto de majorantes e minorantes respei
 \end{definition}
 
 \begin{example}
-	Considere o \textit{poset} $\langle \mathbb{N}, \leq \rangle$ o conjunto $X = \{x \in \mathbb{N} \mid (\exists k_1, k_2 \in \mathbb{N})[k_1 < x \leq k_2]\}$ é um conjunto que sempre possuirá majorantes e minorantes (a saber $k_1$ e $k_2$) logo ele é um conjunto limitado em $\langle \mathbb{N}, \leq \rangle$.
+	Considere o \textit{poset} $\langle \mathbb{N}, \leq \rangle$ o conjunto $X_{k_1, k_2} = \{x \in \mathbb{N} \mid k_1 < x < k_2\}$ é um conjunto que sempre possuirá majorantes e minorantes (a saber $k_1$ e $k_2$) logo ele é um conjunto limitado em $\langle \mathbb{N}, \leq \rangle$.
 \end{example}
 
 \begin{example}
@@ -676,7 +688,7 @@ O próximo resultado estabelece que o conjunto de majorantes e minorantes respei
 \end{theorem}
 
 \begin{proof}
-	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, suponha que $X \neq \emptyset$, assim para todo $x \in X$ e cada $y \in X_\curlyvee$ tem-se que $y \leq x$, logo $x \in (X_\curlyvee)_\curlywedge$, portanto, $X \subseteq (X_\curlyvee)_\curlywedge$.
+	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$, suponha que $X \neq \emptyset$, assim para todo $x \in X$ e cada $y \in X_\curlyvee$ tem-se que $y \sqsubseteq x$, logo $x \in (X_\curlyvee)_\curlywedge$, portanto, $X \subseteq (X_\curlyvee)_\curlywedge$.
 \end{proof}
 
 \begin{theorem}\label{teo:MajoranteMinoranteInclusao}
@@ -721,7 +733,125 @@ O próximo resultado estabelece que o conjunto de majorantes e minorantes respei
 	O que termina a prova.
 \end{proof}
 
+\begin{definition}[Supremo]\label{def:Supermo}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$ o supremo de $X$ (caso exista), denotado por $sup(X)$, é o menor dos majorantes, em notação formal tem-se que $sup(X) = min(X_\curlywedge)$.
+\end{definition}
+
+Como dito em \cite{abe1991-TC, carmo2013}, uma forma de caracterização do supremo é através de suas propriedades inerentes, e isto é feito da seguinte forma, dado um \textit{poset} $\langle A, \sqsubseteq \rangle$ tem-se que $sup(X) = a $ se, e somente se:
+
+\begin{itemize}
+	\item[1.] $a \in A$.
+	\item[2.] Para todo $x \in X$ tem-se que $x \sqsubseteq a$.
+	\item[3.] Se $a' \in A$ e para todo $x \in X$ tem-se que  $x \sqsubseteq a'$, então $a \sqsubseteq a'$.
+\end{itemize}
+
+Note que a propriedade (1) diz que o supremo (caso exista) é sempre um elemento do poset, já a propriedade (2) estabelece que o supremo deve ser um majorante e a propriedade (3) estabelece que o supremo deve ser a menor cota superior, isto é, o mínimo do conjunto dos majorantes.
+
+\begin{definition}[Ínfimo]\label{def:Infimo}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X \subseteq A$ o ínfimo de $X$ (caso exista), denotado por $inf(X)$, é o maior dos minorantes, em notação formal tem-se que $sup(X) = max(X_\curlyvee)$.
+\end{definition}
+
+Dualmente ao supremo como dito em \cite{abe1991-TC, carmo2013}, uma forma de caracterização do ínfimo é através de suas propriedades inerentes, e isto é feito da seguinte forma, dado um \textit{poset} $\langle A, \sqsubseteq \rangle$ tem-se que $inf(X) = a $ se, e somente se:
+
+\begin{itemize}
+	\item[1.] $a \in A$.
+	\item[2.] Para todo $x \in X$ tem-se que $a \sqsubseteq x$.
+	\item[3.] Se $a' \in A$ e para todo $x \in X$ tem-se que  $a' \sqsubseteq x$, então $a' \sqsubseteq a$.
+\end{itemize}
+
+Ou seja, a propriedade (1) diz que o ínfimo (caso exista) é sempre um elemento do poset, já a propriedade (2) estabelece que o  ínfimo deve ser um minorante e a propriedade (3) estabelece que o  ínfimo deve ser a maior cota inferior, isto é, o máximo do conjunto dos minorantes.
+
+\begin{remark}
+	Como destacado em \cite{fmcbook}, os termos \textit{least upper bound} (menor cota superior) e \textit{join} são sinônimos de supremo, enquanto, que \textit{greatest lower bound} (maior cota inferior) e \textit{meet} são sinônimos de ínfimo.
+\end{remark}
+
+\begin{example}\label{exe:SupremoInfimoPoset}
+	Considere o \textit{poset} representado pela Figura \ref{fig:DiagramaHasse10} a seguir, o subconjunto $X = \{2, 3, 4, 5\}$ é tal que $sup(X) = 7$ e $inf(X) = 2$, por lado, para o subconjunto $Y = \{1, 0, 2, 4\}$ tem-se que $sup(Y) = 3$ mas não existe um ínfimo de tal conjunto. Além disso, pegando o conjunto inteiro do \textit{poset} tem-se que o conjunto possui supremo, a saber $7$ mas não possui ínfimo. 
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (min1)   at (0, 0)  {$1$};
+			\node (min2)   at (2, 0)  {$0$};
+			\node (a) at (1, 1)  {$2$};
+			\node (b)   at (0, 2)  {$4$};
+			\node (c)   at (2, 2)  {$5$};
+			\node (e) at (1, 3)  {$3$};
+			\node (f) at (3, 3)  {$6$};
+			\node (g) at (2, 4)  {$7$};
+			
+			\draw (min1) -- (a) -- (b) -- (e) -- (g);
+			\draw (min2) -- (a) -- (c) -- (f) -- (g);
+			\draw (c) -- (e);
+		\end{tikzpicture}
+		\caption{Diagrama de Hasse do \textit{poset} do Exemplo \ref{exe:SupremoInfimoPoset}.}
+		\label{fig:DiagramaHasse10}
+	\end{figure}
+\end{example}
+
+\begin{example}
+	Considerando o \textit{poset} $\langle \mathbb{Q}, \leq \rangle$ tem-se que o subconjunto $\{x \in Q \mid x^2 \leq 2\}$ não possui supremo pois $\sqrt{2} \notin \mathbb{Q}$.
+\end{example}
+
+\begin{theorem}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$. Se $X \subseteq Y$ e além disso $X$ e $Y$ possuem supremo, então $sup(X) \sqsubseteq sup(Y)$.
+\end{theorem}
+
+\begin{proof}
+	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$, assuma $X \subseteq Y$ e que que $X$ e $Y$ possuem supremo, assim pelo Teorema \ref{teo:MonotonicidadeMajoranteMinorante}(i) tem-se que $Y_\curlywedge \subseteq X_\curlywedge$.  Mas pelo Teorema \ref{teo:MonotonicidadeInclusaoMaxMin}(ii) tem-se que $min(Y_\curlywedge) \sqsubseteq min(X_\curlywedge)$, logo $sup(X) \sqsubseteq sup(Y)$.
+\end{proof}
+
+\begin{theorem}
+	Seja $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$. Se $X \subseteq Y$ e além disso $X$ e $Y$ possuem ínfimo, então $inf(Y) \sqsubseteq inf(X)$.
+\end{theorem}
+
+\begin{proof}
+	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset} e $X, Y \subseteq A$, assuma $X \subseteq Y$ e que que $X$ e $Y$ possuem supremo, assim pelo Teorema \ref{teo:MonotonicidadeMajoranteMinorante}(ii) tem-se que $Y_\curlywedge \subseteq X_\curlywedge$.  Mas pelo Teorema \ref{teo:MonotonicidadeInclusaoMaxMin}(i) tem-se que $max(Y_\curlyvee) \sqsubseteq max(X_\curlyvee)$, logo $inf(Y) \sqsubseteq inf(X)$.
+\end{proof}
+
+\begin{theorem}\label{teo:InfimoApartirSupremo}
+	Se $\langle A, \sqsubseteq \rangle$ é um \textit{poset}, $X \subseteq A$ com $sup(X_\curlyvee) = a$ e $a \in A$, então $inf(X) = sup(X_\curlyvee) $.
+\end{theorem}
+
+\begin{proof}
+	$\langle A, \sqsubseteq \rangle$ é um \textit{poset}, $X \subseteq A$ com $sup(X_\curlyvee) = a$ e $a \in A$, agora note que para qualquer que seja $x \in X$ e $y \in X_\curlyvee$ tem-se que $y \sqsubseteq x$, e assim $x$ é claramente um majorante de $X_\curlyvee$, ou seja, $x \in (X_\curlyvee)_\curlywedge$,  consequentemente, $a \sqsubseteq y$, uma vez que, $sup(X_\curlyvee) = a$, assim $a$ é um minorante de $X$, ou seja, $a \in X_\curlyvee$. Por outro lado, para qualquer $z \in X_\curlyvee$ tem-se que $z \sqsubseteq a$ e, portanto, $a = inf(X)$.
+\end{proof}
+
+\begin{theorem}\label{teo:SupremoApartirInfimo}
+	Se $\langle A, \sqsubseteq \rangle$ é um \textit{poset}, $X \subseteq A$ com $inf(X_\curlyvee) = a$ e $a \in A$, então $sup(X) = inf(X_\curlywedge) $.
+\end{theorem}
+
+\begin{proof}
+	Similar a demonstração do Teorema \ref{teo:InfimoApartirSupremo}.
+\end{proof}
+
+\begin{remark}
+	Quando um conjunto $X$ satisfaz o Teorema  \ref{teo:InfimoApartirSupremo} é dito que ele é inferiormente limitado, e quando ele satisfaz o Teorema \ref{teo:SupremoApartirInfimo} é dito que ele é superiormente limitado. Quando ele satisfaz os dois então ele satisfaz a Definição \ref{def:ConjuntoLimitadoPoset}.
+\end{remark}
+
+\begin{theorem}
+	Se $\langle A, \sqsubseteq \rangle$ é um \textit{poset}, então as seguintes asserções são equivalentes:
+	\begin{itemize}
+		\item[(1)] Todo subconjunto não vazio superiormente limitado de $A$ possui supremo.
+		\item[(2)] Todo subconjunto não vazio inferiormente limitado de $A$ possui ínfimo.
+	\end{itemize}
+\end{theorem}
+	
+\begin{proof}
+	Dado $\langle A, \sqsubseteq \rangle$ um \textit{poset}, tem-se que:
+	
+	$(1) \Rightarrow (2)$ Assuma que todo subconjunto não vazio superiormente limitado de $A$ possui supremo, agora seja $X \subseteq A$ limitado inferiormente, ou seja, $X_\curlyvee \neq \emptyset$, agora obviamente cada $x \in X$ é tal que $x$ é um majorante de $X_\curlyvee$, ou seja, $x \in (X_\curlyvee)_\curlywedge$ e, portanto, $X_\curlyvee$ é superiormente limitado, logo pelo Teorema \ref{teo:SupremoApartirInfimo} existe o supremo do conjunto $X_\curlyvee$, consequentemente pelo Teorema \ref{teo:InfimoApartirSupremo} existe o ínfimo de $X_\curlyvee$.
+	
+	$(2) \Rightarrow (1)$ Similar ao item anterior.
+\end{proof}
+
+\section{Princípio da Boa Ordenação}
+
+Escrever depois...
+
 \section{Somas Ordinais, Ordem Produto e Ordem Lexicográfica}\label{sec:OperacoesPoset}
+
+Escrever depois...
 
 \section{Questionário}\label{sec:Questionario4part1}
 
@@ -815,7 +945,18 @@ O próximo resultado estabelece que o conjunto de majorantes e minorantes respei
 \end{exerList}
 
 \begin{problem}\label{prob:EquivalenciaOrdem15}
-	Para cada um dos diagrama na Figura \ref{fig:DiagramaExercicioPoset1} a seguir construa sua estrutura de \textit{poset}.
+	Para cada \textit{poset} a seguir desenhe o diagrama um Hasse para o mesmo.
+\end{problem}
+
+\begin{exerList}
+	\item $\langle \{1, 2, 3, 4, 5, 6, 10, 15, 20, 60\}, M \rangle$ onde $x \mathrel{M} y$ se, e somente se, $\displaystyle\frac{60}{x} = y$.
+	\item $\langle \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}, D\rangle$ onde $x \mathrel{D} y$ se, e somente se, $\displaystyle\frac{y}{x} = k$ tal que $k \in \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$.
+	\item $\langle \{1, 2, 3\}, \{(1, 1), (1, 2), (2, 2), (3, 3), (1, 3), (2, 3)\} \rangle$.
+	\item $\langle \{a, b, c, d\}, \{(d, d), (b, b), (a, a), (c, c), (d, c), (d, a), (a, c)\} \rangle$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem16}
+	Para cada um dos diagrama na Figura \ref{fig:DiagramaExercicioPoset1},   construa sua estrutura de \textit{poset}.
 \end{problem}
 
 \begin{figure}[h]
@@ -861,18 +1002,96 @@ O próximo resultado estabelece que o conjunto de majorantes e minorantes respei
 	\label{fig:DiagramaExercicioPoset1}
 \end{figure}
 
-\begin{problem}\label{prob:EquivalenciaOrdem16}
-	Para cada \textit{poset} a seguir desenhe o diagrama um Hasse para o mesmo.
-\end{problem}
-
-\begin{exerList}
-	\item $\langle \{1, 2, 3, 4, 5, 6, 10, 15, 20, 60\}, M \rangle$ onde $x \mathrel{M} y$ se, e somente se, $\displaystyle\frac{60}{x} = y$.
-	\item $\langle \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}, D\rangle$ onde $x \mathrel{D} y$ se, e somente se, $\displaystyle\frac{y}{x} = k$ tal que $k \in \{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$.
-	\item $\langle \{1, 2, 3\}, \{(1, 1), (1, 2), (2, 2), (3, 3), (1, 3), (2, 3)\} \rangle$.
-	\item $\langle \{a, b, c, d\}, \{(d, d), (b, b), (a, a), (c, c), (d, c), (d, a), (a, c)\} \rangle$.
-\end{exerList}
 
 \begin{problem}\label{prob:EquivalenciaOrdem17}
+	Considere o conjunto $X = \{a, b, c, d, e, f, g, h, i\}$ e $R$ a relação de ordem parcial representada pela Figura \ref{fig:ExercicioDePoset17}, calcule o máximo, mínimo, elementos maximais, elementos minimais, conjuntos dos majorantes, conjuntos dos minorantes, supremo e ínfimo dos seguintes subconjuntos  de $X$:
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\node (a) at (0, 0)		{$a$};
+		\node (b) at (1, 1)		{$b$};
+		\node (c) at (-1, 1)		{$c$};
+		\node (f) at (2, 2)		{$f$};
+		\node (e) at (0, 2)		{$e$};
+		\node (d) at (-2, 2)		 {$d$};
+		\node (h) at (1, 3)		{$h$};
+		\node (g) at (-1, 3)		{$g$};
+		\node (i) at (0, 4)		 {$i$};
+		
+		\draw (a) -- (b) -- (f) -- (h) -- (i);
+		\draw (a) -- (c) -- (d) -- (g) -- (i);
+		\draw (c) -- (e) -- (h);
+		\draw (b) -- (e) -- (g);
+		%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+	\end{tikzpicture}
+	\caption{Legenda}
+	\label{fig:ExercicioDePoset17}
+\end{figure}
+
+\begin{exerList}
+	\item $A_1 = \{d, e, b\}$.
+	\item $A_2= \{a, c, e, b\}$.
+	\item $A_3 = \{g, e, h\}$.
+	\item $A_4 = \{d, e, f\}$.
+	\item $A_5 = \{a, c, f\}$.
+	\item $A_6 = \{a, e\}$.
+	\item $A_7 = \{i\}$.
+	\item $A_8 = \{d, f, a, i\}$.
+	\item $A_9 = \{g, c, b, h\}$.
+	\item $A_{10} = \{a, c, f, e\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem18}
+	Considere o conjunto $X = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$ e $R$ a relação de ordem parcial representada pela Figura \ref{fig:ExercicioDePoset18}, calcule o máximo, mínimo, elementos maximais, elementos minimais, conjuntos dos majorantes, conjuntos dos minorantes, supremo e ínfimo dos seguintes subconjuntos  de $X$:
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\node (a) at (0, 0)		{$1$};
+		\node (b) at (1, 1)		{$2$};
+		\node (c) at (-1, 1)		{$3$};
+		\node (f) at (2, 2)		{$4$};
+		\node (e) at (0, 2)		{$5$};
+		\node (d) at (-2, 2)		 {$10$};
+		\node (d1) at (-3, 1)		 {$6$};
+		\node (h) at (1, 3)		{$9$};
+		\node (h1) at (2, 4)		{$0$};
+		\node (g) at (-1, 3)		{$8$};
+		\node (i) at (0, 4)		 {$7$};
+		
+		\draw (a) -- (b) -- (f) -- (h) -- (i);
+		\draw (a) -- (c) -- (d) -- (g) -- (i);
+		\draw (c) -- (e) -- (h);
+		\draw (b) -- (e) -- (g);
+		\draw (d1) -- (d);
+		\draw (h) -- (h1);
+		%\draw[preaction={draw=white, -,line width=6pt}] (a) -- (e) -- (c);
+	\end{tikzpicture}
+	\caption{Legenda}
+	\label{fig:ExercicioDePoset18}
+\end{figure}
+
+\begin{exerList}
+	\item $A_1 = \{10, 2, 9\}$.
+	\item $A_2= \{0, 6, 4\}$.
+	\item $A_3 = \{10, 3, 6, 7\}$.
+	\item $A_4 = \{6, 7, 0, 1\}$.
+	\item $A_5 = \{9, 8, 3, 2\}$.
+	\item $A_6 = \{5, 8, 2\}$.
+	\item $A_7 = \{3, 9, 5, 2\}$.
+	\item $A_8 = \{10, 1, 4, 7\}$.
+	\item $A_9 = \{0,  9, 4, 8\}$.
+	\item $A_{10} = \{6, 10, 9, 3, 0, 7\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:EquivalenciaOrdem19}
+	Considere um conjunto $A$ qualquer e uma relação binária $R$ sobre $A$ demonstre que $R$ será uma relação de ordem parcial e de equivalência simultaneamente se, e somente se, $R$ for a relação de identidade em $A$.
+\end{problem}
+
+\begin{problem}\label{prob:EquivalenciaOrdemXX}
 	Dê exemplo de:
 \end{problem}
 
