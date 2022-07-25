@@ -53,80 +53,38 @@ Note que a Definição \ref{def:AssinaturaFuncao} permite facilmente deduzir que
 	O leitor deve observar que apesar das assinaturas nos itens (f) e (g) do Exemplo \ref{exe:AssinaturaFuncao} terem o mesmo nome, elas não são iguais, pois diferem no conjunto de partida, e assim não são a mesma assinatura. Esse tipo de cenário na computação recebe o nome de sobrecarga, isto é, o símbolo funcional $BUSCA$ está sobrecarregado para identificar duas funções distintas.
 \end{remark}
 
-Como dito anteriormente una função pode ser vista como uma máquina que transforma entradas em saídas, mas note que para que isso aconteça a máquina deve de alguma forma realizar ações sobre a entrada, ou seja, a máquina deve ``operar'' sobre a entrada. 
+Como dito anteriormente una função pode ser vista como uma máquina que transforma entradas em saídas, mas note que para que isso aconteça a máquina deve de alguma forma realizar ações sobre a entrada, ou seja, a máquina deve ``operar'' sobre a entrada. Esse conceito de como a máquina deve operar sobre as entradas é descrito por uma propriedade $P$ que define uma relação de construção\footnote{Alguns texto usam a nomenclatura lei de formação, ver por exemplo \cite{carmo2013}.}
 
-\begin{definition}[Aplicação]\label{def:Aplicacao}
-	Seja $x_1, \cdots, x_n$ variáveis com $n \in \mathbb{N}_0$\footnote{Deste ponto em diante do manuscrito será considerado $\mathbb{N}_0 = \mathbb{N} - \{0\}.$} e $E$ uma palavra válida, a aplicação das variáveis $x_1, \cdots, x_n$ sobre a palavra $E$, é denotado por  $x_1, \cdots, x_n \mapsto E$, onde $E$ é uma palavra válida em algum contexto formal\footnote{No contexto da matemática, por exemplo, a palavra $x + (2\sqrt{14} - 3)$ é válida e a palavra $(\frac{1}{\log +})\sqrt{5}$ não é válida.}.
+\begin{definition}[Relação de construção]\label{def:RelacaoConstrucao}
+	Dado dois conjuntos $A$ e $B$ e seja $x \in A$ e $y \in B$ a relação de construção definida por uma propriedade $P$ corresponde  ao seguinte conjunto 
+	$$\varepsilon = \{(x, y)\mid P\}$$ tal que $\varepsilon$ satisfaz a seguinte condição: se $(x, y_1), (x, y_2) \in \varepsilon$, então $y_1 = y_2$.
 \end{definition}
 
-Note que a Definição \ref{def:Aplicacao} apenas descreve que as entradas (as variáveis) devem ser aplicada sobre a palavra $E$, assim uma aplicação no sentido como se está apresentado não se preocupa com o tipo das variáveis ou o tipo da palavra de saída. Por exemplo, imagine a aplicação $x \mapsto 2x + 1$, tal aplicação diz que a variável de entrada $x$ gera a palavra de saída $2x + 1$. Assim a noção de aplicação como definida anteriormente se assemelha a noção de $\lambda$-termo (para detalhes vê \cite{bare1984, bimbo2019, hankin2004}) em uma teoria de $\lambda$-cálculo não tipado \cite{henk1992, hankin2004}, ou seja, a aplicação em si está definido uma função sem nomear ou tipar os argumentos de entrada da mesma, o $\lambda$-cálculo em si será trato mais adiante neste manuscrito.
+Note que a Definição \ref{def:RelacaoConstrucao} apenas descreve que as entradas (as variáveis) $x_1, \cdots, x_n$ se relacionam como uma única saída $y$ por uma certa propriedade $P$.
 
-\begin{example}\label{exe:Aplicacoes}
-	São exemplos de aplicações:
+\begin{example}\label{exe:RelacaoConstrucao}
+	São exemplos de relações de construção:
 	\begin{itemize}
-		\item[(a)] $x \mapsto log_2 x$.
-		\item[(b)] $x, y \mapsto 3^x + x$.
-		\item[(c)] $x, y, z \mapsto 4$.
-		\item[(d)] $x, y, z \mapsto \sqrt[z]{\frac{1}{2}x + y}$.
+		\item[(a)] $\{(x, y) \in \mathbb{R}^2 \mid y = \log_2(x + 1)\}\}$
+		\item[(b)] $\{(w_1w_2w_3\cdots w_m, y) \in E^2 \mid y = w_3\cdots w_mw_1w_2\}$ onde $E$ é o conjunto de todas as palavras do português com três letras ou mais e $w_i$ representa o $i$-ésimo símbolo de uma palavra $w$.
+		\item[(c)] $\{(x, y) \in \mathbb{N}^2 \mid y = 14\}$.
+		\item[(d)] $\Big\{(x_1, x_2, x_3, y) \in \mathbb{R} \times \mathbb{R} \times \mathbb{R}^*_+ \times \mathbb{R} \mid y = \sqrt[x_3]{\displaystyle\frac{1}{2}x_1 + x_2}\Big\}$.
+	\end{itemize}
+	Não são exemplos de relações de construção:
+	\begin{itemize}
+		\item[(e)] $\{(x, y) \in N_P \times I_P\}$ onde $N_P$ é o conjunto de todos os nomes de pessoas e $I_P$ é o conjunto de naturais que representam idades, note que em tal relação é permitido que $(\text{Fátima}, 10), (\text{Fátima}, 55)$ estejam nesse conjunto, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoConstrucao}.
+		\item[(f)] $\{(x, y) \in \mathbb{R} \sqrt{y} = x\}$, note que $(5, 25)$ e $(-5, 25)$ pertence a tal conjunto e, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoConstrucao}.
 	\end{itemize}
 \end{example}
 
 \begin{remark}
-	Os itens (b), (c) e (d) do Exemplo \ref{exe:Aplicacoes} permitem concluir que em uma aplicação as variáveis de entrada, isto é, os símbolos à esquerda de $\mapsto$, podem aparecer de forma integral, parcial e nem aparecer na palavra de saída $E$ à direita de $\mapsto$.    
+	O item (c) do Exemplo \ref{exe:RelacaoConstrucao} é um caso interessante, a propriedade da relação descreve que para qualquer entrada $x$ a mesma sempre irá devolver como resposta um $y = 14$, ou seja, para todo $x$ tem-se que o par $(x, 14)$ está na relação. Esse tipo de relação de construção será aqui chamada de \textbf{relação de construção constante}.    
 \end{remark}
-
-Note que uma aplicação expressa a ação que deve ser feita em relação as variáveis de entrada, assim a semântica de uma aplicação  $x \mapsto x + 1$ é: Dado um $x$ construa e devolva\footnote{Aqui devolva é no resultado de retorna o que foi construído como resultado da aplicação.} $x + 1$. Agora observe que até o presente momento aplicação foi tratada de forma genérica, isto é, são utilizadas variáveis para gerar a palavra de saída. Mas uma vez que a entrada são variáveis, significa que as mesma podem ser substituídas (possivelmente) por infinitos valores, gerando assim infinitas palavras, uma para cada entrada. Esta ação de substituir as variáveis por elementos específicos, isto é, símbolos constantes específicos, será chamada de \textbf{uso} da aplicação, sendo formalizado a seguir.
-
-\begin{definition}[Uso de uma aplicação]\label{def:UsoAplicacao}
-	O uso da aplicação $x_1, \cdots, x_n \mapsto E$ para as palavras $y_1, \cdots, y_n$, denotado por $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n$, corresponde ao ato de substituir em $E$ toda referência de $x_i$ por $y_i$ com $1 \leq i \leq n$.
-\end{definition}
-
-\begin{example}\label{exe:UsoAplicacao}
-	São exemplos de usado de aplicações:
-	\begin{itemize}
-		\item[(a)] Considerando $x \mapsto x + 1$ tem-se que $(x \mapsto x + 1)3$ gera a palavra $3 + 1$, e $(x \mapsto x + 1)10$ gera a palavra $10 + 1$.
-		\item[(b)] Dado $x, y \mapsto 3^x + x$ tem-se que $(x, y \mapsto 3^x + x)4,5$ gera a palavra $3^4 + 4$. Além disso,  tem-se que $(x, y \mapsto 3^x + x)4,5,1$ não é um uso válido, pois a aplicação só possui duas variáveis, mas o uso tenta usar a aplicação para três valores.
-		\item[(c)] Considerando $x, y, z \mapsto 14$ tem-se que $(x, y, z \mapsto 14)1, 2, 3$ gera a palavra $14$, e $(x, y, z \mapsto 14)3, 1, 3$ também gera a palavra $14$.
-	\end{itemize}
-\end{example}
-
-Para o leitor experiente pode notar que a noção de uso da aplicação nada mais é do que a noção de $\beta$-redução existente em $\lambda$-cálculo \cite{bare1984}. 
-
-\begin{remark}\label{rema:ReducaoFuncao}
-	Para evitar ficar escrevendo que $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n$ gera uma palavra $E'$, é possível escrever $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n \rightsquigarrow E'$.
-\end{remark}
-
-Agora é comum em matemática como dito em \cite{carmo2013}, após o uso de uma aplicação verificar se existem símbolos que podem ser interpretados como operações, caso existam os mesmos devem ser usado afim de ser gerada a menor palavra (em número de símbolos) possível.
-
-\begin{example}
-	Dado as mesma aplicações e usos dos itens (a) e (b) Exemplo \ref{exe:UsoAplicacao} tem-se que $(x \mapsto x + 1)3 \rightsquigarrow 4$, $(x \mapsto x + 1)10 \rightsquigarrow 11$ e $(x, y \mapsto 3^x + x)4,5 \rightsquigarrow 85$.
-\end{example}
-
-\begin{example}
-	Dado a aplicação $x \mapsto -2x$ tem-se que $(x \mapsto -2x)-4 \rightsquigarrow -8$.
-\end{example}
-
-\begin{definition}[Igualdade de uso]\label{def:IgualdadeUsoAplicacoes}
-	Dado $x_1, \cdots, x_n \mapsto E$, $y_1, \cdots, y_n$ e $z_1, \cdots, z_n$, o uso de aplicação  $x_1, \cdots, x_n \mapsto E$ para $y_1, \cdots, y_n$ é igual ao uso para $z_1, \cdots, z_n$, denotado pela igualdade usual $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n = (x_1, \cdots, x_n \mapsto E)z_1, \cdots, z_n$, sempre que: $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n \rightsquigarrow E'$ e  $(x_1, \cdots, x_n \mapsto E)z_1, \cdots, z_n \rightsquigarrow E'$, onde $E'$ é uma palavra irredutível.
-\end{definition}
-
-\begin{example}
-	Dado a aplicação $x, y \mapsto \frac{(x+y)}{2}$ tem-se que $(x, y \mapsto \frac{(x+y)}{2})2, 4 \rightsquigarrow 3$ e  $(x, y \mapsto \frac{(x+y)}{2})3, 3 \rightsquigarrow 3$, logo pode-se escrever que $(x, y \mapsto \frac{(x+y)}{2})2, 4 = (x, y \mapsto \frac{(x+y)}{2})3, 3$. Por outro lado, $(x, y \mapsto \frac{(x+y)}{2})6, 12 \rightsquigarrow 9$ e, assim, $(x, y \mapsto \frac{(x+y)}{2})2, 4 \neq (x, y \mapsto \frac{(x+y)}{2})6, 12$
-\end{example}
-
-\begin{proposition}
-	Dado $x_1, \cdots, x_n \mapsto E$ e $y_1, \cdots, y_n$ e $z_1, \cdots, z_n$. Se existe $1 \leq i \leq n$ tal que $y_i \neq z_i$, então $(x_1, \cdots, x_n \mapsto E)y_1, \cdots, y_n \neq (x_1, \cdots, x_n \mapsto E)z_1, \cdots, z_n$.
-\end{proposition}
-
-\begin{proof}
-	Direto das definições \ref{def:UsoAplicacao} e \ref{def:IgualdadeUsoAplicacoes}.
-\end{proof}
-
 
 Agora que foram apresentados estes conceitos fundamentais pode-se continuar o desenvolvimento deste texto com a formalização da ideia de função.
 
 \begin{definition}[Função]
-	Dado uma assinatura $f: A \rightarrow B$ e seja $x \mapsto E$ uma aplicação, a estrutura da forma $\langle f: A \rightarrow B, x \mapsto E \rangle$ é uma função sempre que para todo $e \in A$ se $(x \mapsto E)e \rightsquigarrow E'$, então $E' \in B$.
+	Dado uma assinatura $f: A \rightarrow B$ e seja $\varepsilon \subseteq A \times B$ uma relação de construção, a estrutura $\langle f: A \rightarrow B, \varepsilon \rangle$ é uma função.
 \end{definition}
 
 % Susam, lipstick (topo),  ver como relação
