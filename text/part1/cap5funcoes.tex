@@ -49,19 +49,12 @@ Note que a Definição \ref{def:AssinaturaFuncao} permite facilmente deduzir que
 	\end{itemize}
 \end{example}
 
-Diversas linguagens de programação tais como C, C++ e Java apresentam a possibilidade de definir assinaturas de funções, na linguagem C por exemplo as assinaturas de funções que compõem uma biblioteca são reunidas em um arquivo de \textit{header}, isto é, um arquivo com a extensão .h, para mais detalhes consulte \cite{paulo2009algoritmos}.  
+Diversas linguagens de programação tais como C, C++ e Java apresentam a possibilidade de definir assinaturas de funções, na linguagem C por exemplo as assinaturas de funções que compõem uma biblioteca são reunidas em um arquivo de \textit{header}, isto é, um arquivo com a extensão .h, para mais detalhes consulte \cite{paulo2009algoritmos}, a seguir é exemplificado um arquivo de header.
 
 \begin{figure}[h]
-	\begin{lstlisting}[style=mystyle]
-		// Assinaturas
-		int reverse(int x);
-		unsigned int strlen (char *x);
-		int strcmp (char *x, char *y);
-		char *strcpy (char *y, char *x);
-	\end{lstlisting}
-	\caption{Exemplo de um Arquivo .h da linguagem C.}
+	\lstinputlisting[language=C]{codes/assinatura.c}
+	\caption{Exemplo de um arquivo .h contendo assinaturas na linguagem C.}
 \end{figure}
-
 
 Um conceito indiretamente esboçado pela ideia de assinatura de função, é o de tipagem da função 
 
