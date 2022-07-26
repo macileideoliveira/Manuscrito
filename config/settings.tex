@@ -447,3 +447,30 @@ linewidth=1pt]{nBox}
 \newlist{exerList}{enumerate}{1}
 \setlist[exerList,1]{label={\color{blue}(\alph*).}}
 
+%---------------------------------------------------------------------------------------
+%	Configuração do ambiente listings (para algoritmos "importados")
+%---------------------------------------------------------------------------------------
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{black!5},   
+	commentstyle=\color{green},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{gray},
+	stringstyle=\color{purple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=false,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=1,
+	language=C
+}
+
+\lstset{style=mystyle}
+
+
+

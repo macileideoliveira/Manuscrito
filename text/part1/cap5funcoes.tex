@@ -49,6 +49,22 @@ Note que a Definição \ref{def:AssinaturaFuncao} permite facilmente deduzir que
 	\end{itemize}
 \end{example}
 
+Diversas linguagens de programação tais como C, C++ e Java apresentam a possibilidade de definir assinaturas de funções, na linguagem C por exemplo as assinaturas de funções que compõem uma biblioteca são reunidas em um arquivo de \textit{header}, isto é, um arquivo com a extensão .h, para mais detalhes consulte \cite{paulo2009algoritmos}.  
+
+\begin{figure}[h]
+	\begin{lstlisting}[style=mystyle]
+		// Assinaturas
+		int reverse(int x);
+		unsigned int strlen (char *x);
+		int strcmp (char *x, char *y);
+		char *strcpy (char *y, char *x);
+	\end{lstlisting}
+	\caption{Exemplo de um Arquivo .h da linguagem C.}
+\end{figure}
+
+
+Um conceito indiretamente esboçado pela ideia de assinatura de função, é o de tipagem da função 
+
 \begin{remark}
 	O leitor deve observar que apesar das assinaturas nos itens (f) e (g) do Exemplo \ref{exe:AssinaturaFuncao} terem o mesmo nome, elas não são iguais, pois diferem no conjunto de partida, e assim não são a mesma assinatura. Esse tipo de cenário na computação recebe o nome de sobrecarga, isto é, o símbolo funcional $BUSCA$ está sobrecarregado para identificar duas funções distintas.
 \end{remark}
