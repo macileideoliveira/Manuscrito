@@ -58,18 +58,23 @@ Diversas linguagens de programação tais como C, C++ e Java apresentam a possib
 \begin{figure}[h]
 	\lstinputlisting[language=C]{codes/assinatura.h}
 	\caption{Exemplo de um arquivo .h contendo assinaturas na linguagem C.}
+	\label{fig:AssinaturasEmC}
 \end{figure}
 
-Um conceito indiretamente esboçado pela ideia de assinatura de função, é o de tipagem da função, sempre que a assinatura é da forma $f: A \rightarrow B$ pode-se dizer que $f$ é uma função do tipo ``$A$ em $B$'', ou mesmo pode-se dizer que ``$f$ é um tipo seta de $A$ para $B$''.
+Um conceito indiretamente esboçado pela ideia de assinatura de função, é o de tipagem da função, sempre que a assinatura é da forma $f: A \rightarrow B$ pode-se dizer que $f$ é uma função do tipo ``$A$ em $B$'', ou mesmo que ``$f$ é um tipo seta de $A$ para $B$'', a noção de ``tipo seta'' é uma nomenclatura diretamente ligado a ideia de Teoria das categorias.
 
-Como dito anteriormente una função pode ser vista como uma máquina que transforma entradas em saídas, mas note que para que isso aconteça a máquina deve de alguma forma realizar ações sobre a entrada, ou seja, a máquina deve ``operar'' sobre a entrada. Esse conceito de como a máquina deve operar sobre as entradas é descrito por uma propriedade $P$ que define uma relação de construção\footnote{Alguns texto usam a nomenclatura lei de formação, ver por exemplo \cite{carmo2013}.}
+\begin{note}
+	Em geral programadores focados em linguagens imperativas tais como C (ou C++, Java e etc.) tende a erra a seguinte questão: ``Qual é o tipo da função reverse (definida na linha 2 da Figura \ref{fig:AssinaturasEmC})?'' A critério tal função é do tipo seta de int em int, ou seja, matematicamente sua assinatura seria da forma, reverse: int $\rightarrow$ int.
+\end{note}
 
-\begin{definition}[Relação de construção]\label{def:RelacaoConstrucao}
-	Dado dois conjuntos $A$ e $B$ e seja $x \in A$ e $y \in B$ a relação de construção definida por uma propriedade $P$ corresponde  ao seguinte conjunto 
+Como dito anteriormente una função pode ser vista como uma máquina que transforma entradas em saídas, mas note que para que isso aconteça a máquina deve de alguma forma realizar ações sobre a entrada, ou seja, a máquina deve ``operar'' sobre a entrada. Esse conceito de como a máquina deve operar sobre as entradas é descrito por uma propriedade $P$ que define uma relação de mapeamento\footnote{Alguns textos usam a nomenclatura lei de formação, ver por exemplo \cite{carmo2013}.}
+
+\begin{definition}[Relação de mapeamento]\label{def:RelacaoMapeamento}
+	Dado dois conjuntos $A$ e $B$ e seja $x \in A$ e $y \in B$ a relação de mapeamento definida por uma propriedade $P$ corresponde  ao seguinte conjunto 
 	$$\varepsilon = \{(x, y)\mid P\}$$ tal que $\varepsilon$ satisfaz a seguinte condição: se $(x, y_1), (x, y_2) \in \varepsilon$, então $y_1 = y_2$.
 \end{definition}
 
-Note que a Definição \ref{def:RelacaoConstrucao} apenas descreve que as entradas (as variáveis) $x_1, \cdots, x_n$ se relacionam como uma única saída $y$ por uma certa propriedade $P$.
+Note que a Definição \ref{def:RelacaoMapeamento} apenas descreve que as entradas (as variáveis) $x_1, \cdots, x_n$ se relacionam como uma única saída $y$ por uma certa propriedade $P$.
 
 \begin{example}\label{exe:RelacaoConstrucao}
 	São exemplos de relações de construção:
@@ -81,19 +86,42 @@ Note que a Definição \ref{def:RelacaoConstrucao} apenas descreve que as entrad
 	\end{itemize}
 	Não são exemplos de relações de construção:
 	\begin{itemize}
-		\item[(e)] $\{(x, y) \in N_P \times I_P\}$ onde $N_P$ é o conjunto de todos os nomes de pessoas e $I_P$ é o conjunto de naturais que representam idades, note que em tal relação é permitido que $(\text{Fátima}, 10), (\text{Fátima}, 55)$ estejam nesse conjunto, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoConstrucao}.
-		\item[(f)] $\{(x, y) \in \mathbb{R} \sqrt{y} = x\}$, note que $(5, 25)$ e $(-5, 25)$ pertence a tal conjunto e, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoConstrucao}.
+		\item[(e)] $\{(x, y) \in N_P \times I_P\}$ onde $N_P$ é o conjunto de todos os nomes de pessoas e $I_P$ é o conjunto de naturais que representam idades, note que em tal relação é permitido que $(\text{Fátima}, 10), (\text{Fátima}, 55)$ estejam nesse conjunto, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoMapeamento}.
+		\item[(f)] $\{(x, y) \in \mathbb{R} \sqrt{y} = x\}$, note que $(5, 25)$ e $(-5, 25)$ pertence a tal conjunto e, portanto, esse conjunto não satisfaz a Definição \ref{def:RelacaoMapeamento}.
 	\end{itemize}
 \end{example}
 
 \begin{remark}
-	O item (c) do Exemplo \ref{exe:RelacaoConstrucao} é um caso interessante, a propriedade da relação descreve que para qualquer entrada $x$ a mesma sempre irá devolver como resposta um $y = 14$, ou seja, para todo $x$ tem-se que o par $(x, 14)$ está na relação. Esse tipo de relação de construção será aqui chamada de \textbf{relação de construção constante}.    
+	O item (c) do Exemplo \ref{exe:RelacaoConstrucao} é um caso interessante, a propriedade da relação descreve que para qualquer entrada $x$ a mesma sempre irá devolver como resposta um $y = 14$, ou seja, para todo $x$ tem-se que o par $(x, 14)$ está na relação. Esse tipo de relação de mapeamento será aqui chamada de \textbf{relação de mapeamento constante}.    
 \end{remark}
 
 Agora que foram apresentados estes conceitos fundamentais pode-se continuar o desenvolvimento deste texto com a formalização da ideia de função.
 
 \begin{definition}[Função]
-	Dado uma assinatura $f: A \rightarrow B$ e seja $\varepsilon \subseteq A \times B$ uma relação de construção, a estrutura $\langle f: A \rightarrow B, \varepsilon \rangle$ é uma função.
+	Dado uma assinatura $f: A \rightarrow B$ e seja $\varepsilon \subseteq A \times B$ uma relação de mapeamento, a estrutura $\langle f: A \rightarrow B, \varepsilon \rangle$ é uma função.
+\end{definition}
+
+\begin{example}\label{exe:Funcoes}
+	São exemplos de funções:
+	\begin{itemize}
+		\item[(a)] $\langle dob: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y = 2x\} \rangle$.
+		\item[(b)] $\langle mul: \mathbb{R} \times \mathbb{R} \rightarrow  \mathbb{N},  \{((x, y), z) \in \mathbb{R}^2 \times \mathbb{R} \mid  z = xy\} \rangle$.
+		\item[(c)] $\langle sqrt: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y^2 = x\} \rangle$.
+		\item[(d)] $\langle one: \mathbb{Z} \rightarrow  \mathbb{Z},  \{(x, y) \in \mathbb{Z}^2 \mid  1 = x+y\} \rangle$.
+		\item[(e)] $\langle sign: \mathbb{R} \rightarrow  \{0,1\},  \{(x, y) \in \mathbb{R} \times \{0, 1\} \mid y = 1 \text{ sempre que } x > 0.5 \text{ e } y = 0 \text{ se } x \leq 0.5\} \rangle$.
+	\end{itemize}
+\end{example}
+
+Em um sentido de realização, a relação de mapeamento é uma estrutura que estabelece os passos a serem executados para produzir a saída da  função, por exemplo, considere o item (c) do Exemplo \ref{exe:Funcoes}
+
+\begin{remark}
+	É comum em muitas situações se referenciar as funções de forma genérica, isto é, falando só o nome e o tipo da mesma e ficando a existência da relação de mapeamento subentidade.
+\end{remark}
+
+De forma similar a apresentação feita em \cite{carmo2013} aqui será usado a própria relação de mapeamento para definir as noções de domínio e imagem de uma função.
+
+\begin{definition}[Domínio e Imagem de função]
+	Seja $\langle f: A \rightarrow B, \varepsilon \rangle$ uma função
 \end{definition}
 
 % Susam, lipstick (topo),  ver como relação
