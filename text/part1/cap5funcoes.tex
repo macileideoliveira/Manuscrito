@@ -106,22 +106,62 @@ Agora que foram apresentados estes conceitos fundamentais pode-se continuar o de
 	\begin{itemize}
 		\item[(a)] $\langle dob: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y = 2x\} \rangle$.
 		\item[(b)] $\langle mul: \mathbb{R} \times \mathbb{R} \rightarrow  \mathbb{N},  \{((x, y), z) \in \mathbb{R}^2 \times \mathbb{R} \mid  z = xy\} \rangle$.
-		\item[(c)] $\langle sqrt: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y^2 = x\} \rangle$.
-		\item[(d)] $\langle one: \mathbb{Z} \rightarrow  \mathbb{Z},  \{(x, y) \in \mathbb{Z}^2 \mid  1 = x+y\} \rangle$.
+		\item[(c)] $\langle sqroot: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y^2 = x\} \rangle$.
+		\item[(d)] $\langle one: \mathbb{Z}^2 \rightarrow  \{1\},  \{((x, y), 1) \in \mathbb{Z}^2 \times \{1\} \mid  1 = x+y\} \rangle$.
 		\item[(e)] $\langle sign: \mathbb{R} \rightarrow  \{0,1\},  \{(x, y) \in \mathbb{R} \times \{0, 1\} \mid y = 1 \text{ sempre que } x > 0.5 \text{ e } y = 0 \text{ se } x \leq 0.5\} \rangle$.
 	\end{itemize}
 \end{example}
 
-Em um sentido de realização, a relação de mapeamento é uma estrutura que estabelece os passos a serem executados para produzir a saída da  função, por exemplo, considere o item (c) do Exemplo \ref{exe:Funcoes}
-
-\begin{remark}
-	É comum em muitas situações se referenciar as funções de forma genérica, isto é, falando só o nome e o tipo da mesma e ficando a existência da relação de mapeamento subentidade.
-\end{remark}
-
 De forma similar a apresentação feita em \cite{carmo2013} aqui será usado a própria relação de mapeamento para definir as noções de domínio e imagem de uma função.
 
-\begin{definition}[Domínio e Imagem de função]
-	Seja $\langle f: A \rightarrow B, \varepsilon \rangle$ uma função
+\begin{definition}[Domínio e Imagem de função]\label{def:DomImaFuncao}
+	Seja $\langle f: A \rightarrow B, \varepsilon \rangle$ uma função o domínio e a imagem de $f$, denotados respectivamente por $dom(f)$ e $ima(f)$, corresponde exatamente ao domínio e a imagem de $\varepsilon$, ou seja, $dom(f) = Dom(\varepsilon)$ e $ima(f) = Ima(\varepsilon)$.
 \end{definition}
+
+\begin{example}
+	Considere a função $\langle k:\mathbb{R} \rightarrow \mathbb{R}, \{(x, y) \in \mathbb{R}^2 \mid y = \sqrt{x}\} \rangle$ tem-se que $dom(k) = ima(k) = \mathbb{R}^+$, pois claramente $(x, y) \in \varepsilon$ se, e somente se, $(x, y) = (x, \sqrt{x})$, agora obviamente $\sqrt{x}$ só existe para $x \geq 0$, logo $Dom(\varepsilon) = \mathbb{R}^+$, em contra partida para qualquer seja $\sqrt{x} \in \mathbb{R}$ tem-se que $\sqrt{x} \geq 0$, consequentemente, $Ima(\varepsilon) = \mathbb{R}^+$.
+\end{example}
+
+\begin{example}
+	Considere a função $\langle prev:\mathbb{N} \rightarrow \mathbb{N}, \{(x, y) \in \mathbb{N}^2 \mid y = n - 1\} \rangle$, note que $(x, y) \in \varepsilon$ se, e somente se, $(x, y) = (x, x-1)$, mas $x - 1 \in \mathbb{N}$ apenas se $x > 0$, portanto,  tem-se que $dom(prev) = \mathbb{N}_*$. Por outro lado, para qualquer $x > 0$ tem-se que $x - 1 \in \mathbb{N}$ e, portanto, não é difícil verificar que  $Ima(\varepsilon) = \mathbb{N}$, consequentemente, $Ima(prev) = \mathbb{N}$.
+\end{example}
+
+Agora é comum ao estudar funções como destacado em \cite{carmo2013}, não ficar declarando a estrutura da função o tempo inteiro, em vez disso, em geral é descrita a assinatura da função junto com o açúcar sintático detalhado a seguir.
+
+\begin{note}[Açúcar sintático]\label{def:acucarFuncao}
+	Seja  $\langle f: A \rightarrow B, \varepsilon \rangle$ uma função, $f(x)$ é um açúcar sintático para dizer que $f$ está recebendo como entrada $x$, se escreve $f(x) = y$ como açúcar sintático da frase: ``ao calcular $f$ com entrada $x$ é gerado $y$ como saída'', mas para isso necessário que $(x, y) \in \varepsilon$. Agora observe que quando a relação $\varepsilon$ de um função descreve $y$ a partir de uma igualdade da forma $y = E$, pode-se em vez de, fazer $f(x) = y$ escreve diretamente $f(x) = E$, e desde que $y = E$ a expressão $f(x) = E$ é um refinamento do açúcar sintático.
+\end{note}
+
+\begin{example}
+	Usando as ideias do açúcar sintático descrito na Nota \ref{def:acucarFuncao} tem-se que:
+	\begin{itemize}
+		\item[(a)] A função  $\langle dob: \mathbb{N} \rightarrow  \mathbb{N},  \{(x, y) \in \mathbb{N}^2 \mid  y = 2x\} \rangle$ pode simplesmente ser escrita usando sua assinatura $dob:\mathbb{N} \rightarrow  \mathbb{N}$ e dizendo que $dob(x) = 2x$.
+		\item[(b)] A função  $\langle pot: \mathbb{R} \times \mathbb{N} \rightarrow  \mathbb{R},  \{((x, y), z) \in (\mathbb{R} \times \mathbb{N}) \times \mathbb{R} \mid  z = x^y\} \rangle$ pode simplesmente ser escrita usando sua assinatura $pot: \mathbb{R} \times \mathbb{N} \rightarrow  \mathbb{R}$ e dizendo que $pot(x, y) = x^y$.
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	Deste ponto em diante sempre que for possível mencionar uma função apenas por sua assinatura isso será feito neste manuscrito.
+\end{remark}
+
+Agora note que a Definição \ref{def:DomImaFuncao} não impõe de forma alguma que todos os elementos do conjunto de partida de uma função estejam no seu domínio, tendo isso em mente pode-se classificar funções em duas categorias definidas a seguir.
+
+\begin{definition}[Funções totais e parciais]
+	Uma função $f: A \rightarrow B$ é dita ser total sempre que $dom(f) = A$ e será dia parcial sempre que $dom(f) \subseteq A$.
+\end{definition}
+
+
+\begin{figure}[h]
+	\lstinputlisting[language=C]{codes/sqfunction.c}
+	\caption{Código da implementação da função no item (c) do Exemplo \ref{exe:Funcoes} escrito na linguagem C.}
+	\label{fig:FuncaoSqrt}
+\end{figure}
+
+\begin{remark}
+	Obviamente a linha $1$ no código esboçado na Figura \ref{fig:FuncaoSqrt} claramente fiz respeito a assinatura da função, já o conteúdo das linhas $2$ até $6$ são responsáveis por fazer uma ``busca''de um $y$ tal que dado um $x$ de entrada tem-se que $f(x) = y$.
+\end{remark}
+
+Agora note um fato sobre a função $sqroot$ e sua implementação no código esboçado na Figura \ref{fig:FuncaoSqrt}, quando tal função recebe 
+
 
 % Susam, lipstick (topo),  ver como relação
