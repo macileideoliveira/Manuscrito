@@ -63,7 +63,7 @@ Diversas linguagens de programação tais como C, C++ e Java apresentam a possib
 
 Um conceito indiretamente esboçado pela ideia de assinatura de função, é o de tipagem da função, sempre que a assinatura é da forma $f: A \rightarrow B$ pode-se dizer que $f$ é uma função do tipo ``$A$ em $B$'', ou mesmo que ``$f$ é um tipo seta de $A$ para $B$'', a noção de ``tipo seta'' é uma nomenclatura diretamente ligado a ideia de Teoria das categorias.
 
-\begin{note}
+\begin{note}\label{note:TipoFuncao}
 	Em geral programadores focados em linguagens imperativas tais como C (ou C++, Java e etc.) tende a erra a seguinte questão: ``Qual é o tipo da função reverse (definida na linha 2 da Figura \ref{fig:AssinaturasEmC})?'' A critério tal função é do tipo seta de int em int, ou seja, matematicamente sua assinatura seria da forma, reverse: int $\rightarrow$ int.
 \end{note}
 
@@ -144,10 +144,16 @@ Agora é comum ao estudar funções como destacado em \cite{carmo2013}, não fic
 	Deste ponto em diante sempre que for possível mencionar uma função apenas por sua assinatura isso será feito neste manuscrito.
 \end{remark}
 
+Note se $f$ é uma função com assinatura $f: A \rightarrow B$, isto é, $f$ é uma função do tipo seta de $A$ em $B$, e $x$ um objeto do tipo $A$\footnote{Em teoria dos tipos \cite{nederpelt2014, thompson1999} se $A$ é um tipo e $x$ é um objeto do tipo $A$ pode-se escrever que $x:A$, isto é algo semelhante a teoria dos conjuntos ao dizer que $x \in A$.} pode-se pensar em uma regra capaz de deduzir o tipo da saída de $f(x)$, tal regra poderia ser nomeada como $dType$ e poderia ser escrita como:
+\begin{equation*}
+	\infer[dType]{f(x):B}{x:A & f:A \rightarrow B}
+\end{equation*}
+essa regra não é uma regra nova, algo criado nesse manuscrito, na verdade a mesma em um certo ponto de vista é uma versão da famosa regra de \textit{modus ponens} (ver Capítulo \ref{cap:LogicaProposicional}), a existência de tal regra é uma manifestação da profunda conexão que existe entre lógica e computação. Tal conexão é conhecida como isomorfismo de Curry–Howard, e é um aspecto fundamental em áreas como teoria dos tipos \cite{nederpelt2014, thompson1999}, teoria da prova \cite{nederpelt2014, sergey2014}, $\lambda$-cálculo \cite{bare1984, henk1992, bimbo2019} e programação funcional \cite{thompson1999, fmcbook}.
+
 Agora note que a Definição \ref{def:DomImaFuncao} não impõe de forma alguma que todos os elementos do conjunto de partida de uma função estejam no seu domínio, tendo isso em mente pode-se classificar funções em duas categorias definidas a seguir.
 
 \begin{definition}[Funções totais e parciais]
-	Uma função $f: A \rightarrow B$ é dita ser total sempre que $dom(f) = A$ e será dia parcial sempre que $dom(f) \subseteq A$.
+	Uma função $f: A \rightarrow B$ é dita ser total sempre que $dom(f) = A$ e será dita parcial sempre que $dom(f) \subseteq A$.
 \end{definition}
 
 

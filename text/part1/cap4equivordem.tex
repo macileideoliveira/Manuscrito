@@ -37,11 +37,11 @@ Os Exemplos \ref{exe:Equivalencia1} e \ref{exe:Equivalencia2} permite o leitor p
 \end{example}
 
 \begin{example}
-	A relação $R = \{(x, y) \in \mathbb{N}^2 \mid x, y \text{ possuem o mesmo resto da divisão por } 5\}$ é um relação de equivalência.
+	A relação $R = \{(x, y) \in \mathbb{Z}^2 \mid x, y \text{ possuem o mesmo resto da divisão por } 5\}$ é uma relação de equivalência.
 \end{example}
 
 \begin{example}
-	A relação $I =  \{(x, y) \in PERS^2 \mid x, y \text{ possuem a mesma idade}\}$ é um relação de equivalência sobre o conjunto de todas as pessoas $(PERS)$.
+	A relação $I =  \{(x, y) \in PERS^2 \mid x, y \text{ possuem a mesma idade}\}$ é uma relação de equivalência sobre o conjunto de todas as pessoas $(PERS)$.
 \end{example}
 
 \begin{example}
@@ -108,7 +108,7 @@ Uma fato importante sobre o espaço quociente de uma relação de equivalência 
 	Primeiramente note que como $\equiv$ é uma relação reflexiva tem-se para todo $x \in A$ que $x \in [x]$ e assim claramente $[x] \in A_{/_\equiv}$ e $[x] \neq \emptyset$, satisfazendo assim a condição (1) da Definição \ref{def:ParticaoConjuntos}. Por outro lado, os Teoremas \ref{teo:EquivalenciaPropriedade1} e \ref{teo:EquivalenciaPropriedade2} mostram que dado $[x], [y] \in A_{/_\equiv}$ sempre que $[x] \neq [y]$ tem-se que  $[x] \cap [y] = \emptyset$ e, portanto, a condição (2) da Definição \ref{def:ParticaoConjuntos} é satisfeita, desde que as condições (1) e (2) são satisfeita pelo elementos de $A_{/_\equiv}$ tem-se que $A_{/_\equiv}$ é uma partição de $A$.
 \end{proof}
 
-Um interessante uso das relações de equivalência é como dito em \cite{carmo2013} a construção do conjunto dos números racionais $(\mathbb{Q})$ a partir dos números inteiros $(\mathbb{Z})$.
+Um interessante uso das relações de equivalência é a construção do conjunto dos números racionais $(\mathbb{Q})$ a partir dos números inteiros $(\mathbb{Z})$ como dito em \cite{carmo2013}.
 
 %Um interessante uso das relações de equivalência é como dito em \cite{carmo2013} a construção do conjunto dos números racionais $(\mathbb{Q})$ a partir dos números inteiros $(\mathbb{Z})$, para o leitor interessando tal construção está detalhada no apêndice \ref{ape:Racionais}.
 
@@ -121,7 +121,7 @@ Em algumas situação é interessante que seja possível definir uma hierarquia 
 \end{definition}
 
 \begin{example}
-	A relação $\{(x, y) \in \mathbb{N}^2 \mid y = x + 1\}$ é uma ordem estrita.
+	A relação $\{(x, y) \in \mathbb{N}^2 \mid (\exists k \in \mathbb{N})[k \geq 1 \land y = x + k	]\}$ é uma ordem estrita.
 \end{example}
 
 \begin{example}
@@ -537,7 +537,7 @@ Além da ideia de máximo e mínimo sobre os \textit{posets} também definido a 
 Em algumas situações elementos maximais coincidem com o máximo, entretanto, como mostrado a seguir ser maximal não é garantia de ser o máximo do conjunto.
 
 \begin{example}
-	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse8} a seguir. Para tal \textit{poset} tem-se que os elementos $4$ e $5$ satisfazem a Definição \ref{def:MaximaisPoset} logo ambos são maximais do conjunto, porém, ambos são incomparáveis, portanto, não nenhum é o máximo do conjunto.
+	Considere o \textit{poset} esboçado pela Figura \ref{fig:DiagramaHasse8} a seguir. Para tal \textit{poset} tem-se que os elementos $4$ e $5$ satisfazem a Definição \ref{def:MaximaisPoset} logo ambos são maximais do conjunto, porém, ambos são incomparáveis, portanto, nenhum é o máximo do conjunto.
 	
 	\begin{figure}[h]
 		\centering
