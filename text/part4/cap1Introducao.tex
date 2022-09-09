@@ -421,3 +421,76 @@ Desde que $\gg^*$ é de fato uma relação tem-se que a igualdade entre derivaç
 \end{example}
 
 O leitor pode ter notado que como gramática formais possuem um conjunto finito de regras, as linguagens por elas geradas nada mais são do que conjuntos indutivamente gerados.
+
+\section{Questionário}\label{sec:Questionario1part4}
+
+\begin{problem}\label{prob:Linguagem1}
+	Dado o alfabeto $\Sigma = \{a, b, c\}$ e as palavras $u = aabcab, v = bbccabac$ e $w = ccbabbaaca$ determine o que é solicitado.
+\end{problem}
+
+\begin{exerList}
+	\item A palavra $uv^r$.
+	\item A palavra $(w^r)^2u$.
+	\item A palavra $((u^r)^2v^0)^rv$.
+	\item A palavra $uu^2v^rw$.
+	\item A palavra $((wuv)^r)^2u$.
+	\item O valor da expressão $|w^3| + 2|v^2u| - |u|$.
+	\item O valor da expressão $2|w^r| - |uv|$.
+	\item O valor da expressão $|w^raaw| - |w|$.
+	\item O valor da expressão $|uv^r| - 4$.
+	\item O valor da expressão $\frac{|(w^r)^2u|}{2} - \frac{|u|}{6}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Linguagem2}
+	Demonstre para quaisquer palavras $u$ e $v$ e para todo $n \in \mathbb{N}$ as asserções a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item Se $u$ é um prefixo de $v$, então $|u| \leq |v|$.
+	\item $|u^n| = n|u|$.
+	\item $|(uv)^r| = |vu|$.
+	\item Se $|u| = n$, então $n \leq |uv|$.
+\end{exerList}
+
+\begin{problem}
+	Considere a linguagem $L = \{\lambda, abb, a, abba\}$ e determine o que é solicitado a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $L^r - \{\lambda, a\}$.
+	\item $L^3$.
+	\item $PRE(L)$.
+	\item $SUF(L^2)$.
+	\item $w$ tal que $|w| = \bigsqcup \{|w'| \mid w' \in L^3\}$.
+\end{exerList}
+
+\begin{problem}
+	Prove que para qualquer linguagem $L$ e quaisquer $m,n \in \mathbb{N}$ as seguintes asserções.
+\end{problem}
+
+\begin{exerList}
+	\item $(L^m)^n = L^{mn}$.
+	\item $L^mL^n = L^{m+n}$.
+	\item $(L^r)^n = (L^n)^r$.
+	\item $\overline{L}^r = \overline{L^r}$.
+	\item $PRE(L) = (SUF(L^r))^r$.
+\end{exerList}
+
+\begin{problem}
+	Dado duas linguagens quaisquer $L_1$ e $L_2$ demostre que:
+\end{problem}
+
+\begin{exerList}
+	\item Se $L_1 \cap L_2 \neq \emptyset$, então $PRE(L_1) \cap PRE(L_2) = \emptyset$.
+	\item Se $L_1 \subseteq L_2$, então $SUF(L_1) \cap SUF(L_2) = \emptyset$.
+	\item Se $L_1 \subseteq L_2$, então $L_1^r \subseteq L_2^r$.
+	\item Se $L_1 \subseteq L_2$, então para todo $L$ tem-se que $LL_1 \subseteq LL_2$. 
+\end{exerList}
+
+\begin{problem}
+	Demonstre ou refute o predicado $(\forall L \subseteq \Sigma^*)[(\forall n \in \mathbb{N})[\overline{L}^n = \overline{L^n}]]$.
+\end{problem}
+
+\begin{problem}
+	Esboce formalmente em que condições a igualdade $PRE(L) = (SUF(L))^r$ é verdadeira.
+\end{problem}
