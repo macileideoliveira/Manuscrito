@@ -1454,7 +1454,7 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 	\end{figure}
 \end{example}
 
-\section{Máquinas de Mealy}\label{sec:MealyMoore}
+\section{Uma Breve Introdução das Máquinas de Mealy}\label{sec:MealyMoore}
 
 Uma classe particularmente interessante de autômatos finitos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas (ou autômatos) de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização das máquinas de Mealy\footnote{Para leitores interessados nas máquinas de Moore é recomendado a leitura de \cite{menezes1998LFA}.} e será aqui trabalhado a ideia de usar tais máquinas como tradutoras, além disso, será apresentado o relacionamento de tais máquinas com os circuitos sequências. 
 
@@ -1601,21 +1601,112 @@ Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máqui
 	Um leitor mais atento pode notar que um AFD $A$ pode ser encarado como sendo uma máquina de Mealy cuja função de tradução está desabilitada,  e neste caso a linguagem traduzida corresponderá exatamente ao conjunto vazio, isto é, $TRAD(A) = \emptyset$.
 \end{remark}
 
+O resultado a seguir garante que máquinas de Mealy são dispositivos que traduzem linguagens regulares em linguagens regulares, em um sentido mecânico tal resultado estabelece que uma máquina de Mealy é um computador equipado com um programa que compila uma linguagem regular dada, para outra linguagem regular, em uma visão mais abstrata e algébrica uma máquina de Mealy computa um homomorfismo entre duas linguagens regulares.
+
 \begin{theorem}
 	Se $A$ é uma máquina de Mealy, então $TRAD(A)$ é uma linguagem regular.
 \end{theorem}
 
 \begin{proof}
-	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q, \Lambda, \delta', q_0, F \rangle$ onde $\delta'(q, a) = q'$ se, e somente, se $\delta(q, b) = q'$ e $\psi(q, b) = a$, claramente $\delta'$ está bem definido. Além disso, por indução não é difícil verificar\footnote{Este é um bom exercício ao leitor.} que $\widehat{\delta'}(q_0, w) = q_f$ se, e somente se, $\widehat{\delta}(q_0, u) = q_f$ e $\widehat{\psi}(q_0, u)$ com $w \in \Lambda^*, u \in \Sigma^*$ e $q_f \in F$. Assim claramente $\mathcal{L}(A') = TRAD(A)$ e, portanto, $TRAD(A)$ é uma linguagem regular.
+	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q \cup \{q_z\}, \Lambda, \delta', q_0, F \rangle$ onde $q_z \notin Q$ e a função de transição $\delta$ é definida pelas regras: 
+	\begin{eqnarray*}
+		\delta'(q, a) & = & \left\{\begin{array}{ll}	\delta(q, b) , & \hbox{se } q \in Q \text{ e } \psi(q, b) = a\\	q_z,  & \hbox{senão}\end{array}\right.
+	\end{eqnarray*}
+	claramente $\delta'$ está bem definida. Além disso, por indução não é difícil verificar\footnote{Este é um bom exercício ao leitor.} que $\widehat{\delta'}(q_0, w) \in F$ se, e somente se, $\widehat{\delta}(q_0, u) \in F$ e $\widehat{\psi}(q_0, u) = w$ com $w \in \Lambda^*, u \in \Sigma^*$ e $q_f \in F$. Assim claramente $\mathcal{L}(A') = TRAD(A)$ e, portanto, $TRAD(A)$ é uma linguagem regular.
 \end{proof}
 
 Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footnote{Outro modelo que é equivalente as máquinas de Mealy nesse sentido são as máquinas de Moore \cite{moore1956}.} de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos.
 
 \begin{figure}[h]
 	\centering
-	\begin{circuitikz}
-		% Portas lógicas e componentes
-		\node[and port] (AND) at (0,0){};
-		\node[latch, flipflop def={t1=$J_A$, t3=$K_A$}] (JK1) at (3, 0) {}; 
+	\begin{circuitikz}[scale=0.7, transform shape]
+		
+		% Portas Lógicas e Clock
+		\draw (0,2) node[nand port] (nand1) {};
+		\node at (nand1.bin 2) [ocirc, left]{};
+		\draw (3,2) node[nand port] (nand2) {};
+		
+		\draw (-1,-2) node[nand port, number inputs=3] (nand3) {};
+		\draw (-1,-4) node[nand port, number inputs=3] (nand4) {};
+		\draw (-1,-6) node[nand port, number inputs=3] (nand5) {};
+		
+		\draw  (2, -4) node[nand port,number inputs=3] (nand6)  {};
+		
+		\draw (-5, -1) node[not port] (not1) {};
+		
+		\draw  (4, -4)  node[latch, flipflop def={t1=$D_A$, t6=$A$, t4=$\overline{A}$}] (FF1) {};
+		
+		\draw (-5, -7) node[left] {$Clock$ \faWaveSquare} -- (2,-7) node[circ] (clk1)  {} -- (10,-7) node[circ] (clk2) {}; 
+		
+		\draw (-6, 0) node[circ] (vX) {};
+		
+		\draw (8,-2) node[nand port] (nand7) {};
+		\draw (8,-4) node[nand port] (nand8) {};
+		\draw (8,-6) node[nand port] (nand9) {};
+		
+		\draw (10,-4) node[nand port, number inputs=3] (nand10) {};
+		
+		\draw  (12, -4)  node[latch, flipflop def={t1=$D_B$, t6=$B$, t4=$\overline{B}$}] (FF2) {};
+	
+		% Rotulando as Entradas e Saídas
+		\draw (nand2.out) node (naout2) [anchor=west,xshift=0.2cm]   {$Z$};
+		
+	    \draw (-7, -1) coordinate[label={[left]$X$}] (X) to[short,-*] ++(1,0) coordinate(pX);
+	    \draw (not1.out) to[short,-*] ++(0.5,0) coordinate(nX);
+	    
+	    \draw (nand1.bin 1) node (A1) [anchor=east,xshift=-0.2cm]   {$A$};
+		\draw (nand1.bin 2) node (B1) [anchor=east,xshift=-0.2cm]   {$B$};
+		
+		\draw (nand3.bin 2) node (A2) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
+		\draw (nand3.bin 3) node (B2) [anchor=east,xshift=-0.2cm]   {$B$};
+		
+		\draw (nand4.bin 2) node (A3) [anchor=east,xshift=-0.2cm]   {$A$};
+		\draw (nand4.bin 3) node (B3) [anchor=east,xshift=-0.2cm]   {$\overline{B	}$};
+		
+		\draw (nand5.bin 2) node (A4) [anchor=east,xshift=-0.2cm]   {$A$};
+		\draw (nand5.bin 3) node (B4) [anchor=east,xshift=-0.2cm]   {$B$};
+		
+		%\draw (FF1.pin 6) node (ff1out6) [anchor=west,xshift=0.2cm]   {$A$};
+		%\draw (FF1.pin 4) node (ff1out4) [anchor=west,xshift=0.2cm]   {$\overline{A}$};
+		
+		\draw (nand7.bin 2) node (A5) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
+		
+		\draw (nand8.bin 1) node (A6) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
+		\draw (nand8.bin 2) node (B5) [anchor=east,xshift=-0.2cm]   {$B$};
+		
+		\draw (nand9.bin 1) node (A7) [anchor=east,xshift=-0.2cm]   {$A$};
+		\draw (nand9.bin 2) node (B6) [anchor=east,xshift=-0.2cm]   {$\overline{B}$};
+		
+		%\draw (FF2.pin 6) node (ff1out6) [anchor=west,xshift=0.2cm]   {$B$};
+		%\draw (FF2.pin 4) node (ff1out4) [anchor=west,xshift=0.2cm]   {$\overline{B}$};
+		
+		% Barramento
+		\draw (nand1.out) -| node[circ,midway]{} (nand2.in 1);
+		\draw (nand1.out) -| (nand2.in 2);
+		
+		\draw (pX) -- (vX);
+
+		\draw (pX) -- (not1.in);
+		\draw (not1.out) -| (nand3.in 1); 
+		\draw (nX) -- ($(nX)!.8!(nX|-nand4.in 1)$) -| (nand4.in 1);
+		
+		\draw (pX) -- ($(pX)!1!(pX|-nand5.in 1)$) -| (nand5.in 1);
+		
+		\draw (nand3.out) -| (nand6.in 1);
+		\draw (nand4.out) -- (nand6.in 2);
+		\draw (nand5.out) -| (nand6.in 3);
+		
+		\draw (nand6.out) -| (FF1.pin 1);
+		\draw (clk1) |- (FF1.pin 3);
+		
+		\draw (vX) -| (nand7.in 1);
+		
+		\draw (nand7.out) -| (nand10.in 1);
+		\draw (nand8.out) -- (nand10.in 2);
+		\draw (nand9.out) -| (nand10.in 3);
+		
+		\draw (nand10.out) -| (FF2.pin 1);
+		\draw (clk2) |- (FF2.pin 3);
+		
 	\end{circuitikz}
 \end{figure}
