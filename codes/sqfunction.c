@@ -3,5 +3,5 @@ int sqroot(int x){
   while(y*y != x){
     y = y + 1;
   }
-  return x;
+  return y;
 }

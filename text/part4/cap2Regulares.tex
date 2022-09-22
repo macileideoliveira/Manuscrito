@@ -1311,7 +1311,7 @@ O próximo resultado mostra que dado um AFD $A$ qualquer o  AFD quociente $A'$ d
 		& \stackrel{Teo. \ \ref{teo:FinalQuociente}}{\Longleftrightarrow} & \widehat{\delta}(q_0, w) \in F\\
 		& \Longleftrightarrow & w \in \mathcal{L}(A)
 	\end{eqnarray*}
-
+	
 	\noindent logo $\mathcal{L}(A_{/\equiv}) = \mathcal{L}(A)$.
 \end{proof}
 
@@ -1425,7 +1425,7 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 			- & - & - & X & X & \\ \hline
 			- & - & - & - & X & X\\ \hline
 			- & - & - & - & - & X\\ \hline
-			- & - & - & - & X & -\\ \hline
+			- & - & - & - & - & -\\ \hline
 		\end{tabular}
 		\caption{Matriz de equivalência $M$ para o AFD \ref{fig:Linguagem-AFDM-1}.}
 		\label{tab:AFD-Minimizacao}
@@ -1454,17 +1454,19 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 	\end{figure}
 \end{example}
 
-\section{Uma Breve Introdução das Máquinas de Mealy}\label{sec:MealyMoore}
+\section{Máquinas de Mealy}\label{sec:MealyMoore}
 
 Uma classe particularmente interessante de autômatos finitos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas (ou autômatos) de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização das máquinas de Mealy\footnote{Para leitores interessados nas máquinas de Moore é recomendado a leitura de \cite{menezes1998LFA}.} e será aqui trabalhado a ideia de usar tais máquinas como tradutoras, além disso, será apresentado o relacionamento de tais máquinas com os circuitos sequências. 
 
-Diferente dos autômatos sem saída vistos nas seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN} as máquinas de Mealy são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN como será visto a seguir.  
+Como dito em \cite{reinier2019}, diferente dos autômatos sem saída vistos nas seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN} as máquinas de Mealy são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN como será visto a seguir.  
 
-Em termos informais uma autômato com saída pode ser descrito como um máquina que possui duas memórias (somente de leitura), a primeira memória guarda a palavra de entrada usada no funcionamento da máquina, já segunda memória (apenas de escrita) é responsável por armazenar a palavra de saída, sendo essa gerada durante o funcionamento do autômato. Formalmente uma máquina de Mealy é como se segue.
+Em termos informais uma autômato com saída pode ser descrito como um máquina que possui duas memórias, a primeira memória (somente de leitura) é chamada de memória de entrada, e assim como nos autômatos das seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN}, ela serve para guarda a palavra de entrada usada para o funcionamento da máquina. Já segunda memória (apenas de escrita) é chamada de \textbf{memória de saída}, sendo esta responsável por armazenar a palavra de saída, produzida pela máquina de Mealy. Formalmente uma máquina de Mealy é como se segue.
 
 \begin{definition}[Máquina de Mealy]\label{def:MealyMachine}
-	Uma máquina (ou autômato) de Mealy é uma estrutura $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ onde $Q, \Sigma, q_0$ e $F$ são da mesma forma que na Definição \ref{def:AFD}, a função $\delta: Q \times \Sigma \rightarrow Q$ é uma função parcial\footnote{Entretanto, não é difícil verificar que máquinas de Mealy onde $\delta$ é total tem o mesmo poder de computação/tradução das máquinas de Mealy em que $\delta$ é parcial.}. $\Lambda$ é um alfabeto chamado \textbf{alfabeto de saída} e $\psi: Q \times \Sigma \rightarrow \Lambda^+$ é a função de tradução da máquina de Mealy.
+	Uma máquina (ou autômato) de Mealy é uma estrutura $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ onde $Q, \Sigma, q_0$ e $F$ são da mesma forma que na Definição \ref{def:AFD}, a função $\delta: Q \times \Sigma \rightarrow Q$ é uma função parcial,  $\Lambda$ é um alfabeto chamado \textbf{alfabeto de saída} e $\psi: Q \times \Sigma \rightarrow \Lambda^*$ é a função parcial de tradução da máquina de Mealy, de forma que $\psi(q, a)$ está definida se, e somente se, $\delta(q, a)$ está definida.
 \end{definition}
+
+Dado qualquer máquina de Mealy tem-se que a função $\delta$ é responsável por acessar (ou usar) a memória de entrada (da mesma que em qualquer AFD), por outro lado, a função $\psi$ é o mecanismo responsável por acessar (ou usar) a memória de saída.
 
 \begin{example}\label{exe:Mealy1}
 	A estrutura $M = \langle \{q_0, q_1\}, \{a, b\}, \{0, 1, 2\}, \delta, \psi, q_0, \{q_0\} \rangle$ onde a função de transição é representada pela Tabela \ref{tab:TransicaoMealyEx1} e a função de tradução é representada pela Tabela \ref{tab:TraducaoMealyEx1}, é uma máquina de Mealy.
@@ -1484,15 +1486,15 @@ Em termos informais uma autômato com saída pode ser descrito como um máquina 
 		\centering
 		\begin{tabular}{c|cc}
 			\backslashbox{$Q$}{$\Sigma$} & $a$ & $b$\\ \hline
-			$q_0$ & $11$ & $20$ \\
-			$q_1$ & $12$ & $02$ 
+			$q_0$ & $1$ & $0$ \\
+			$q_1$ & $1$ & $2$ 
 		\end{tabular}
 		\caption{Tabela da Função de tradução da Máquina de Mealy do Exemplo \ref{exe:Mealy1}.}
 		\label{tab:TraducaoMealyEx1}
 	\end{table*}
 \end{example}
 
-Pode-se utilizar a ideia de grafo de transição para representar visualmente as máquinas de Mealy a única diferença que esta representação terá em relação aos grafos que representam os AFD, é que as arestas que ligam dois vértices $q_i$ e $q_j$ serão rotuladas com pares $(a, x) \in \Sigma \times \Lambda$ representando assim simultaneamente as funções $\delta(q_i, a) = q_j$ e $\psi(q_i, a) = x$.
+Pode-se utilizar a ideia de grafo de transição para representar visualmente as máquinas de Mealy a única diferença que esta representação terá em relação aos grafos que representam os AFD, é que as arestas que ligam dois vértices $q_i$ e $q_j$ serão rotuladas com pares $(a, b) \in \Sigma \times \Lambda$ representando assim simultaneamente as funções $\delta(q_i, a) = q_j$ e $\psi(q_i, a) = b$.
 
 \begin{example}\label{exe:MaquinaMealyGrafo1}
 	A representação do grafo de transição da máquina de Mealy do Exemplo \ref{exe:Mealy1} pode ser consultada na Figura \ref{fig:MaquinaMealy1}.
@@ -1507,18 +1509,18 @@ Pode-se utilizar a ideia de grafo de transição para representar visualmente as
 		
 		%Transições:
 		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
-		(A) edge [bend left]  				node [align=center]   {$(a, 11)$\\$(b, 20)$} (B)
-		(B) edge [bend left]  				node    			  {$(a, 12)$} (A)
-		(B) edge [loop above]				node    			  {$(b, 02)$} ( );
+		(A) edge [bend left]  				node [align=center]   {$(a, 1)$\\$(b, 0)$} (B)
+		(B) edge [bend left]  				node    			  {$(a, 1)$} (A)
+		(B) edge [loop above]				node    			  {$(b, 2)$} ( );
 	\end{tikzpicture}
 	\caption{Representação da máquina de Mealy do Exemplo \ref{exe:Mealy1}.}
 	\label{fig:MaquinaMealy1}
 \end{figure}
 
-Note que a máquina de Mealy traduz (ou associa) cada transição da máquina a um símbolo do alfabeto de saída, ou seja, cada movimento no processo de computação da máquina é traduzido na saída da mesma. Obviamente $\widehat{\delta}$ é definido da mesma forma que para os AFD, sendo assim basta agora estender a função $\psi$ para que a máquina de Mealy possa de fato ser vista como um tradutor finito, e isto será feito a seguir.
+Note que a máquina de Mealy traduz (ou associa) cada transição da máquina em um símbolo do alfabeto de saída, ou seja, cada movimento no processo de computação da máquina é traduzido na saída da mesma. Obviamente $\widehat{\delta}$ é definido da mesma forma que para os AFD, sendo assim basta agora estender a função $\psi$ para que a máquina de Mealy possa de fato ser vista como um tradutor finito, e isto será feito a seguir.
 
 \begin{definition}[Extensão da função $\psi$]\label{def:Traducao}
-	Seja $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0\rangle$ uma máquina de Mealy a função $\psi$ é estendida para a função $\widehat{\psi} : Q \times \Sigma^* \rightarrow \Lambda^*$ usando recursividade como se segue.
+	Seja $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ uma máquina de Mealy a função $\psi$ é estendida para a função $\widehat{\psi} : Q \times \Sigma^* \rightarrow \Lambda^*$ usando recursividade como se segue.
 	
 	\begin{eqnarray}\label{eq:ExtensaoDaFuncaoDetraducaoMealy}
 		\widehat{\psi}(q, \lambda)& = & \lambda \\
@@ -1530,23 +1532,17 @@ Note que a máquina de Mealy traduz (ou associa) cada transição da máquina a 
 	Considerando a máquina de Mealy do Exemplo \ref{exe:Mealy1} a tradução da palavra $bab$ a partir do estado $q_1$ é dada seguinte forma,
 	\begin{eqnarray*}
 		\widehat{\psi}(q_1, bab) & = & \widehat{\psi}(q_1, ba)\psi(\widehat{\delta}(q_1, ba), b)\\
-		& = & \widehat{\psi}(q_1, b)\psi(\widehat{\delta}(q_1, b), a)\psi(\widehat{\delta}(q_1, ba), b)\\
-		& = & \widehat{\psi}(q_1, \lambda)\psi(\widehat{\delta}(q_1, \lambda), b)\psi(\widehat{\delta}(q_1, b), a)\psi(\widehat{\delta}(q_1, ba), b)\\
-		& = & \lambda 021220\\
-		& = & 021220
+		& = & \Big(\widehat{\psi}(q_1, b)\psi(\widehat{\delta}(q_1, b), a)\Big)\psi(\widehat{\delta}(q_1, ba), b)\\
+		& = & \Big(\Big(\widehat{\psi}(q_1, \lambda)\psi(q_1, b)\Big)\psi(\widehat{\delta}(q_1, b), a)\Big)\psi(\widehat{\delta}(q_1, ba), b)\\
+		& = & \lambda 210\\
+		& = & 210
 	\end{eqnarray*}
 \end{example}
 
-Agora desde que uma máquina de Mealy não possui $\lambda$-transições é claro pela natureza da função $\psi$ e pela Definição \ref{def:Traducao} que $\widehat{\psi}(q_0, w) = \lambda$ implica que nenhuma transição foi executada.
-
-\begin{remark}
-	Pode-se interpretar que as funções $\psi$ e $\widehat{\psi}$ escrevem na fita de saída da máquina, isto é, na memória adicional de escrita que tais máquinas possuem.
-\end{remark}
-
-Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máquina de Mealy não é visto como uma linguagem aceita pela máquina, em vez disso, a saída original de uma máquina de Mealy é exatamente a palavra escrito pelo estado final que a máquina para, neste texto será apresentada uma generalização dessa ideia, isto é, aqui será apresentada a noção de linguagem traduzida pela máquina.
+Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máquina de Mealy não é visto como uma linguagem aceita pela máquina, em vez disso, a saída original de uma máquina de Mealy é exatamente a palavra escrita na memória de saída após a máquina termina a execução \cite{reinier2019}.
 
 \begin{definition}[Linguagem Traduzia - Máquina de Mealy]
-	Dado uma máquina de Mealy $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0\rangle$ a linguagem traduzida de $A$, denotado por $TRAD(A)$, é o conjunto de todas as traduções das palavras $w \in \Sigma^*$ realizadas a partir do estado inicial $q_0$, ou seja, tem-se que:
+	Dado uma máquina de Mealy $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ a linguagem traduzida de $A$, denotado por $TRAD(A)$, é o conjunto de todas as traduções das palavras $w \in \Sigma^*$ realizadas a partir do estado inicial $q_0$, ou seja, tem-se que:
 	\begin{equation}
 		TRAD(A) = \{\widehat{\psi}(q_0, w)  \mid \widehat{\delta}(q_0, w) \in F\}
 	\end{equation}
@@ -1597,116 +1593,195 @@ Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máqui
 	\end{figure}
 \end{example}
 
+%Dado uma máquina de Mealy qualquer $A$ caso seja desejado saber a saída da transição final de uma palavra $wa \in \Sigma^*$ com $w \in \Sigma^*$ e $a \in \Sigma$ e não sua tradução completa, basta calcular $\widehat{\psi}(\widehat{\delta}(q_0, w), a)$, este conceito será interessante no Exemplo \ref{exe:CircuitoMealy1}.
+
 \begin{remark}
-	Um leitor mais atento pode notar que um AFD $A$ pode ser encarado como sendo uma máquina de Mealy cuja função de tradução está desabilitada,  e neste caso a linguagem traduzida corresponderá exatamente ao conjunto vazio, isto é, $TRAD(A) = \emptyset$.
+	Um leitor mais atento pode notar que um AFD $A$ pode ser encarado como sendo uma máquina de Mealy cuja função de tradução está desabilitada, ou seja,  e neste caso a linguagem traduzida corresponderá exatamente ao conjunto vazio, isto é, $TRAD(A) = \emptyset$.
 \end{remark}
 
-O resultado a seguir garante que máquinas de Mealy são dispositivos que traduzem linguagens regulares em linguagens regulares, em um sentido mecânico tal resultado estabelece que uma máquina de Mealy é um computador equipado com um programa que compila uma linguagem regular dada, para outra linguagem regular, em uma visão mais abstrata e algébrica uma máquina de Mealy computa um homomorfismo entre duas linguagens regulares.
+O resultado a seguir garante que máquinas de Mealy traduzem linguagens regulares em linguagens regulares,  tal resultado diz que uma máquina de Mealy é um computador equipado com um compilador que compila a linguagem regular $\mathcal{L}(A)$ na  linguagem regular $TRAD(A)$, em uma visão mais abstrata e algébrica uma máquina de Mealy computa um homomorfismo entre duas linguagens regulares.
 
 \begin{theorem}
 	Se $A$ é uma máquina de Mealy, então $TRAD(A)$ é uma linguagem regular.
 \end{theorem}
 
 \begin{proof}
-	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q \cup \{q_z\}, \Lambda, \delta', q_0, F \rangle$ onde $q_z \notin Q$ e a função de transição $\delta$ é definida pelas regras: 
+	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q \cup \{q_z\}, \Lambda, \delta', q_0, F \rangle$ onde $q_z \notin Q$ e a função de transição $\delta'$ é definida pelas regras: 
 	\begin{eqnarray*}
 		\delta'(q, a) & = & \left\{\begin{array}{ll}	\delta(q, b) , & \hbox{se } q \in Q \text{ e } \psi(q, b) = a\\	q_z,  & \hbox{senão}\end{array}\right.
 	\end{eqnarray*}
-	claramente $\delta'$ está bem definida. Além disso, por indução não é difícil verificar\footnote{Este é um bom exercício ao leitor.} que $\widehat{\delta'}(q_0, w) \in F$ se, e somente se, $\widehat{\delta}(q_0, u) \in F$ e $\widehat{\psi}(q_0, u) = w$ com $w \in \Lambda^*, u \in \Sigma^*$ e $q_f \in F$. Assim claramente $\mathcal{L}(A') = TRAD(A)$ e, portanto, $TRAD(A)$ é uma linguagem regular.
+	claramente $\delta'$ está bem definida e é total. Além disso, por indução não é difícil verificar\footnote{Este é um bom exercício ao leitor.} que $\widehat{\delta'}(q_0, w) \in F$ se, e somente se, $\widehat{\delta}(q_0, u) \in F$ e $\widehat{\psi}(q_0, u) = w$ com $w \in \Lambda^*, u \in \Sigma^*$ e $q_f \in F$. Assim claramente $\mathcal{L}(A') = TRAD(A)$ e, portanto, $TRAD(A)$ é uma linguagem regular.
 \end{proof}
 
-Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footnote{Outro modelo que é equivalente as máquinas de Mealy nesse sentido são as máquinas de Moore \cite{moore1956}.} de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos.
+Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footnote{Outro modelo que é equivalente as máquinas de Mealy nesse sentido são as máquinas de Moore \cite{moore1956}.} de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos. O Exemplo \ref{exe:MaquinaCircuito1} mostra como usar máquinas de Mealy para resolver problemas e a partir de tais máquinas produzir um circuito para resolver o problema.
 
-\begin{figure}[h]
-	\centering
-	\begin{circuitikz}[scale=0.7, transform shape]
-		
-		% Portas Lógicas e Clock
-		\draw (0,2) node[nand port] (nand1) {};
-		\node at (nand1.bin 2) [ocirc, left]{};
-		\draw (3,2) node[nand port] (nand2) {};
-		
-		\draw (-1,-2) node[nand port, number inputs=3] (nand3) {};
-		\draw (-1,-4) node[nand port, number inputs=3] (nand4) {};
-		\draw (-1,-6) node[nand port, number inputs=3] (nand5) {};
-		
-		\draw  (2, -4) node[nand port,number inputs=3] (nand6)  {};
-		
-		\draw (-5, -1) node[not port] (not1) {};
-		
-		\draw  (4, -4)  node[latch, flipflop def={t1=$D_A$, t6=$A$, t4=$\overline{A}$}] (FF1) {};
-		
-		\draw (-5, -7) node[left] {$Clock$ \faWaveSquare} -- (2,-7) node[circ] (clk1)  {} -- (10,-7) node[circ] (clk2) {}; 
-		
-		\draw (-6, 0) node[circ] (vX) {};
-		
-		\draw (8,-2) node[nand port] (nand7) {};
-		\draw (8,-4) node[nand port] (nand8) {};
-		\draw (8,-6) node[nand port] (nand9) {};
-		
-		\draw (10,-4) node[nand port, number inputs=3] (nand10) {};
-		
-		\draw  (12, -4)  node[latch, flipflop def={t1=$D_B$, t6=$B$, t4=$\overline{B}$}] (FF2) {};
+\begin{example}\label{exe:MaquinaCircuito1}
+	Considere o problema de detectar se uma palavra sobre o alfabeto $\{0,1\}$ termina com uma sequência da forma $1010$. Esse problema é solucionado pela máquina de Mealy $A$ representada pela Figura , sobre está máquina é claro que $\widehat{\psi}(q_0, w) = v0001$, se e somente se, tem-se que $w = u1010$ para algum $v, u \in \{0,1\}^*$, ou seja, o último caractere da palavra de saída será $1$ apenas no caso da palavra de entrada terminar em $1010$.
 	
-		% Rotulando as Entradas e Saídas
-		\draw (nand2.out) node (naout2) [anchor=west,xshift=0.2cm]   {$Z$};
-		
-	    \draw (-7, -1) coordinate[label={[left]$X$}] (X) to[short,-*] ++(1,0) coordinate(pX);
-	    \draw (not1.out) to[short,-*] ++(0.5,0) coordinate(nX);
-	    
-	    \draw (nand1.bin 1) node (A1) [anchor=east,xshift=-0.2cm]   {$A$};
-		\draw (nand1.bin 2) node (B1) [anchor=east,xshift=-0.2cm]   {$B$};
-		
-		\draw (nand3.bin 2) node (A2) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
-		\draw (nand3.bin 3) node (B2) [anchor=east,xshift=-0.2cm]   {$B$};
-		
-		\draw (nand4.bin 2) node (A3) [anchor=east,xshift=-0.2cm]   {$A$};
-		\draw (nand4.bin 3) node (B3) [anchor=east,xshift=-0.2cm]   {$\overline{B	}$};
-		
-		\draw (nand5.bin 2) node (A4) [anchor=east,xshift=-0.2cm]   {$A$};
-		\draw (nand5.bin 3) node (B4) [anchor=east,xshift=-0.2cm]   {$B$};
-		
-		%\draw (FF1.pin 6) node (ff1out6) [anchor=west,xshift=0.2cm]   {$A$};
-		%\draw (FF1.pin 4) node (ff1out4) [anchor=west,xshift=0.2cm]   {$\overline{A}$};
-		
-		\draw (nand7.bin 2) node (A5) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
-		
-		\draw (nand8.bin 1) node (A6) [anchor=east,xshift=-0.2cm]   {$\overline{A}$};
-		\draw (nand8.bin 2) node (B5) [anchor=east,xshift=-0.2cm]   {$B$};
-		
-		\draw (nand9.bin 1) node (A7) [anchor=east,xshift=-0.2cm]   {$A$};
-		\draw (nand9.bin 2) node (B6) [anchor=east,xshift=-0.2cm]   {$\overline{B}$};
-		
-		%\draw (FF2.pin 6) node (ff1out6) [anchor=west,xshift=0.2cm]   {$B$};
-		%\draw (FF2.pin 4) node (ff1out4) [anchor=west,xshift=0.2cm]   {$\overline{B}$};
-		
-		% Barramento
-		\draw (nand1.out) -| node[circ,midway]{} (nand2.in 1);
-		\draw (nand1.out) -| (nand2.in 2);
-		
-		\draw (pX) -- (vX);
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3.5cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+			\node[state, initial]							(A)               	{$q_0$};
+			\node												  (E) [below of=A] {};
+			\node[state]							  	      (B) [left of=E] 	{$q_1$};
+			\node[state, accepting]	  	      (C) [right of=E] 	{$q_2$};
+			\node[state]					  (D) [below of=E] 	{$q_3$};
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge									  node [left]	{$(1, 0)$} (B)
+			(A) edge [loop right]				 node {$(0,0)$} ()
+			(B) edge [loop above]			   node {$(1,0)$} ()
+			(B) edge									 node {$(0, 0)$} (C)
+			(C) edge									 node {$(0, 0)$} (A)
+			(C) edge [bend left]				 node {$(1, 0)$} (D)
+			(D) edge [bend left]				  node {$(0, 1)$} (C)
+			(D) edge 					 	 		     node {$(1, 0)$} (B);
+		\end{tikzpicture}
+		\caption{Representação da máquina de Mealy do Exemplo \ref{exe:MaquinaCircuito1}.}
+		\label{fig:MaquinaCircuito1}
+	\end{figure}
 
-		\draw (pX) -- (not1.in);
-		\draw (not1.out) -| (nand3.in 1); 
-		\draw (nX) -- ($(nX)!.8!(nX|-nand4.in 1)$) -| (nand4.in 1);
-		
-		\draw (pX) -- ($(pX)!1!(pX|-nand5.in 1)$) -| (nand5.in 1);
-		
-		\draw (nand3.out) -| (nand6.in 1);
-		\draw (nand4.out) -- (nand6.in 2);
-		\draw (nand5.out) -| (nand6.in 3);
-		
-		\draw (nand6.out) -| (FF1.pin 1);
-		\draw (clk1) |- (FF1.pin 3);
-		
-		\draw (vX) -| (nand7.in 1);
-		
-		\draw (nand7.out) -| (nand10.in 1);
-		\draw (nand8.out) -- (nand10.in 2);
-		\draw (nand9.out) -| (nand10.in 3);
-		
-		\draw (nand10.out) -| (FF2.pin 1);
-		\draw (clk2) |- (FF2.pin 3);
-		
-	\end{circuitikz}
-\end{figure}
+	Agora para construir uma implementação física de tal máquina\footnote{Um implementação física aqui diz respeito a projeto e construir o circuito que executa tal máquina.} primeiro deve-se usar variáveis de estado para poder codificar os estados, aqui será usado as variáveis $A$ e $B$ com a seguinte codificação:
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{c|cc}
+			\hline
+			\multirow{2}{*}{Estado} & \multicolumn{2}{c}{Variáveis}\\
+			& $A$ & $B$\\ \hline
+			$q_0$ & $0$ & $0$\\
+			$q_1$ & $0$ & $1$\\
+			$q_2$ & $1$ & $0$\\
+			$q_3$ & $1$ & $1$\\
+		\end{tabular}
+		\caption{Codificação da máquina de Mealy da Figura \ref{fig:MaquinaCircuito1}.}
+		\label{tab:MaquinaCircuito1}
+	\end{table}
+
+	Para a implementação física de tal máquina de Mealy será usado dois \textit{Flip-Flops}\footnote{Em eletrônica e circuitos digitais, um \textit{flip-flop}, é um circuito digital que pulsado pode ser usado como uma memória de um bit.} do tipo D, para exibir o circuito antes serão codificadas todas as informações da máquina usado a Tabela \ref{tab:MaquinaCircuito1} com referência, essa codificação pode ser vista na Tabela \ref{tab:Circuito1}, ressaltando que será usado os símbolos $A$ e $B$ para as variáveis de estado e o símbolo $Y$ para a saída.
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{c|cc|cc|c|c|c|c}
+			\hline
+			\multirow{2}{*}{Estado} & \multicolumn{2}{c|}{Próximo Estado} & \multicolumn{2}{c|}{Saídas} &  \multicolumn{4}{c}{\textit{ Flip-flop}}\\
+			 & $X = 0$ & $X = 1$ &  $X = 0$ & $X = 1$ &\multicolumn{2}{c}{$X = 0$}  &  \multicolumn{2}{c}{$X = 1$}\\
+			 \hline
+			 $AB$ & $AB$ & $AB$ & $Y$  & $Y$ & $D_A$ & $D_B$ & $D_A$ & $D_B$\\
+			 \hline
+			 $00$ & $00$ & $01$  & $0$ & $0$ & $0$ & $0$ & $0$ & $1$\\
+			 $01$ & $10$ &  $01$ & $0$ & $0$ & $1$ & $0$ & $0$ & $1$\\
+			 $11$ & $10$ & $01$ & $1$ & $0$ & $1$ & $0$ &  $0$ & $1$\\
+			 $10$ & $00$ & $11$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$\\
+			 \hline
+		\end{tabular}
+		\caption{Tabela de transição.}
+		\label{tab:Circuito1}
+	\end{table}
+
+	Da tabela anterior são montados os mapas de Karnaugh\footnote{Para leitores sem familiaridade com eletrônica digital é recomendado a leitura das obras \cite{hold2002, idoeta2018, lourenco1996}.} \cite{hold2002, idoeta2018, lourenco1996}a seguir.
+	
+	\begin{figure}[h]
+		\centering
+		\subfloat[Flip-flop $D_A$.]{
+			\begin{karnaugh-map}[4][2][1][][]
+				\terms{1,3,6}{1}
+				\implicant{1}{3}
+				\implicant{6}{6}
+				\draw[color=black, ultra thin] (0, 2) --
+				node [pos=0.7, above right, anchor=south west] {$AB$} % Y label
+				node [pos=0.7, below left, anchor=north east] {$X$} % X label
+				++(135:1);
+			\end{karnaugh-map}
+			\label{tab:Map1}
+		}
+		%\quad
+		\subfloat[Flip-flop $D_B$.]{
+			\begin{karnaugh-map}[4][2][1][][]
+				\terms{4, 5, 6,7}{1}
+				\implicant{4}{6}
+				\draw[color=black, ultra thin] (0, 2) --
+				node [pos=0.7, above right, anchor=south west] {$AB$} % Y label
+				node [pos=0.7, below left, anchor=north east] {$X$} % X label
+				++(135:1);
+			\end{karnaugh-map}	
+			\label{tab:Map2}
+		}
+		\caption{Mapas de Karnaugh para o Circuito da Figura \ref{tab:Circuito1}.}
+		\label{fig:Mapa}
+	\end{figure}
+
+	A partir dos mapas de Karnaugh das Figuras \ref{tab:Map1} e \ref{tab:Map2} e da Tabela \ref{tab:Circuito1} são obtidas as seguintes equações de excitação:
+	\begin{equation}\label{eq:Excitacao1}
+		D_A = B\overline{X} + A\overline{B}X
+	\end{equation}
+	e
+	\begin{equation}\label{eq:Excitacao2}
+		D_B = X
+	\end{equation}
+	e a equação do valor de saída:
+	\begin{equation}\label{eq:CircuitoSaida}
+		Y = AB\overline{X}
+	\end{equation}
+	Portanto, no circuito que implementa tal máquina tem-se que o flip-flop $D_A$ recebe como entrada o ``pulso\footnote{O termo pulso aqui é usado como sinônimo para a ideia de nível de sinal da corrente elétrica.}'' produzido por uma porta lógica \textbf{OR} que combina a saída de duas portas lógicas \textbf{AND}, sendo que a primeira combina os valores de  $B$ e $\overline{X}$ e a segunda combina os valores $A, \overline{B}$ e $X$, ou seja, a segunda é uma porta para três entradas. Por sua vez, o flip-flop $D_B$ recebe com entrada o valor de pulso de $X$.  Vale salientar que os valores complementares dos pulsos são obtidos negando o sinal na entrada das portas, assim não são necessário esboçar explicitamente as portas \textbf{NOT} no diagrama do circuito. Por fim, o circuito também deverá conter uma porta \textbf{AND} de três entradas que combina $A,B$ e $\overline{X}$ para gerar a saída do circuito (Equação \ref{eq:CircuitoSaida}), o diagrama de tal circuito pode ser visto na Figura 
+
+
+	\begin{figure}[h]
+		\centering
+		\begin{circuitikz}%[scale=0.7, transform shape]
+			% Portas Lógicas e Clock
+			\draw (0,1) node[and port] (and1) {};
+			\draw (0,-2) node[and port,number inputs=3] (and2) {};
+			\draw (0,-5) node[and port,number inputs=3] (and3) {};
+			\draw (3,-0.5) node[or port] (or1) {};
+			\draw (5, 2) node[left] (clock) {\faWaveSquare}; 
+			% Negações na entrada das portas
+			\node at (and1.bin 2) [ocirc, left] (N1) [anchor=east] {};
+			\node at (and2.bin 2) [ocirc, left] (N2) [anchor=east] {};
+			\node at (and3.bin 3) [ocirc, left] (N3) [anchor=east]{};
+			% Flip-flops
+			\draw  (8, 0)  node[latch, flipflop def={t1=$D_B$, t4=$ $, t6=$ $}] (DA) {};
+			\draw  (8, -4) node[latch, flipflop def={t1=$D_B$, t4=$ $, t6=$ $}] (DB) {};
+			% Pontos
+			\draw (DA.pin 3) node[circ] (clk1) [anchor=east,xshift=-1cm]   {};
+			\draw (DB.pin 1) node[circ] (xB) [anchor=east,xshift=-10.1cm]   {};
+			\draw (N2) node[circ] (xp1) [anchor=east,xshift=-2.5cm]  {};
+			\draw (and2.bin 1) node[circ] (xp0) [anchor=east,xshift=-3cm] {};
+			\draw (and2.bin 3) node[circ] (xp2) [anchor=east,xshift=-2.1cm] {};
+			\draw (and3.bin 1) node[circ] (xA) [anchor=east,xshift=-3cm] {};
+			% Identificadores
+			\draw (DA.pin 6) node (pA) [anchor=west]   {$A$};
+			\draw (DB.pin 6) node (pB) [anchor=west]   {$B$};
+			\draw (and3.out) node (Y) [anchor=west] {$Y$};
+			\draw (xB) node (X) [anchor=east, xshift=-2cm] {$X$};
+			\draw (xp1) node (B0) [anchor=east, xshift=-1.5cm] {$B$};
+			\draw (xA) node (A0) [anchor=east, xshift=-1.0cm] {$A$};
+			% Barramento
+			\draw (and1.out) -| (or1.in 1); 
+			\draw (and2.out) -| (or1.in 2);
+			\draw (or1.out) |- (DA.pin 1);
+			\draw (X) -- (xB);
+			\draw (A0) -- (xA);
+			\draw (xA) -- (and3.bin 1);
+			\draw (xA) |- (xp0);
+			\draw (B0) -- (xp1);
+			\draw  (xp0) -- (and2.bin 1);
+			\draw (xp1) |- (and3.bin 2);
+			\draw (xp1) |- (and1.bin 1);
+			\draw (xp1) -- (N2);
+			\draw (xp2) -- (and2.bin 3);
+			\draw (xp2) |- (N1);
+			\draw (xB) -- (xp2);
+			\draw (xB) |- (N3);
+			\draw (xB) -- (DB.pin 1);
+			\draw (clock) -| (clk1);
+			\draw (clk1) -- (DA.pin 3);
+			\draw (clk1) |-  (DB.pin 3);
+		\end{circuitikz}
+		\caption{Diagrama do circuito que implementa a máquina de Mealy da Figura \ref{fig:MaquinaCircuito1}.}
+		\label{fig:Circuito1}
+	\end{figure}
+\end{example}
