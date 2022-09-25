@@ -1,6 +1,4 @@
-\chapter{Teoria das Linguagens Regulares}\label{cap:LinguagemRegulares}
-
-% Uma teoria matemática não deve ser considerada completa até que a tenhamos feito tão clara que a possamos explicar ao primeiro homem que encontramos na rua. (David Hilbert)
+\chapter{Linguagens Regulares}\label{cap:LinguagemRegulares}
 
 \epigraph{``Se as pessoas não acreditam que a matemática é simples, é só porque eles não percebem o quão complicada a vida é''}{John Von Neumann}
 
@@ -1224,7 +1222,7 @@ Pode-se agora finalmente enunciar o Teorema Myhill-Nerode que estabelece uma car
 	Direto dos Lemas \ref{lema:LimiteInferiorEstados}, \ref{lema:LimiteSuperiorEstados} e \ref{lema:UnicadadeMinAFD}.
 \end{proof}
 
-Apesar de extremamente elegante o resultado exposto pelo Teorema Myhill-Nerode apresentado anteriormente, não fornece um procedimento (ou algoritmo) geral explícito para construir um AFD mínimo equivalente a outro AFD dado, o que o teorema faz é construir para uma linguagem regular o autômato mínimo que a reconhece. Por outro lado o processo de obter um AFD mínimo a partir de um outro AFD dado é chamado de minimização \cite{benjaLivro2010}, e o mesmo é baseado na ideia de relação equivalência entre estados e do espaço quociente de estados em um AFD. Primeiro será apresentado a formalização matemática da construção do AFD quociente e depois o pseudo-código de tal construção.
+Apesar de extremamente elegante o resultado exposto pelo Teorema Myhill-Nerode apresentado anteriormente, nãoé um algoritmo explícito (no sentido de um conjunto finito de instruções) para construir um AFD mínimo equivalente a outro AFD dado, o que o teorema faz é construir para uma linguagem regular o autômato mínimo que a reconhece. Por outro lado o processo de obter um AFD mínimo a partir de um outro AFD dado é chamado de minimização \cite{benjaLivro2010}, e o mesmo é baseado na ideia de relação equivalência entre estados e do espaço quociente de estados em um AFD. Primeiro será apresentado a formalização matemática da construção do AFD quociente e depois o pseudo-código de tal construção.
 
 \begin{definition}[Estados Equivalentes]\label{def:EquivalenciaEstados}
 	Seja $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ um AFD. A relação de equivalência entre dois estados $q, q' \in Q$ será denotado por $q \equiv q'$ e será verdadeira quando para todo $w \in \Sigma^*$ tem-se que $\widehat{\delta}(q, w) \in F \Longleftrightarrow \widehat{\delta}(q', w) \in F$.
@@ -1413,19 +1411,19 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 		\label{fig:Linguagem-AFDM-1}
 	\end{figure}
 	
-	Inicialmente é gerada a matriz representada na Tabela \ref{tab:AFD-Minimizacao} a seguir, em que a $i$-ésima linha (coluna) representa o estado $q_{i-1}$, e os espaço marcados com $-$ são aqueles não considerados pelo algoritmo, as posições com $X$ representam os estados não equivalentes, e as posições $(i,j)$ em branco representam os estados equivalentes.	
+	Inicialmente é gerada a matriz representada na Tabela \ref{tab:AFD-Minimizacao} a seguir, em que a $i$-ésima linha (coluna) representa o estado $q_{i-1}$, e os espaço marcados com $\ast$ são aqueles não considerados pelo algoritmo, as posições com $\checked$ representam os estados não equivalentes, e as posições $(i,j)$ em branco representam os estados equivalentes.	
 	
 	\begin{table}[h]
 		\scriptsize
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			- & X & X &   & X & X\\ \hline
-			- & - & X & X &   & X\\ \hline
-			- & - & - & X & X & \\ \hline
-			- & - & - & - & X & X\\ \hline
-			- & - & - & - & - & X\\ \hline
-			- & - & - & - & - & -\\ \hline
+			$\ast$ & $\checked$ & $\checked$ &   & $\checked$ & $\checked$\\ \hline
+			$\ast$ & $\ast$ & $\checked$ & $\checked$ &   & $\checked$\\ \hline
+			$\ast$ & $\ast$ & $\ast$ & $\checked$ & $\checked$ & \\ \hline
+			$\ast$ & $\ast$ & $\ast$ & $\ast$ & $\checked$ & $\checked$\\ \hline
+			$\ast$ & $\ast$ & $\ast$ & $\ast$ & $\ast$ & $\checked$\\ \hline
+			$\ast$ & $\ast$ & $\ast$ & $\ast$ & $\ast$ & $\ast$\\ \hline
 		\end{tabular}
 		\caption{Matriz de equivalência $M$ para o AFD \ref{fig:Linguagem-AFDM-1}.}
 		\label{tab:AFD-Minimizacao}
@@ -1731,7 +1729,7 @@ Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footno
 
 	\begin{figure}[h]
 		\centering
-		\begin{circuitikz}%[scale=0.7, transform shape]
+		\begin{circuitikz}%[scale=0.8, transform shape]
 			% Portas Lógicas e Clock
 			\draw (0,1) node[and port] (and1) {};
 			\draw (0,-2) node[and port,number inputs=3] (and2) {};
@@ -1743,7 +1741,7 @@ Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footno
 			\node at (and2.bin 2) [ocirc, left] (N2) [anchor=east] {};
 			\node at (and3.bin 3) [ocirc, left] (N3) [anchor=east]{};
 			% Flip-flops
-			\draw  (8, 0)  node[latch, flipflop def={t1=$D_B$, t4=$ $, t6=$ $}] (DA) {};
+			\draw  (8, 0)  node[latch, flipflop def={t1=$D_A$, t4=$ $, t6=$ $}] (DA) {};
 			\draw  (8, -4) node[latch, flipflop def={t1=$D_B$, t4=$ $, t6=$ $}] (DB) {};
 			% Pontos
 			\draw (DA.pin 3) node[circ] (clk1) [anchor=east,xshift=-1cm]   {};
@@ -1785,3 +1783,355 @@ Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footno
 		\label{fig:Circuito1}
 	\end{figure}
 \end{example}
+
+\section{A Notação Matricial}\label{sec:NotacaoMatricial}
+
+{\color{red}Escrever depois...}
+
+\begin{remark}
+	Para esse questionário sempre que $w \in \Sigma^*$ e $c \in \Sigma$ a notação $|w|_c$ irá representar o número de $c$'s que existem na palavra $w$.
+\end{remark}
+
+\section{Questionário}\label{sec:Questionario2part4}
+
+\begin{problem}\label{prob:Regulares1}
+	Considere o autômato na Figura \ref{fig:AutomaExercicioLR8} e responda o que é solicitado.
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+		\node[state, initial]				(A)               	{$s_0$};
+		\node[state, accepting]				(B) [right of=A] 	{$s_1$};
+		\node[state]				        (C) [right of=B] 	{$s_2$};
+		\node[state, accepting]		        (D) [right of=C] 	{$s_3$};
+		\node[state]				        (E) [above of=C] 	{$s_4$};
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A) edge [bend right]  				node [below] {$c$}		 (B)
+		(A) edge [loop above]  				node 		 {$a$}		 ( )
+		(A) edge [bend left]  				node [above] {$b$}		 (E)
+		(B) edge [bend right]  				node [above] {$b$}		 (A)
+		(B) edge  							node [below] {$a$}	 	 (C)
+		(B) edge [loop below]  				node 		 {$c$}		 ( )
+		(C) edge [bend left]  				node [above] {$c$}	 	 (D)
+		(C) edge [bend left]  				node [left]  {$b$}		 (E)
+		(C) edge [loop below]  				node 		 {$a$}		 ( )
+		(E) edge [bend left]  				node [right] {$b$}		 (C)
+		(E) edge [bend left]  				node [right] {$c$}	 	 (D)
+		(E) edge [loop above]  				node 		 {$a$}		 ( )
+		(D) edge [loop right]  				node 		 {$c$}       ( )
+		(D) edge [bend left]  				node [below] {$a,b$} 	 (C);
+	\end{tikzpicture}
+	\caption{Autômato para o exercício 1.}
+	\label{fig:AutomaExercicioLR8}
+\end{figure}
+
+\begin{exerList}
+	\item Verifique se as palavras: $abccaaabacab, ccccbacabacbb, bbacabb, aaccca, aaabb, acacabb,$ $bbacac$ e $ccabbbacac$ são aceitas ou não pelo autômato.
+	\item $\lambda$ é aceito por este autômato?
+	\item Traduza o grafo de transição para a notação algébrica.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares2}
+	Construa um AFD que compute cada linguagem a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $L_1 = \{\lambda, 00101111, 11001101, 1\}$.
+	\item $L_2 = \{w10 \in \{0,1\}^* \mid w = (001)^n11 \text{ com } n \in \mathbb{N}\}$.
+	\item $L_3 = \{w \in \{a,b\}^* \mid w = a^{2m}b^{2n+1} \text{ ou } w = aab^{3m + 3}b^n \text{ com } m,n \in \mathbb{N}\}$.
+	\item $L_4 = \{w \in \{a,b,c,d\}^* \mid w \text{ não contém as subcadeias } ab \text{ e } cd\}$.
+	\item $L_5 = \{w \in \{0,1\}^* \mid (\forall n \in \mathbb{N})[|w|_1 \neq 3n]\}$.
+	\item $L_6 = \{w \in \{0,1\}^* \mid w = x_1\cdots x_n \text{ e } x_i = 0 \text{ se } i \text{ for par, senão } x_i = 1 \text{, sendo } n \in \mathbb{N}\}$.
+	\item $L_7 = \{w \in \{x, y, z\}^* \mid \text{Se } w \text{ contém a sub-palavra } zz \text{, então à  direita da sub-palavra }$ $zz \text{ não ocorre a sub-palavra } yy \}$.
+	\item $L_8 = \{aaa, aab, aba, abb, baa, bab, bba, bbb\} \cup \{bbca, ccab, ccab, baba\}$.
+	\item $L_9 = \{uv \in \{0,1\}^* \mid u = 1^m0111, v = 0100^p1 \text{ com } m, p \in \mathbb{N}\}$.
+	\item $L_{10} = \{w \in \{0,1\}^* \mid w \text{ é um número binário multiplo de  } 3\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares3}
+	Considerando o alfabeto $\Sigma = \{c, d\}$ para cada uma das linguagens definidas pelas propriedades a seguir construa um AFD que a compute.
+\end{problem}
+
+\begin{exerList}
+	\item $w$ possui exatamente um único símbolo $d$, e este não aparece no final das palavras.
+	\item $w$ tem apenas uma única sub-palavra $dd$.
+	\item $w$ não contém três $d$'s seguidos.
+	\item $w$ possui pelo menos um $c$.
+	\item $w$ possui 6 ou menos símbolos, e não existe as sub-palavras $cc$ e $dd$.
+	\item $w$ tem mais que $4$ símbolos $c$.
+	\item $w$ é da forma $db^4wb^5d$ com $w \in \Sigma^*$.
+	\item $w$ possui tamanho $n$ tal que $n \mod 3 \neq 0$.
+	\item $|w| = n$ com $n \geq 3$ e $|w|_c \mod 2 > 1$.
+	\item $w$ é qualquer palavra tal que $3 \leq |w|_c \leq 6$
+	\item $w$ tem a forma $c^md^n$ tal que $m$ ou $n$ não divisível por $2$.
+	\item $w$ tem a forma $c^md^nc^p$ tal que $mnp > 6$ e $mnp$ seja impar.
+	\item $w$ é tal que $|w|_d = 2$ ou $|w|_c = 1$.
+	\item $w$ tem a forma $c^md^n$ tal que $m+n > mn$.
+	\item $w$ possui a sub-palavra  $ddcd$ e $|w|_d + |w|_c > 6$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares4}
+	Considerando o alfabeto $\Sigma = \{2, 3, 5\}$, demonstre usando AFD que as linguagens definidas pelas propriedades a seguir são regulares.
+\end{problem}
+
+\begin{exerList}
+	\item $L_{pp} = \{w \in \Sigma^* \mid |w|_2, |w|_5 \text{ são ambos pares}\}$.
+	\item $L_{pi} = \{w \in \Sigma^* \mid |w|_2 \cdot |w|_3 \text{ é par e } |w|_5 \text{ é impar}\}$.
+	\item $L_{pip} = \{w \in \Sigma^* \mid |w|_2 \text{ é par,} |w|_3 \text{ é impar e } |w|_5 \text{ é par}\}$.
+	\item $L_{pu} = \{w \in \Sigma^* \mid w = x_1\cdots x_n, x_1 = x_n \text{ com } n \in \mathbb{N}\}$.
+	\item $L_{pud} = \{w \in \Sigma^* \mid w = x_1\cdots x_n, x_1 \neq x_n \text{ com } n \in \mathbb{N}\}$.
+	\item $L_{dif} = \{wuv \in \Sigma^* \mid w,v \in \{3,5\}^*, |u| \geq 3\}$.
+	\item $L_{inv} = \{wuv \in \Sigma^* \mid w \in \{2\}^*,v \in \{3,5\}^+, u \in \{3\}^*\}$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares5}
+	Dado um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ qualquer, mostre que para todo $u,v \in \Sigma^*$ tem-se que $\widehat{\delta}(q_0, uv) = \widehat{\delta}(\widehat{\delta}(q_0, u), v)$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares6}
+	Considerando os AFN das Figuras  \ref{fig:AFN1}, \ref{fig:AFN2} e \ref{fig:AFN3} execute as computações das palavras $aabbababa$, $bbababba, bbbbabaabb, bababaaa$ e $ababababbb$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares7}
+	Considerando o AFN da Figura  \ref{fig:AFN4} construa as árvores de computação para as palavras $010101$ e $11001101$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares8}
+	Converta os AFN das Figuras  \ref{fig:AFN1}, \ref{fig:AFN2}, \ref{fig:AFN3} e \ref{fig:AFN4} para a notação algébrica.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares9}
+	Encontre os AFD equivalentes aos AFN das Figuras  \ref{fig:AFN1}, \ref{fig:AFN2} e \ref{fig:AFN3}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares10}
+	Seja $L = \{01, 012\}$, construa um AFN com $4$ estados (ou menos)  que aceita a linguagem $L^*$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares11}
+	Dado a linguagem $L = \{0101^m \mid m \geq 1\} \cup \{010^n \mid n \in \mathbb{N}\}$ construa um AFN com 5 ou menos estados que aceite a linguagem $L$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares12}
+	Dado os AFN que você construiu nos Exercícios 10 e 11, encontre os AFD equivalentes a eles.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares13}
+	Considerando o AFN representado pelo grafo de transição na Figura \ref{fig:AutomaExercicioLR20} responda o que é solicitado.
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3.0cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+		\node[state, initial]				(A)               	{$q_0$};
+		\node[state]						(B) [right of=A] 	{$q_1$};
+		\node[state]				        (C) [right of=B] 	{$q_2$};
+		\node[state, accepting]		        (D) [right of=C] 	{$q_3$};
+		
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A) edge 			  				node [below] {$b,a$}	 (B)
+		(A) edge [loop above]  				node 		 {$a$}		 ( )
+		(B) edge 			  				node [below] {$a$}		 (C)
+		(B) edge [loop above]  				node 		 {$a,b$}	 ( )
+		(C) edge 			  				node [below] {$b,a$}	 (D)
+		(C) edge [loop above]  				node 		 {$a$}	 	 ( )
+		(D) edge [loop above]  				node 		 {$a,b$} 	 ( );
+	\end{tikzpicture}
+	\caption{Autômato para o exercício 12.}
+	\label{fig:AutomaExercicioLR20}
+\end{figure}
+
+\begin{exerList}
+	\item Realize a computação para as palavras $aaba$ e $baba$.
+	\item Esboce a árvore de computação para a palavra $abbaabaab$.
+	\item Converta o AFN da Figura \ref{fig:AutomaExercicioLR20} para a notação algébrica.
+	\item Encontre um AFD equivalente ao AFN da Figura \ref{fig:AutomaExercicioLR20}.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares14}
+	 Considerando o AFN representado pelo grafo de transição na Figura \ref{fig:AutomaExercicioLR21} responda o que é solicitado.
+\end{problem}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3.0cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+		\node[state, initial]				(A)               	{$q_0$};
+		\node[state, accepting]				(B) [right of=A] 	{$q_1$};
+		\node[state]				        (C) [right of=B] 	{$q_2$};
+		\node[state, accepting]		        (D) [right of=C] 	{$q_3$};
+		
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A) edge 			  				node {$0$}	 	 (B)
+		(A) edge [bend right]  				node {$0,1$}	 (D)
+		(B) edge [loop above]  				node {$0,1$}	 ( )
+		(B) edge 			  				node {$0,1$} 	 (C)
+		(C) edge [loop above]  				node {$1$}		 ( )
+		(C) edge 							node [below] {$0,1$}	 (D)
+		(D) edge [bend right]				node [above] {$0,1$}	 (C);
+		
+	\end{tikzpicture}
+	\caption{Autômato para o exercício 14.}
+	\label{fig:AutomaExercicioLR21}
+\end{figure}
+
+\begin{exerList}
+	\item Realize a computação para as palavras $01110$ e $1001011$.
+	\item Esboce a árvore de computação para a palavra $110110101$.
+	\item Converta o AFN da Figura \ref{fig:AutomaExercicioLR21} para a notação algébrica.
+	\item Encontre um AFD equivalente ao AFN da Figura \ref{fig:AutomaExercicioLR21}.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares15}
+	Considerando o $\lambda$-AFN do Exemplo \ref{exe:LinguagemLAFN1} responda o que é solicitado. 
+\end{problem}
+
+\begin{exerList}
+	\item Calcule $\delta_\lambda(q_0), \delta_\lambda(q_1)$ e $\delta_\lambda(q_2)$.
+	\item Compute $\widehat{\underline{\delta_N}}(q_0, 11233)$.
+	\item Apresente um AFD equivalente ao $\lambda$-AFN.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares16}
+	Considerando $\Sigma_1 = \{0, 1\}$  e $\Sigma_2 = \{2, 3\}$ construa um $\lambda$-AFN com um único estado final que aceita a linguagem $\{w \in \Sigma_1^* \mid |w|_1 = 2i, i \in \mathbb{N}\} \cup \{w \in \Sigma_2^* \mid |w|_3 = 2j + 1, j\in \mathbb{N}\}$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares17}
+	Considere o alfabeto $\Sigma = \{a, b, c\}$ e as linguagens  $L_1 = \{w \in \Sigma^* \mid |w|_a \geq 0, |w|_b > 0, |w|_c = 2k, k \in \mathbb{N}\}$ e $L_2 = \{abaccc, ababc, abacab, acbcc, bacbaaa,$ $abb, bba, aaaabbbb, cac, ccba, caccabcac\}$. Para cada uma das linguagens $L_1 \cup L_2$, $L_1L_2$ e $L_2L_1$ construa um $\lambda$-AFN $A$ que as aceite.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares18}
+	Considerando o $\lambda$-AFN $A = \langle Q, \Sigma, \underline{\delta_N}, q_0, \{q_2\} \rangle$ onde $\underline{\delta_N}$ é especificada pela Tabela \ref{tab:DeltaLAFN-Exe25}, responda o que é solicitado.
+\end{problem}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|cccc}
+		\backslashbox{$Q'$}{$\Sigma \cup \{\lambda\}$}	& $\lambda$ & $a$ & $b$ & $c$\\\hline
+		$q_0$ & $\emptyset$ & $\{q_0\}$ & $\{q_1\}$ & $\{q_2\}$\\
+		$q_1$ & $\{q_0\}$ & $\{q_1\}$ & $\{q_2\}$ & $\emptyset$\\
+		$q_2$ & $\{q_1\}$ & $\{q_2\}$ & $\emptyset$ & $\{q_0\}$ 		
+	\end{tabular}
+	\caption{Tabela da função de transição do $\lambda$-AFN do Exercício 18.}
+	\label{tab:DeltaLAFN-Exe25}
+\end{table}
+
+\begin{exerList}
+	\item Para cada estado do autômato calcule $\delta_\lambda$.
+	\item Esboce todos os $w$ pertencentes a linguagem do autômato tal que $|w| \leq 4$.
+	\item Encontre um AFD equivalente $A$. 
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares19}
+	Considerando o $\lambda$-AFN $S = \langle Q, \Sigma, \underline{\delta_N}, s_0, \{s_2\} \rangle$ onde $\underline{\delta_N}$ é especificada pela Tabela \ref{tab:DeltaLAFN-Exe26}, responda o que é solicitado.
+\end{problem}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|cccc}
+		\backslashbox{$Q'$}{$\Sigma \cup \{\lambda\}$}	& $\lambda$ & $0$ & $1$ & $2$\\\hline
+		$s_0$ & $\{s_1, s_2\}$ & $\emptyset$  & $\{s_1\}$ & $\{s_2\}$\\
+		$s_1$ & $\emptyset$ & $\{s_0\}$ & $\{s_2\}$ & $\{s_0, s_2\}$ \\
+		$s_2$ & $\emptyset$ & $\emptyset$ & $\emptyset$ & $\emptyset$ 		
+	\end{tabular}
+	\caption{Tabela da função de transição do $\lambda$-AFN do exercício 19.}
+	\label{tab:DeltaLAFN-Exe26}
+\end{table}
+
+\begin{exerList}
+	\item Para cada estado do autômato calcule $\delta_\lambda$.
+	\item Esboce todos os $w$ pertencentes a linguagem do autômato tal que $|w| \leq 3$.
+	\item Encontre um AFD equivalente $S$. 
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares20}
+	Para as linguagens especificadas pelos enunciados a seguir construa $\lambda$-AFN que as aceite.
+\end{problem}
+
+\begin{exerList}
+	\item A linguagem de todas as palavras que começam e terminam com qualquer letra do alfabeto $\{a,b,c\}$, porém não existe nas palavras dois $a$'s e dois $c$'s seguidos.
+	\item A linguagem de todas as palavras sobre o alfabeto $\{0,1\}$ que iniciam com o prefixo $(01)^n$ e termina com o sufixo $10$ ou começam com o prefixo $(101)^n$ e terminam com o sufixo $00$, sendo $n \in \mathbb{N}$ tal que $n \geq 1$.
+	\item A linguagem de todas as palavras sobre o alfabeto $\{x, y\}$ tal que no mínimo uma das quatro últimas letras da palavra é um $x$.
+	\item A linguagem de todas as palavras sobre o alfabeto $\{x, y, z\}$ tal que no máximo uma das três primeiras letras da palavra é um $y$ ou as duas primeiras são $z$.
+\end{exerList}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+		\node[state, initial]				(A)               	{$q_0$};
+		\node[state, accepting]				(B) [right of=A] 	{$q_1$};
+		\node[state]				        (C) [right of=B] 	{$q_2$};
+		
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A) edge [bend left]  				node {$1$}	 			 (B)
+		(B) edge [bend left]  				node {$\lambda, 0$}		 (A)
+		(B) edge [loop above]				node {$1$}				 ( )
+		(B) edge [bend left]				node {$0,1$}			 (C)
+		(C) edge [bend left]				node {$1$}				 (B)
+		(C) edge [loop above]				node {$0$}				 ( );
+	\end{tikzpicture}
+	\caption{Autômato para o Exercício \ref{prob:Regulares26}.}
+	\label{fig:AutomaExercicioLR33}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+		\node[state, initial]				(A)               	{$q_0$};
+		\node[state, accepting]				(B) [right of=A] 	{$q_1$};
+		\node[state]				        (C) [right of=B] 	{$q_2$};
+		
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A) edge [bend left]  				node {$1,0$} 			 (B)
+		(B) edge [bend left]  				node {$\lambda$}		 (A)
+		(B) edge [loop above]				node {$1$}				 ( )
+		(B) edge [bend left]				node {$0,1$}			 (C)
+		(C) edge [bend left]				node {$1, \lambda$}		 (B)
+		(C) edge [loop above]				node {$0$}				 ( );
+	\end{tikzpicture}
+	\caption{Autômato para o Exercício \ref{prob:Regulares27}.}
+	\label{fig:AutomaExercicioLR34}
+\end{figure}
+
+\begin{problem}\label{prob:Regulares21}
+	Encontre o AFD quociente do AFD apresentado no Exercício \ref{prob:Regulares1}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares22}
+	Encontre o AFD quociente equivalente ao AFN apresentado no Exercício \ref{prob:Regulares13}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares23}
+	Encontre o AFD quociente equivalente ao AFN apresentado no Exercício \ref{prob:Regulares14}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares24}
+	Encontre o AFD quociente equivalente ao $\lambda$-AFN apresentado no Exercício \ref{prob:Regulares18}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares25}
+	Encontre o AFD quociente equivalente ao $\lambda$-AFN apresentado no Exercício  \ref{prob:Regulares19}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares26}
+	Encontre o AFD quociente equivalente ao $\lambda$-AFN da Figura \ref{fig:AutomaExercicioLR33} .
+\end{problem}
+
+\begin{problem}\label{prob:Regulares27}
+	Encontre o AFD quociente equivalente ao $\lambda$-AFN da Figura \ref{fig:AutomaExercicioLR34}.
+\end{problem}

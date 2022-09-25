@@ -1,0 +1,952 @@
+\chapter{Expressões e Gramáticas Regulares}\label{cap:GramáticasRegulares}
+
+\epigraph{Uma teoria matemática não deve ser considerada completa até que a tenhamos feito tão clara que a possamos explicar ao primeiro homem que encontramos na rua.}{David Hilbert}
+
+No Capítulo \ref{cap:LinguagemRegulares} a noção de linguagens regulares foi formalizado utilizado pela das máquinas de computação, isto é, sobre a perspectiva dos autômatos finitos, em tal perspectiva as linguagens são vistas como sendo conjuntos de palavras sobre os quais as máquinas tinha a tarefa de reconhecer seus elementos, ou seja, decidir quando um dada palavra pertencia ou não a linguagem, agora neste capítulo serão apresentada as linguagens regulares através da ótica de formalizamos geradores. 
+
+
+\section{Expressões Regulares}\label{sec:ExpressaoRegulares}
+
+Neste seção será apresentada uma nova visão de aspecto mais algébrico para as linguagens regulares, essa nova visão foi introduzida por Kleene em seu seminal \textit{paper} ``\textit{Representation of events in nerve nets and finite automata}'' \cite{kleene1951}, tal perspectiva consiste em um sistema formal (com sintaxe e semântica) chamado de expressões  regulares, a seguir é formalizado a sintaxe das expressões regulares.
+
+\begin{definition}[Conjunto das Expressões Regulares -- Sintaxe]\label{def:ExpRegularesSintaxe}
+	Seja $\Sigma$ uma alfabeto, o conjunto de todas as expressões regulares sobre $\Sigma$, denotado por $Exp_\Sigma$, é o conjunto indutivamente gerado pelas seguintes regras.
+	\begin{itemize}
+		\item[ ]\textbf{(B)ase}: $\emptyset, \lambda$ e cada $a \in \Sigma$, são expressões regulares\footnote{As expressões regulares da base costumam ser chamadas de expressões regulares primitivas.}.
+		\item[ ]\textbf{(P)asso indutivo}:  Se $r_1, r_2 \in Exp_\Sigma$, então $r_1 + r_2, r_1 \cdot r_2, r_1^*, (r_1) \in Exp_\Sigma$.
+		\item[ ]\textbf{(F)echo}: $Exp_\Sigma$ é exatamente o conjunto dos elementos obtidos a partir \textbf{(B)} ou usando-se uma quantidade finita (podendo ser nula) de aplicações de \textbf{(P)}.
+	\end{itemize}
+\end{definition}
+
+No que diz respeito as expressões regulares é comum assumir que $+, \cdot, (, ), ^* \notin \Sigma$, assim uma expressão regular nem sempre é uma palavra sobre $\Sigma$, em geral os símbolos $+$ e $\cdot$ são lidos como soma e produto \cite{carroll1989}. Além disso, como dito em \cite{benjaLivro2010} se $r_1, r_2 \in Exp_\Sigma$, então costuma-se escrever $r_1r_2$ em vez de $r_1\cdot r_2$.
+
+\begin{remark}
+	Também é possível encontrar referência em que o termo expressão regular seja trocado para álgebra de Kleene.
+\end{remark}
+
+\begin{example}
+	Considerando o alfabeto $\{0,1\}$ tem-se que $(1 + 1)0, 01 \in Exp_\Sigma$. Essa afirmação pode ser verificada construindo tais palavras facilmente, basta pela regra \textbf{(B)} tem-se que  $0$ e $1$ são expressões regulares primitivas, assim usando a regra \textbf{(P)} pode-se construir as expressões $1 + 1$ e $01$, agora aplicando novamente a regra \textbf{(P)} sobre a expressão $1 + 1$ pode-se gerar a expressão $(1 + 1)$, finalmente, aplicando \textbf{(P)} novamente obtem-se a expressão $(1+1)0$ e isso mostra que de fato $(1 + 1)0, 01 \in Exp_\Sigma$.
+\end{example}
+
+\begin{example}
+	Considerando o alfabeto $\{a, b, c\}$ tem-se que $a(\emptyset + (bc^*)) \in Exp_\Sigma$. Essa afirmação pode ser verificada construindo tal palavra, uma vez que, $a, b$ e $c$ são expressões regulares primitivas aplicando o passo \textbf{(B)} varias vezes será obtida a expressão regular $a(\emptyset + (bc^*)$.
+\end{example}
+
+A seguir será formalizado o conceito de semântica para as expressões regulares, sendo que tal semântica pode ser visto como uma \textbf{semântica denotacional}\footnote{Uma semântica denotacional é aquela em que as funções de valoração usadas, são funções que mapeiam palavras da linguagem para funções parciais que representam o comportamento dos programas.} \cite{scott1971}, que apresenta significado as operações de soma e multiplicação.
+
+\begin{definition}[Semântica das Expressão Regulares]\label{def:ExpRegularesSemantica}
+	Seja $Exp_\Sigma$ o conjunto das expressões regulares sobre $\Sigma$,  a semântica (ou interpretação) de $Exp_\Sigma$ é uma função $\mathcal{L}: Exp_\Sigma \rightarrow \wp(\Sigma^*)$ definida recursivamente para todo $r, r_1, r_2  \in Exp_\Sigma$ pelas seguintes regras.
+	\begin{itemize}
+		\item[(i)] Se $r \in \Sigma \cup \{\lambda\}$, então $\mathcal{L}(r) = \{r\}$.
+		\item[(ii)] Se $r = \emptyset$, então $\mathcal{L}(r) = \emptyset$.
+		\item[(iii)] Se $r = r_1 + r_2$, então $\mathcal{L}(r) = \mathcal{L}(r_1) \cup \mathcal{L}(r_2)$.
+		\item[(iv)] Se $r = r_1 \cdot r_2$, então $\mathcal{L}(r) = \mathcal{L}(r_1)\mathcal{L}(r_2)$.
+		\item[(v)] Se $r = r_1^*$, então $\mathcal{L}(r) = (\mathcal{L}(r_1))^*$.
+		\item[(vi)] Se $r = (r_1)$, então $\mathcal{L}(r) = (\mathcal{L}(r_1))$.	
+	\end{itemize}
+\end{definition}
+
+Agora como explicado em \cite{carroll1989}, para a valoração de expressões regulares não primitivas, é necessário que seja seguido a precedência dos operadores no momento de combinar as linguagens, sendo tal precedência no sentido de maior precedência para a menor formada pela seguinte ordem: fecho de Kleene, concatenação e união.
+
+\begin{remark}
+	Vale destacar que como na aritmética convencional os parênteses mudam a precedência dos conectivos anteriores, e deve ser avaliados dos mais internos para os mais externos.
+\end{remark}
+
+\begin{note}
+	A valoração pode vim a gerar situações como $(L)$ onde $L \subseteq \Sigma^*$, neste caso será escrito simplesmente $L$ vem vez de $(L)$.
+\end{note}
+
+\begin{example}\label{exe:ValoracaoExpressao2}
+	Dado o alfabeto $\{0,1\}$ e $(0 + 1^*)0 \in Exp_\Sigma$ tem-se que:
+	\begin{eqnarray*}
+		\mathcal{L}((0 + 1^*)0 ) & = & \mathcal{L}((0 + 1^*))\mathcal{L}(0)\\
+		& = & (\mathcal{L}(0 + 1^*))\{0\}\\
+		& = & (\mathcal{L}(0) \cup  \mathcal{L}(1^*))\{0\}\\
+		& = & (\mathcal{L}(0) \cup  (\mathcal{L}(1))^*)\{0\}\\
+		& = & (\{0\} \cup \{1\}^*)\{0\}\\
+		& = & (\{0\} \cup \{\lambda, 1, 11, 111, 1111, \cdots\})\{0\}\\
+		& = & \{\lambda, 0, 1, 11, 111, 1111, \cdots\}\{0\}\\
+		& = & \{0, 00, 10, 110, 1110, 11110, \cdots \}
+	\end{eqnarray*}
+	ou seja, a valoração da expressão regular $\{0,1\}$ e $(0 + 1^*)0$ é exatamente a linguagem de todas as palavras $w$ sobre o alfabeto $\{0,1\}$  sendo que $w = 0^m$ ou $w = 1^n0$ com $m,n \in \mathbb{N}$ tal que $1 \leq m \leq 2$ e $n \geq 1$.
+\end{example}
+
+\begin{example}\label{exe:ValoracaoExpressao1}
+	Dado o alfabeto $\{0,1\}$ e $(00)^* \in Exp_\Sigma$ tem-se que:
+	\begin{eqnarray*}
+		\mathcal{L}((00)^*) & = & (\mathcal{L}((00)))^*\\
+		& = & ((\mathcal{L}(00)))^*\\
+		& = & ((\mathcal{L}(0)\mathcal{L}(0)))^*\\
+		& = & ((\{0\}\{0\}))^*\\
+		& = & ((\{00\}))^*\\
+		& = & (\{00\})^*\\
+		& = & \{00\}^*\\
+		& = & \{\lambda, 00, 0000, 000000, 00000000, \cdots\}
+	\end{eqnarray*}
+	ou seja, a valoração da expressão regular $(00)^*$ consiste da linguagem de todas as palavras $w$ sobre o alfabeto $\{0,1\}$ sem nenhum 1 e que o tamanho seja par, isto é, $|w| = 2k$ para algum $k \in \mathbb{N}$.
+\end{example}
+
+\begin{example}
+	Dado o alfabeto $\{a,b,c\}$ e a expressão $((ab)^* + c)\emptyset \in Exp_\Sigma$ tem-se que:
+	\begin{eqnarray*}
+		\mathcal{L}(((ab)^* + c) \emptyset) & = & \mathcal{L}(((ab)^* + c))\mathcal{L}(\emptyset)\\
+		%& = & (\mathcal{L}((ab)^* + c))\emptyset\\
+		%& = & (\mathcal{L}((ab)^*) \cup \mathcal{L}(c))\emptyset\\
+		& = & ((\mathcal{L}((ab)))^* \cup \{c\})\emptyset\\
+		& = & (((\mathcal{L}(ab)))^* \cup \{c\})\emptyset\\
+		& = & (((\mathcal{L}(a)\mathcal{L}(b)))^* \cup \{c\})\emptyset\\
+		& = & (((\{a\}\{b\}))^* \cup \{c\})\emptyset\\
+		& = & (((\{ab\}))^* \cup \{c\})\emptyset\\
+		& = & ((\{ab\})^* \cup \{c\})\emptyset\\
+		& = & (\{ab\}^* \cup \{c\})\emptyset\\
+		& = & (\{\lambda, ab, abab, ababab, \cdots\} \cup \{c\})\emptyset\\
+		& = & (\{\lambda, c, ab, abab, ababab, \cdots\})\emptyset\\
+		& = & \{\lambda, c, ab, abab, ababab, \cdots\}\emptyset\\
+		& = & \{\lambda, c, ab, abab, ababab, \cdots\}
+	\end{eqnarray*}
+	portanto, a valoração da expressão regular $((ab)^* + c)\emptyset$ é exatamente a linguagem de todas as palavras $w$ sobre o alfabeto $\{a,b,c\}$  onde $w = c^m$ ou $w = (ab)^n$ com $m,n \in \mathbb{N}$ tal que $m \leq 1$ e $n \geq 1$.
+\end{example}
+
+\begin{definition}
+	Duas expressões regulares $r_1, r_2 \in Exp_\Sigma$ são dita equivalentes, denotado por $r_1 \equiv r_2$, sempre que $\mathcal{L}(r_1) = \mathcal{L}(r_2)$.
+\end{definition}
+
+\begin{example}
+	Dada a expressão $00 + (1^*0)$ note que:
+	\begin{eqnarray*}
+		\mathcal{L}(00 + (1^*0)) & = &\mathcal{L}(00) \cup \mathcal{L}((1^*0))\\
+		%& = & \mathcal{L}(0)\mathcal{L}(0) \cup (\mathcal{L}(1^*0))\\
+		%& = & \mathcal{L}(0)\mathcal{L}(0) \cup (\mathcal{L}(1^*)\mathcal{L}(0))\\
+		& = & \mathcal{L}(0)\mathcal{L}(0) \cup ((\mathcal{L}(1))^*\mathcal{L}(0))\\
+		& = & \{0\}\{0\} \cup ((\{1\})^*\{0\})\\
+		& = & \{0\}\{0\} \cup (\{1\}^*\{0\})\\
+		& = & \{0\}\{0\} \cup (\{\lambda, 1, 11, 111, 1111, \cdots\}\{0\})\\
+		%& = & \{0\}\{0\} \cup (\{0, 10, 110, 1110, 11110, \cdots\})\\
+		%& = & \{0\}\{0\} \cup \{0, 10, 110, 1110, 11110, \cdots\}\\
+		& = & \{00\} \cup \{0, 10, 110, 1110, 11110, \cdots\}\\
+		& = & \{0, 00, 10, 110, 1110, 11110, \cdots\}
+	\end{eqnarray*}
+	logo, tal expressão é equivalente a expressão  $\equiv (0 + 1^*)0$ apresentada no Exemplo \ref{exe:ValoracaoExpressao2}. 
+\end{example}
+
+\begin{proposition}
+	Se $r_1, r_2, r_3 \in Exp_\Sigma$, então $r_1 (r_2 + r_3) \equiv r_1r_2 + r_1r_3$.
+\end{proposition}
+
+\begin{proof}
+	Assuma que $r_1, r_2, r_3 \in Exp_\Sigma$, logo tem-se que;
+	\begin{eqnarray*}
+		\mathcal{L}(r_1 (r_2 + r_3)) & = & \mathcal{L}(r_1)\mathcal{L}((r_2 + r_3))\\
+		& = & \mathcal{L}(r_1)(\mathcal{L}(r_2 + r_3))\\
+		& = & \mathcal{L}(r_1)(\mathcal{L}(r_2) \cup  \mathcal{L}(r_3))\\ 
+		& = & \mathcal{L}(r_1)(\mathcal{L}(r_2) \cup  \mathcal{L}(r_3))\\ 
+		& = & \mathcal{L}(r_1)\mathcal{L}(r_2) \cup  \mathcal{L}(r_1)\mathcal{L}(r_3)\\ 
+		& = & \mathcal{L}(r_1r_2 + r_1r_3)
+	\end{eqnarray*}
+	O que conclui a prova.
+\end{proof}
+
+Agora será mostrado qual a classe (ou tipo) de linguagens definidas por expressões regulares, ou seja, agora será mostrado a que classe pertencem as linguagens fruto da valoração das expressões regulares.
+
+\begin{theorem}[Transformação de expressões regulares para AFN]\label{teo:Exp-AFN}
+	Se $L = \mathcal{L}(r)$ para alguma expressão regular $r$, então existe um $\lambda$-AFN $A$ tal que $L = \mathcal{L}(A)$.
+\end{theorem}
+
+\begin{proof}
+	Suponha que $L = \mathcal{L}(r)$ para alguma expressão regular $r$, agora por indução sobre o número de operadores em $r$ será mostrado que existe um $\lambda$-AFN $A$ tal que $L = \mathcal{L}(A)$.
+	
+	\begin{itemize}
+		\item \textbf{Base da indução}: Para as expressões regulares $r$ com $0$ operadores, isto é, $r = \lambda$ ou $r = \emptyset$ ou $r = a$ para $a \in \Sigma$ considere os seguintes $\lambda$-AFN.
+		
+		\begin{figure}[h]
+			\centering
+			\subfloat[$\lambda$-AFN $A_\lambda$.]{
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3cm, on grid,
+					auto, state/.append style={minimum size=2em}, thick ]
+					\node[state,initial, accepting]   (A)               {$q_0$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					;
+				\end{tikzpicture}
+				\label{Ima:Automato-A}
+			}\quad\quad\quad
+			\subfloat[$\lambda$-AFN $A_\emptyset$.]{
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3cm, on grid,
+					auto, state/.append style={minimum size=2em}, thick ]
+					\node[state,initial]   (A)               {$q_0$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					;
+				\end{tikzpicture}
+				\label{Ima:Automato-B}
+			}\quad\quad\quad
+			\subfloat[$\lambda$-AFN $A_a$.]{
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid,
+					auto, state/.append style={minimum size=2em}, thick ]
+					\node[state,initial]    (A)               {$q_0$};
+					\node[state, accepting] (B)[right of=A]   {$q_1$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					(A) edge 				            node {$a$}           (B);
+				\end{tikzpicture}
+				\label{Ima:Automato-C}
+			}%
+			\caption{Os três $\lambda$-AFN básicos para as expressões regulares primitivas.}
+			\label{fig:AFD-basicos}
+		\end{figure}
+		
+		Claramente tem-se que $\mathcal{L}(\lambda) = \mathcal{L}(A_\lambda), \mathcal{L}(\emptyset) = \mathcal{L}(A_\emptyset)$ e $\mathcal{L}(a) = \mathcal{L}(A_a)$ para todo $a \in \Sigma$.
+		
+		
+		\item \textbf{Hipótese indutiva (HI)}: Suponha que para toda $r \in Exp_\Sigma$ com $n$ operadores tal que $n \geq 0$ existe um $\lambda$-AFN da forma $A = \langle Q_r, \Sigma, \delta_N^r, q_0^r, \{q_f^r\}\rangle$ tal que $\mathcal{L}(r) = \mathcal{L}(A^r)$. Para fins de representação considere que tal $\lambda$-AFN $A^r$ tem a forma descrita pela Figura \ref{Ima:Automato-D}.
+		
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid,
+				auto, state/.append style={minimum size=2em}, thick ]
+				\node[state,initial]   (A)               {$q_0^r$};
+				\node				   (B)[right of=A]   {$\cdots$};
+				\node[state, accepting](C)[right of=B]   {$q_f^r$};
+				
+				
+				\path[->] (A) +(-1,0) edge (A)
+				
+				%Transições:
+				%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+				(A) edge 				            node { }         (B)
+				(B) edge 				            node { }         (C);
+			\end{tikzpicture}
+			\caption{$\lambda$-AFN $A^r$ para uma expressão $r$ genérica com $n$ operadores.}
+			\label{Ima:Automato-D}
+		\end{figure}
+		
+		\item \textbf{Passo indutivo}: Agora dado uma expressão regular $r$ com $n + 1$ operadores tal que $n \geq 0$, existe três (e apenas três) casos possíveis para a forma de $r$. 
+		
+		\begin{itemize}
+			\item[\textbf{1º}] \textbf{Caso}: $r = r_1 + r_2$, assim respectivamente $r_1$ e $r_2$ possuem $k_1$ e $k_2$ operadores tais que $k_1 + k_2 = n$, obviamente $k_1, k_2 \geq 0$ e, portanto, por \textbf{(HI)} tem-se que existem $A^{r_1} = \langle Q_{r_1}, \Sigma, \underline{\delta_N}^{r_1}, q_0^{r_1}, \{q_f^{r_1}\}\rangle$ e $A^{r_2} = \langle Q_{r_2}, \Sigma, \underline{\delta_N}^{r_2}, q_0^{r_2}, \{q_f^{r_2}\}\rangle$  tal que $\mathcal{L}(r_1) = \mathcal{L}(A^{r_1})$ e $\mathcal{L}(r_2) = \mathcal{L}(A^{r_2})$, agora pode-se criar um novo $\lambda$-AFN $A^r = \langle Q_{r_1} \cup Q_{r_2} \cup \{q_0\}, \Sigma, \underline{\delta_N}^r, q_0, \{q_f^{r_1}, q_f^{r_2}\}\rangle$ onde,
+			\begin{eqnarray*}
+				\underline{\delta_N}^r(q, a) & = & 
+				\left\{\begin{array}{ll}	
+					\underline{\delta_N}^{r_1}(q, a), & \hbox{se } q \in Q_{r_1}\\	
+					\underline{\delta_N}^{r_2}(q, a), & \hbox{se } q \in Q_{r_2}\\
+					\{q_0^{r_1}, q_0^{r_2}\}, & \hbox{se } q = q_0, a = \lambda\\
+					\emptyset, & \hbox{qualquer outro caso}
+				\end{array}\right.
+			\end{eqnarray*}
+			Para fins de representação considere que tal $\lambda$-AFN $A^r$ tem a forma a seguir.
+			
+			\begin{figure}[h]
+				\centering
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.0cm, on grid,
+					auto, state/.append style={minimum size=2.5em}, thick ]
+					\node[state,initial]   (A)               {$q_0$};
+					\node				   (B)[right of=A]   {};
+					\node[state]		   (C)[above of=B]   {$q_0^{r_1}$};
+					\node				   (C1)[right of=C]	 {$\cdots$};
+					\node[state, accepting](C2)[right of=C1] {$q_f^{r_1}$};
+					\node[state]		   (D)[below of=B]   {$q_0^{r_2}$};
+					\node				   (D1)[right of=D]	 {$\cdots$};
+					\node[state, accepting](D2)[right of=D1] {$q_f^{r_2}$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					(A) edge 				            node {$\lambda$}         (C)
+					(A) edge 				            node {$\lambda$}         (D)
+					(C) edge 				            node {}			         (C1)
+					(C1) edge 				            node {}			         (C2)
+					(D) edge 				            node {}			         (D1)
+					(D1) edge 				            node {}			         (D2);
+				\end{tikzpicture}
+				\caption{$\lambda$-AFN $A^r$ para uma expressão $r_1 + r_2$.}
+				\label{Ima:Automato-E}
+			\end{figure}
+			
+			Agora note que para todo $w \in \Sigma^*$ tem-se que,
+			\begin{eqnarray*}
+				w \in \mathcal{L}(r) & \Longleftrightarrow & w \in \mathcal{L}(r_1 + r_2)\\
+				& \Longleftrightarrow & w \in \mathcal{L}(r_1) \cup  \mathcal{L}(r_2)\\
+				& \Longleftrightarrow & w \in \mathcal{L}(r_1) \text{ ou } w \in \mathcal{L}(r_2)\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}^{r_1}}(q_0^{r_1}, w) \cap \{q_f^{r_1}\} \neq \emptyset \text{ ou } \widehat{\underline{\delta_N}^{r_2}}(q_0^{r_2}, w) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}}(q_0, w) \cap \{q_f^{r_1}\} \neq \emptyset \text{ ou } \widehat{\underline{\delta_N}}(q_0, w) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}}(q_0, w) \cap \{q_f^{r_1}, q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & w \in \mathcal{L}(A^r)
+			\end{eqnarray*}
+			
+			\item[\textbf{2º}] \textbf{Caso}: $r = r_1r_2$, assim novamente $r_1$ e $r_2$ possuem $k_1$ e $k_2$ operadores tais que $k_1 + k_2 = n$, obviamente $k_1, k_2 \geq 0$ e, portanto, por \textbf{(HI)} tem-se que existem $A^{r_1} = \langle Q_{r_1}, \Sigma, \underline{\delta_N}^{r_1}, q_0^{r_1}, \{q_f^{r_1}\}\rangle$ e $A^{r_2} = \langle Q_{r_2}, \Sigma, \underline{\delta_N}^{r_2}, q_0^{r_2}, \{q_f^{r_2}\}\rangle$  tal que $\mathcal{L}(r_1) = \mathcal{L}(A^{r_1})$ e $\mathcal{L}(r_2) = \mathcal{L}(A^{r_2})$, agora pode-se criar um novo $\lambda$-AFN $A^r = \langle Q_{r_1} \cup Q_{r_2}, \Sigma, \underline{\delta_N}^r, q_0^{r_1}, \{q_f^{r_2}\}\rangle$ onde,
+			\begin{eqnarray*}
+				\underline{\delta_N}^r(q, a) & = & 
+				\left\{\begin{array}{ll}	
+					\underline{\delta_N}^{r_1}(q, a), & \hbox{se } q \in Q_{r_1} - \{q^{r_1}_f\}, a \in \Sigma \cup \{\lambda\}\\
+					\underline{\delta_N}^{r_1}(q, a), & \hbox{se } q = q^{r_1}_f, a \in \Sigma\\
+					\underline{\delta_N}^{r_1}(q, a) \cup \{q^{r_1}_0\}, & \hbox{se } q = q^{r_1}_f, a = \lambda\\
+					\underline{\delta_N}^{r_2}(q, a), & \hbox{se } q \in Q_{r_2} - \{q^{r_2}_f\}, a \in \Sigma \cup \{\lambda\}\\
+					\underline{\delta_N}^{r_2}(q, a), & \hbox{se } q = q^{r_2}_f, a \in \Sigma\\
+					\underline{\delta_N}^{r_2}(q, a) \cup \{q^{r_2}_0\}, & \hbox{se } q = q^{r_2}_f, a = \lambda\\
+					\emptyset, & \hbox{qualquer outro caso}
+				\end{array}\right.
+			\end{eqnarray*}
+			E para fins de representação tal $\lambda$-AFN $A^r$ possui a forma a seguir.
+			
+			\begin{figure}[h]
+				\centering
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.0cm, on grid,
+					auto, state/.append style={minimum size=2em}, thick ]
+					\node[state,initial]   (A)               {$q_0^{r_1}$};
+					\node				   (B)[right of=A]   {$\cdots$};
+					\node[state]           (C)[right of=B]   {$q_f^{r_1}$};
+					\node[state]   		   (D)[right of=C]   {$q_0^{r_2}$};
+					\node				   (E)[right of=D]   {$\cdots$};
+					\node[state, accepting](F)[right of=E]   {$q_f^{r_2}$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					(A) edge 				            node { }         (B)
+					(B) edge 				            node { }         (C)
+					(C) edge 				            node {$\lambda$} (D)
+					(D) edge 				            node { }         (E)
+					(E) edge 				            node { }         (F);
+				\end{tikzpicture}
+				\caption{$\lambda$-AFN $A^r$ para uma expressão $r_1r_2$.}
+				\label{Ima:Automato-F}
+			\end{figure}
+			
+			Agora note que para todo $w \in \Sigma^*$ tal que $w = xy$ com $x, y \in \Sigma^*$ tem-se que,
+			\begin{eqnarray*}
+				w \in \mathcal{L}(r)  & \Longleftrightarrow & w \in \mathcal{L}(r_1r_2)\\
+				& \Longleftrightarrow & xy \in \mathcal{L}(r_1r_2)\\
+				& \Longleftrightarrow & xy \in \mathcal{L}(r_1)\mathcal{L}(r_2)\\
+				& \Longleftrightarrow & x \in \mathcal{L}(r_1) \text{ e } y \in \mathcal{L}(r_2)\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}^{r_1}}(q_0^{r_1}, x) \cap \{q_f^{r_1}\} \neq \emptyset \text{ e } \widehat{\underline{\delta_N}^{r_2}}(q_0^{r_2}, y) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}}(q_0^{r_1}, x) \cap \{q_f^{r_1}\} \neq \emptyset \text{ e } \widehat{\underline{\delta_N}}(q_0^{r_2}, y) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}}(\widehat{\underline{\delta_N}}(q_0^{r_1}, x), y) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & \widehat{\underline{\delta_N}}(q_0^{r_1}, xy) \cap \{q_f^{r_2}\} \neq \emptyset\\
+				& \Longleftrightarrow & w \in \mathcal{L}(A^r)
+			\end{eqnarray*}
+			
+			\item[\textbf{3º}] \textbf{Caso}: $r = r_1^*$, onde $r_1$ tem exatamente $n$ operadores sendo que $n \geq 0$, assim por \textbf{(HI)} tem-se que existem $A^{r_1} = \langle Q_{r_1}, \Sigma, \underline{\delta_N}^{r_1}, q_0^{r_1}, \{q_f^{r_1}\}\rangle$ tal que $\mathcal{L}(r_1) = \mathcal{L}(A^{r_1})$, agora pode-se criar um novo $\lambda$-AFN $A^r = \langle Q_{r_1} \cup \{q_0, q_{f}\}, \Sigma, \underline{\delta_N}^r, q_0^{r_1}, \{q_{f}\}\rangle$ onde,
+			\begin{eqnarray*}
+				\underline{\delta_N}^r(q, a) & = & \left\{
+				\begin{array}{ll}	
+					\underline{\delta_N}^{r_1}(q, a), & \hbox{se } q \in Q_{r_1} - \{q^{r_1}_f\}\\
+					\underline{\delta_N}^{r_1}(q, a), & \hbox{se } q  = q^{r_1}_f, a \in \Sigma \\
+					\underline{\delta_N}^{r_1}(q, a) \cup \{q_f\}, & \hbox{se } q  = q^{r_1}_f, a = \lambda \\
+					\{q_0^{r_1}, q_f\}, & \hbox{se } q = q_0, a = \lambda\\
+					\{q_0^{r_1}\}, & \hbox{se } q = q_f, a = \lambda\\
+					\emptyset, & \hbox{qualquer outro caso}
+				\end{array}\right.
+			\end{eqnarray*}
+			E para fins de representação tal $\lambda$-AFN $A^r$ tem sua forma como descrita pela figura a seguir.
+			
+			\begin{figure}[h]
+				\centering
+				\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid,
+					auto, state/.append style={minimum size=3em}, thick ]
+					\node[state,initial]   (A)               {$q_0$};
+					\node[state] 		   (B)[right of=A]   {$q_0^{r_1}$};
+					\node		           (C)[right of=B]   {$\cdots$};
+					\node[state]   		   (D)[right of=C]   {$q_f^{r_1}$};
+					\node[state, accepting](E)[right of=D]   {$q_f$};
+					
+					
+					\path[->] (A) +(-1,0) edge (A)
+					
+					%Transições:
+					%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+					(A) edge 				            node {$\lambda$} (B)
+					(A) edge [bend left]				node {$\lambda$} (E)
+					(B) edge 				            node { }         (C)
+					(C) edge 				            node {} 		 (D)
+					(D) edge 				            node {$\lambda$} (E)
+					(E) edge [bend left]				node {$\lambda$} (B);
+				\end{tikzpicture}
+				\caption{$\lambda$-AFN $A^r$ para uma expressão $r_1^*$.}
+				\label{Ima:Automato-G}
+			\end{figure}
+			
+			A prova de que $\mathcal{L}(r) = \mathcal{L}(A^r)$ ficará de exercício ao leitor. Agora os três caso anteriores permite afirma que sempre existe um $\lambda$-AFN $A$ tal que $L = \mathcal{L}(A)$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+Uma consequência imediata deste teorema é apresentada a seguir.
+
+\begin{corollary}
+	A linguagem (ou valoração) de qualquer $r \in Exp_\Sigma$ é uma linguagem regular.
+\end{corollary}
+
+\begin{proof}
+	Direto do Teorema \ref{teo:Exp-AFN} e o Corolário \ref{col:RegularLAFN}.
+\end{proof}
+
+\begin{example}\label{exe:Expressao-AFN}
+	Dado o alfabeto $\{a,b\}$ e $(ab)^* \in Exp_\Sigma$  pelo Teorema \ref{teo:Exp-AFN} são construídos os autômatos a seguir,
+	
+	\begin{figure}[h]
+		\centering
+		\subfloat[$\lambda$-AFN para $\mathcal{L}(a)$.]{
+			\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3cm, on grid,
+				auto, state/.append style={minimum size=2.5em}, thick ]
+				\node[state,initial]    (A)               {$q^a_0$};
+				\node[state, accepting] (B)[right of=A]   {$q^a_1$};
+				
+				
+				\path[->] (A) +(-1,0) edge (A)
+				
+				%Transições:
+				%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+				(A) edge 				            node {$a$}           (B);
+			\end{tikzpicture}
+			\label{Ima:Exp-LAFN1}
+		}\hfill
+		\subfloat[$\lambda$-AFN para $\mathcal{L}(b)$.]{
+			\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3cm, on grid,
+				auto, state/.append style={minimum size=2.5em}, thick ]
+				\node[state,initial]    (A)               {$q^b_0$};
+				\node[state, accepting] (B)[right of=A]   {$q^b_1$};
+				
+				
+				\path[->] (A) +(-1,0) edge (A)
+				
+				%Transições:
+				%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+				(A) edge 				            node {$b$}           (B);
+			\end{tikzpicture}
+			\label{Ima:Exp-LAFN2}
+		}%
+		\caption{Os $\lambda$-AFN básicos para as expressões regulares primitivas $a$ e $b$.}
+		\label{fig:LAFD-basicos1}
+	\end{figure}
+	
+	Pode-se então gerar o $\lambda$-AFN para reconhecer a concatenação $ab$, tal autômato será gerada pela combinação dos autômatos das Figuras \ref{Ima:Exp-LAFN1} e \ref{Ima:Exp-LAFN2}, gerando com resultado o autômato a seguir como se segue,
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3cm, on grid,
+			auto, state/.append style={minimum size=2.5em}, thick ]
+			\node[state,initial]    (A)               {$q^a_0$};
+			\node[state] 			(B)[right of=A]   {$q^a_1$};
+			\node[state] 			(C)[right of=B]   {$q^b_0$};
+			\node[state, accepting] (D)[right of=C]   {$q^b_1$};
+			
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge 				            node {$a$}           (B)
+			(B) edge 				            node {$\lambda$}     (C)
+			(C) edge 				            node {$b$}           (D);
+		\end{tikzpicture}
+		\caption{$\lambda$-AFN para as expressões regular $\mathcal{L}(ab)$.}
+		\label{fig:LAFD-basicos2}
+	\end{figure}
+	
+	Para finalizar é necessário agora apresentar o autômato que reconheça o fecho de Kleene da expressão $ab$, tal autômato é construído seguindo o Teorema \ref{teo:Exp-AFN}, e tal autômato é representado pelo grafo de transição esboçado na Figura \ref{fig:LAFD-basicos3} a seguir.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid,
+			auto, state/.append style={minimum size=2.0em}, thick ]
+			\node[state,initial]    (A)               {$q_0$};
+			\node[state]		    (B)[right of=A]   {$q^a_0$};
+			\node[state] 			(C)[right of=B]   {$q^a_1$};
+			\node[state] 			(D)[right of=C]   {$q^b_0$};
+			\node[state]			(E)[right of=D]   {$q^b_1$};
+			\node[state, accepting] (F)[right of=E]   {$q_f$};
+			
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge 				            node {$\lambda$}     (B)
+			(B) edge 				            node {$a$}           (C)
+			(C) edge 				            node {$\lambda$}     (D)
+			(D) edge 				            node {$b$}           (E)
+			(E) edge 				            node {$\lambda$}     (F)
+			(A) edge [bend left]	            node {$\lambda$}     (F)
+			(F) edge [bend left]	            node {$\lambda$}     (B);
+		\end{tikzpicture}
+		\caption{$\lambda$-AFN para as expressões regular $\mathcal{L}((ab)^*)$.}
+		\label{fig:LAFD-basicos3}
+	\end{figure} 
+\end{example}
+
+\begin{remark}
+	Apenas na demonstração a seguir considere que o símbolo $\Sigma$ representa o somatório enumerável, com respeito a soma $(+)$ das expressões regulares, além disso, para fins de representação durante tal prova a letra $X$ irá representar um alfabeto genérico qualquer.
+\end{remark}
+
+\begin{theorem}
+	Se $L$ é uma linguagem regular, então existe uma expressão regular $r$ tal que $L = \mathcal{L}(r)$.
+\end{theorem}
+
+\begin{proof}
+	Sem perda de generalidade suponha que $L = \mathcal{L}(A)$ é uma linguagem regular reconhecida por um $\lambda$-AFN $A = \langle \{q_1, \cdots, q_n\}, X, \delta, q_1, F \rangle$ em que $n \geq 1$. Agora será construído para todo $k \leq n$ a expressão regular $r^k_{i,j}$ é definida recursivamente como sendo:
+	\begin{eqnarray*}
+		r^0_{i,j} & = &  \left\{
+		\begin{array}{ll}	
+			\displaystyle\sum_{\delta(q_i, a) =  q_j} a, & \hbox{se } i \neq j\\
+			\displaystyle\lambda + \sum_{\delta(q_i, a) =  q_j} a, & \hbox{se } i = j\\
+		\end{array}\right.\\
+		r^{k}_{i,j} & = & (r^{k-1}_{i,k}(r^{k-1}_{k,k})^* r^{k-1}_{k,j}) + r^{k-1}_{i,j}
+	\end{eqnarray*}
+	note que $r^{k}_{i,j}$ é a expressão regular cuja valoração é o conjunto de todas as palavras $w \in X^*$ tal que $\widehat{\delta}(q_i, w) = q_j$ de forma que nenhum estado intermediário $q_p$ com $p > k$ seja usado na computação (para detalhes deste fato consulte \cite{benjaLivro2010, hopcroft2008}). Agora uma vez que $A$ pode ter vários estados $q_f \in F$ tem-se então que cada $w \in X^*$ tal que $\widehat{\delta}(q_1, w) = q_f$ é uma palavra aceita por $A$, ou seja, $w \in \mathcal{L}(A)$ e, portanto, para $n = \# Q$ a valoração da expressão regular $r$ definida por, 
+	\begin{eqnarray*}
+		r = \sum_{q_f \in F} r^n_{1, f}
+	\end{eqnarray*}
+	é exatamente o conjunto de todas as palavras aceitas por $A$, ou seja, $\mathcal{L}(A) = \mathcal{L}(r)$. 
+\end{proof}
+
+\begin{example}
+	Considere o AFD esboçado pela Figura \ref{fig:AFD-Expressao}, 
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid,
+			auto, state/.append style={minimum size=3.0em}, thick ]
+			\node[state,initial]    (A)               {$q_1$};
+			\node[state, accepting] (B)[right of=A]   {$q_2$};
+			
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge [loop above]				node {$b$}     ( )
+			(B) edge [loop above]				node {$b$}     ( )
+			(A) edge [bend left]	            node {$a$}     (B)
+			(B) edge [bend left]	            node {$a$}     (A);
+		\end{tikzpicture}
+		\caption{Um AFD que computa sobre o alfabeto $\{a, b\}$.}
+		\label{fig:AFD-Expressao}
+	\end{figure} 
+	
+	Como $n = \# Q$ tem-se que $n = 2$, e portanto, a expressão regular cuja valoração corresponde a linguagem do AFD será dada por, 
+	\begin{eqnarray}\label{eq:AFD-EXP0}
+		r^2_{1, 2} & = & (r^{1}_{1, 2}(r^{1}_{2, 2})^*r^{1}_{2, 2}) + r^{1}_{1, 2}
+	\end{eqnarray}
+	Note porém que, 
+	\begin{eqnarray}\label{eq:AFD-EXP1}
+		r^{1}_{1, 2}  & = & (r^{0}_{1, 1}(r^0_{1,1})^* r^0_{1,2}) + r^0_{1,2} \nonumber \\
+		& \equiv & ((\lambda + b)(\lambda + b)^* a) + a\\
+		& \equiv & b^*a \nonumber
+	\end{eqnarray}
+	e
+	\begin{eqnarray}\label{eq:AFD-EXP2}
+		r^{1}_{2, 2}  & = & (r^{0}_{2, 1}(r^0_{1,1})^* r^0_{1,2}) + r^0_{2,2} \nonumber \\
+		& \equiv & (a(\lambda + b)^* a) + (\lambda + b)\\
+		& \equiv & ab^* a + \lambda + b \nonumber
+	\end{eqnarray}
+	substituindo as Equações (\ref{eq:AFD-EXP1}) e (\ref{eq:AFD-EXP2}) na Equação (\ref{eq:AFD-EXP0}) tem-se que,
+	\begin{eqnarray*}
+		r^2_{1, 2} & = & (b^*a(ab^* a + \lambda + b)^* ab^* a + \lambda + b) + (b^*a)\\
+		& \equiv & b^*a(ab^*a + b)^*(ab^* a + \lambda) + b^*a\\
+		& \equiv & b^*a(ab^*a + b)^*+ b^*a\\
+		& \equiv & b^*a(ab^*a + b)^*
+	\end{eqnarray*}
+\end{example}
+
+\section{Gramática Regulares}\label{sec:GramaticaRegular}
+
+Já foram apresentados anteriores dois formalismos para as linguagens regulares, a saber, formalismo operacional ou mecânico (os autômatos) e o formalismo denotacional (as expressões regulares). Nesta seção será apresentado um terceiro formalismo para as linguagens regulares, sendo este um formalismo gerador (ou axiomático) \cite{menezes1998LFA}. 
+
+\begin{definition}[Gramática Linear]\label{def:GramaticaLinear}
+	Uma gramática formal $G = \langle V, \Sigma, S, P \rangle$ e dita Linear à Direta, ou simplesmente GLD, se todas as suas produções são da forma, 
+	$$A \rhd wB$$
+	e é dita Linear à Esquerda, ou simplesmente GLE, se todas as suas produções são da forma, 
+	$$A \rhd Bw$$
+	onde $A \in V, B \in V \cup \{\lambda\}$ e $w \in \Sigma^*$.
+\end{definition}
+
+\begin{example}
+	A gramática $G_1 = \langle \{B, S , A\}, \{a, b\}, S, P \rangle$ onde $P$ é formado pelas regras:
+	\begin{eqnarray*}
+		S & \rhd & aaB\\
+		B & \rhd & bb
+	\end{eqnarray*}
+	é uma GLD.
+\end{example}
+
+\begin{example}\label{exe:GLE1}
+	A gramática $G_1 = \langle \{X, S , Y\}, \{0, 1\}, S, P \rangle$ onde $P$ é formado pelas regras:
+	\begin{eqnarray*}
+		S & \rhd & X001\\
+		S & \rhd & Y011\\
+		X & \rhd & S01\\
+		Y & \rhd & \lambda
+	\end{eqnarray*}
+	é uma GLE.
+\end{example}
+
+Em uma gramática formal $G$ quando para uma palavra $w$ existem $w_1, \cdots, w_n$ tal que há as seguintes regras $w \rhd w_1, \cdots, w \rhd w_n \in P$, é comum para simplificar a escrita do conjunto de regras usar a notação $w \rhd w_1 \mid \cdots \mid w_n$. 
+
+\begin{example}\label{exe:GLE}
+	Considere a GLE apresentada no Exemplo \ref{exe:GLE1} o conjunto $P$ da mesma poderia ser escrito como:
+	\begin{eqnarray*}
+		S & \rhd & X001 \mid Y011\\
+		X & \rhd & S01\\
+		Y & \rhd & \lambda
+	\end{eqnarray*}
+\end{example}
+
+\begin{definition}[Gramática Regular]
+	Uma gramática formal $G$ é dita regular sempre que ela for linear à esquerda ou à direita.
+\end{definition}
+
+Um tipo mais rigoroso de gramática regular como comentado em \cite{benjaLivro2010, linz2006},  são as chamadas gramática regulares unitárias definidas a seguir.
+
+\begin{definition}[Gramáticas Regulares Unitárias]
+	Uma gramática regular $G$ é dita unitária à esquerda (à direita) se ela é linear à esquerda (à direita) e toda produção é da forma $A \rhd Bw$ $(A \rhd wB)$ com $A \in V, B \in V \cup \{\lambda\}$ e $w \in \Sigma \cup \{\lambda\}$.
+\end{definition}
+
+\begin{example}
+	A gramática $G$ do Exemplo \ref{exe:GLE} é uma gramática regular pois é uma GLE, porém não é uma gramática regular unitária.
+\end{example}
+
+\begin{remark}
+	De forma natural como o leitor deve estar pensando agora,  duas gramática $G_1$ e $G_2$ serão ditas equivalentes sempre que elas gerarem a mesma linguagens.
+\end{remark}
+
+O próximo resultado estabelece que gramática regulares e gramática regulares unitárias tem o mesmo poder de geração de linguagens.
+
+\begin{theorem}\label{teo:SimplificacaoRegular}
+	$L = \mathcal{L}(G)$ para alguma gramática regular $G$ se, e somente se, existe uma gramática regular unitária $G'$ na mesma direção (esquerda ou direita) tal que $L = \mathcal{L}(G')$.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha que $L = \mathcal{L}(G)$ para alguma gramática regular $G = \langle V, \Sigma, S, P \rangle$ tal que $G$ seja linear à esquerda (a prova é similar para o caso à direita). Agora construa uma nova gramática $G' = \langle V', \Sigma, S, P' \rangle$ tal que $P'$ é definido usando as seguintes regras: 
+	
+	\begin{itemize}
+		\item[R1:] Se $A \rhd Bw \in P$ onde $B \in V \cup \{\lambda\},  |w| \leq 1$, então $A \rhd Bw \in P'$.
+		\item[R2:] Se $A \rhd Ca_1\cdots a_n \in P$ onde $B \in V$ e $a_i \in \Sigma$ sendo $1 \leq i \leq n$ e $n > 1$, então tem-se que $A \rhd B_na_n, B_n \rhd B_{n-1}a_{n-1}, \cdots, B_2 \rhd Ca_1 \in P'$.
+		\item[R3:] Se $A \rhd a_1\cdots a_n \in P$ onde $a_i \in \Sigma$ sendo $1 \leq i \leq n$ e $n \geq 2$, então tem-se que $A \rhd B_na_n, B_n \rhd B_{n-1}a_{n-1}, \cdots, B_2 \rhd B_1a_1, B_1 \rhd \lambda \in P'$.
+	\end{itemize}
+	
+	Para as regras R2 e R3 todo $B_i$ é uma nova variável existente em $V'$ que não existe originalmente em $V$. Claramente a gramática $G'$ é regular unitária à esquerda. Também não é difícil mostra por indução sobre o tamanho das derivações que para todo $w \in \Sigma^*$ tem-se que $S \gg^*_G w$ se, e somente se, $S \gg^*_{G'} w$, portanto, $\mathcal{L}(G) = \mathcal{L}(G')$.
+	
+	$(\Leftarrow)$ Trivial uma vez que toda gramática regular unitária à esquerda (à direita) é um caso particular de gramática regular à esquerda (à direita).
+\end{proof}
+
+\begin{example}\label{exe:GRU}
+	Considerando a gramática regular do Exemplo \ref{exe:GLE} usando o Teorema \ref{teo:SimplificacaoRegular} é gerado a gramática regular unitária $G' = \langle \{S, B_3, B_2, C_3, C_2, X, D_2, Y\}, \{0, 1\}, S, P'\rangle$ onde $P'$ é formado pelas regras:
+	\begin{eqnarray*}
+		S & \rhd & B_31 \mid C_31\\
+		B_3 & \rhd & B_20\\
+		B_2 & \rhd & X0\\
+		C_3 & \rhd & C_21\\
+		C_2 & \rhd & Y0\\
+		X & \rhd & D_21\\
+		D_2 & \rhd& S0\\
+		Y & \rhd & \lambda
+	\end{eqnarray*}
+\end{example}
+
+\begin{remark}
+	Obviamente a gramática do Exemplo \ref{exe:GRU} poderia ser otimizada para usar menos variáveis, porém otimização não é o foco de interesse no Teorema \ref{teo:SimplificacaoRegular}.
+\end{remark} 
+
+O próximo resultado estabelece o poder de geração das gramáticas regulares à direta.
+
+\begin{theorem}\label{teo:GRD-AFD}
+	$L = \mathcal{L}(G)$ para alguma gramática regular à direta $G$ se, e somente se, $L$ é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha que $L = \mathcal{L}(G)$ para alguma gramática regular à direta $G$, assim pelo Teorema \ref{teo:SimplificacaoRegular} existe uma gramática regular unitária à direita $G' = \langle V, \Sigma, S, P \rangle$ tal que $L = \mathcal{L}(G')$, sem perda de generalidade\footnote{Basta gerar uma nova gramática onde toda regra da forma $A \rhd a$ com $a \in \Sigma$ foi substituída pelas regras $A \rhd aC$ e $C \rhd \lambda$ onde $C$ é uma variável nova criada, obviamente a nova gramática continua equivalentes a antiga.} pode-se assumir que toda regra em $P$ é da forma $A \rhd aB$ ou $A \rhd \lambda$ com $A, B \in V$ e $a \in \Sigma \cup \{\lambda\}$, dito isto, pode-se agora construir um $\lambda$-AFN $M = \langle V \cup \{q_f\}, \Sigma, \underline{\delta_N}, S, \{q_f\} \rangle$ tal que:
+	\begin{eqnarray*}
+		B \in \underline{\delta_N}(A, a) & \Longleftrightarrow & A \rhd aB \in P\\
+		q_f \in \underline{\delta_N}(A, \lambda)& \Longleftrightarrow & A \rhd \lambda \in P
+	\end{eqnarray*}
+	Agora será mostrado por indução sobre o tamanho das derivações em $G'$ que se $w$ é derivada por $G'$ e $w \in \Sigma^*$, então é aceita por $M$.
+	\begin{itemize}
+		\item \textbf{Base da indução}:
+		
+		Quando $w$ é derivada em $G'$ com uma única derivação tem-se então duas situações possíveis:
+		\begin{itemize}
+			\item[(1)] Quando $w = \lambda$, obrigatoriamente existe uma regra da forma $S \rhd \lambda$, e pela construção de $M$ tem-se que $q_f \in \underline{\delta_N}(S, \lambda)$, logo $\widehat{\underline{\delta_N}}(S, \lambda) \cap \{q_f\} \neq \emptyset$ e, portanto, $\lambda \in L(M)$. 
+			\item[(2)] Quando $w = aB$, existe em $P$ uma regra da forma $S \rhd aB$ com $a \in \Sigma \cup \{\lambda\}$ e $B \in V$, assim pela construção de $M$ tem-se que $B \in \underline{\delta_N}(A, a)$. Como $aB \notin \Sigma^*$ não há mais nada a fazer nesse caso.
+		\end{itemize}
+		
+		
+		\item \textbf{Hipótese indutiva (HI)}:
+		
+		Suponha que $S \gg^*_{G'} w$ em $n$ derivação com $n \geq 1$ tal que:
+		\begin{itemize}
+			\item[(1)] Se $w \in \Sigma^*$, então $w \in \mathcal{L}(M)$.
+			\item[(2)] Se $w = a_1\cdots a_{n-1}B$ com $a_i \in \Sigma \cup \{\lambda\}$ para todo $1 \leq i \leq n-1$ e $B \in V$, então tem-se que $B \in \widehat{\underline{\delta_N}}(S, a_1\cdots a_{n-1})$.
+		\end{itemize}
+		
+		\item \textbf{Passo indutivo}:
+		
+		Agora dado que $S \gg^*_{G'} w'$ em $n+1$ derivações, tem-se obrigatoriamente que acontece o caso (2) de \textbf{(HI)} e nesse caso duas situações são possíveis:
+		\begin{itemize}
+			\item[(1)] Se $w' \in \Sigma^*$, então $w = a_1\cdots a_{n-1}B$ com $a_i \in \Sigma \cup \{\lambda\}$ para todo $1 \leq i \leq n-1$ e existe em $P$ uma produção $B \rightarrow \lambda$, e assim, $w' = a_1\cdots a_{n-1}$, nesta situação pelo caso (2) de \textbf{(HI)} tem-se que $B \in \widehat{\underline{\delta_N}}(S, a_1\cdots a_{n-1})$ e como $B \rightarrow \lambda$ pelo construção de $M$ tem-se que $q_f \in \underline{\delta_N}(B, \lambda)$, consequentemente, $\widehat{\underline{\delta_N}}(S, a_1\cdots a_{n-1}) \cap \{q_f\} \neq \emptyset$ e, portanto, $w' \in \mathcal{L}(M)$.
+			\item[(2)] Se $w' = a_1\cdots a_{n-1}B$ com $a_i \in \Sigma \cup \{\lambda\}$ para todo $1 \leq i \leq n-1$ e $B \in V$, então pela construção de $M$ tem-se que $B \in \widehat{\underline{\delta_N}}(S, w)$ como $w' \notin \Sigma^*$ não há mais nada a fazer nesse caso.
+		\end{itemize}
+	\end{itemize}
+	Portanto, o raciocínio indutivo anterior garante que sempre que  $w$ é derivada por $G'$ e $w \in \Sigma^*$ tem-se que $w \in \mathcal{L}(M)$ e assim pode-se afirmar pelo Corolário \ref{col:RegularLAFN} que $L$ é regular. $(\Leftarrow)$ Suponha que $L$ é uma linguagem regular assim por definição existe um AFD $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ tal que $L = \mathcal{L}(M)$, assim construa uma gramática regular unitária à direita $G = \langle Q, \Sigma, q_0, P \rangle$ onde o conjunto $P$ é definido usando as regras a seguir, 
+	\begin{itemize}
+		\item[(a)] Se $\delta(q_i, a) = q_j$, então $q_i \rhd aq_j \in P$.
+		\item[(b)] Se $q_i \in F$, então $q_i \rhd \lambda \in P$.
+	\end{itemize} 
+	Agora note que para todo $w \in \Sigma^*$ com $w = a_1 \cdots a_n$ tem-se que, 
+	\begin{eqnarray*}
+		w \in \mathcal{L}(M) & \Longleftrightarrow & \widehat{\delta}(q_0, w) \in F\\
+		& \Longleftrightarrow & \widehat{\delta}(q_0, a_1 \cdots a_n) \in F\\
+		& \Longleftrightarrow & (\exists q_f \in F)[\widehat{\delta}(q_0, w) = q_f]\\
+		& \Longleftrightarrow & (\exists q_1, \cdots, q_{n-1} \in Q,  q_f \in F)[\delta(q_0, a_1) = q_1 \land \cdots \land \delta(q_{n-1}, a_n) = q_f]\\
+		& \Longleftrightarrow & (\exists q_1, \cdots, q_{n-1} \in Q,  q_f \in F)[q_0 \rhd a_1q_1, \cdots, q_{n-1} \rhd a_nq_f, q_f \rhd \lambda \in P]\\
+		& \Longleftrightarrow & q_0 \gg^* a_1 \cdots a_n\\
+		& \Longleftrightarrow & q_0 \gg^* w\\
+		& \Longleftrightarrow & w \in \mathcal{L}(G)
+	\end{eqnarray*} 
+	portanto, $\mathcal{L}(M) = \mathcal{L}(G)$ o que conclui a prova.
+\end{proof}
+
+\begin{lemma}\label{lema:GRD-Reversa}
+	Se $L$ é gerada por uma gramática à direita, então $L^r$ é gerada por uma gramática regular à direita.
+\end{lemma}
+
+\begin{proof}
+	Suponha que $L$ é gerada por uma gramática à direita $G$, ou seja, $L = \mathcal{L}(G)$, assim pelo Teorema \ref{teo:GRD-AFD} tem-se que $L$ é regular, logo existe um AFD $M = \langle Q, \Sigma, \delta, q_0, F\rangle$ tal que $L = \mathcal{L}(M)$, agora construa um $\lambda$-AFN $M_1 = \langle Q \cup \{q_f\}, \Sigma, \underline{\delta_N}, q_0, \{q_f\}\rangle$ tal que,
+	\begin{eqnarray*}
+		\underline{\delta_N}(q, a) & = & \left\{\begin{array}{ll}	
+			\{\delta(q, a)\}, & \hbox{se } q \in Q, a \in \Sigma\\
+			\{q_f\}, & \hbox{se } q \in F, a = \lambda \\
+			\emptyset, & \hbox{qualquer outro caso}
+		\end{array}\right.
+	\end{eqnarray*}
+	claramente $L = \mathcal{L}(M_1)$, agora construa um novo $\lambda$-AFN $M_2 = \langle Q \cup \{q_f\}, \Sigma, \underline{\delta'_N}, q_f, \{q_0\}\rangle$ onde para todo $q \in Q \cup \{q_f\}$ e $a \in \Sigma \cup \{\lambda\}$ tem-se que,
+	\begin{eqnarray*}
+		q_i \in \underline{\delta'_N}(q_j, a) & \Longleftrightarrow & q_j \in \underline{\delta_N}(q_i, a)
+	\end{eqnarray*}
+	pela construção de $M_2$ é claro que  $w \in \mathcal{L}(M_1) \Longleftrightarrow w^r \in \mathcal{L}(M_2)$ e, portanto, $L^r = \mathcal{L}(M_2)$. Desde que $M_2$ é um $\lambda$-AFN pelo Corolário \ref{col:RegularLAFN} tem-se que $L^r$ é uma linguagem regular, consequentemente, pelo Teorema \ref{teo:GRD-AFD} existe uma gramática regular à direita $G'$ tal que $L = \mathcal{L}(G')$, o que conclui a prova.
+\end{proof}
+
+O próximo resultado mostra que gramática regulares à esquerda e à direita são equivalentes.
+
+\begin{theorem}[Mudança de direção regular]\label{teo:MudacaDeLadoGramatica}
+	$L$ é gerada por uma gramática à esquerda se, e somente se, $L$ é gerada por uma gramática regular à direita.
+\end{theorem}
+
+\begin{proof}
+	$(\Rightarrow)$ Suponha que $L$ é gerada por uma gramática à esquerda $G = \langle V, \Sigma, S, P \rangle$, pelo Teorema \ref{teo:SimplificacaoRegular} pode-se assumir que $G$ é uma gramática regular unitária também a esquerda, assim todas as regras em $P$ são da forma $A \rhd Ba$ com $A \in V, B \in V \cup \{\lambda\}$ e $a \in \Sigma \cup \{\lambda\}$. Sem perda de generalidade\footnote{Basta gerar uma nova gramática onde toda regra da forma $A \rhd a$ com $a \in \Sigma$ foi substituída pelas regras $A \rhd Ca$ e $C \rhd \lambda$ onde $C$ é uma variável nova criada.} pode-se construir uma nova gramática regular unitária à esquerda $G' = \langle V', \Sigma, S, P'\rangle$ onde toda regra em $P'$ é da forma $A \rhd Ba$ ou $A \rhd \lambda$ com $A, B \in V'$ e $a \in \Sigma \cup \{\lambda\}$ claramente pela construção de $G'$ tem-se que $\mathcal{L}(G) = \mathcal{L}(G')$, agora construa um $\lambda$-AFN $M = \langle V' \cup \{q_f\}, \Sigma, \underline{\delta_N}, S, \{q_f\} \rangle$ onde, 
+	\begin{eqnarray*}
+		B \in \underline{\delta_N}(A, a) & \Longleftrightarrow & A \rhd Ba \in P\\
+		q_f \in \underline{\delta_N}(A, \lambda)& \Longleftrightarrow & A \rhd \lambda \in P
+	\end{eqnarray*} 
+	Agora note que para todo $w = a_1\cdots a_n \in \Sigma^*$ tem-se que,
+	\begin{eqnarray*}
+		w \in \mathcal{L}(G') & \Longleftrightarrow &  a_1\cdots a_n \in \mathcal{L}(G')\\
+		& \Longleftrightarrow & S \gg_{G'}^* a_1\cdots a_n\\
+		& \Longleftrightarrow & (\exists A_1 \cdots A_n, S \in V)\\
+		& & [S \rhd A_na_n, A_n \rhd A_{n-1}a_{n-1}, \cdots, A_{2} \rhd A_1a_1, A_1 \rhd \lambda \in P']\\
+		& \Longleftrightarrow & (\exists A_1 \cdots A_n, S \in V)\\
+		& & [A_n \in \underline{\delta_N}(S, a_n), A_{n-1} \in \underline{\delta_N}(A_n, a_{n-1}), \cdots,  A_{1} \in \underline{\delta_N}(A_2, a_{1}), \\
+		& &  q_f \in \underline{\delta_N}(A_1, \lambda)]\\
+		& \Longleftrightarrow & a_n\cdots a_1 \in \mathcal{L}(M)\\
+		& \Longleftrightarrow & w^r \in \mathcal{L}(M)
+	\end{eqnarray*}
+	Logo $\mathcal{L}(M) = \mathcal{L}(G')^r$, desde que $M$ é um $\lambda$-AFN tem-se pelo Corolário \ref{col:RegularLAFN} que $\mathcal{L}(G')^r$ é regular, assim pelo Teorema \ref{teo:GRD-AFD} existe uma gramática regular à direita $\hat{G_1}$ que a gera, ou seja, $\mathcal{L}(\hat{G_1}) = \mathcal{L}(G')^r$, mas pelo Lema \ref{lema:GRD-Reversa} irá existir outra gramática regular à direita $\hat{G_2}$ tal que $\mathcal{L}(\hat{G_2}) = \mathcal{L}(\hat{G_1})^r$, mas $ \mathcal{L}(\hat{G_1})^r = (\mathcal{L}(G')^r)^r = (\mathcal{L}(G)^r)^r = (L^r)^r = L$, portanto, $L$ é gerada por uma gramática regular à direita. $(\Leftarrow)$ Suponha que que $L$ é gerada por uma gramática regular à direita, ou seja, que existe uma gramática regular a direita $G$ tal que $L = \mathcal{L}(G)$, assim pelo Lema \ref{lema:GRD-Reversa} irá existir outra gramática regular à direita $G_1 = \langle V, \Sigma, S, P \rangle$ tal que $L^r = \mathcal{L}(G_1)$, sem perda de generalidade pelo Teorema \ref{teo:SimplificacaoRegular} pode-se assumir que $G_1$ é regular unitária à direita, logo todas as suas produções são da forma $A \rhd aB$ com $A \in V, B \in V \cup \{\lambda\}$ e $a \in \Sigma \cup \{\lambda\}$. Dito isso construa uma nova gramática $G_2 = \langle V, \Sigma, S, P'\rangle$ onde $P' = \{A \rhd Ba \mid A \rhd Ba \in P\}$, claramente $G_2$ é unitária à esquerda. Mas pela construção de $G_2$ fica claro que $S \gg_{G_1}^* w \Longleftrightarrow S \gg_{G_2}^* w^r$, logo $\mathcal{L}(G_1)^r = \mathcal{L}(G_2)$, mas desde que, $\mathcal{L}(G_1)^r = (L^r)^r = L$, tem-se então que $L$ é gerada por uma gramática linear à esquerda, o que completa  a prova.
+\end{proof}
+
+\begin{example}
+	Dado a gramática regular à direita $G_1 = \langle \{A, B, C\}, \{a, b\}, A, P_1 \rangle$ com $P_1$ é formado pelas seguintes regras,
+	\begin{eqnarray*}
+		A & \rhd & aC \mid B \\
+		B & \rhd & bB \mid \lambda\\
+		C & \rhd & aA
+	\end{eqnarray*}
+	claramente $\mathcal{L}(G_1) = \{w \in \{a, b\}^* \mid w = a^{2m}b^n \hbox{ com } m,n \in \mathbb{N}\}$,  agora usando a construção exposta pelo Teorema \ref{teo:MudacaDeLadoGramatica}, é possível construir a gramática regular à esquerda $G_2 = \langle \{A, B, C\}, \{a, b\}, B, P_2 \rangle$ onde $P_2$ é formado pelas seguintes regras,
+	\begin{eqnarray*}
+		B & \rhd & Bb \mid Ab \mid A\\
+		A & \rhd & Ca \mid \lambda\\
+		C & \rhd & Aa 
+	\end{eqnarray*}
+	e obviamente $\mathcal{L}(G_2) = \{w \in \{a, b\}^* \mid w = a^{2m}b^n \hbox{ com } m,n \in \mathbb{N}\}$.
+\end{example}
+
+\section{Questionário}
+
+\begin{problem}\label{prob:Regulares28}
+	Mostre uma expressão regular cuja valoração é corresponde exatamente a linguagem $\{aabb, aaabbb, aaba, \lambda\}$. 
+\end{problem}
+
+\begin{problem}\label{prob:Regulares29}
+	Construa uma expressão regular para cada uma das linguagens descrita no Exercício \ref{prob:Regulares3}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares30}
+	Construa uma expressão regular para cada uma das linguagens descrita no Exercício \ref{prob:Regulares20}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares31}
+	Para cada um dos AFD $A$, que foram criados por você para responder o Exercício \ref{prob:Regulares2}, determine uma expressão regular $r$ tal que $\mathcal{L}(r) = \mathcal{L}(A)$.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares32}
+	Para cada expressão regular a seguir construa um autômato que aceita a linguagem da expressão regular.
+\end{problem}
+
+\begin{exerList}
+	\item $a^*b + a$.
+	\item $(ab + cd)^*$.
+	\item $(a^*ab)^* + bc$.
+	\item $(aa)^* (b + \lambda) + \emptyset$.
+	\item $(a^*) + b(aa)^*$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares33}
+	Dado o alfabeto $\{a, b\}$ demonstre as asserções a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $(a + b)^* \equiv (a^*b^*)^*$.
+	\item $a^* + b^* \not\equiv (a + b)^*$.
+	\item $a^*b^* \not\equiv (ab)^*$.
+	\item $(b + ab)^* (a + \lambda) \equiv (a + \lambda)(ba + b)^*$.
+	\item $a^*a \equiv aa^*$.
+	\item $\emptyset + (a + b)^* \equiv (a + b)^* + \emptyset$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares34}
+	Para quais quer $r_1, r_2, r_3 \in Exp_\Sigma$ demonstre as asserções a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $(r_1^*)^* \equiv r_1^*$.
+	\item $(r_1 + r_2) \equiv r_2 + r_1$.
+	\item $r_1 + (r_2 + r_3) \equiv (r_1 + r_2) + r_3$.
+	\item $r_1 + r_1 \equiv r_1$.
+	\item $(r_1 + r_2)^* \equiv (r_1^* r_2^*)^*$.
+	\item $r_1r_1 \equiv r_1$.
+	\item $(r_1r_2)^*r_1 \equiv r_1(r_2r_1)^*$.
+	\item $r_1 + \emptyset \equiv r_1$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares35}
+	Construa um autômato que aceite cada valoração a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $\mathcal{L}(aa^*(b + a))$.
+	\item $\mathcal{L}((aa + abb)^*(aa + \lambda + ba))$.
+	\item $\mathcal{L}((ab + b)^*(a + \lambda))$.
+	\item $\mathcal{L}(aa^* + aba^*b^*)$.
+	\item $\mathcal{L}((\lambda + \emptyset)^*)$.
+	\item $\mathcal{L}(aa^*bb^*aa^*)$.
+	\item $\mathcal{L}(ab + (\emptyset + a)^*b)$.
+	\item $\mathcal{L}((a^*(b(bb)^*aa)^*)a)$.
+	\item $\mathcal{L}(((aa)^*)^*)$.
+	\item $\mathcal{L}((b + a)(\lambda^*)^*)$.
+	\item $\mathcal{L}(a^*(ba + ab))$.
+	\item $\mathcal{L}((bb + bab)^*(a + \lambda aa^* + ba))$.
+	\item $\mathcal{L}((b^* + b)^*(a^* + \lambda))$.
+	\item $\mathcal{L}(a^* + ba)$.
+	\item $\mathcal{L}(((\lambda)^* + \emptyset)^*)$.
+	\item $\mathcal{L}(a^*ba^*ba^*)$.
+	\item $\mathcal{L}(bab + (ab + a)b)$.
+	\item $\mathcal{L}(a(b)^*b^*)$.
+	\item $\mathcal{L}((b + a)(b + a)$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares36}
+	Construa uma expressão regular cuja valoração seja exatamente a linguagem aceita pelo AFD da Figura \ref{fig:AutomaExercicioLR8}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares37}
+	Construa uma gramática regular à esquerda para cada uma das linguagens descrita no Exercício \ref{prob:Regulares3}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares38}
+	Construa uma gramática regular à direita para cada uma das linguagens descrita no Exercício \ref{prob:Regulares3}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares39}
+	Construa uma gramática regular à esquerda para cada uma das linguagens descrita no Exercício  \ref{prob:Regulares20}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares40}
+	Construa uma gramática regular à direita para cada uma das linguagens descrita no Exercício  \ref{prob:Regulares20}.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares41}
+	Construa uma gramática regular que gera exatamente cada valoração a seguir.
+\end{problem}
+
+\begin{exerList}
+	\item $\mathcal{L}(a^*b + a)$.
+	\item $\mathcal{L}((ab + cd)^*)$.
+	\item $\mathcal{L}((a^*ab)^* + bc)$.
+	\item $\mathcal{L}((aa)^* (b + \lambda))$.
+	\item $\mathcal{L}((a^*) + b(aa)^*)$.
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares42}
+	Construa uma gramática regular que gera exatamente a linguagem aceita pelo AFD da Figura \ref{fig:AutomaExercicioLR8}
+\end{problem}
+
+\begin{problem}\label{prob:Regulares43}
+	Para as gramáticas descrita a seguir construa um AFN que aceita as linguagens geradas por tais gramáticas. 
+\end{problem}
+
+\begin{exerList}
+	\item $G_1 = \langle \{S, A, B\},\{a, b\}, S, P \rangle$ onde $P$ é definido por, 
+	\begin{eqnarray*}
+		S & \rhd & aA \mid bB \mid aaS \mid bbS\\
+		A & \rhd & aA \mid \lambda \\
+		B & \rhd & bB \mid b
+	\end{eqnarray*}
+	\item $G_2 = \langle \{S, A, B\},\{a, b\}, S, P \rangle$ onde $P$ é definido por, 
+	\begin{eqnarray*}
+		S & \rhd & abA\\
+		A & \rhd & bab\\
+		B & \rhd & aA \mid bb
+	\end{eqnarray*}
+	
+	\item $G_3 = \langle \{S, A, B\},\{a, b\}, S, P \rangle$ onde $P$ é definido por, 
+	\begin{eqnarray*}
+		S & \rhd & aA \mid bS \mid \lambda\\
+		A & \rhd & aB \mid bS \mid \lambda \\
+		B & \rhd & aaS \mid bS \mid \lambda 
+	\end{eqnarray*}
+	
+	\item $G_4 = \langle \{S, A\},\{a, b\}, S, P \rangle$ onde $P$ é definido por,
+	\begin{eqnarray*}
+		S & \rhd & aaB \mid b\\
+		A & \rhd & bbS 
+	\end{eqnarray*}
+	
+	\item $G_5 = \langle \{S, A, B\},\{a, b\}, S, P \rangle$ onde $P$ é definido por, 
+	\begin{eqnarray*}
+		S & \rhd & aaaA \mid bbB\\
+		A & \rhd & abaA \mid S\\
+		B & \rhd & bbS \mid aA \mid bb\\ 
+	\end{eqnarray*}
+\end{exerList}
+
+\begin{problem}\label{prob:Regulares44} 
+	Para cada gramática do Exercício \ref{prob:Regulares43} esboce uma gramática regular unitária à esquerda equivalente.
+\end{problem}
+
+\begin{problem}\label{prob:Regulares45} 
+	Esboce uma gramática regular que gere a linguagem aceita pelo AFD da Figura \ref{fig:AFD-Expressao}
+\end{problem}
