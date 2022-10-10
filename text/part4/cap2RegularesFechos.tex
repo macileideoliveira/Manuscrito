@@ -1,3 +1,132 @@
 \chapter{Álgebra das Linguagens Regulares}\label{cap:AlgebrasRegulares}
 
-%\epigraph{Uma teoria matemática não deve ser considerada completa até que a tenhamos feito tão clara que a possamos explicar ao primeiro homem que encontramos na rua.}{David Hilbert}
+%\epigraph{Sem o fogo do Entusiamo, não há o calor da vitória.}{Provérbio Chinês}
+
+%\epigraph{A Vida. Pode-se odiá-la ou ignorá-la, mas nunca gostar dela!}{Douglas Noël Adams, Série -- O Guia do Mochileiro das Galáxias.}
+
+\epigraph{Você acha que VOCÊ tem problemas? Experimente ser um robô maníaco depressivo...}{Douglas Noël Adams, O Guia do Mochileiro das Galáxias.}
+
+\section{Operadores de Fecho}
+
+Neste capítulo as serão estudadas  as operações que fecham algebricamente o conjunto (ou classe) de todas as linguagens regulares $\mathcal{L}_{Reg}$, isto é, serão apresentados aqui o operadores de fecho para as linguagens regulares. A maior parte dos resultados demonstrados aqui foi provado inicialmente no seminal \textit{paper} \cite{rabin1959}.
+
+\begin{theorem}[Fecho do Complemento]\label{teo:FechoComplementoRegular}
+	Se $L$ é uma linguagem regular, então $\overline{L}$ também é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	Assuma que $L$ seja uma linguagem regular, assim por definição existe um AFD $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ tal que $\mathcal{L}(A) = L$, agora defina um no novo AFD $\overline{A} = \langle Q, \Sigma, \delta, q_0, \overline{F} \rangle$ tal que $\overline{F} = Q - F$, agora para todo $w \in \Sigma^*$ tem-se que:
+	\begin{eqnarray*}
+		w \in \mathcal{L}(\overline{A}) & \Longleftrightarrow & \widehat{\delta}(q_0, w) \in \overline{F}\\
+		& \Longleftrightarrow & \widehat{\delta}(q_0, w) \notin F\\
+		& \Longleftrightarrow & w \notin \mathcal{L}(A)
+	\end{eqnarray*}
+	consequentemente, $\mathcal{L}(\overline{A}) = \overline{L}$, e desde que $\overline{A}$ é um AFD, tem-se que $\overline{L}$ também é uma linguagem regular, concluindo assim a prova.
+\end{proof}
+
+O AFD construído na demonstração do Teorema \ref{teo:FechoComplementoRegular} é chamado de \textbf{autômato complementar}, o exemplo a seguir mostra a construção de um autômato complementar de um AFD dado.
+
+\begin{example}\label{exe:FechoAFD1}
+	Considere o AFD $A$ representado na Figura \ref{fig:FechoAFD1} que reconhece a linguagem de todas as palavras com a quantidade par de a's e uma quantidade qualquer de b's.
+	
+	\begin{figure}[ht]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=5.0cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+			\node[state, initial, accepting]   (A)		  {$q_0$};
+			\node[state] (B) [right of=A]  						 {$q_1$};
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge [bend left]  				node {$a$}     		(B)
+			(B) edge [bend left]  				node {$a$}     		(A)
+			(A) edge [loop above]			 node {$b$}          ()
+			(B) edge [loop above]			 node {$b$}          ();
+		\end{tikzpicture}
+		\caption{AFD $A$ para a linguagem $\{w \in \{a, b\}^* \mid |w_a| = 2n \text{ com } n, |w|_b \in \mathbb{N}\}$.}
+		\label{fig:FechoAFD1}
+	\end{figure}
+
+	O AFD complementar ao AFD da Figura \ref{fig:FechoAFD1}  pode ser visto na Figura \ref{fig:FechoAFD2}.
+	 
+	\begin{figure}[ht]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=5.0cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+			\node[state, initial]   (A)		  {$q_0$};
+			\node[state,  accepting] (B) [right of=A]  						 {$q_1$};
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(A) edge [bend left]  				node {$a$}     		(B)
+			(B) edge [bend left]  				node {$a$}     		(A)
+			(A) edge [loop above]			 node {$b$}          ()
+			(B) edge [loop above]			 node {$b$}          ();
+		\end{tikzpicture}
+		\caption{AFD $A$ para a linguagem $\{w \in \{a, b\}^* \mid |w_a| = 2n+1 \text{ com } n, |w|_b \in \mathbb{N}\}$.}
+		\label{fig:FechoAFD2}
+	\end{figure}
+\end{example}
+
+\begin{example}\label{exe:FechoAFD2}
+	Seguindo a estratégia exposta na prova do Teorema \ref{teo:FechoComplementoRegular} o AFD complementar ao AFD da Figura \ref{fig:AFD2} corresponde exatamente ao AFD representado na Figura \ref{fig:FechoAFD3}, e é claro que a linguagem de tal AFD corresponde exatamente a linguagem $\{0,1\}^*$
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=2.5cm, on grid, auto, state/.append style={minimum size=3em}, thick ]
+			\node[state, initial,  accepting]   			(A)               {$s_0$};
+			\node[]		  						(C) [right of=A]  {};
+			\node[state,  accepting] 						(B) [above of=C]  {$s_1$};
+			\node[state,  accepting] 						(D) [below of=C]  {$s_2$};
+			
+			\path[->] (A) +(-1,0) edge (A)
+			
+			%Transições:
+			%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+			(B) edge [loop right]               node {$1$}           ( )
+			(A) edge			  				node {$0$}     		 (B)
+			(A) edge			  				node {$1$}     		 (D)
+			(B) edge [bend left]  				node {$0$}     		 (D)
+			(D) edge [bend left]  				node [right] {$0, 1$}(B);
+		\end{tikzpicture}
+		\caption{AFD complementar ao AFD da Figura \ref{fig:AFD2}.}
+		\label{fig:FechoAFD3}
+	\end{figure}
+\end{example}
+
+Para os dois próximos resultados considere sempre que as linguagens são definidas sobre o mesmo alfabeto, isto é, $L_1, L_2 \subseteq \Sigma^*$. 
+
+\begin{theorem}[Fecho do União]\label{teo:FechoUniaoRegular}
+	Se $L_1$ e $L_2$ são linguagens regulares, então $L_1 \cup L_2$ também é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	Assuma que $L_1$ e $L_2$ são linguagens regulares, logo existem $A_1 = \langle Q, \Sigma, \delta_1, q_0,  F_1\rangle$ e $A_2 = \langle S, \Sigma, \delta_2, s_0,  F_2\rangle$ com $A_1$ e $A_2$ sendo AFD e, além disso, $\mathcal{L}(A_1) = L_1$ e $\mathcal{L}(A_2) = L_2$, sem perda de generalidade assuma que $Q \cap S = \emptyset$, agora construa um $\lambda$-AFN $A = \langle Q \cup S \cup \{q_{init}\}, \Sigma, \underline{\delta_N}, q_{init}, F\rangle$ tal que $q_{init} \notin Q \cup S$ e $F = F_1 \cup F_2$, além disso, tem-se que:
+	\begin{eqnarray*}
+		\underline{\delta_N}(q, a) & = & \left\{\begin{array}{ll}	\{\delta_1(q, a)\}, & \hbox{se } q \in Q, a \in \Sigma \\	\{\delta_2(q, a)\},  & \hbox{se } q \in S, a \in \Sigma \\ \{q_0, s_0\}, &   \hbox{se } q = q_{init}, a = \lambda \\ \emptyset, & \hbox{qualquer outro caso} \end{array}\right.
+	\end{eqnarray*}
+	agora para todo $w \in \Sigma^*$ tem-se que, 
+	\begin{eqnarray*}
+		w \in \mathcal{L}(A) & \Longleftrightarrow & \widehat{\underline{\delta_N}}(q_{init}, w) \cap F \neq \emptyset
+	\end{eqnarray*}
+	mas pela construção de $\underline{\delta_N}$ tem-se que,
+	\begin{eqnarray*}
+		\widehat{\underline{\delta_N}}(q_{init}, w) \cap F \neq \emptyset & \Longleftrightarrow & \{\widehat{\delta_1}(q_{0}, w)\} \cup  \{\widehat{\delta_2}(s_{0}, w)\} \neq \emptyset\\
+		& \Longleftrightarrow & \{\widehat{\delta_1}(q_{0}, w)\} \neq \emptyset \text{ ou } \{\widehat{\delta_2}(s_{0}, w)\} \neq \emptyset \\
+		& \Longleftrightarrow & (\exists q_i \in F_1)[\widehat{\delta_1}(q_{0}, w) = q_i] \text{ ou }  (\exists s_j \in F_2)[\widehat{\delta_2}(s_{0}, w) = s_j]\\
+		& \Longleftrightarrow & w \in \mathcal{L}(A_1) \text{ ou } w \in \mathcal{L}(A_2) \\
+		& \Longleftrightarrow & w \in \mathcal{L}(A_1) \cup \mathcal{L}(A_2) \\
+		& \Longleftrightarrow & w \in L_1 \cup L_2
+	\end{eqnarray*}
+	assim $\mathcal{L}(A) = L_1 \cup L_2$, e desde que $A$ é um $\lambda$-AFN pelo Corolário \ref{col:RegularLAFN} tem-se que $L_1 \cup L_2$ será uma linguagem regular, o completa a prova.
+\end{proof}
+
+\begin{theorem}[Fecho do Interseção]\label{teo:FechoIntersecaoRegular}
+	Se $L_1$ e $L_2$ são linguagens regulares, então $L_1 \cap L_2$ também é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	Assuma que $L_1$ e $L_2$ são duas linguagens regulares, assim existem dois AFD $A_1$ e $A_2$ com $\mathcal{L}(A_1) = L_1$ e $\mathcal{L}(A_2) = L_2$, pelo Teorema \ref{teo:FechoComplementoRegular} tem-se que existem dois dois AFD $A'_1$ e $A'_2$ tais que $\mathcal{L}(A'_1) = \overline{\mathcal{L}(A_1)}$ e $\mathcal{L}(A'_2) = \overline{\mathcal{L}(A_2)}$, agora pelo Teorema \ref{teo:FechoUniaoRegular} tem-se que $\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}$ é uma linguagem regular, logo existe um AFD $A_0$ tal que $\mathcal{L}(A_0) = \overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}$, e novamente pelo Teorema \ref{teo:FechoComplementoRegular} tem-se que $\overline{\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}}$ é uma linguagem regular, mas pelas operações sobre conjunto tem-se que $\overline{\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}} = \mathcal{L}(A_1) \cap \mathcal{L}(A_2)$, consequentemente, $L_1 \cap L_2$ é regular.
+\end{proof}

@@ -377,7 +377,7 @@ Formalmente pode-se dizer como apontado em \cite{valdi2020phd}, que a teoria dos
 Agora que foram introduzidos os conceitos fundamentais para a teoria dos autômatos, este prossegue apresentado formalmente o conceito de estrutura geradora ou gramática formal, o leitor mais atento e com maior conhecimento sobre lógica de primeira ordem e teoria da prova \cite{avigad1998, buss1998} pode notar que gramáticas formais são na verdade outro nome para  sistemas de reescrita \cite{ayala2014}.
 
 \begin{definition}[Gramática formal]\label{def:GramaticaFormal}
-	Uma gramática formal é uma estrutura da forma $G = \langle V, \Sigma, S, P \rangle$ onde $V$ é um conjunto não vazio de símbolos chamados variáveis tal que $V \cap \Sigma = \emptyset$, $\Sigma$ é um alfabeto, $S \in V$ é uma variável destacada chamada de \textbf{variável inicial} e $P$ é um conjunto de regras de reescrita\footnote{Tamém é comum encontrar na literatura a nomenclatura regras de produção \cite{benjaLivro2010, linz2006}.}\footnote{Um leitor com o mínimo de maturidade matemática pode observar que o operador $\rhd$ das regras de reescrita é na verdade o rótulo de uma relação binária entre $(V \cup \Sigma)^+$ e $(V \cup \Sigma)^*$.} da forma $w \rhd w'$ onde $w \in (V \cup \Sigma)^+$ e $w' \in (V \cup \Sigma)^*$.
+	Uma gramática formal é uma estrutura com a seguinte forma $G = \langle V, \Sigma, S, P \rangle$ onde $V$ é um conjunto não vazio de símbolos chamados variáveis tal que $V \cap \Sigma = \emptyset$, $\Sigma$ é um alfabeto, $S \in V$ é uma variável destacada chamada de \textbf{variável inicial} e $P$ é um conjunto de regras de reescrita\footnote{Tamém é comum encontrar na literatura a nomenclatura regras de produção \cite{benjaLivro2010, linz2006}.}\footnote{Um leitor com o mínimo de maturidade matemática pode observar que o símbolo $P$ é na verdade o rótulo de uma relação binária, sendo claramente $P \subseteq (V \cup \Sigma)^+ \times (V \cup \Sigma)^*$.} da forma $w \rhd w'$ onde $w \in (V \cup \Sigma)^+$ e $w' \in (V \cup \Sigma)^*$.
 \end{definition}
 
 \begin{example}\label{exe:GramaticaFormal1} 
@@ -387,33 +387,33 @@ Agora que foram introduzidos os conceitos fundamentais para a teoria dos autôma
 Qualquer gramática então pode ser visto com um sistema para a geração de palavras através de um mecanismo chamado derivação descrito a seguir.
 
 \begin{definition}[Derivação de palavras]
-	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$, a palavra $XwY$ deriva a palavra $Xw'Y$  na gramática $G$, denotado por $XwY \gg_G Xw'Y$, sempre que existe uma regra forma $w \rhd w' \in P$.
+	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$, a palavra $XwY$ deriva a palavra $Xw'Y$  na gramática $G$, denotado por $XwY \vdash_G Xw'Y$, sempre que existe uma regra forma $w \rhd w' \in P$.
 \end{definition}
 
 \begin{example}
-	Dado a gramática do Exemplo \ref{exe:GramaticaFormal1} tem-se que $aABa \gg_G aaABaBa$, pois existe em $P$ a regra $A \rhd aABa$.
+	Dado a gramática do Exemplo \ref{exe:GramaticaFormal1} tem-se que $aABa \vdash_G aaABaBa$, pois existe em $P$ a regra $A \rhd aABa$.
 \end{example}
 
-Rigorosamente $\gg_G$ na verdade é uma relação entre $(V \cup \Sigma)^+$ e $(V \cup \Sigma)^*$, e assim $\gg_G^*$ denota o fecho transitivo e reflexivo de  $\gg_G$, além disso, sempre que não causar confusão é comum eliminar a escrita do rótulo da gramática, ou seja, são escritos respectivamente $\gg^*$ e $\gg$ em vez de $\gg_G^*$ e $\gg_G$.
+Rigorosamente $\vdash_G$ na verdade é uma relação entre $(V \cup \Sigma)^+$ e $(V \cup \Sigma)^*$, e assim $\vdash_G^*$ denota o fecho transitivo e reflexivo de  $\vdash_G$, além disso, sempre que não causar confusão é comum eliminar a escrita do rótulo da gramática, ou seja, são escritos respectivamente $\vdash^*$ e $\vdash$ em vez de $\vdash_G^*$ e $\vdash_G$.
 
 \begin{example}
-	Considerando ainda a gramática exibida no Exemplo \ref{exe:GramaticaFormal1} tem-se que $aABa \gg^* aaaABaBaBa$, uma vez que, $aABa \gg aaABaBa \gg aaaABaBaBa$.
+	Considerando ainda a gramática exibida no Exemplo \ref{exe:GramaticaFormal1} tem-se que $aABa \vdash^* aaaABaBaBa$, uma vez que, $aABa \vdash aaABaBa \vdash aaaABaBaBa$.
 \end{example}
 
 \begin{example}
-	A estrutura $G = \langle \{A, B, S\}, \{0,1\}, S, P \rangle$ em que $P$ é formado pelas regras $S \rhd 11A, A \rhd B0$ e $B \rhd 000$ é uma gramática formal e assim $11A \gg^* 110000$, pois tem-se que, $11A \gg^* 11B0 \gg^* 110000$.
+	A estrutura $G = \langle \{A, B, S\}, \{0,1\}, S, P \rangle$ em que $P$ é formado pelas regras $S \rhd 11A, A \rhd B0$ e $B \rhd 000$ é uma gramática formal e assim $11A \vdash^* 110000$, pois tem-se que, $11A \vdash^* 11B0 \vdash^* 110000$.
 \end{example}
 
-Como dito em \cite{benjaLivro2010}, dado uma gramática formal $G$ tem-se que sempre houver uma sequencia de derivações $w_1 \gg w_2 \gg \cdots \gg w_n$ acontecer, as palavras $w_1, w_2, \cdots, w_n$ são chamadas de formas sentenciais, ou simplesmente, sentenças. Assim uma derivação nada mais é do que uma sequência finita de formas sentenciais.
+Como dito em \cite{benjaLivro2010}, dado uma gramática formal $G$ tem-se que sempre houver uma sequencia de derivações $w_1 \vdash w_2 \vdash \cdots \vdash w_n$ acontecer, as palavras $w_1, w_2, \cdots, w_n$ são chamadas de formas sentenciais, ou simplesmente, sentenças. Assim uma derivação nada mais é do que uma sequência finita de formas sentenciais.
 
 \begin{definition}[Igualdade de Derivações]\label{def:IgualdadeDerivacaoGramatica}
-	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$ e duas derivações $S \gg w_1 \gg^* w_n$ e $S \gg w'_1 \gg^* w'_n$ sobre $G$, será dito que estas derivações são iguais sempre que $w_i = w'_i$ para todo $1 \leq i \leq n$.
+	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$ e duas derivações $S \vdash w_1 \vdash^* w_n$ e $S \vdash w'_1 \vdash^* w'_n$ sobre $G$, será dito que estas derivações são iguais sempre que $w_i = w'_i$ para todo $1 \leq i \leq n$.
 \end{definition}
 
-Desde que $\gg^*$ é de fato uma relação tem-se que a igualdade entre derivações nada mais é do que a igualdade entre tuplas ordenadas.
+Desde que $\vdash^*$ é de fato uma relação tem-se que a igualdade entre derivações nada mais é do que a igualdade entre tuplas ordenadas.
 
 \begin{definition}[Linguagem de uma gramática]\label{def:LinaugemGramatica}
-	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$ a linguagem gerada por $G$, denotada por $\mathcal{L}(G)$, corresponde ao conjunto formado por todas as palavras sobre $\Sigma$ que são deriváveis a partir do variável inicial da gramática, ou seja, $\mathcal{L}(G) = \{w \in \Sigma^* \mid S \gg^* w\}$.
+	Dado uma gramática $G = \langle V, \Sigma, S, P \rangle$ a linguagem gerada por $G$, denotada por $\mathcal{L}(G)$, corresponde ao conjunto formado por todas as palavras sobre $\Sigma$ que são deriváveis a partir do variável inicial da gramática, ou seja, $\mathcal{L}(G) = \{w \in \Sigma^* \mid S \vdash^* w\}$.
 \end{definition}
 
 \begin{example}
