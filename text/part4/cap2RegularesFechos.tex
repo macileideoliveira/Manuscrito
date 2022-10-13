@@ -130,3 +130,31 @@ Para os dois próximos resultados considere sempre que as linguagens são defini
 \begin{proof}
 	Assuma que $L_1$ e $L_2$ são duas linguagens regulares, assim existem dois AFD $A_1$ e $A_2$ com $\mathcal{L}(A_1) = L_1$ e $\mathcal{L}(A_2) = L_2$, pelo Teorema \ref{teo:FechoComplementoRegular} tem-se que existem dois dois AFD $A'_1$ e $A'_2$ tais que $\mathcal{L}(A'_1) = \overline{\mathcal{L}(A_1)}$ e $\mathcal{L}(A'_2) = \overline{\mathcal{L}(A_2)}$, agora pelo Teorema \ref{teo:FechoUniaoRegular} tem-se que $\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}$ é uma linguagem regular, logo existe um AFD $A_0$ tal que $\mathcal{L}(A_0) = \overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}$, e novamente pelo Teorema \ref{teo:FechoComplementoRegular} tem-se que $\overline{\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}}$ é uma linguagem regular, mas pelas operações sobre conjunto tem-se que $\overline{\overline{\mathcal{L}(A_1)} \cup \overline{\mathcal{L}(A_2)}} = \mathcal{L}(A_1) \cap \mathcal{L}(A_2)$, consequentemente, $L_1 \cap L_2$ é regular.
 \end{proof}
+
+Note que o Teorema \ref{teo:FechoIntersecaoRegular} determinar que a interseção de duas linguagens regulares ainda é uma linguagem regular, mas na prova do mesmo não é mostrado um autômato que reconhece tal linguagem, o que contrasta com a prova do Teorema \ref{teo:FechoUniaoRegular}, apesar disso, através do Teorema \ref{teo:FechoIntersecaoRegular} pode-se concluir o resultado a seguir.
+
+\begin{corollary}
+	Dado duas linguagem regulares $L_1$ e $L_2$, existe um AFD $A$ tal que $\mathcal{L}(A) = L_1 \cap L_2$.
+\end{corollary}
+
+\begin{proof}
+	Assuma que $L_1$ e $L_2$ são duas linguagens regulares, assim por definição existem dois AFD $A_1 = \langle Q, \Sigma, \delta_1, q_0, F_1 \rangle$ e $A_2 = \langle S, \Sigma, \delta_2, s_0, F_2 \rangle$ tal que $\mathcal{L}(A_1) = L_1$ e $\mathcal{L}(A_2) = L_2$, sem perda de generalidade assuma que $Q \cap S = \emptyset$, agora construa o autômato $A = \langle Q \times S, \Sigma, \delta, (q_0, s_0), F_1 \times F_2\rangle$ onde para todo $(q, s) \in Q \times S$ e $a \in \Sigma$ tem-se que, 
+	\begin{eqnarray*}
+		\delta((q, s), a) = (\delta_1(q, a), \delta_2(s, a))
+	\end{eqnarray*}
+	desde que $\delta_1$ e $\delta_2$ são funções totais, tem-se que $\delta$ também será total, além disso, como $F_1 \times F_2 \subseteq Q \times S$, pode-se concluir que $A$ é um autômato bem definido. Agora desde que $A_1$ e $A_2$ são ambos AFD e pela construção de $\delta$ é claro que $A$ também será um AFD, além disso, por indução sobre o tamanho das palavras $w$ tem-se para todo $(q, s) \in Q \times S$ que, 
+	\begin{eqnarray*}
+		\widehat{\delta}((q, s), w) = (\widehat{\delta_1}(q, w), \widehat{\delta_2}(s, w))
+	\end{eqnarray*}
+	por fim note que para todo $w \in \Sigma^*$ tem-se que,
+	\begin{eqnarray*}
+		w \in \mathcal{L}(A) & \Longleftrightarrow & \widehat{\delta}((q_0, s_0), w) \in F_1 \times F_2\\
+		& \Longleftrightarrow & (\widehat{\delta_1}(q_0, w), \widehat{\delta_2}(s_0, w)) \in F_1 \times F_2\\
+		& \Longleftrightarrow & \widehat{\delta_1}(q_0, w) \in F_1 \text{ e } \widehat{\delta_2}(s_0, w) \in F_2\\
+		& \Longleftrightarrow & w \in \mathcal{L}(A_1) \text{ e } w \in \mathcal{L}(A_2)\\
+		& \Longleftrightarrow & w \in \mathcal{L}(A_1) \cap \mathcal{L}(A_2)
+	\end{eqnarray*}
+	portanto, tem-se que $\mathcal{L}(A) = L_1 \cap L_2$, o que conclui a prova.
+\end{proof}
+
+O próximo operador de fecho para as linguagens regulares é a concatenação de linguagem, definida anteriormente (Definição \ref{def:ConcatenacaoLinguagem}) no Capítulo \ref{cap:LinguagemFormais}.
