@@ -2,7 +2,7 @@
 *.swp
 *.ptc
 *.DS_Store
-*.pdf
+##*.pdf
 *.sh
 
 ## Core latex/pdflatex auxiliary files:
@@ -39,7 +39,7 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
-*.pdf
+##*.pdf
 
 ## Build tool directories for auxiliary files
 # latexrun
