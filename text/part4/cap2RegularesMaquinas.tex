@@ -1222,7 +1222,7 @@ Pode-se agora finalmente enunciar o Teorema Myhill-Nerode que estabelece uma car
 	Direto dos Lemas \ref{lema:LimiteInferiorEstados}, \ref{lema:LimiteSuperiorEstados} e \ref{lema:UnicadadeMinAFD}.
 \end{proof}
 
-Apesar de extremamente elegante o resultado exposto pelo Teorema Myhill-Nerode apresentado anteriormente, nãoé um algoritmo explícito (no sentido de um conjunto finito de instruções) para construir um AFD mínimo equivalente a outro AFD dado, o que o teorema faz é construir para uma linguagem regular o autômato mínimo que a reconhece. Por outro lado o processo de obter um AFD mínimo a partir de um outro AFD dado é chamado de minimização \cite{benjaLivro2010}, e o mesmo é baseado na ideia de relação equivalência entre estados e do espaço quociente de estados em um AFD. Primeiro será apresentado a formalização matemática da construção do AFD quociente e depois o pseudo-código de tal construção.
+Apesar de extremamente elegante o resultado exposto pelo Teorema Myhill-Nerode apresentado anteriormente, nãoé um algoritmo explícito (no sentido de um conjunto finito de instruções) para construir um AFD mínimo equivalente a outro AFD dado, o que o teorema faz é construir para uma linguagem regular o autômato mínimo que a reconhece. Por outro lado, o processo de obter um AFD mínimo a partir de um outro AFD dado é chamado de minimização \cite{benjaLivro2010}, e o mesmo é baseado na ideia de relação equivalência entre estados e do espaço quociente de estados em um AFD. Primeiro será apresentado a formalização matemática da construção do AFD quociente e depois o pseudo-código de tal construção.
 
 \begin{definition}[Estados Equivalentes]\label{def:EquivalenciaEstados}
 	Seja $A = \langle Q, \Sigma, \delta, q_0, F\rangle$ um AFD. A relação de equivalência entre dois estados $q, q' \in Q$ será denotado por $q \equiv q'$ e será verdadeira quando para todo $w \in \Sigma^*$ tem-se que $\widehat{\delta}(q, w) \in F \Longleftrightarrow \widehat{\delta}(q', w) \in F$.
@@ -1452,9 +1452,9 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 	\end{figure}
 \end{example}
 
-\section{Máquinas de Mealy}\label{sec:MealyMoore}
+\section{Máquinas de Mealy e Moore}\label{sec:MealyMoore}
 
-Uma classe particularmente interessante de autômatos finitos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas (ou autômatos) de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização das máquinas de Mealy\footnote{Para leitores interessados nas máquinas de Moore é recomendado a leitura de \cite{menezes1998LFA}.} e será aqui trabalhado a ideia de usar tais máquinas como tradutoras, além disso, será apresentado o relacionamento de tais máquinas com os circuitos sequências. 
+Uma classe particularmente interessante de autômatos finitos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas (ou autômatos) de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização das máquinas de Mealy e das máquinas de Moore, será aqui trabalhado a ideia de usar tais máquinas como tradutoras, além disso, será apresentado o relacionamento das máquinas de Mealy com os circuitos sequências. 
 
 Como dito em \cite{reinier2019}, diferente dos autômatos sem saída vistos nas seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN} as máquinas de Mealy são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN como será visto a seguir.  
 
@@ -1614,7 +1614,7 @@ O resultado a seguir garante que máquinas de Mealy traduzem linguagens regulare
 Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footnote{Outro modelo que é equivalente as máquinas de Mealy nesse sentido são as máquinas de Moore \cite{moore1956}.} de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos. O Exemplo \ref{exe:MaquinaCircuito1} mostra como usar máquinas de Mealy para resolver problemas e a partir de tais máquinas produzir um circuito para resolver o problema.
 
 \begin{example}\label{exe:MaquinaCircuito1}
-	Considere o problema de detectar se uma palavra sobre o alfabeto $\{0,1\}$ termina com uma sequência da forma $1010$. Esse problema é solucionado pela máquina de Mealy $A$ representada pela Figura , sobre está máquina é claro que $\widehat{\psi}(q_0, w) = v0001$, se e somente se, tem-se que $w = u1010$ para algum $v, u \in \{0,1\}^*$, ou seja, o último caractere da palavra de saída será $1$ apenas no caso da palavra de entrada terminar em $1010$.
+	Considere o problema de detectar se uma palavra sobre o alfabeto $\{0,1\}$ termina com uma sequência da forma $1010$. Esse problema é solucionado pela máquina de Mealy $A$ representada pela Figura \ref{fig:MaquinaCircuito1}, sobre está máquina é claro que $\widehat{\psi}(q_0, w) = v0001$, se e somente se, tem-se que $w = u1010$ para algum $v, u \in \{0,1\}^*$, ou seja, o último caractere da palavra de saída será $1$ apenas no caso da palavra de entrada terminar em $1010$.
 	
 	\begin{figure}[h]
 		\centering
@@ -1642,7 +1642,7 @@ Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footno
 		\label{fig:MaquinaCircuito1}
 	\end{figure}
 
-	Agora para construir uma implementação física de tal máquina\footnote{Um implementação física aqui diz respeito a projeto e construir o circuito que executa tal máquina.} primeiro deve-se usar variáveis de estado para poder codificar os estados, aqui será usado as variáveis $A$ e $B$ com a seguinte codificação:
+	Agora para construir uma implementação física de tal máquina\footnote{Um implementação física aqui diz respeito ao projeto para construir o circuito que executa tal máquina.} primeiro deve-se usar variáveis de estado para poder codificar os estados, aqui será usado as variáveis $A$ e $B$ com a seguinte codificação:
 	
 	\begin{table}[h]
 		\centering
