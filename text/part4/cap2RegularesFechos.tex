@@ -176,12 +176,47 @@ Nesta seção dando continuidade ao estudo dos operadores de fecho sobre as ling
 \end{theorem}
 
 \begin{proof}
-	Assuma que $L_1$ e $L_2$ são linguagens regulares, ou seja, assim que existem dois AFD $A_1 = \langle Q, \Sigma, \delta_1, q_0, F_1 \rangle$ e $A_2 = \langle S, \Sigma, \delta_2, s_0, F_2 \rangle$ tal que $\mathcal{L}(A_1) = L_1$ e $\mathcal{L}(A_2) = L_2$, agora sem perda de generalidade assuma que $Q \cap S = \emptyset$, agora construa um AFN $A = \langle Q \cup S, \Sigma, \delta, q_0, F\rangle$ onde a função de transição $\delta: (Q \cup S) \times \Sigma \rightarrow \wp(Q \cup S)$ é definida para todo $(q, a) \in  (Q \cup S) \times \Sigma$ como,
+	Assuma que $L_1$ e $L_2$ são linguagens regulares, assim pelo Teorema \ref{teo:GRD-AFD} existem duas GLD $G_1 = \langle V_1, \Sigma, S_1, P_1 \rangle$ e $G_2 = \langle V_2, \Sigma, S_2, P_2 \rangle$, sem perda de generalidade assuma que $V_1 \cap V_2 = \emptyset$. Assim pode-se construir uma nova GLD $G = \langle V_1 \cup V_2 \cup \{S\}, \Sigma, S, P\rangle$ com $P = P_1 \cup P_2 \cup \{S \rhd S_1S_2\}$, agora para todo $w \in \Sigma^*$ tem-se que,
 	\begin{eqnarray*}
-		\delta_N(q, a) & = & \left\{\begin{array}{ll}	\{\delta_1(q, a)\}, & \hbox{se } q \in Q - F_1\\	\{\delta_1(q, a)\delta_2(s_0, a)\},  & \hbox{se } q \in F_1\\ \{\delta_2(q, a)\}, &   \hbox{se } q \in S\\ \emptyset, & \hbox{qualquer outro caso} \end{array}\right.
+		w \in \mathcal{L}(G) & \Longleftrightarrow & S \vdash^*_G w\\
+		& \Longleftrightarrow & S \vdash S_1S_2 \vdash^*_G w\\
+		& \Longleftrightarrow & (\exists u, v \in \Sigma)[w = uv \land S_1 \vdash^*_{G_1} u \land S_2 \vdash^*_{G_2} v]\\
+		& \Longleftrightarrow & (\exists u, v \in \Sigma)[w = uv \land u \in \mathcal{L}(G_1) \land v \in \mathcal{L}(G_2)]\\
+		& \Longleftrightarrow &  w \in \mathcal{L}(G_1) \mathcal{L}(G_2)\\
+		& \Longleftrightarrow &  w \in L_1L_2
 	\end{eqnarray*}
-	além disso, tem-se que,
-	\begin{eqnarray*}
-		F & = & \left\{\begin{array}{ll} F_2, & \text{se } \lambda \notin L_2\\ F_1 \cup F_2, & \text{senão}\end{array}\right.
-	\end{eqnarray*}
+	portanto, $\mathcal{L}(G) = L_1L_2$, e desde que $G$ é uma GLD pelo Teorema \ref{teo:GRD-AFD} tem-se que $L_1L_2$ é uma linguagem regular.
+\end{proof}
+
+\begin{lemma}[Fecho da Potência]\label{lema:FechoPotenciaRegular}
+	Se $L$ é uma linguagem regular, então para todo $n \in \mathbb{N}$ tem-se que $L^n$ é uma linguagem regular.
+\end{lemma}
+
+\begin{proof}
+	Inicialmente note que pela Definição \ref{def:PotenciaLinguagens} tem-se para todo $n \in \mathbb{N}$ que $L^n = LL^{n-1}$, e também que $L^0 = \{\lambda\}$, dito isso, assuma que $L$ é uma linguagem regular, agora por indução sobre $n$ será demonstrado que $L^n $ será uma linguagem regular.
+	
+	\begin{itemize}
+		\item \textbf{Base da indução}
+		
+		Desde que $L^0 = \{\lambda\}$ e como $G = \langle \{S\}, \Sigma, S, P\rangle$ com $P = \{S \rhd \lambda \}$ é uma gramática regular tal que $\mathcal{L}(G) =L^0$, e portanto,  $L^0$ é regular.
+		
+		\item \textbf{Hipótese indutiva (HI)}: 
+		
+		Assuma que $L^n$ é uma linguagem regular.
+		
+		\item \textbf{Passo indutivo:}
+		
+		Dado a linguagem $L^{n+1}$, sabe-se $L^{n+1} = LL^{n}$, agora desde que por hipótese $L$ é uma linguagem regular e por \textbf{(HI)} $L^n$ é também uma linguagem regular, tem-se pelo Teorema \ref{teo:FechoConcatenacaoRegular} que $LL^{n}$ é uma linguagem regular e, portanto, $L^{n+1}$ é uma linguagem regular.
+	\end{itemize}
+	Consequentemente para qualquer que seja o $n \in \mathbb{N}$ tem-se que $L^n$ é uma linguagem regular.
+\end{proof}
+
+O próximo resultado estabelece que o fecho de Kleene é um fecho para a classe de linguagens regulares, ou seja, para qualquer linguagem regular o seu fecho de Kleene também será uma linguagem regular.
+
+\begin{theorem}[Fecho de Kleene]
+	Se $L$ é uma linguagem regular, então $L^*$ é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	Suponha que $L$ seja uma linguagem regular, assim dado a Definição \ref{def:FechoPositivoKleeneLinguagem} tem-se pelo Lema \ref{lema:FechoPotenciaRegular} e pelo Teorema \ref{teo:FechoUniaoRegular} que $L^*$ é uma linguagem regular.
 \end{proof}

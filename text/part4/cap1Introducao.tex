@@ -277,7 +277,7 @@ Similarmente ao que ocorre com os alfabetos, as linguagens por serem conjuntos `
 	O leitor mais atento pode perceber que a propriedade involutiva da operação reversa sobre palavras é ``herdada'' para a reversão sobre linguagens, isto é, para qualquer linguagem $L$ tem-se que $(L^r)^r = L$. 
 \end{remark}
 
-\begin{definition}[Linguagem Potência]
+\begin{definition}[Linguagem Potência]\label{def:PotenciaLinguagens}
 	Seja $L$ uma linguagem, a linguagem potência de $L$, denotada por $L^n$, é definida recursivamente para todo $n \in \mathbb{N}$ como:
 	\begin{eqnarray}
 		L^0 & = &\{\lambda\}\\
@@ -461,7 +461,7 @@ O leitor pode ter notado que como gramática formais possuem um conjunto finito 
 	\item $L^3$.
 	\item $PRE(L)$.
 	\item $SUF(L^2)$.
-	\item $w$ tal que $|w| = \bigsqcup \{|w'| \mid w' \in L^3\}$.
+	\item todos os $w$'s tais que $|w| = \bigsqcup \{|w'| \mid w' \in L^3\}$.
 \end{exerList}
 
 \begin{problem}\label{prob:Linguagem4}
@@ -481,7 +481,7 @@ O leitor pode ter notado que como gramática formais possuem um conjunto finito 
 \end{problem}
 
 \begin{exerList}
-	\item Se $L_1 \cap L_2 \neq \emptyset$, então $PRE(L_1) \cap PRE(L_2) = \emptyset$.
+	\item Se $L_1 \cap L_2 = \emptyset$, então $PRE(L_1) \cap PRE(L_2) \neq \emptyset$.
 	\item Se $L_1 \subseteq L_2$, então $SUF(L_1) \cap SUF(L_2) = \emptyset$.
 	\item Se $L_1 \subseteq L_2$, então $L_1^r \subseteq L_2^r$.
 	\item Se $L_1 \subseteq L_2$, então para todo $L$ tem-se que $LL_1 \subseteq LL_2$. 
