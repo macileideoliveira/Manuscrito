@@ -2,12 +2,15 @@
 
 \epigraph{Uma teoria matemática não deve ser considerada completa até que a tenhamos feito tão clara que a possamos explicar ao primeiro homem que encontramos na rua.}{David Hilbert}
 
-No Capítulo \ref{cap:LinguagemRegulares} a noção de linguagens regulares foi formalizado utilizado pela das máquinas de computação, isto é, sobre a perspectiva dos autômatos finitos, em tal perspectiva as linguagens são vistas como sendo conjuntos de palavras sobre os quais as máquinas tinha a tarefa de reconhecer seus elementos, ou seja, decidir quando um dada palavra pertencia ou não a linguagem, agora neste capítulo serão apresentada as linguagens regulares através da ótica de formalizamos geradores. 
-
-
 \section{Expressões Regulares}\label{sec:ExpressaoRegulares}
 
-Neste seção será apresentada uma nova visão de aspecto mais algébrico para as linguagens regulares, essa nova visão foi introduzida por Kleene em seu seminal \textit{paper} ``\textit{Representation of events in nerve nets and finite automata}'' \cite{kleene1951}, tal perspectiva consiste em um sistema formal (com sintaxe e semântica) chamado de expressões  regulares, a seguir é formalizado a sintaxe das expressões regulares.
+No Capítulo \ref{cap:LinguagemRegulares} a noção de linguagens regulares foi formalizado utilizado pela das máquinas de computação, isto é, sobre a perspectiva dos autômatos finitos, em tal perspectiva as linguagens são vistas como sendo conjuntos de palavras sobre os quais as máquinas tinha a tarefa de reconhecer seus elementos, ou seja, decidir quando um dada palavra pertencia ou não a linguagem, agora neste capítulo serão apresentada as linguagens regulares através da ótica de geradores.
+
+Em primeiro lugar será apresentada uma visão de aspecto mais algébrico para as linguagens regulares, essa nova visão foi introduzida por Kleene em seu seminal \textit{paper} ``\textit{Representation of events in nerve nets and finite automata}'' \cite{kleene1951}, tal perspectiva consiste em um sistema formal (com sintaxe e semântica) chamado de expressões  regulares, a seguir é formalizado a sintaxe das expressões regulares.
+
+\begin{remark}
+	Também é possível encontrar referência em que o termo expressão regular seja trocado para álgebra de Kleene.
+\end{remark}
 
 \begin{definition}[Conjunto das Expressões Regulares -- Sintaxe]\label{def:ExpRegularesSintaxe}
 	Seja $\Sigma$ uma alfabeto, o conjunto de todas as expressões regulares sobre $\Sigma$, denotado por $Exp_\Sigma$, é o conjunto indutivamente gerado pelas seguintes regras.
@@ -20,9 +23,6 @@ Neste seção será apresentada uma nova visão de aspecto mais algébrico para 
 
 No que diz respeito as expressões regulares é comum assumir que $+, \cdot, (, ), ^* \notin \Sigma$, assim uma expressão regular nem sempre é uma palavra sobre $\Sigma$, em geral os símbolos $+$ e $\cdot$ são lidos como soma e produto \cite{carroll1989}. Além disso, como dito em \cite{benjaLivro2010} se $r_1, r_2 \in Exp_\Sigma$, então costuma-se escrever $r_1r_2$ em vez de $r_1\cdot r_2$.
 
-\begin{remark}
-	Também é possível encontrar referência em que o termo expressão regular seja trocado para álgebra de Kleene.
-\end{remark}
 
 \begin{example}
 	Considerando o alfabeto $\{0,1\}$ tem-se que $(1 + 1)0, 01 \in Exp_\Sigma$. Essa afirmação pode ser verificada construindo tais palavras facilmente, basta pela regra \textbf{(B)} tem-se que  $0$ e $1$ são expressões regulares primitivas, assim usando a regra \textbf{(P)} pode-se construir as expressões $1 + 1$ e $01$, agora aplicando novamente a regra \textbf{(P)} sobre a expressão $1 + 1$ pode-se gerar a expressão $(1 + 1)$, finalmente, aplicando \textbf{(P)} novamente obtem-se a expressão $(1+1)0$ e isso mostra que de fato $(1 + 1)0, 01 \in Exp_\Sigma$.

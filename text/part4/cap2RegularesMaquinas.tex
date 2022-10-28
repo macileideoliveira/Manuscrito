@@ -730,7 +730,7 @@ O Algoritmo \ref{alg:AFN-AFD}  é uma melhoria do método proposto por Rabin e S
 Os $\lambda$-Autômatos Finitos Não-determinísticos, ou simplesmente, $\lambda$-AFN são como dito em \cite{menezes1998LFA}, uma generalização do modelo de AFN em que são permitidas transições entre estados diferentes usando (ou consumindo) a palavra vazia, tais transições recebem o nome de $\lambda$-transições, a seguir tais autômatos serão apresentados formalmente.
 
 \begin{definition}[$\lambda$-Autômatos Finitos Não-determinísticos]\label{def:LAFN}
-	Um $\lambda$-AFN é uma estrutura $A = \langle Q, \Sigma, \underline{\delta_N}, q_0, F\rangle$ onde: $Q, \Sigma, q_0$ e $F$ são da mesma forma que na Definição \ref{def:AFD}, já $\underline{\delta_N} : Q \times (\Sigma \cup \{\lambda\}) \rightarrow \wp(Q)$ é uma função total (chamada $\lambda$-função de transição não determinística).
+	Um $\lambda$-AFN é uma estrutura $A = \langle Q, \Sigma, \underline{\delta_N}, q_0, F\rangle$ em que $Q, \Sigma, q_0$ e $F$ são da mesma forma que na Definição \ref{def:AFD}, já $\underline{\delta_N}$ é uma função total com a seguinte assinatura $\underline{\delta_N} : Q \times (\Sigma \cup \{\lambda\}) \rightarrow \wp(Q)$, tal função é chamada de função de transição não determinística com $\lambda$-movimentos.
 \end{definition}
 
 A representação usando grafos de transição dos $\lambda$-AFN e similar a representação dos AFN da seção anterior, a única diferença é que podem haver transições rotuladas pelo símbolo $\lambda$, isto é, podem existir no grafo arestas entre vértices que são rotuladas por $\lambda$, e o mesmo vale para a representação das árvores de computação.
@@ -881,7 +881,7 @@ Assim como para o caso dos AFN uma palavra qualquer $w \in \Sigma^*$ será dita 
 Os aspectos relacionados a mostrar que um $\lambda$-AFN reconhece uma linguagem $L$ são similares ao mesmo aspectos com respeito aos AFN.
 
 \begin{example}\label{exe:LinguagemLAFN1}
-	O $\lambda$-AFN representado pelo grafo de transição da Figura \ref{fig:Linguagem-LAFN1} a seguir reconhece a linguagem $L = \{w \in \{1,2,3\}^* \mid w = 1^i2^j3^k \text{ com } i,j,k \in \mathbb{N}\}$.
+	O $\lambda$-AFN representado pelo grafo de transição da Figura \ref{fig:Linguagem-LAFN1}, reconhece a linguagem $L = \{w \in \{1,2,3\}^* \mid w = 1^i2^j3^k \text{ com } i,j,k \in \mathbb{N}\}$.
 	
 	\begin{figure}[h]
 		\centering
@@ -942,7 +942,7 @@ Os aspectos relacionados a mostrar que um $\lambda$-AFN reconhece uma linguagem 
 	\label{fig:Linguagem-LAFN2}
 \end{figure}
 
-\begin{theorem}[Transformação $\lambda$-AFN-AFN]\label{teo:LAFN-AFD}
+\begin{theorem}[Transformação $\lambda$-AFN-AFD]\label{teo:LAFN-AFD}
 	Se $L = \mathcal{L}(A)$ para algum $\lambda$-AFN $A$, então existe um  AFD $A'$ tal que $L = \mathcal{L}(A')$.
 \end{theorem}
 
@@ -1173,10 +1173,10 @@ O próximo lema estabelece que para alguma linguagem $L$ no caso $\mathcal{H}_L$
 \end{definition}
 
 \begin{definition}[AFD Mínimo]
-	Seja $L$ uma linguagem regular tal que $L = \mathcal{L}(A)$ para algum um AFD $A$. O AFD $A$ será dito ser mínimo se, e somente se,  e para todo outro AFD $B$ tal que $L= \mathcal{L}(B)$ tem-se que $dim(A) \leq dim(B)$. 
+	Seja $L$ uma linguagem regular tal que $L = \mathcal{L}(A)$ para algum um AFD $A$. O AFD $A$ será dito ser mínimo se, e somente se,  para todo outro AFD $B$ tal que $L= \mathcal{L}(B)$ tem-se que $dim(A) \leq dim(B)$. 
 \end{definition}
 
-O próximo resultado mostra que não existe nenhum autômato como menos estados que o AFD construído na prova do Lema \ref{lema:LimiteSuperiorEstados}, ou seja, o método de construção mostrado na  na prova do Lema \ref{lema:LimiteSuperiorEstados} gera o AFD mínimo de qualquer linguagem.
+O próximo resultado mostra que não existe nenhum autômato como menos estados que o AFD construído na prova do Lema \ref{lema:LimiteSuperiorEstados}, ou seja, o método de construção mostrado na prova do Lema \ref{lema:LimiteSuperiorEstados} gera o AFD mínimo de qualquer linguagem.
 
 \begin{lemma}\label{lema:UnicadadeMinAFD}
 	Seja $L$ uma linguagem regular, assim o  AFD $A_L$ construído no Lema \ref{lema:LimiteSuperiorEstados} é o único (a menos de isomorfismo) mínimo AFD que aceita $L$.
@@ -1445,7 +1445,8 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 			(A) edge [loop above]				node		 {$0$} ( )
 			(B) edge [bend left]  				node 		 {$1$} (A)
 			(B) edge [bend left]  				node 		 {$0$} (C)
-			(C) edge [bend left]  				node 		 {$0$} (B);
+			(C) edge [bend left]  				node 		 {$0$} (B)
+			(C) edge [loop above]				node		 {$1$} ( );
 		\end{tikzpicture}
 		\caption{Grafo do AFD do Exemplo \ref{exe:LinguagemLAFN1}.}
 		\label{fig:Linguagem-AFDM-2}
@@ -1454,7 +1455,7 @@ O exemplo a seguir ilustra a aplicação do Algoritmo \ref{alg:AFD-Quociente} pa
 
 \section{Máquinas de Mealy e Moore}\label{sec:MealyMoore}
 
-Uma classe particularmente interessante de autômatos finitos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas (ou autômatos) de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização das máquinas de Mealy e das máquinas de Moore, será aqui trabalhado a ideia de usar tais máquinas como tradutoras, além disso, será apresentado o relacionamento das máquinas de Mealy com os circuitos sequências. 
+Uma classe particularmente interessante de autômatos são os chamados \textbf{autômatos com saída}, dos quais se destacam as máquinas de Mealy \cite{mealy1955} e Moore \cite{moore1956}, além de serem alicerces fundamentais da teoria dos autômatos finitos, tais máquina tem uma grande gama de aplicações práticas. Nesta seção será apresentada ao leitor uma formalização de ambas as máquinas de Moore, e será trabalhado a ideia de tais máquinas como tradutoras, além disso, será apresentado o relacionamento das máquinas de Mealy com os circuitos sequências. 
 
 Como dito em \cite{reinier2019}, diferente dos autômatos sem saída vistos nas seções \ref{sec:AFD}, \ref{sec:AFN} e \ref{sec:LAFN} as máquinas de Mealy são capazes de apresentar saídas mais complexas que as típicas saídas booleanas (aceita/rejeita) dos AFD, AFN e $\lambda$-AFN como será visto a seguir.  
 
@@ -1599,19 +1600,19 @@ Diferentemente dos AFD, AFN e $\lambda$-AFN o conjunto saída de qualquer máqui
 
 O resultado a seguir garante que máquinas de Mealy traduzem linguagens regulares em linguagens regulares,  tal resultado diz que uma máquina de Mealy é um computador equipado com um compilador que compila a linguagem regular $\mathcal{L}(A)$ na  linguagem regular $TRAD(A)$, em uma visão mais abstrata e algébrica uma máquina de Mealy computa um homomorfismo entre duas linguagens regulares.
 
-\begin{theorem}
+\begin{theorem}\label{teo:TraducaoRegular}
 	Se $A$ é uma máquina de Mealy, então $TRAD(A)$ é uma linguagem regular.
 \end{theorem}
 
 \begin{proof}
-	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q \cup \{q_z\}, \Lambda, \delta', q_0, F \rangle$ onde $q_z \notin Q$ e a função de transição $\delta'$ é definida pelas regras: 
+	Suponha que  $A = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0, F\rangle$ é uma máquina de Mealy, agora defina um AFD $A' = \langle Q \cup \{q_z\}, Alf, \delta', q_0, F \rangle$ onde $Alf = \{a \in \Lambda^* \mid \psi(q, b) = a\}$, além disso, $q_z \notin Q$ e a função de transição $\delta'$ é definida pelas regras: 
 	\begin{eqnarray*}
 		\delta'(q, a) & = & \left\{\begin{array}{ll}	\delta(q, b) , & \hbox{se } q \in Q \text{ e } \psi(q, b) = a\\	q_z,  & \hbox{senão}\end{array}\right.
 	\end{eqnarray*}
 	claramente $\delta'$ está bem definida e é total. Além disso, por indução não é difícil verificar\footnote{Este é um bom exercício ao leitor.} que $\widehat{\delta'}(q_0, w) \in F$ se, e somente se, $\widehat{\delta}(q_0, u) \in F$ e $\widehat{\psi}(q_0, u) = w$ com $w \in \Lambda^*, u \in \Sigma^*$ e $q_f \in F$. Assim claramente $\mathcal{L}(A') = TRAD(A)$ e, portanto, $TRAD(A)$ é uma linguagem regular.
 \end{proof}
 
-Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footnote{Outro modelo que é equivalente as máquinas de Mealy nesse sentido são as máquinas de Moore \cite{moore1956}.} de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos. O Exemplo \ref{exe:MaquinaCircuito1} mostra como usar máquinas de Mealy para resolver problemas e a partir de tais máquinas produzir um circuito para resolver o problema.
+Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo de autômato com saída como uma formalização para descrever matematicamente os circuitos sequências síncronos. O Exemplo \ref{exe:MaquinaCircuito1} mostra como usar máquinas de Mealy para resolver problemas e a partir de tais máquinas produzir um circuito para resolver o problema.
 
 \begin{example}\label{exe:MaquinaCircuito1}
 	Considere o problema de detectar se uma palavra sobre o alfabeto $\{0,1\}$ termina com uma sequência da forma $1010$. Esse problema é solucionado pela máquina de Mealy $A$ representada pela Figura \ref{fig:MaquinaCircuito1}, sobre está máquina é claro que $\widehat{\psi}(q_0, w) = v0001$, se e somente se, tem-se que $w = u1010$ para algum $v, u \in \{0,1\}^*$, ou seja, o último caractere da palavra de saída será $1$ apenas no caso da palavra de entrada terminar em $1010$.
@@ -1783,6 +1784,141 @@ Em seu seminal artigo Mealy \cite{mealy1955}, propõe o uso de seu modelo\footno
 		\label{fig:Circuito1}
 	\end{figure}
 \end{example}
+
+Em contrapartida as máquinas de Mealy, que como já dito, traduzem cada transição da máquina em um fragmento da palavra de saída, existem as máquina de Moore, nomeadas em homenagem a Edward F. Moore (1925-2003) que as propôs em seu seminal artigo \cite{moore1956}, tais máquinas não traduzem as transições em prefixos da palavras de saída, em vez disso, cada estado da máquina é mapeado em um símbolo do alfabeto de saída.
+
+\begin{definition}[Máquina de Moore]\label{def:MooreMachine}
+	Uma máquina (ou autômato) de Moore é uma estrutura $A = \langle Q, \Sigma, \Lambda, \delta, \Phi, q_0, F\rangle$ onde $Q, \Sigma, F$ e $q_0$ são da mesma forma que na Definição \ref{def:AFD}. Já $\delta: Q \times \Sigma \rightarrow Q$ é uma função parcial de transição e $\Lambda$ um alfabeto chamado \textbf{alfabeto de saída} e $\Phi: Q \rightarrow \Lambda^*$ é a função total de escrita dos estado da máquina de Moore.
+\end{definition}
+
+\begin{example}\label{exe:Moore1}
+	A estrutura $M = \langle \{q_0, q_1, q_3\}, \{a, b\}, \{x, y, z\}, \delta, \Phi, q_0, \{q_1, q_2\} \rangle$ onde a função de transição é esboçada pela Tabela \ref{tab:TransicaoMoore1} a seguir, sendo a função de escrita dos estados é definida como: $\Phi(q_0) = xy, \Phi(q_1) = yz$ e $\Phi(q_2) = zx$. É uma máquina de Moore.
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{c|cc}
+			\backslashbox{$Q$}{$\Sigma$} & a & b\\ \hline
+			$q_0$ & $q_1$ & $q_2$ \\
+			$q_1$ & $q_1$ & $q_2$ \\
+			$q_2$ & $q_0$ & $q_2$ 
+		\end{tabular}
+		\caption{Tabela de transição para a máquina de Moore do Exemplo \ref{exe:Moore1}.}
+		\label{tab:TransicaoMoore1}
+	\end{table}
+\end{example}
+
+Novamente similar aos AFD pode-se utilizar a ideia de grafo de transição para representar visualmente as máquinas de Moore a única diferença que esta representação terá em relação aos grafos que representam os AFD, é que os vértices serão rotulados por pares $(q, w) \in Q \times \Lambda$ e $q_j$ em que $\Phi(q) = w$.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[>=stealth, shorten >=1pt, node distance=3.0cm, on grid, auto, state/.append style={minimum size=1em}, thick ]
+		\node[state, initial]							(A)               	{$(q_0, xy)$};
+		\node[state, accepting]							(B) [right of=A] 	{$(q_1, yz)$};
+		\node[state]									(C) [below of=B] 	{$(q_2, zx)$};
+		\path[->] (A) +(-1,0) edge (A)
+		
+		%Transições:
+		%(Partida) edge [tipo da seta] node {simbolo lido} (Destino)
+		(A)	edge			  				node   				  {$a$} (B)
+		(A) edge [bend left]  				node [below]		  {$b$} (C)
+		(B) edge [loop right]				node				  {$a$} ( )
+		(B)	edge			  				node   				  {$b$} (C)
+		(C) edge [bend left]  				node   				  {$a$} (A)
+		(C) edge [loop right]				node				  {$b$} ( );
+	\end{tikzpicture}
+	\caption{Representação da máquina de Moore do Exemplo \ref{exe:Mealy1}.}
+	\label{fig:MaquinaMoore1}
+\end{figure}
+
+\begin{example}\label{exe:MaquinaMooreGrafo1}
+	A representação do grafo de transição da máquina de Mealy do Exemplo \ref{exe:Moore1} pode ser observada na Figura \ref{fig:MaquinaMoore1}.
+\end{example}
+
+\begin{remark}
+	Note que para qualquer $w \in \Sigma^*$ tem-se que $\Phi(\widehat{\delta}(q_0,w))$ expressa a saída da máquina de Moore para a palavra $w$.
+\end{remark}
+
+Para que as máquinas de Moore possam ser vistas como tradutores é necessário apresentar uma função de tradução para tais máquinas, sendo esta apresentada a seguir.
+
+\begin{definition}[Função de tradução das máquinas de Moore]
+	Dado uma máquina de Moore $A = \langle Q, \Sigma, \Lambda, \delta, \Phi, q_0, F\rangle$ a função de tradução $\widehat{\Phi} : Q \times \Sigma^* \rightarrow \Lambda^*$ é definida por recursão como se segue.
+	\begin{eqnarray}\label{eq:ExtensaoDaFuncaoDetraducaoMoore}
+		\widehat{\Phi}(q, \lambda)& = & \lambda \\
+		\widehat{\Phi}(q, wa)& = & \widehat{\Phi}(q, w)\Phi(\widehat{\delta}(q, wa))
+	\end{eqnarray}
+\end{definition}
+
+\begin{example}
+	Considerando a máquina de Moore no Exemplo \ref{exe:Moore1}, dado a palavra de entrada ``baa'', tem-se que:
+	\begin{eqnarray*}
+		\widehat{\Phi}(q_0, baa) & = & \widehat{\Phi}(q_0, ba)\Phi(\widehat{\delta}(q_0, baa))\\
+		& = & \Big(\widehat{\Phi}(q_0, b)\Phi(\widehat{\delta}(q_0, ba)) \Big)\Phi(\widehat{\delta}(q_0, baa))\\
+		& = & \Big(\Big(\widehat{\Phi}(q_0, \lambda)\Phi(\widehat{\delta}(q_0, b))\Big)\Phi(\widehat{\delta}(q_0, ba)) \Big)\Phi(\widehat{\delta}(q_0, baa))\\
+		& = & zxxyyz
+	\end{eqnarray*}
+	ou seja, estando a máquina no estado $q_0$ e lendo a palavra $baa$ na memória de entrada, a máquina irá escrever na memória de saída a palavra $zxxyyz$.
+\end{example}
+
+\begin{remark}
+	Pode-se assim como para o caso das máquinas de Mealy considerar que a função de tradução das máquinas de Moore, isto é, a função $\widehat{\Phi}$ escreve a memória de escrita da máquina.
+\end{remark}
+
+\begin{definition}[Linguagem Traduzia - Máquina de Moore]
+	Dado uma máquina de Moore $A = \langle Q, \Sigma, \Lambda, \delta, \Phi, q_0\rangle$ a linguagem traduzida de $A$, denotado por $trad(A)$, é o conjunto de todas as traduções das palavras $w \in \Sigma^*$ realizadas a partir do estado inicial $q_0$, ou seja, tem-se que:
+	\begin{equation}
+		trad(A) = \{\widehat{\Phi}(q_0, w) \mid  \widehat{\delta}(q_0, w) \in F\}
+	\end{equation}
+\end{definition}
+
+Os próximos resultados apresentam uma forte relação entre as máquinas de Mealy e Moore.
+ 
+\begin{theorem}[Transformação Moore-Mealy]\label{teo:Moore-Mealy}
+	Dado uma linguagem $L \subseteq \Lambda^*$. Se $L = trad(A)$ para alguma máquina de Moore $A$,  então existe uma máquina de Mealy $A'$ tal que $L = TRAD(A')$.
+\end{theorem} 
+
+\begin{proof}
+	Suponha que $L = trad(A)$ para alguma máquina de Moore $A = \langle Q, \Sigma, \Lambda, \delta, \Phi, q_0\rangle$, agora defina uma máquina de Mealy $A' = \langle Q, \Sigma, \Lambda, \delta, \psi, q_0\rangle$, onde para todo $(q, a) \in Q \times \Sigma$ é definido que:
+	\begin{eqnarray}\label{eq:ConversaoMoore-Mealy}
+		\psi(q, a) & = & \Phi(\delta(q, a))
+	\end{eqnarray}
+	Agora será mostrado por indução sobre o tamanho das palavras que para todo $w \in \Sigma^*$ que as traduções de $M$ e $N$ são iguais, ou seja, será mostrado que $\widehat{\Phi}(q_0, w) = \widehat{\psi}(q_0, w)$.
+	\begin{itemize}
+		\item \textbf{Base da indução:} Quando $|w| = 0$ é trivial da própria definição de $\widehat{\Phi}$ e $\widehat{\psi}$.
+		\item \textbf{Hipótese indutiva (HI)}: Suponha que $\Phi(q_0, w) = \psi(q_0, w)$ para todo $|w| = n$ com $n \geq 0$.
+		\item \textbf{Passo indutivo}: Dado $w = ua$ com $u \in \Sigma^*$ tal que $|u| \geq 0$ e $a \in \Sigma$ tem-se que,
+		
+		\begin{eqnarray*}
+			\widehat{\Phi}(q_0, w) & = & \widehat{\Phi}(q_0, ua)\\
+			& = & \widehat{\Phi}(q, u)\Phi(\widehat{\delta}(q, ua))\\
+			& \stackrel{\textbf{(HI)}}{=} & \widehat{\psi}(q_0, u)\Phi(\widehat{\delta}(q_0, ua))\\
+			& = & \widehat{\psi}(q_0, u)\Phi(\delta(\widehat{\delta}(q_0, u), a))\\
+			& \stackrel{Eq. \ \ref{eq:ConversaoMoore-Mealy}}{=} & \widehat{\psi}(q_0, u)\psi(\widehat{\delta}(q_0, u), a)\\
+			& = & \widehat{\psi}(q_0, ua)\\ 
+			& = & \widehat{\psi}(q_0, w)
+		\end{eqnarray*}
+	\end{itemize}
+	e desde que os estados finais em ambos os autômatos são iguais tem-se que $\widehat{\psi}(q_0, w) \in trad(A)$ se, e somente se, $\widehat{\Phi}(q_0, w) \in TRAD(A')$, consequentemente, tem-se que $trad(A) = TRAD(A')$ e, portanto, $L = TRAD(A')$.
+\end{proof}
+
+\begin{corollary}
+	Se $A$ é uma máquina de Moore, então $trad(A)$ é uma linguagem regular.
+\end{corollary}
+
+\begin{proof}
+	Suponha que $A$ é uma máquina de Moore tal que $L = trad(A)$, assim pelo Teorema \ref{teo:Moore-Mealy} existe uma máquina de Mealy $A'$ tal que $L = TRAD(A')$, mas pelo Teorema \ref{teo:TraducaoRegular} $TRAD(A')$ é uma linguagem regular, portanto, $trad(A)$ é uma linguagem regular, o que conclui a prova.
+\end{proof}
+
+\begin{theorem}[Transformação Mealy-Moore]\label{teo:Mealy-Moore}
+	Dado uma linguagem $L \subseteq \Lambda^*$. Se $L = TRAD(A)$ para alguma máquina de Mealy $A$,  então existe uma máquina de Moore $A'$ tal que $L = trad(M)$.
+\end{theorem}
+
+\begin{proof}
+	Similar ao raciocínio da demonstração do Teorema \ref{teo:Moore-Mealy}, e ficará como exercício ao leitor.
+\end{proof}
+
+\begin{remark}
+	As definições de máquinas de Mealy e Moore apresentadas aqui são um pouco diferente das máquinas de Mealy e Moore apresentadas em \cite{menezes1998LFA}, entretanto, ambas as definições são equivalentes quanto a classe de linguagens traduzidas.
+\end{remark}
 
 \section{A Notação Matricial}\label{sec:NotacaoMatricial}
 
