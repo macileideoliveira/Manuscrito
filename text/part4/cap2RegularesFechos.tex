@@ -220,3 +220,13 @@ O próximo resultado estabelece que o fecho de Kleene é um fecho para a classe 
 \begin{proof}
 	Suponha que $L$ seja uma linguagem regular, assim dado a Definição \ref{def:FechoPositivoKleeneLinguagem} tem-se pelo Lema \ref{lema:FechoPotenciaRegular} e pelo Teorema \ref{teo:FechoUniaoRegular} que $L^*$ é uma linguagem regular.
 \end{proof}
+
+A próxima operação a ser estudada aqui será a noção de homomorfismo entre linguagens, definida a seguir.
+
+\begin{definition}[Homomorfismo]
+	Sejam $\Sigma_1$ e $\Sigma_2$ dois alfabetos e $f : \Sigma_1^* \rightarrow \Sigma_2^*$ uma função total, um homomorfismo $\widehat{f}$ de $\Sigma_1^*$ em $\Sigma_2^*$ é uma função definida  para todo $w \in \Sigma_1^*, a \in \Sigma_1$ recursivamente como:
+	\begin{eqnarray*}
+		\widehat{f}(\lambda) & = & \lambda\\
+		\widehat{f}(wa) & = & \widehat{f}(w)f(a)
+	\end{eqnarray*}
+\end{definition}
