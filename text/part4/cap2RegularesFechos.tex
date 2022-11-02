@@ -176,7 +176,7 @@ Nesta seção dando continuidade ao estudo dos operadores de fecho sobre as ling
 \end{theorem}
 
 \begin{proof}
-	Assuma que $L_1$ e $L_2$ são linguagens regulares, assim pelo Teorema \ref{teo:GRD-AFD} existem duas GLD $G_1 = \langle V_1, \Sigma, S_1, P_1 \rangle$ e $G_2 = \langle V_2, \Sigma, S_2, P_2 \rangle$, sem perda de generalidade assuma que $V_1 \cap V_2 = \emptyset$. Assim pode-se construir uma nova GLD $G = \langle V_1 \cup V_2 \cup \{S\}, \Sigma, S, P\rangle$ com $P = P_1 \cup P_2 \cup \{S \rhd S_1S_2\}$, agora para todo $w \in \Sigma^*$ tem-se que,
+	Assuma que $L_1$ e $L_2$ são linguagens regulares, assim pelo Teorema \ref{teo:GRD-AFD} existem duas gramáticas regulares à direita $G_1 = \langle V_1, \Sigma, S_1, P_1 \rangle$ e $G_2 = \langle V_2, \Sigma, S_2, P_2 \rangle$, sem perda de generalidade assuma que $V_1 \cap V_2 = \emptyset$. Assim pode-se construir uma nova gramática regular à direita $G = \langle V_1 \cup V_2 \cup \{S\}, \Sigma, S, P\rangle$ com $P = P_1 \cup P_2 \cup \{S \rhd S_1S_2\}$, agora para todo $w \in \Sigma^*$ tem-se que,
 	\begin{eqnarray*}
 		w \in \mathcal{L}(G) & \Longleftrightarrow & S \vdash^*_G w\\
 		& \Longleftrightarrow & S \vdash S_1S_2 \vdash^*_G w\\
@@ -206,7 +206,7 @@ Nesta seção dando continuidade ao estudo dos operadores de fecho sobre as ling
 		
 		\item \textbf{Passo indutivo:}
 		
-		Dado a linguagem $L^{n+1}$, sabe-se $L^{n+1} = LL^{n}$, agora desde que por hipótese $L$ é uma linguagem regular e por \textbf{(HI)} $L^n$ é também uma linguagem regular, tem-se pelo Teorema \ref{teo:FechoConcatenacaoRegular} que $LL^{n}$ é uma linguagem regular e, portanto, $L^{n+1}$ é uma linguagem regular.
+		Dado a linguagem $L^{n+1}$, sabe-se que $L^{n+1} = LL^{n}$, agora desde que por hipótese $L$ é uma linguagem regular e por \textbf{(HI)} $L^n$ é também uma linguagem regular, tem-se pelo Teorema \ref{teo:FechoConcatenacaoRegular} que $LL^{n}$ é uma linguagem regular e, portanto, $L^{n+1}$ é uma linguagem regular.
 	\end{itemize}
 	Consequentemente para qualquer que seja o $n \in \mathbb{N}$ tem-se que $L^n$ é uma linguagem regular.
 \end{proof}
@@ -218,15 +218,41 @@ O próximo resultado estabelece que o fecho de Kleene é um fecho para a classe 
 \end{theorem}
 
 \begin{proof}
-	Suponha que $L$ seja uma linguagem regular, assim dado a Definição \ref{def:FechoPositivoKleeneLinguagem} tem-se pelo Lema \ref{lema:FechoPotenciaRegular} e pelo Teorema \ref{teo:FechoUniaoRegular} que $L^*$ é uma linguagem regular.
+	Suponha que $L$ seja uma linguagem regular, assim dado a Definição \ref{def:FechoPositivoKleeneLinguagem} e pelo Lema \ref{lema:FechoPotenciaRegular} e pelo Teorema \ref{teo:FechoUniaoRegular} tem-se que $L^*$ é uma linguagem regular.
 \end{proof}
 
 A próxima operação a ser estudada aqui será a noção de homomorfismo entre linguagens, definida a seguir.
 
 \begin{definition}[Homomorfismo]
-	Sejam $\Sigma_1$ e $\Sigma_2$ dois alfabetos e $f : \Sigma_1^* \rightarrow \Sigma_2^*$ uma função total, um homomorfismo $\widehat{f}$ de $\Sigma_1^*$ em $\Sigma_2^*$ é uma função definida  para todo $w \in \Sigma_1^*, a \in \Sigma_1$ recursivamente como:
+	Sejam $\Sigma_1$ e $\Sigma_2$ dois alfabetos e $f : \Sigma_1 \rightarrow \Sigma_2^*$ uma função total, um homomorfismo $\widehat{f}$ de $\Sigma_1^*$ em $\Sigma_2^*$ é uma função definida  para todo $w \in \Sigma_1^*, a \in \Sigma_1$ recursivamente como:
 	\begin{eqnarray*}
 		\widehat{f}(\lambda) & = & \lambda\\
 		\widehat{f}(wa) & = & \widehat{f}(w)f(a)
 	\end{eqnarray*}
 \end{definition}
+
+\begin{theorem}[Fecho do Homomorfismo]
+	Se $L$ é uma linguagem regular sobre $\Sigma_1$ e $f: \Sigma^*_1 \rightarrow \Sigma_2^*$ é um homomorfismo, então a imagem homomórfica $f[L]$ é uma linguagem regular.
+\end{theorem}
+
+\begin{proof}
+	suponha que $L$ é uma linguagem regular sobre  $\Sigma_1$ e que $f: \Sigma^*_1 \rightarrow \Sigma_2^*$ é um homomorfismo, assim pelo Teorema \ref{teo:SimplificacaoRegular} tem-se que existe uma gramática regular unitária à direita $G = \langle V, \Sigma_1, S, P \rangle$ tal que $\mathcal{L}(G) = L$, agora construa uma nova gramática regular $G' = \langle V, \Sigma_2, S, P' \rangle$ onde, 
+	\begin{eqnarray*}
+		P ' = \{A \rhd f(a)B \mid A \rhd aB \in P \}
+	\end{eqnarray*}
+	claramente $G'$ é regular à direita\footnote{Note que a gramática resultante não é necessariamente unitária.}. Agora pela construção de $P'$ é claro que para todo $w = a_1\cdots a_n$ sendo $a_i \in \Sigma \cup \{\lambda\}$ para todo $1 \leq i \leq n$ tem-se que, 
+	\begin{eqnarray*}
+		w \in \mathcal{L}(G) & \Longleftrightarrow & a_1\cdots a_n \in \mathcal{L}(G)\\
+		& \Longleftrightarrow & S \vdash_{G} a_1\cdots a_n \\
+		& \Longleftrightarrow & S \vdash_{G'} f(a_1)\cdots f(a_n)\\
+		& \Longleftrightarrow & f(a_1)\cdots f(a_n) \in  \mathcal{L}(G')\\
+		& \Longleftrightarrow & f(w) \in \mathcal{L}(G')
+	\end{eqnarray*}
+	portanto, tem-se que $\mathcal{L}(G') = f[\mathcal{L}(G)] = f[L]$, ou seja, $\mathcal{L}(G')$ é a a imagem homomórfica de $L$, e desde que $G'$ é uma gramática regular tem-se que $\mathcal{L}(G')$ é uma linguagem regular o que conclui a prova.
+\end{proof}
+
+Caso o leitor tenha interesse em outros operadores de fecho não booleanos é recomendável fazer a leitura das referências \cite{benjaLivro2010, carroll1989}. Até agora este capítulo se interessou apenas em estudar alguns operadores que fechavam o conjunto (ou classe) $L_{Reg}$ em alguma estrutura algébrica, na próxima seção será abordada uma questão fundamental que impõem limites sobre a forma das linguagens regulares.
+
+\section{Linguagens Não Regulares}
+
+Antes de começar a discutir sobre como determinar se uma linguagem é ou não regular, é interessante destacar como apontado em \cite{benjaLivro2010, linz2006, menezes1998LFA} que de fato autômatos finitos apresentam com característica marcante, a ideia de ter uma memória muito limitada para processar as palavras de entrada.
